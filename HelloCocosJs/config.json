@@ -1,10 +1,10 @@
 {
   "init_cfg": {
-    "isLandscape": true,
+    "isLandscape": false,
     "isWindowTop": false,
     "name": "HelloCocosJs",
-    "width": 1136,
-    "height": 640,
+    "width": 270,
+    "height": 480,
     "entry": "main.js",
     "consolePort": 6050,
     "uploadPort": 6060,
