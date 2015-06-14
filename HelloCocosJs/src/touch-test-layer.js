@@ -1,5 +1,6 @@
 var TILE_WIDTH  = 99;
 var TILE_HEIGHT = 171;
+var BORDER_OFF	= 80;
 
 function getGameRect() {
     var rect = cc.view.getViewPortRect();
@@ -46,6 +47,7 @@ var TouchTestLayer = cc.Layer.extend({
     _bg01 : null,
     _bg10 : null,
     _bg11 : null,
+    _bird : null,
 
     _moveBackground : function(off) {
     	var winSize = cc.winSize;
@@ -102,6 +104,11 @@ var TouchTestLayer = cc.Layer.extend({
     	_bg01.setPosition(pos01);
     	_bg10.setPosition(pos10);
     	_bg11.setPosition(pos11);
+    	
+    	var pos = _drawNode.getPosition();
+    	pos.x += off.x;
+    	pos.y += off.y;
+    	_drawNode.setPosition(pos);
     },
 
     ctor:function() {
@@ -125,27 +132,19 @@ var TouchTestLayer = cc.Layer.extend({
         
         _drawNode = new cc.DrawNode();
         this.addChild(_drawNode);
-
+        
         var size = cc.winSize;
-        // add a "close" icon to exit the progress. it's an autorelease object
-        var closeItem = new cc.MenuItemImage(
-            res.CloseNormal_png,
-            res.CloseSelected_png,
-            function () {
-                cc.log("Menu is clicked!");
-                cc.director.popScene();
-            }, this);
-        closeItem.attr({
-            x: size.width - 20,
-            y: size.height - 20,
-            anchorX: 0.5,
-            anchorY: 0.5
-        });
-
-        var menu = new cc.Menu(closeItem);
-        menu.x = 0;
-        menu.y = 0;
-        this.addChild(menu, 1);
+        _drawNode.drawPoly([cc.p(BORDER_OFF, BORDER_OFF),
+                            cc.p(BORDER_OFF, size.height-BORDER_OFF),
+                            cc.p(size.width-BORDER_OFF, size.height-BORDER_OFF),
+                            cc.p(size.width-80, 80)],
+        		null, 2, cc.color(255, 0, 0, 200));
+        
+        _bird = new Bird();
+        var pos = cc.p(Math.random()*(size.width-BORDER_OFF*2)+BORDER_OFF,
+        		Math.random()*(size.height-BORDER_OFF*2)+BORDER_OFF);
+        _bird.setPosition(pos);
+        this.addChild(_bird);
 
         return true;
     },
@@ -163,29 +162,31 @@ var TouchTestLayer = cc.Layer.extend({
         });
 
         cc.eventManager.addListener(_touchListener, this);
+        
+        cc.director.getScheduler().scheduleCallbackForTarget(this, this.gameLoop, 1, cc.REPEAT_FOREVER, 0, false);
     },
 
     onExit : function() {
+    	cc.director.getScheduler().unscheduleCallbackForTarget(this, this.gameLoop);
         cc.eventManager.removeListener(_touchListener);
         this._super();
     },
     onTouchBegan: function(touch, event) {
-        _drawNode.clear();
-        var pos = touch.getLocation();
-        _drawNode.drawDot(pos, 10.0, cc.color(255, 0, 0, 255));
-        _lastPos = pos;
+        _lastPos = touch.getLocation();
         return true;
     },
     onTouchMoved: function(touch, event) {
         var pos = touch.getLocation();
-        _drawNode.drawSegment(_lastPos, pos, 10.0, cc.color(255, 0, 0, 255));
         if (_lastPos) this.moveBackground(cc.p(pos.x-_lastPos.x, pos.y-_lastPos.y));
         _lastPos = pos;
     },
     onTouchEnded: function(touch, event) {
-        var pos = touch.getLocation();
-        _drawNode.drawDot(pos, 10.0, cc.color(255, 0, 0, 255));
         _lastPos = null;
+    },
+    
+    gameLoop:function(dt) {
+//    	cc.log("gameLoop: " + dt);
+//    	this._moveBackground(cc.p(1, 0));
     }
 });
 

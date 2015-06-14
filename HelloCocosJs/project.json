@@ -13,6 +13,7 @@
     "jsList" : [
         "src/resource.js",
         "src/app.js",
-        "src/touch-test-layer.js"
+        "src/touch-test-layer.js",
+        "src/bird.js"
     ]
 }
