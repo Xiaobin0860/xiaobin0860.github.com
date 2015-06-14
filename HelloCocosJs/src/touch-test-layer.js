@@ -13,22 +13,24 @@ function getGameRect() {
 var BackgroundLayer = cc.Layer.extend({
     ctor : function() {
         this._super();
-
-        var bg =  cc.LayerColor.create(cc.color(128, 128, 128, 225));
-        this.addChild(bg);
-
-        var rect = getGameRect();
-        cc.log("game rect: {{" + rect.x + ", " + rect.y + "}, {" + rect.width + ", " + rect.height + "}}.");
-        for (var i=rect.x; i<rect.x+rect.width; i=i+TILE_WIDTH) {
-            for (var j=rect.y; j<rect.y+rect.height; j=j+TILE_HEIGHT) {
+        var winSize = cc.winSize;
+        var width = 0;
+        var height = 0;
+        for (var i=0; i<winSize.width; i=i+TILE_WIDTH) {
+        	width += TILE_WIDTH;
+        	for (var j=0; j<winSize.height; j=j+TILE_HEIGHT) {
+        		if (0 == i) height += TILE_HEIGHT;
                 var pos = cc.p(i, j);
-                var tile = cc.Sprite.create(res.pic_jpg);
+                var tile = new cc.Sprite(res.pic_jpg);
                 tile.setAnchorPoint(0, 0);
                 cc.log("add sprite at {" + pos.x + ", " + pos.y + "}.");
                 tile.setPosition(pos);
                 this.addChild(tile);
             }
         }
+        
+        cc.log("BackgroundLayer width=" + width + ", height=" + height);
+        this.setContentSize(width, height);
 
         return true;
     }
@@ -38,22 +40,116 @@ var TouchTestLayer = cc.Layer.extend({
     _drawNode : null,
     _touchListener : null,
     _lastPos : null,
-    _bg : null,
+//    _bgs : null,
+//    _reused : null,
+    _self : null,
+    // 实现无限地图，需要4块大于窗口的背景
+    _bg00 : null,
+    _bg01 : null,
+    _bg10 : null,
+    _bg11 : null,
 
     _moveBackground : function(off) {
-        var pos = _bg.getPosition();
-        _bg.setPosition(cc.p(pos.x + off.x, pos.y + off.y));
+//    	var gameRect = getGameRect();
+    	var winSize = cc.winSize;
+//    	for (var i=0; i<_bgs.length; ++i) {
+//    		var bg = _bgs[i];
+//    		var pos = bg.getPosition();
+//    		pos.x += off.x;
+//    		pos.y += off.y;
+//    		bg.setPosition(pos);
+//    		if (pos.x > 0 && pos.x < winSize.width) {
+//    			var addBg = new BackgroundLayer();
+//    			pos.x -= addBg.getContentSize().width;
+//    			cc.log(this + "add new bg at {" + pos.x + ", " + pos.y + "}.");
+//    			addBg.setPosition(pos);
+//    			_self.addChild(addBg);
+//    			_bgs.push(addBg);
+//    		}
+//    	}
+    	var bgSize = _bg00.getContentSize();
+    	var pos00 = _bg00.getPosition();
+    	pos00.x += off.x;
+    	pos00.y += off.y;
+    	var pos01 = _bg01.getPosition();
+    	pos01.x += off.x;
+    	pos01.y += off.y;
+    	var pos10 = _bg10.getPosition();
+    	pos10.x += off.x;
+    	pos10.y += off.y;
+    	var pos11 = _bg11.getPosition();
+    	pos11.x += off.x;
+    	pos11.y += off.y;
+
+    	if (pos00.x < -bgSize.width) {	//00.x, 10.x
+    		pos00.x = pos01.x + bgSize.width;
+    		pos10.x = pos11.x + bgSize.width;
+    	}
+    	else if (pos00.x > bgSize.width) {
+    		pos00.x = pos01.x - bgSize.width;
+    		pos10.x = pos11.x - bgSize.width;
+    	}
+    	if (pos00.y < -bgSize.height) {	//00.y, 01.y
+    		pos00.y = pos10.y + bgSize.height;
+    		pos01.y = pos11.y + bgSize.height;
+    	}
+    	else if (pos00.y > bgSize.height) {
+    		pos00.y = pos10.y - bgSize.height;
+    		pos01.y = pos11.y - bgSize.height;
+    	}
+    	
+    	if (pos11.x < -bgSize.width) {	//11.x, 01.x
+    		pos11.x = pos10.x + bgSize.width;
+    		pos01.x = pos00.x + bgSize.width;
+    	}
+    	else if (pos11.x > bgSize.width) {
+    		pos11.x = pos10.x - bgSize.width;
+    		pos01.x = pos00.x - bgSize.width;
+    	}
+    	
+    	if (pos11.y < -bgSize.height) {	//11.y, 10.y
+    		pos11.y = pos01.y + bgSize.height;
+    		pos10.y = pos00.y + bgSize.height;
+    	}
+    	else if (pos11.y > bgSize.height) {
+    		pos11.y = pos01.y - bgSize.height;
+    		pos10.y = pos00.y - bgSize.height;
+    	}
+
+    	_bg00.setPosition(pos00);
+    	_bg01.setPosition(pos01);
+    	_bg10.setPosition(pos10);
+    	_bg11.setPosition(pos11);
     },
 
     ctor:function() {
         this._super();
+        
+        _self = this;
+        
+//        _bgs = new Array();
+//        _reused = new Array();
 
         //var bg =  cc.LayerColor.create(cc.color(128, 128, 128, 225));
         //this.addChild(bg);
-        _bg = new BackgroundLayer();
-        this.addChild(_bg);
-
-        _drawNode = cc.DrawNode.create();
+//        var bg = new BackgroundLayer();
+//        this.addChild(bg);
+//        _bgs.push(bg);
+        _bg00 = new BackgroundLayer();	//左下
+        _bg01 = new BackgroundLayer();	//右下
+        _bg10 = new BackgroundLayer();	//左上
+        _bg11 = new BackgroundLayer();	//右上
+        var bgSize = _bg00.getContentSize();
+        _bg00.setPosition(cc.p(0, 0));
+        _bg01.setPosition(cc.p(bgSize.width, 0));
+        _bg10.setPosition(cc.p(0, bgSize.height));
+        _bg11.setPosition(cc.p(bgSize.width, bgSize.height));
+        this.addChild(_bg00);
+        this.addChild(_bg01);
+        this.addChild(_bg10);
+        this.addChild(_bg11);
+        
+        _drawNode = new cc.DrawNode();
         this.addChild(_drawNode);
 
         var size = cc.winSize;
@@ -77,16 +173,12 @@ var TouchTestLayer = cc.Layer.extend({
         menu.y = 0;
         this.addChild(menu, 1);
 
-        cc.log("this=" + this);
         return true;
     },
 
     onEnter:function() {
         this._super();
 
-        cc.log("this=" + this);
-        cc.log(this._moveBackground);
-        this._moveBackground(cc.p(200, 200));
         _touchListener = cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
@@ -112,11 +204,8 @@ var TouchTestLayer = cc.Layer.extend({
     },
     onTouchMoved: function(touch, event) {
         var pos = touch.getLocation();
-        cc.log(_drawNode);
-        cc.log(this._moveBackground);
         _drawNode.drawSegment(_lastPos, pos, 10.0, cc.color(255, 0, 0, 255));
         if (_lastPos) this.moveBackground(cc.p(pos.x-_lastPos.x, pos.y-_lastPos.y));
-        cc.log("this=" + this);
         _lastPos = pos;
     },
     onTouchEnded: function(touch, event) {
