@@ -1,5 +1,5 @@
 var res = {
-    HelloWorld_png : "res/HelloWorld.png",
+//    HelloWorld_png : "res/HelloWorld.png",
     CloseNormal_png : "res/CloseNormal.png",
     CloseSelected_png : "res/CloseSelected.png",
     pic_jpg : "res/pic.jpg"

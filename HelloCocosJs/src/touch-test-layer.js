@@ -40,8 +40,6 @@ var TouchTestLayer = cc.Layer.extend({
     _drawNode : null,
     _touchListener : null,
     _lastPos : null,
-//    _bgs : null,
-//    _reused : null,
     _self : null,
     // 实现无限地图，需要4块大于窗口的背景
     _bg00 : null,
@@ -50,23 +48,7 @@ var TouchTestLayer = cc.Layer.extend({
     _bg11 : null,
 
     _moveBackground : function(off) {
-//    	var gameRect = getGameRect();
     	var winSize = cc.winSize;
-//    	for (var i=0; i<_bgs.length; ++i) {
-//    		var bg = _bgs[i];
-//    		var pos = bg.getPosition();
-//    		pos.x += off.x;
-//    		pos.y += off.y;
-//    		bg.setPosition(pos);
-//    		if (pos.x > 0 && pos.x < winSize.width) {
-//    			var addBg = new BackgroundLayer();
-//    			pos.x -= addBg.getContentSize().width;
-//    			cc.log(this + "add new bg at {" + pos.x + ", " + pos.y + "}.");
-//    			addBg.setPosition(pos);
-//    			_self.addChild(addBg);
-//    			_bgs.push(addBg);
-//    		}
-//    	}
     	var bgSize = _bg00.getContentSize();
     	var pos00 = _bg00.getPosition();
     	pos00.x += off.x;
@@ -127,14 +109,6 @@ var TouchTestLayer = cc.Layer.extend({
         
         _self = this;
         
-//        _bgs = new Array();
-//        _reused = new Array();
-
-        //var bg =  cc.LayerColor.create(cc.color(128, 128, 128, 225));
-        //this.addChild(bg);
-//        var bg = new BackgroundLayer();
-//        this.addChild(bg);
-//        _bgs.push(bg);
         _bg00 = new BackgroundLayer();	//左下
         _bg01 = new BackgroundLayer();	//右下
         _bg10 = new BackgroundLayer();	//左上
