@@ -247,6 +247,7 @@ var TouchTestLayer = cc.Layer.extend({
     	_drawNode.setPosition(cc.p((size.width-contentSize.width)/2.0, (size.height-contentSize.height)/2.0));
     	_drawNode.clear();
     	_shapeScale = 1.0;
+    	_drawNode.setVisible(true);
     	_drawNode.setScale(_shapeScale);
     	_drawNode.drawPoly([cc.p(0, 0),
     	                    cc.p(0, size.height-2*BORDER_OFF),
