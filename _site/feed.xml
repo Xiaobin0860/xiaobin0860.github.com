@@ -6,17 +6,17 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Jan 2016 22:17:49 +0800</pubDate>
-    <lastBuildDate>Sun, 10 Jan 2016 22:17:49 +0800</lastBuildDate>
+    <pubDate>Sun, 10 Jan 2016 22:32:23 +0800</pubDate>
+    <lastBuildDate>Sun, 10 Jan 2016 22:32:23 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
         <title>My first post</title>
-        <description>&lt;h1 id=&quot;section&quot;&gt;我的第一篇博客&lt;/h1&gt;
-
-&lt;p&gt;Stay hungry, Stay foolish.&lt;br /&gt;
+        <description>&lt;p&gt;Stay hungry, Stay foolish.&lt;br /&gt;
 求知若饥，虚心若愚。&lt;br /&gt;
 2016.1.10&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160110.jpg&quot; alt=&quot;小宝&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 10 Jan 2016 21:04:46 +0800</pubDate>
@@ -32,9 +32,7 @@
     
       <item>
         <title>AutoBuild(1)</title>
-        <description>&lt;h1 id=&quot;autobuild1&quot;&gt;AutoBuild(1)&lt;/h1&gt;
-
-&lt;p&gt;之前做过几个项目，项目版本发布管理都是件令人头疼的事。资源管理、程序打包有太多人工操作在里面，
+        <description>&lt;p&gt;之前做过几个项目，项目版本发布管理都是件令人头疼的事。资源管理、程序打包有太多人工操作在里面，
 只要涉及到人式操作就难免出错。使用打包脚本会减少部分操作，但是每次发版甚至是测试人员要包都很麻烦，
 一着急还容易出错。一直想实现一个自动打包、发布系统，减少发布打包人为的修改操作。从页面上直接可以看到
 项目各平台编译状况，测试也可以直接从上面下载安装。&lt;/p&gt;
@@ -103,9 +101,7 @@
     
       <item>
         <title>markdown syntax</title>
-        <description>&lt;h1 id=&quot;markdown&quot;&gt;markdown&lt;/h1&gt;
-
-&lt;p&gt;Markdown is a superset of HTML, so any HTML file is a valid Markdown.
+        <description>&lt;p&gt;Markdown is a superset of HTML, so any HTML file is a valid Markdown.
 &lt;!-- This means we can use HTML elements in Markdown. --&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;headings&quot;&gt;Headings&lt;/h2&gt;
