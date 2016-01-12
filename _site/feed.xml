@@ -6,9 +6,114 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 Jan 2016 00:52:19 +0800</pubDate>
-    <lastBuildDate>Tue, 12 Jan 2016 00:52:19 +0800</lastBuildDate>
+    <pubDate>Wed, 13 Jan 2016 00:00:29 +0800</pubDate>
+    <lastBuildDate>Wed, 13 Jan 2016 00:00:29 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>erlang/opt doc</title>
+        <description>&lt;p&gt;&lt;a href=&quot;&quot;&gt;erlang/opt doc&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 12 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://xiaobin0860.github.io/erlang/2016/01/12/otp-doc.html</link>
+        <guid isPermaLink="true">http://xiaobin0860.github.io/erlang/2016/01/12/otp-doc.html</guid>
+        
+        
+        <category>erlang</category>
+        
+      </item>
+    
+      <item>
+        <title>erlang执行shell</title>
+        <description>&lt;h2 id=&quot;oscmdcmd&quot;&gt;os:cmd(Cmd)&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cmd(Command) -&amp;gt; string()
+Types:
+Command = atom() | io_lib:chars()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;erlangopenportportname-portsettings&quot;&gt;erlang:open_port(PortName, PortSettings)&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;open_port(PortName, PortSettings) -&amp;gt; port()
+Types:
+PortName = 
+    {spawn, Command :: string() | binary()} |
+    {spawn_driver, Command :: string() | binary()} |
+    {spawn_executable, FileName :: file:name()} |
+    {fd, In :: integer() &amp;gt;= 0, Out :: integer() &amp;gt;= 0}
+PortSettings = [Opt]
+Opt = 
+    {packet, N :: 1 | 2 | 4} |
+    stream |
+    {line, L :: integer() &amp;gt;= 0} |
+    {cd, Dir :: string() | binary()} |
+    {env, Env :: [{Name :: string(), Val :: string() | false}]} |
+    {args, [string() | binary()]} |
+    {arg0, string() | binary()} |
+    exit_status |
+    use_stdio |
+    nouse_stdio |
+    stderr_to_stdout |
+    in |
+    out |
+    binary |
+    eof |
+    {parallelism, Boolean :: boolean()} |
+    hide
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loop2() -&amp;gt;
+    receive
+        {build} -&amp;gt;
+            io:format(&quot;build ...~n&quot;),
+            Port = open_port({spawn_executable, &quot;path/build_ios_nolog.sh&quot;}, [stream, exit_status, eof, hide]),
+            Result = get_data(Port, []),
+            io:format(&quot;~p~n&quot;, [Result]),
+            loop2();
+        stop -&amp;gt;
+            ok;
+        _ -&amp;gt;
+            io:format(&quot;recv unknown message!~n&quot;),
+            loop2()
+    end.
+
+get_data(Port, Sofar) -&amp;gt;
+    receive
+        {Port, {data, Bytes}} -&amp;gt;
+            get_data(Port, [Sofar|Bytes]);
+        {Port, eof} -&amp;gt;
+            Port ! {self(), close},
+            receive
+                {Port, closed} -&amp;gt; true
+            end,
+            receive
+                {&#39;EXIT&#39;,  Port,  _} -&amp;gt; ok
+            after 1 -&amp;gt; ok
+            end,
+            ExitCode =
+            receive
+                {Port, {exit_status, Code}} -&amp;gt; Code
+            end,
+            {ExitCode, lists:flatten(Sofar)}
+            %{ExitCode, Sofar}
+    end.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Tue, 12 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://xiaobin0860.github.io/erlang/2016/01/12/erlang-shell.html</link>
+        <guid isPermaLink="true">http://xiaobin0860.github.io/erlang/2016/01/12/erlang-shell.html</guid>
+        
+        
+        <category>erlang</category>
+        
+      </item>
     
       <item>
         <title>记录一次内存错误debug</title>
