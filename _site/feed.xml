@@ -6,8 +6,8 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Jan 2016 00:15:36 +0800</pubDate>
-    <lastBuildDate>Sun, 17 Jan 2016 00:15:36 +0800</lastBuildDate>
+    <pubDate>Sun, 17 Jan 2016 00:36:31 +0800</pubDate>
+    <lastBuildDate>Sun, 17 Jan 2016 00:36:31 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -24,9 +24,16 @@ will instruct the browser to refresh every `5` seconds.
 以后看有没有办法实现通知。^_^&lt;/p&gt;
 
 &lt;h2 id=&quot;click-to-refresh&quot;&gt;click to refresh&lt;/h2&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;body onclick=&quot;window.location.reload();&quot;&amp;gt;
     ...
 &amp;lt;/body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;scroll-to-bottom&quot;&gt;scroll to bottom&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;window.scrollTo(0, document.body.scrollHeight);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

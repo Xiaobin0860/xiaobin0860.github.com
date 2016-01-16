@@ -17,8 +17,14 @@ AutoBuild系统中我想有个页面能够一直看到当前项目的状态，�
 
 click to refresh
 ----------------
+
     <body onclick="window.location.reload();">
         ...
     </body>
+
+scroll to bottom
+----------------
+
+    window.scrollTo(0, document.body.scrollHeight);
 
 ![大宝]({{ site.url }}/imgs/20160116.jpg)
