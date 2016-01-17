@@ -6,9 +6,51 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Jan 2016 00:36:31 +0800</pubDate>
-    <lastBuildDate>Sun, 17 Jan 2016 00:36:31 +0800</lastBuildDate>
+    <pubDate>Sun, 17 Jan 2016 23:21:15 +0800</pubDate>
+    <lastBuildDate>Sun, 17 Jan 2016 23:21:15 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>jekyll templates</title>
+        <description>&lt;h2 id=&quot;variables&quot;&gt;Variables&lt;/h2&gt;
+
+&lt;p&gt;Variables are surrounded by `` like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;My first name is . My last name is .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;tags&quot;&gt;Tags&lt;/h2&gt;
+
+&lt;p&gt;Tags provide arbitrary logic in the rendering process.&lt;/p&gt;
+
+&lt;h2 id=&quot;filters&quot;&gt;Filters&lt;/h2&gt;
+
+&lt;p&gt;Filters transform the values of variables and tag arguments.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2016-01-17T23:21:15+08:00
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;comments&quot;&gt;Comments&lt;/h2&gt;
+
+&lt;p&gt;Comments look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;won&#39;t&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;be&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;rendered&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160117.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 17 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://xiaobin0860.github.io/jekyll/2016/01/17/jekyll-templates.html</link>
+        <guid isPermaLink="true">http://xiaobin0860.github.io/jekyll/2016/01/17/jekyll-templates.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+      </item>
     
       <item>
         <title>Auto-Refresh code in HTML</title>

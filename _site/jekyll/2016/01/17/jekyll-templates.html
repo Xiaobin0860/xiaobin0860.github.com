@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>xl000's blog</title>
-  <meta name="description" content="xl000's blog
-">
+  <title>jekyll templates</title>
+  <meta name="description" content="Variables">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://xiaobin0860.github.io/">
+  <link rel="canonical" href="http://xiaobin0860.github.io/jekyll/2016/01/17/jekyll-templates.html">
   <link rel="alternate" type="application/rss+xml" title="xl000's blog" href="http://xiaobin0860.github.io/feed.xml">
 </head>
 
@@ -55,81 +54,48 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">jekyll templates</h1>
+    <p class="post-meta"><time datetime="2016-01-17T00:00:00+08:00" itemprop="datePublished">Jan 17, 2016</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jan 17, 2016</span>
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="variables">Variables</h2>
 
-        <h2>
-          <a class="post-link" href="/jekyll/2016/01/17/jekyll-templates.html">jekyll templates</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 16, 2016</span>
+<p>Variables are surrounded by `` like this:</p>
 
-        <h2>
-          <a class="post-link" href="/html/2016/01/16/html-auto-refresh.html">Auto-Refresh code in HTML</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 12, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/erlang/2016/01/12/otp-doc.html">erlang/opt doc</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 12, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/erlang/2016/01/12/erlang-shell.html">erlang执行shell</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 11, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/cocos2d-x/debug/2016/01/11/2dx-debug.html">记录一次内存错误debug</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/01/10/fist-post.html">My first post</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/erlang/autobuild/2016/01/08/autobuild(1).html">AutoBuild(1)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 6, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/markdown/2016/01/06/markdown.html">markdown syntax</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
+<div class="highlighter-rouge"><pre class="highlight"><code>My first name is . My last name is .
+</code></pre>
 </div>
+
+<h2 id="tags">Tags</h2>
+
+<p>Tags provide arbitrary logic in the rendering process.</p>
+
+<h2 id="filters">Filters</h2>
+
+<p>Filters transform the values of variables and tag arguments.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>2016-01-17T23:21:15+08:00
+</code></pre>
+</div>
+
+<h2 id="comments">Comments</h2>
+
+<p>Comments look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">#</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">won't</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">rendered</span><span class="w"> </span><span class="err">#</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="http://xiaobin0860.github.io/imgs/20160117.jpg" alt="大宝" /></p>
+
+
+  </div>
+
+</article>
 
       </div>
     </div>
