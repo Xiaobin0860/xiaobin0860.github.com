@@ -64,9 +64,9 @@
   <div class="post-content" itemprop="articleBody">
     <h2 id="variables">Variables</h2>
 
-<p>Variables are surrounded by `` like this:</p>
+<p>Variables are surrounded by <code class="highlighter-rouge">\{\{</code> and <code class="highlighter-rouge">}}</code> like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>My first name is . My last name is .
+<div class="highlighter-rouge"><pre class="highlight"><code>My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
 </code></pre>
 </div>
 
@@ -74,11 +74,15 @@
 
 <p>Tags provide arbitrary logic in the rendering process.</p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
+</code></pre>
+</div>
+
 <h2 id="filters">Filters</h2>
 
 <p>Filters transform the values of variables and tag arguments.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>2016-01-17T23:21:15+08:00
+<div class="highlighter-rouge"><pre class="highlight"><code>\{\{ site.time | date_to_xmlschema  }}
 </code></pre>
 </div>
 
@@ -86,8 +90,8 @@
 
 <p>Comments look like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">#</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">won't</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">rendered</span><span class="w"> </span><span class="err">#</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>\{\# this won't be rendered #}
+</code></pre>
 </div>
 
 <p><img src="http://xiaobin0860.github.io/imgs/20160117.jpg" alt="大宝" /></p>
