@@ -6,9 +6,38 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Jan 2016 23:39:54 +0800</pubDate>
-    <lastBuildDate>Sun, 17 Jan 2016 23:39:54 +0800</lastBuildDate>
+    <pubDate>Wed, 20 Jan 2016 01:20:34 +0800</pubDate>
+    <lastBuildDate>Wed, 20 Jan 2016 01:20:34 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>redmine</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;
+    &lt;h2 id=&quot;ruby&quot;&gt;安装ruby&lt;/h2&gt;
+
+    &lt;p&gt;gpg2 –keyserver hkp://keys.gnupg.net –recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+ curl -L https://get.rvm.io | bash -s stable
+ source /etc/profile.d/rvm.sh
+ rvm list known
+ rvm install ruby-head&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;h2 id=&quot;rails&quot;&gt;安装rails&lt;/h2&gt;
+
+    &lt;p&gt;gem install rails&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Mon, 18 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://xiaobin0860.github.io/redmine/2016/01/18/redmine.html</link>
+        <guid isPermaLink="true">http://xiaobin0860.github.io/redmine/2016/01/18/redmine.html</guid>
+        
+        
+        <category>redmine</category>
+        
+      </item>
     
       <item>
         <title>jekyll templates</title>
@@ -241,6 +270,142 @@ get_data(Port, Sofar) -&amp;gt;
         <category>jekyll</category>
         
         <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>AutoBuild(2)</title>
+        <description>&lt;h2 id=&quot;websocket&quot;&gt;Websocket&lt;/h2&gt;
+
+&lt;p&gt;WebSocket is an HTML5 technology used for two-way messaging from inside a web page.&lt;br /&gt;
+WebSocket is a protocol providing full-duplex communication channels over a single TCP connection.&lt;br /&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/WebSocket&quot;&gt;WebSocket&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;chicagoboss-websockets&quot;&gt;ChicagoBoss WebSockets&lt;/h2&gt;
+
+&lt;h3 id=&quot;server-code&quot;&gt;Server Code&lt;/h3&gt;
+
+&lt;p&gt;The server WebSocket API is based around Erlang message-passing;&lt;br /&gt;
+to send a message to a particular client, simply send it a message like:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WebSocket ! {text, &amp;lt;&amp;lt;&quot;some text&quot;&amp;gt;&amp;gt;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Furthermore, you can broadcast a message that will be handled by your &lt;code class=&quot;highlighter-rouge&quot;&gt;handle_broadcast/2&lt;/code&gt; function by&lt;br /&gt;
+using the module name of your websocket module and the proper method of the &lt;code class=&quot;highlighter-rouge&quot;&gt;boss_service_worker&lt;/code&gt; module:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;boss_service_worker:broadcast(myapp_myservice_websocket, MyMessage).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To handle incoming messages from clients, you’ll need to create WebSocket controllers in your project’s&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;src/websocket&lt;/code&gt; directory. Each controller module should have a name of the form&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;app name&amp;gt;_&amp;lt;service name&amp;gt;_websocket.erl&lt;/code&gt; and be a parameterized module with parameters for&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Req&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;SessionId&lt;/code&gt;, e.g.:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-module(myapp_myservice_websocket, [Req, SessionId]).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The module should implement the &lt;code class=&quot;highlighter-rouge&quot;&gt;boss_service_handler&lt;/code&gt; behavior.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-module(ab_status_websocket, [Req, SessionId]).
+-behaviour(boss_service_handler).
+-compile(export_all).
+
+init() -&amp;gt; {ok, []}.
+
+handle_join(_Url, WebsocketPid, State) -&amp;gt;
+    log:d(&quot;~p joined!&quot;, [WebsocketPid]),
+    WebsocketPid ! {text, &quot;Hello WebSocket!&quot;},
+    NewState = [WebsocketPid | State],
+    {noreply, NewState}.
+
+handle_close(_Reason, _Url, WebsocketPid, State) -&amp;gt;
+    log:d(&quot;~p closed!&quot;, [WebsocketPid]),
+    NewState = lists:delete(WebsocketPid, State),
+    {noreply, NewState}.
+
+handle_incoming(_Url, _WebsocketPid, _Message, State) -&amp;gt;
+    {noreply, State}.
+
+handle_broadcast(Message, State) -&amp;gt;
+    broadcast_message(Message, State),
+    {noreply, State}.
+
+handle_info(_Info, State) -&amp;gt;
+    {noreply, State}.
+
+terminate(_Reason, _State) -&amp;gt; ok.
+
+broadcast_message(Message, [H|R]) -&amp;gt;
+    log:d(&quot;send ~p to ~p ...&quot;, [Message, H]),
+    H ! {text, Message},
+    broadcast_message(Message, R);
+broadcast_message(_Message, []) -&amp;gt; ok.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;client-code&quot;&gt;Client code&lt;/h3&gt;
+
+&lt;p&gt;WebSocket URLs are automatically generated from the WebSocket controllers in your project’s&lt;br /&gt;
+src/websocket directory. For example, if you have &lt;code class=&quot;highlighter-rouge&quot;&gt;myapp_foobar_websocket.erl&lt;/code&gt;, then to create&lt;br /&gt;
+a new WebSocket on the client:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;head&amp;gt;
+    &amp;lt;!--&amp;lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&amp;gt;--&amp;gt;
+    &amp;lt;script&amp;gt;
+        function createWebsocket()
+        {
+            ws = new WebSocket(&quot;ws://localhost:8001/websocket/status&quot;);
+            ws.onmessage = function(e){
+                &amp;lt;!--alert(e.data);--&amp;gt;
+                document.getElementById(&quot;status&quot;).innerHTML = e.data;
+                scrollToBottom();
+            }
+        }
+        function scrollToBottom()
+        {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+        function reloadPage()
+        {
+            window.location.reload();
+        }
+        function load()
+        {
+            scrollToBottom();
+            createWebsocket();
+        }
+    &amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;!--&amp;lt;body bgcolor=&quot;#000000&quot; onclick=&quot;reloadPage()&quot; onload=&quot;load()&quot;&amp;gt;--&amp;gt;
+&amp;lt;body bgcolor=&quot;#000000&quot; onload=&quot;load()&quot;&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;pre style=&quot;color:#00ff00&quot; id=&quot;status&quot;&amp;gt;
+    
+    &amp;lt;/pre&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;到此AutoBuild初步完成状态通知。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 08 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://xiaobin0860.github.io/erlang/autobuild/chicagoboss/websocket/2016/01/08/autobuild(2).html</link>
+        <guid isPermaLink="true">http://xiaobin0860.github.io/erlang/autobuild/chicagoboss/websocket/2016/01/08/autobuild(2).html</guid>
+        
+        
+        <category>erlang</category>
+        
+        <category>autobuild</category>
+        
+        <category>chicagoboss</category>
+        
+        <category>websocket</category>
         
       </item>
     
