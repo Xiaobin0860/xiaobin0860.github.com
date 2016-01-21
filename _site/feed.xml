@@ -6,9 +6,61 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 20 Jan 2016 01:20:34 +0800</pubDate>
-    <lastBuildDate>Wed, 20 Jan 2016 01:20:34 +0800</lastBuildDate>
+    <pubDate>Fri, 22 Jan 2016 00:00:20 +0800</pubDate>
+    <lastBuildDate>Fri, 22 Jan 2016 00:00:20 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>分布式服务器设计</title>
+        <description>&lt;h2 id=&quot;jone-zhangs-blog----httpwwwcnblogscomccdevp3341234html&quot;&gt;&lt;a href=&quot;http://www.cnblogs.com/ccdev/p/3341234.html&quot;&gt;Jone Zhang’s Blog – 高并发服务端分布式系统设计概要&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160121_jone_zhang.jpg&quot; alt=&quot;分布式系统设计图&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;整个系统由N台机器组合而成，其中Global Master一台，Global Slave一台到多台，两者之间保持强一致性并完全同步，&lt;br /&gt;
+可由Global Slave随时顶替Global Master工作，它们被Global Heartbeat（一台）来管理，保证有一个Global Master正常工作；&lt;br /&gt;
+Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉了，则必须人工干预才能恢复正常；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;整个系统由多个groups合成，每一个group负责相应业务的数据的存取，它们是数据节点，是真正抗压力的地方，&lt;br /&gt;
+每一个group由一个Group Master和一个到多个Group Slave构成，Group Master作为该group的主节点，提供读和写，&lt;br /&gt;
+而Group Slave则只提供读服务且保证这些Group Slave节点中，至少有一个和Group Master保持完全同步，&lt;br /&gt;
+剩余的Group Slave和Group Master能够达到最终一致，它们之间以“半同步”模式工作保证最终一致性；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;每一个group的健康状态由Global Master来管理，Global Master向group发送管理信息，并保证有一个Group Master正常工作，&lt;br /&gt;
+若Group Master宕机，在该group内通过分布式选举产生新的Group Master顶替原来宕机的机器继续工作，&lt;br /&gt;
+但仍然有一小段时间需要中断写服务来切换新的Group Master；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;每一个group的底层是实际的存储系统，File system，它们是无状态的，即，由分布式选举产生的Group Master可以在原来的File system上继续工作；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Client的上端可认为是Web请求，Client在“首次”进行数据读写时，向Global Master查询相应的group信息，并将其缓存，&lt;br /&gt;
+后续将直接与相应的group进行通信；为避免大量“首次”查询冲垮Global Master，在Client与Global Master之间增加DNS负载均衡，&lt;br /&gt;
+可由Global Slave分担部分查询工作；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当Client已经拥有足够的group信息时，它将直接与group通信进行工作，从而真正的压力和流量由各个group分担，并处理完成需要的工作。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;我的分布式游戏服务器设计&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160121_my_server.jpg&quot; alt=&quot;分布式游戏服务器设计图&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 21 Jan 2016 00:00:00 +0800</pubDate>
+        <link>http://xiaobin0860.github.io/server/%E5%88%86%E5%B8%83%E5%BC%8F/2016/01/21/server.html</link>
+        <guid isPermaLink="true">http://xiaobin0860.github.io/server/%E5%88%86%E5%B8%83%E5%BC%8F/2016/01/21/server.html</guid>
+        
+        
+        <category>server</category>
+        
+        <category>分布式</category>
+        
+      </item>
     
       <item>
         <title>redmine</title>
@@ -475,128 +527,6 @@ a new WebSocket on the client:&lt;/p&gt;
         <category>erlang</category>
         
         <category>autobuild</category>
-        
-      </item>
-    
-      <item>
-        <title>markdown syntax</title>
-        <description>&lt;p&gt;Markdown is a superset of HTML, so any HTML file is a valid Markdown.
-&lt;!-- This means we can use HTML elements in Markdown. --&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;headings&quot;&gt;Headings&lt;/h2&gt;
-
-&lt;h1 id=&quot;this-is-an-h1&quot;&gt;This is an h1&lt;/h1&gt;
-&lt;p&gt;## This is an h2
-### This is an h3
-#### This is an h4
-##### This is an h5
-###### This is an h6&lt;/p&gt;
-
-&lt;h1 id=&quot;this-is-an-h1-1&quot;&gt;This is an h1&lt;/h1&gt;
-&lt;p&gt;This is an h2
-————-&lt;/p&gt;
-
-&lt;h2 id=&quot;text-styles&quot;&gt;Text styles&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;This text is in italics.&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;And so is this text&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;This text is in bold&lt;/strong&gt;&lt;br /&gt;
-&lt;strong&gt;And so is this text&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;This text is in both.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;~~This text is rendered with strikethrough.~~&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;monospace&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;paragraphs&quot;&gt;Paragraphs&lt;/h2&gt;
-
-&lt;p&gt;This is a paragraph.&lt;/p&gt;
-
-&lt;p&gt;Now I’m in paragraph 2.
-I’m still in paragraph 2 too!&lt;/p&gt;
-
-&lt;p&gt;I’m in paragraph three!&lt;/p&gt;
-
-&lt;p&gt;Leave 2 spaces at the end of a line to to a&lt;br /&gt;
-line break&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This is a block quote. You can&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;manually wrap your lines and put a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; before every line.
-You can also use more than one level
-&amp;gt; of indentation.
-How neat is that?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;lists&quot;&gt;Lists&lt;/h2&gt;
-
-&lt;p&gt;Unordered lists&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Item1&lt;/li&gt;
-  &lt;li&gt;Item2&lt;/li&gt;
-  &lt;li&gt;Item3&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Item1&lt;/li&gt;
-  &lt;li&gt;Item2&lt;/li&gt;
-  &lt;li&gt;Item3&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;or&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Item1&lt;/li&gt;
-  &lt;li&gt;Item2&lt;/li&gt;
-  &lt;li&gt;Item3&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ordered lists&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Item1
-    &lt;ul&gt;
-      &lt;li&gt;Sub1&lt;/li&gt;
-      &lt;li&gt;Sub2&lt;/li&gt;
-      &lt;li&gt;Sub3&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Item2&lt;/li&gt;
-  &lt;li&gt;Item3&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;code-blocks&quot;&gt;Code blocks&lt;/h2&gt;
-
-&lt;p&gt;You can indicate a code block by indenting a line with four spaces or a tab.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-module(test).
--export([test/0]).
-
-test() -&amp;gt;
-    io:format(&quot;Hello World!~n&quot;).
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://xiaobin0860.github.io&quot;&gt;xl000&lt;/a&gt;
-&amp;lt;l_xb@foxmail.com&amp;gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 06 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/markdown/2016/01/06/markdown.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/markdown/2016/01/06/markdown.html</guid>
-        
-        
-        <category>markdown</category>
         
       </item>
     

@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>xl000's blog</title>
-  <meta name="description" content="xl000's blog
-">
+  <title>分布式服务器设计</title>
+  <meta name="description" content="Jone Zhang’s Blog – 高并发服务端分布式系统设计概要">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://xiaobin0860.github.io/">
+  <link rel="canonical" href="http://xiaobin0860.github.io/server/%E5%88%86%E5%B8%83%E5%BC%8F/2016/01/21/server.html">
   <link rel="alternate" type="application/rss+xml" title="xl000's blog" href="http://xiaobin0860.github.io/feed.xml">
 </head>
 
@@ -55,105 +54,56 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">分布式服务器设计</h1>
+    <p class="post-meta"><time datetime="2016-01-21T00:00:00+08:00" itemprop="datePublished">Jan 21, 2016</time></p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Jan 21, 2016</span>
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="jone-zhangs-blog----httpwwwcnblogscomccdevp3341234html"><a href="http://www.cnblogs.com/ccdev/p/3341234.html">Jone Zhang’s Blog – 高并发服务端分布式系统设计概要</a></h2>
 
-        <h2>
-          <a class="post-link" href="/server/%E5%88%86%E5%B8%83%E5%BC%8F/2016/01/21/server.html">分布式服务器设计</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 18, 2016</span>
+<p><img src="http://xiaobin0860.github.io/imgs/20160121_jone_zhang.jpg" alt="分布式系统设计图" /></p>
 
-        <h2>
-          <a class="post-link" href="/redmine/2016/01/18/redmine.html">redmine</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 17, 2016</span>
+<ol>
+  <li>
+    <p>整个系统由N台机器组合而成，其中Global Master一台，Global Slave一台到多台，两者之间保持强一致性并完全同步，<br />
+可由Global Slave随时顶替Global Master工作，它们被Global Heartbeat（一台）来管理，保证有一个Global Master正常工作；<br />
+Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉了，则必须人工干预才能恢复正常；</p>
+  </li>
+  <li>
+    <p>整个系统由多个groups合成，每一个group负责相应业务的数据的存取，它们是数据节点，是真正抗压力的地方，<br />
+每一个group由一个Group Master和一个到多个Group Slave构成，Group Master作为该group的主节点，提供读和写，<br />
+而Group Slave则只提供读服务且保证这些Group Slave节点中，至少有一个和Group Master保持完全同步，<br />
+剩余的Group Slave和Group Master能够达到最终一致，它们之间以“半同步”模式工作保证最终一致性；</p>
+  </li>
+  <li>
+    <p>每一个group的健康状态由Global Master来管理，Global Master向group发送管理信息，并保证有一个Group Master正常工作，<br />
+若Group Master宕机，在该group内通过分布式选举产生新的Group Master顶替原来宕机的机器继续工作，<br />
+但仍然有一小段时间需要中断写服务来切换新的Group Master；</p>
+  </li>
+  <li>
+    <p>每一个group的底层是实际的存储系统，File system，它们是无状态的，即，由分布式选举产生的Group Master可以在原来的File system上继续工作；</p>
+  </li>
+  <li>
+    <p>Client的上端可认为是Web请求，Client在“首次”进行数据读写时，向Global Master查询相应的group信息，并将其缓存，<br />
+后续将直接与相应的group进行通信；为避免大量“首次”查询冲垮Global Master，在Client与Global Master之间增加DNS负载均衡，<br />
+可由Global Slave分担部分查询工作；</p>
+  </li>
+  <li>
+    <p>当Client已经拥有足够的group信息时，它将直接与group通信进行工作，从而真正的压力和流量由各个group分担，并处理完成需要的工作。</p>
+  </li>
+</ol>
 
-        <h2>
-          <a class="post-link" href="/jekyll/2016/01/17/jekyll-templates.html">jekyll templates</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 16, 2016</span>
+<h2 id="section">我的分布式游戏服务器设计</h2>
 
-        <h2>
-          <a class="post-link" href="/html/2016/01/16/html-auto-refresh.html">Auto-Refresh code in HTML</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 12, 2016</span>
+<p><img src="http://xiaobin0860.github.io/imgs/20160121_my_server.jpg" alt="分布式游戏服务器设计图" /></p>
 
-        <h2>
-          <a class="post-link" href="/erlang/2016/01/12/otp-doc.html">erlang/opt doc</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 12, 2016</span>
 
-        <h2>
-          <a class="post-link" href="/erlang/2016/01/12/erlang-shell.html">erlang执行shell</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 11, 2016</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/cocos2d-x/debug/2016/01/11/2dx-debug.html">记录一次内存错误debug</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 10, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/01/10/fist-post.html">My first post</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/erlang/autobuild/chicagoboss/websocket/2016/01/08/autobuild(2).html">AutoBuild(2)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/erlang/autobuild/2016/01/08/autobuild(1).html">AutoBuild(1)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Jan 6, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/markdown/2016/01/06/markdown.html">markdown syntax</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>
