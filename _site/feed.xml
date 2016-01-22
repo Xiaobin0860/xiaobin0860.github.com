@@ -6,14 +6,14 @@
 </description>
     <link>http://xiaobin0860.github.io/</link>
     <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 Jan 2016 03:23:18 +0800</pubDate>
-    <lastBuildDate>Sat, 23 Jan 2016 03:23:18 +0800</lastBuildDate>
+    <pubDate>Sat, 23 Jan 2016 03:27:14 +0800</pubDate>
+    <lastBuildDate>Sat, 23 Jan 2016 03:27:14 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
         <title>AutoBuild(3)</title>
-        <description>&lt;p&gt;今天svn提交莫名奇妙卡住，提交成功了，但svn命令一直不返回。强关了后cleanup，再更新后就没有个性了。
-可见提交其它已经成功。删了重新checkout总是依旧。&lt;/p&gt;
+        <description>&lt;p&gt;今天svn提交莫名奇妙卡住，提交成功了，但svn命令一直不返回。强关了后cleanup，再更新后就没有更新了。
+可见提交其实已经成功。删了重新checkout问题依旧。&lt;/p&gt;
 
 &lt;p&gt;为什么提交成功了命令行却一直不返回呢？忽然想到之前为了做AutoBuild系统，hook了svn提交。提交后用wget
 执行了通知编译服务器操作，而编译服务器不在线通知不到，就一直卡在那。&lt;/p&gt;

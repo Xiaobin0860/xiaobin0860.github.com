@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>AutoBuild(3)</title>
-  <meta name="description" content="今天svn提交莫名奇妙卡住，提交成功了，但svn命令一直不返回。强关了后cleanup，再更新后就没有个性了。可见提交其它已经成功。删了重新checkout总是依旧。">
+  <meta name="description" content="今天svn提交莫名奇妙卡住，提交成功了，但svn命令一直不返回。强关了后cleanup，再更新后就没有更新了。可见提交其实已经成功。删了重新checkout问题依旧。">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://xiaobin0860.github.io/autobuild/svn/2016/01/23/autobuild(3).html">
@@ -62,8 +62,8 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>今天svn提交莫名奇妙卡住，提交成功了，但svn命令一直不返回。强关了后cleanup，再更新后就没有个性了。
-可见提交其它已经成功。删了重新checkout总是依旧。</p>
+    <p>今天svn提交莫名奇妙卡住，提交成功了，但svn命令一直不返回。强关了后cleanup，再更新后就没有更新了。
+可见提交其实已经成功。删了重新checkout问题依旧。</p>
 
 <p>为什么提交成功了命令行却一直不返回呢？忽然想到之前为了做AutoBuild系统，hook了svn提交。提交后用wget
 执行了通知编译服务器操作，而编译服务器不在线通知不到，就一直卡在那。</p>
