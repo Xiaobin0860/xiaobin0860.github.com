@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>AutoBuild(2)</title>
+
+	
+
+	<meta name="author" content="xiaobin">
+
+		<!-- Enable responsive viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/resources/syntax/syntax.css">
+<link rel="stylesheet" type="text/css" href="/assets/resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/resources/font-awesome/css/font-awesome.min.css">
+<link rel="icon" href="https://raw.githubusercontent.com/talk2ankan/uno-dbyll/gh-pages/uno-dbyll.png">
+
+<link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.js"></script>
+	
+<script type="text/javascript">
+$(document).ready(function(){
+if(window.location.href=="http://blog.ankanbiswas.in/uno-dbyll/")
+{
+$("#sidebar").css({width:'100%'});
+$("#btnblog").click(function(){
+$("#sidebar").animate({width:'33.3333%'},'slow');
+});
+}
+});
+	
+</script>
+	</head>
+<body>
+
+<nav class="navbar navbar-default visible-xs" role="navigation">
+
+
+ <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarHeaderCollapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a type="button" class="navbar-toggle nav-link" href="http://github.com/xiaobin0860">
+        <i class="fa fa-github"></i>
+      </a>
+      
+      
+       
+      <a type="button" class="navbar-toggle nav-link" href="mailto:xiaobin0860@gmail.com">
+        <i class="fa fa-envelope"></i>
+      </a>
+      
+     
+
+     
+      <a class="navbar-brand" href="">
+        <img src="https://xiaobin0860.github.io" class="img-circle" style="height:35px;width:35px"/>
+        乌托邦
+      </a>
+    </div>
+    
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbarHeaderCollapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="">Home</a></li>
+        <li><a href="/categories.html">Categories</a></li>
+        <li><a href="/tags.html">Tags</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+</nav>
+
+  <!-- nav-menu-dropdown -->
+  <div class="btn-group hidden-xs" id="nav-menu">
+   <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
+     <i class="fa fa-bars"></i>
+   </button>
+   <ul class="dropdown-menu pull-right" role="menu">
+     <li><a href=""><i class="fa fa-home"></i> Home</a></li>
+     <li><a href="/categories.html"><i class="fa fa-folder"></i> Categories</a></li>
+     <li><a href="/tags.html"><i class="fa fa-tags"></i> Tags</a></li>
+     <li class="divider"></li>
+     <li><a href="#"><i class="fa fa-arrow-up"></i> Top of Page</a></li>
+   </ul>
+ </div>
+
+<div class="col-sm-4 sidebar hidden-xs" id="sidebar">
+		<! -- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<a href="">
+		<img src="https://xiaobin0860.github.io" class="img-circle" style="border-radius: 50%;
+border: 3px solid #FFF; height:150px;width:150px" />
+	</a>
+	<h3 class="title">
+        <a href="">乌托邦</a>
+         <p style="font-size:20px;">xl</p>
+    </h3>
+    
+    <hr class="hr-line">
+<h3 class="title">
+         <p style="font-size:18px">Stay hungry, Stay foolish.</p>
+    </h3>
+
+    <hr class="hr-line1">
+ <h3 class="title" style="font-size:30px;">
+ 
+       
+      <a type="button" class="social1" href="http://github.com/xiaobin0860">
+        <i class="fa fa-github"></i>
+      </a>
+      
+       
+     
+      
+      <a type="button" class="social3" href="mailto:xiaobin0860@gmail.com">
+        <i class="fa fa-envelope"></i>
+      </a>
+      
+       <hr class="hr-line1">
+       <a type="button"  style="font-size:20px; padding:7px; padding-left:13px;padding-right:13px;margin-right: 10px;" class="social3 " id="btnblog" href="/#blog">
+        <i class="fa" style="font-weight:bold;letter-spacing:0; font-family:arial,sans-serif">Blog</i>
+      </a>
+      </h3>
+
+</header>
+
+
+
+<! -- sidebar.html end -->
+
+	</div>
+
+<div class="col-sm-8 col-sm-offset-4" id="container">
+  
+<div class="page-header">
+  <h1>AutoBuild(2) </h1>
+</div>
+  
+<article>
+
+  <div class="col-sm-10">
+   <span class="post-date">
+     
+     January 
+     8th,
+     
+     2016
+      
+   </span>
+    <div class="article_body" id="article_body">
+    <h2 id="websocket">Websocket</h2>
+
+<p>WebSocket is an HTML5 technology used for two-way messaging from inside a web page.<br />
+WebSocket is a protocol providing full-duplex communication channels over a single TCP connection.<br />
+<a href="https://en.wikipedia.org/wiki/WebSocket">WebSocket</a></p>
+
+<h2 id="chicagoboss-websockets">ChicagoBoss WebSockets</h2>
+
+<h3 id="server-code">Server Code</h3>
+
+<p>The server WebSocket API is based around Erlang message-passing;<br />
+to send a message to a particular client, simply send it a message like:</p>
+
+<pre><code>WebSocket ! {text, &lt;&lt;"some text"&gt;&gt;}
+</code></pre>
+
+<p>Furthermore, you can broadcast a message that will be handled by your <code>handle_broadcast/2</code> function by<br />
+using the module name of your websocket module and the proper method of the <code>boss_service_worker</code> module:</p>
+
+<pre><code>boss_service_worker:broadcast(myapp_myservice_websocket, MyMessage).
+</code></pre>
+
+<p>To handle incoming messages from clients, you’ll need to create WebSocket controllers in your project’s<br />
+<code>src/websocket</code> directory. Each controller module should have a name of the form<br />
+<code>&lt;app name&gt;_&lt;service name&gt;_websocket.erl</code> and be a parameterized module with parameters for<br />
+<code>Req</code> and <code>SessionId</code>, e.g.:</p>
+
+<pre><code>-module(myapp_myservice_websocket, [Req, SessionId]).
+</code></pre>
+
+<p>The module should implement the <code>boss_service_handler</code> behavior.</p>
+
+<pre><code>-module(ab_status_websocket, [Req, SessionId]).
+-behaviour(boss_service_handler).
+-compile(export_all).
+
+init() -&gt; {ok, []}.
+
+handle_join(_Url, WebsocketPid, State) -&gt;
+    log:d("~p joined!", [WebsocketPid]),
+    WebsocketPid ! {text, "Hello WebSocket!"},
+    NewState = [WebsocketPid | State],
+    {noreply, NewState}.
+
+handle_close(_Reason, _Url, WebsocketPid, State) -&gt;
+    log:d("~p closed!", [WebsocketPid]),
+    NewState = lists:delete(WebsocketPid, State),
+    {noreply, NewState}.
+
+handle_incoming(_Url, _WebsocketPid, _Message, State) -&gt;
+    {noreply, State}.
+
+handle_broadcast(Message, State) -&gt;
+    broadcast_message(Message, State),
+    {noreply, State}.
+
+handle_info(_Info, State) -&gt;
+    {noreply, State}.
+
+terminate(_Reason, _State) -&gt; ok.
+
+broadcast_message(Message, [H|R]) -&gt;
+    log:d("send ~p to ~p ...", [Message, H]),
+    H ! {text, Message},
+    broadcast_message(Message, R);
+broadcast_message(_Message, []) -&gt; ok.
+</code></pre>
+
+<h3 id="client-code">Client code</h3>
+
+<p>WebSocket URLs are automatically generated from the WebSocket controllers in your project’s<br />
+src/websocket directory. For example, if you have <code>myapp_foobar_websocket.erl</code>, then to create<br />
+a new WebSocket on the client:</p>
+
+<pre><code>&lt;head&gt;
+    &lt;!--&lt;meta http-equiv="refresh" content="5"&gt;--&gt;
+    &lt;script&gt;
+        function createWebsocket()
+        {
+            ws = new WebSocket("ws://localhost:8001/websocket/status");
+            ws.onmessage = function(e){
+                &lt;!--alert(e.data);--&gt;
+                document.getElementById("status").innerHTML = e.data;
+                scrollToBottom();
+            }
+        }
+        function scrollToBottom()
+        {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+        function reloadPage()
+        {
+            window.location.reload();
+        }
+        function load()
+        {
+            scrollToBottom();
+            createWebsocket();
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;!--&lt;body bgcolor="#000000" onclick="reloadPage()" onload="load()"&gt;--&gt;
+&lt;body bgcolor="#000000" onload="load()"&gt;
+&lt;div&gt;
+    &lt;pre style="color:#00ff00" id="status"&gt;
+    
+    &lt;/pre&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>到此AutoBuild初步完成状态通知。</p>
+
+
+    </div>
+
+    
+    <ul class="tag_box list-unstyled list-inline">
+      <li><i class="fa fa-folder-open"></i></li>
+      
+      
+       
+        <li><a href="/categories.html#erlang-ref">
+          erlang <span>(4)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#autobuild-ref">
+          autobuild <span>(3)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#chicagoboss-ref">
+          chicagoboss <span>(1)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#websocket-ref">
+          websocket <span>(1)</span>
+          
+        </a></li>
+      
+      
+    </ul>
+      
+
+      
+
+    <hr>
+
+    <div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=AutoBuild(2)"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+
+      <section class="col-sm-6 author">
+        <img src="https://xiaobin0860.github.io" style="height:100px;width:100px;" class="img-rounded author-image" />
+        <h4 class="section-title author-name"><b>乌托邦</b><br/><p style="color:#888;font-size:13px;">xl</p></h4>
+        <p class="author-bio">Stay hungry, Stay foolish.</p>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <ul class="pager">
+      
+      <li class="previous"><a href="/autobuild(1)" title="AutoBuild(1)">&larr; Previous</a></li>
+      
+      
+      <li class="next"><a href="/fist-post" title="My first post">Next &rarr;</a></li>
+      
+    </ul>
+
+  
+  </div>
+  
+       <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'talk2ankan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+</article>
+<div class="clearfix"></div>
+
+
+<footer class="navbar navbar-default">
+    <div class="container">
+      <p class="navbar-text pull-left">Some rights reserved &copy; 2016 xiaobin. </br>
+      Created using <a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> and <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a>. Theme : <a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> by talk2ankan.
+ </p>
+ </div>
+  </footer>
+</div>
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'talk2ankan'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>About</title>
+		<title>erlang执行shell</title>
 
 	
 
@@ -140,26 +140,180 @@ border: 3px solid #FFF; height:150px;width:150px" />
 	</div>
 
 <div class="col-sm-8 col-sm-offset-4" id="container">
-  <div class="page-header">
-  <h1>About </h1>
+  
+<div class="page-header">
+  <h1>erlang执行shell </h1>
 </div>
+  
+<article>
 
-<p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="http://jekyllrb.com/">jekyllrb.com</a></p>
+  <div class="col-sm-10">
+   <span class="post-date">
+     
+     January 
+     12th,
+     
+     2016
+      
+   </span>
+    <div class="article_body" id="article_body">
+    <h2 id="oscmdcmd">os:cmd(Cmd)</h2>
 
-<p>You can find the source code for the Jekyll new theme at:
-<a href="https://github.com/jglovier"><span class="icon icon--github"><svg viewbox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
-</span><span class="username">jglovier</span></a>
- /
-<a href="https://github.com/jglovier/jekyll-new">jekyll-new</a></p>
+<pre><code>cmd(Command) -&gt; string()
+Types:
+Command = atom() | io_lib:chars()
+</code></pre>
 
-<p>You can find the source code for Jekyll at
-<a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewbox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
-</span><span class="username">jekyll</span></a>
- /
-<a href="https://github.com/jekyll/jekyll">jekyll</a></p>
+<h2 id="erlangopenportportname-portsettings">erlang:open_port(PortName, PortSettings)</h2>
+
+<pre><code>open_port(PortName, PortSettings) -&gt; port()
+Types:
+PortName = 
+    {spawn, Command :: string() | binary()} |
+    {spawn_driver, Command :: string() | binary()} |
+    {spawn_executable, FileName :: file:name()} |
+    {fd, In :: integer() &gt;= 0, Out :: integer() &gt;= 0}
+PortSettings = [Opt]
+Opt = 
+    {packet, N :: 1 | 2 | 4} |
+    stream |
+    {line, L :: integer() &gt;= 0} |
+    {cd, Dir :: string() | binary()} |
+    {env, Env :: [{Name :: string(), Val :: string() | false}]} |
+    {args, [string() | binary()]} |
+    {arg0, string() | binary()} |
+    exit_status |
+    use_stdio |
+    nouse_stdio |
+    stderr_to_stdout |
+    in |
+    out |
+    binary |
+    eof |
+    {parallelism, Boolean :: boolean()} |
+    hide
+</code></pre>
+
+<h2 id="example">Example</h2>
+
+<pre><code>loop2() -&gt;
+    receive
+        {build} -&gt;
+            io:format("build ...~n"),
+            Port = open_port({spawn_executable, "path/build_ios_nolog.sh"}, [stream, exit_status, eof, hide]),
+            Result = get_data(Port, []),
+            io:format("~p~n", [Result]),
+            loop2();
+        stop -&gt;
+            ok;
+        _ -&gt;
+            io:format("recv unknown message!~n"),
+            loop2()
+    end.
+
+get_data(Port, Sofar) -&gt;
+    receive
+        {Port, {data, Bytes}} -&gt;
+            get_data(Port, [Sofar|Bytes]);
+        {Port, eof} -&gt;
+            Port ! {self(), close},
+            receive
+                {Port, closed} -&gt; true
+            end,
+            receive
+                {'EXIT',  Port,  _} -&gt; ok
+            after 1 -&gt; ok
+            end,
+            ExitCode =
+            receive
+                {Port, {exit_status, Code}} -&gt; Code
+            end,
+            {ExitCode, lists:flatten(Sofar)}
+            %{ExitCode, Sofar}
+    end.
+</code></pre>
 
 
-<br/><br/>
+    </div>
+
+    
+    <ul class="tag_box list-unstyled list-inline">
+      <li><i class="fa fa-folder-open"></i></li>
+      
+      
+       
+        <li><a href="/categories.html#erlang-ref">
+          erlang <span>(4)</span>
+          
+        </a></li>
+      
+      
+    </ul>
+      
+
+      
+
+    <hr>
+
+    <div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=erlang执行shell"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+
+      <section class="col-sm-6 author">
+        <img src="https://xiaobin0860.github.io" style="height:100px;width:100px;" class="img-rounded author-image" />
+        <h4 class="section-title author-name"><b>乌托邦</b><br/><p style="color:#888;font-size:13px;">xl</p></h4>
+        <p class="author-bio">Stay hungry, Stay foolish.</p>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <ul class="pager">
+      
+      <li class="previous"><a href="/2dx-debug" title="记录一次内存错误debug">&larr; Previous</a></li>
+      
+      
+      <li class="next"><a href="/otp-doc" title="erlang/opt doc">Next &rarr;</a></li>
+      
+    </ul>
+
+  
+  </div>
+  
+       <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'talk2ankan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+    
+</article>
+<div class="clearfix"></div>
+
 
 <footer class="navbar navbar-default">
     <div class="container">

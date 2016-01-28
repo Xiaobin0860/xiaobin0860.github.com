@@ -1,19 +1,30 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-title: xl000's blog
-email: l_xb@foxmail.com
-description: > # this means to ignore newlines until "baseurl:"
-    xl000's blog
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://xiaobin0860.github.io" # the base hostname & protocol for your site
-twitter_username: xiaobin0285
-github_username:  xiaobin0860
-
-# Build settings
+# This is the default format.
+# For more see: http://jekyllrb.com/docs/permalinks/
+permalink: /:title
+# https://help.github.com/articles/migrating-your-pages-site-from-maruku
 markdown: kramdown
+gems: [jekyll-paginate]
+highlighter: pygments
+paginate: 20 # pagination based on number of posts
+paginate_path: "page/:num"
+
+exclude: [HelloCocosJs, README.md, otp_doc]
+
+# These paths are to the main pages Jekyll-Bootstrap ships with.
+# Some JB helpers refer to these paths; change them here if needed.
+#
+categories_path : categories.html
+tags_path : tags.html
+
+title : 乌托邦
+
+author:
+  name: xiaobin
+  role: xl
+  email: xiaobin0860@gmail.com
+  github: xiaobin0860
+  twitter: 
+  facebook: 
+  googleplus: 
+  bio: "Stay hungry, Stay foolish."
+  uno-dbyll: https://xiaobin0860.github.io

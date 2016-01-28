@@ -1,14 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>xl000&#39;s blog</title>
-    <description>xl000&#39;s blog
+    <title>乌托邦</title>
+    <description></description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 28 Jan 2016 19:41:55 +0800</pubDate>
+    <lastBuildDate>Thu, 28 Jan 2016 19:41:55 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.0</generator>
+    
+      <item>
+        <title>shared ptr</title>
+        <description>&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;thread&amp;gt;
+#include &amp;lt;memory&amp;gt;
+#include &amp;lt;chrono&amp;gt;
+#include &amp;lt;atomic&amp;gt;
+
+using Lock = std::lock_guard&amp;lt;std::mutex&amp;gt;;
+
+static std::atomic&amp;lt;int&amp;gt; s_test_count(3);
+class Demo;
+using DemoPtr = std::shared_ptr&amp;lt;Demo&amp;gt;;
+class Demo : public std::enable_shared_from_this&amp;lt;Demo&amp;gt;
+{
+public:
+    Demo()
+    : _testValue(0)
+    , _atomicValue(0)
+    {
+        
+    }
+    
+    ~Demo()
+    {
+        std::cout &amp;lt;&amp;lt; &quot;~Demo()&quot; &amp;lt;&amp;lt; std::endl;
+    }
+    
+    void test1()
+    {
+        std::thread t([this]{
+            std::cout &amp;lt;&amp;lt; &quot;thead&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot; func begin ...&quot; &amp;lt;&amp;lt; std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            {
+                Lock l(_testValueMutex);
+                ++_testValue;
+            }
+            std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+            
+            --s_test_count;
+        });
+        t.detach();
+        {
+            Lock l(_testValueMutex);
+            ++_testValue;
+        }
+        std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+    }
+    
+    void test2()
+    {
+        {
+            auto ptr = shared_from_this();
+            std::thread t([this, ptr]{
+                std::cout &amp;lt;&amp;lt; &quot;thead&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot; func begin ...&quot; &amp;lt;&amp;lt; std::endl;
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                {
+                    Lock l(_testValueMutex);
+                    ++_testValue;
+                }
+                std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+                
+                --s_test_count;
+            });
+            t.detach();
+            {
+                Lock l(_testValueMutex);
+                ++_testValue;
+            }
+            std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+        }
+    }
+    
+    void test3()
+    {
+        {
+            std::thread t(std::bind(&amp;amp;Demo::_theadFunc, this));
+            t.detach();
+            {
+                Lock l(_testValueMutex);
+                ++_testValue;
+            }
+            std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+        }
+    }
+    
+    void test4()
+    {
+        {
+            std::thread t(std::bind(&amp;amp;Demo::_theadFunc, shared_from_this()));
+            t.detach();
+            {
+                Lock l(_testValueMutex);
+                ++_testValue;
+            }
+            std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+        }
+    }
+
+    void test5()
+    {
+        auto ptr = shared_from_this();
+        for (auto j=0; j&amp;lt;20; ++j) {
+            std::thread t([this, ptr]{
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                ++_atomicValue;
+                std::cerr &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+            });
+            t.detach();
+        }
+        while (_atomicValue != 20) {
+            std::this_thread::yield();
+        }
+        --s_test_count;
+    }
+private:
+    std::mutex _testValueMutex;
+    int _testValue;
+    std::atomic&amp;lt;int&amp;gt; _atomicValue;
+    
+    void _theadFunc()
+    {
+        std::cout &amp;lt;&amp;lt; &quot;thead&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot; func begin ...&quot; &amp;lt;&amp;lt; std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        {
+            Lock l(_testValueMutex);
+            ++_testValue;
+        }
+        std::cout &amp;lt;&amp;lt; &quot;thread&quot; &amp;lt;&amp;lt; std::this_thread::get_id() &amp;lt;&amp;lt; &quot;: value=&quot; &amp;lt;&amp;lt; _testValue &amp;lt;&amp;lt; std::endl;
+        
+        --s_test_count;
+    }
+};
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    std::cout &amp;lt;&amp;lt; &quot;Hello, World!\n&quot;;
+//	{
+//		// test 1 crash
+//		auto demoPtr = std::make_shared&amp;lt;Demo&amp;gt;();
+//		std::cout &amp;lt;&amp;lt; &quot;Before test1: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+//		demoPtr-&amp;gt;test1();
+//		std::cout &amp;lt;&amp;lt; &quot;After test1: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+//	}
+    {
+        //test 2
+        auto demoPtr = std::make_shared&amp;lt;Demo&amp;gt;();
+        std::cout &amp;lt;&amp;lt; &quot;Before test2: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+        demoPtr-&amp;gt;test2();
+        std::cout &amp;lt;&amp;lt; &quot;After test2: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+    }
+//	{
+//		//test 3 crash
+//		auto demoPtr = std::make_shared&amp;lt;Demo&amp;gt;();
+//		std::cout &amp;lt;&amp;lt; &quot;Before test3: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+//		demoPtr-&amp;gt;test3();
+//		std::cout &amp;lt;&amp;lt; &quot;After test3: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+//	}
+    {
+        //test 4
+        auto demoPtr = std::make_shared&amp;lt;Demo&amp;gt;();
+        std::cout &amp;lt;&amp;lt; &quot;Before test4: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+        demoPtr-&amp;gt;test4();
+        std::cout &amp;lt;&amp;lt; &quot;After test4: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+    }
+    {
+        //test 5
+        auto demoPtr = std::make_shared&amp;lt;Demo&amp;gt;();
+        std::cout &amp;lt;&amp;lt; &quot;Before test5: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+        demoPtr-&amp;gt;test5();
+        std::cout &amp;lt;&amp;lt; &quot;After test5: use_count=&quot; &amp;lt;&amp;lt; demoPtr.use_count() &amp;lt;&amp;lt; std::endl;
+    }
+    
+    while (s_test_count &amp;gt; 0) {
+        std::this_thread::yield();
+    }
+    
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
 </description>
-    <link>http://xiaobin0860.github.io/</link>
-    <atom:link href="http://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 Jan 2016 03:27:14 +0800</pubDate>
-    <lastBuildDate>Sat, 23 Jan 2016 03:27:14 +0800</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+        <pubDate>Sat, 23 Jan 2016 00:00:00 +0800</pubDate>
+        <link>/c++shared_ptr</link>
+        <guid isPermaLink="true">/c++shared_ptr</guid>
+        
+        
+        <category>c++</category>
+        
+        <category>shared_ptr</category>
+        
+        <category>atomic</category>
+        
+      </item>
     
       <item>
         <title>AutoBuild(3)</title>
@@ -20,14 +214,13 @@
 
 &lt;p&gt;知道问题原因了，修改wget超时及重试次数，并改为后台运行，搞定。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/usr/bin/wget http://xxx --tries=1 --spider --timeout=5 --background
+&lt;pre&gt;&lt;code&gt;/usr/bin/wget http://xxx --tries=1 --spider --timeout=5 --background
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 </description>
         <pubDate>Sat, 23 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/autobuild/svn/2016/01/23/autobuild(3).html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/autobuild/svn/2016/01/23/autobuild(3).html</guid>
+        <link>/autobuild(3)</link>
+        <guid isPermaLink="true">/autobuild(3)</guid>
         
         
         <category>autobuild</category>
@@ -40,7 +233,7 @@
         <title>分布式服务器设计</title>
         <description>&lt;h2 id=&quot;jone-zhangs-blog----httpwwwcnblogscomccdevp3341234html&quot;&gt;&lt;a href=&quot;http://www.cnblogs.com/ccdev/p/3341234.html&quot;&gt;Jone Zhang’s Blog – 高并发服务端分布式系统设计概要&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160121_jone_zhang.jpg&quot; alt=&quot;分布式系统设计图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20160121_jone_zhang.jpg&quot; alt=&quot;分布式系统设计图&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -74,12 +267,12 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
 
 &lt;h2 id=&quot;section&quot;&gt;我的分布式游戏服务器设计&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160121_my_server.jpg&quot; alt=&quot;分布式游戏服务器设计图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20160121_my_server.jpg&quot; alt=&quot;分布式游戏服务器设计图&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 21 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/server/%E5%88%86%E5%B8%83%E5%BC%8F/2016/01/21/server.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/server/%E5%88%86%E5%B8%83%E5%BC%8F/2016/01/21/server.html</guid>
+        <link>/server</link>
+        <guid isPermaLink="true">/server</guid>
         
         
         <category>server</category>
@@ -109,8 +302,8 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
 
 </description>
         <pubDate>Mon, 18 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/redmine/2016/01/18/redmine.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/redmine/2016/01/18/redmine.html</guid>
+        <link>/redmine</link>
+        <guid isPermaLink="true">/redmine</guid>
         
         
         <category>redmine</category>
@@ -121,42 +314,38 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
         <title>jekyll templates</title>
         <description>&lt;h2 id=&quot;variables&quot;&gt;Variables&lt;/h2&gt;
 
-&lt;p&gt;Variables are surrounded by &lt;code class=&quot;highlighter-rouge&quot;&gt;\{\{&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;}}&lt;/code&gt; like this:&lt;/p&gt;
+&lt;p&gt;Variables are surrounded by &lt;code&gt;\{\{&lt;/code&gt; and &lt;code&gt;}}&lt;/code&gt; like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
+&lt;pre&gt;&lt;code&gt;My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;tags&quot;&gt;Tags&lt;/h2&gt;
 
 &lt;p&gt;Tags provide arbitrary logic in the rendering process.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
+&lt;pre&gt;&lt;code&gt;\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;filters&quot;&gt;Filters&lt;/h2&gt;
 
 &lt;p&gt;Filters transform the values of variables and tag arguments.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\{\{ site.time | date_to_xmlschema  }}
+&lt;pre&gt;&lt;code&gt;\{\{ site.time | date_to_xmlschema  }}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;comments&quot;&gt;Comments&lt;/h2&gt;
 
 &lt;p&gt;Comments look like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\{\# this won&#39;t be rendered #}
+&lt;pre&gt;&lt;code&gt;\{\# this won&#39;t be rendered #}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160117.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20160117.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 17 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/jekyll/2016/01/17/jekyll-templates.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/jekyll/2016/01/17/jekyll-templates.html</guid>
+        <link>/jekyll-templates</link>
+        <guid isPermaLink="true">/jekyll-templates</guid>
         
         
         <category>jekyll</category>
@@ -167,34 +356,31 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
         <title>Auto-Refresh code in HTML</title>
         <description>&lt;h2 id=&quot;use-meta-tag&quot;&gt;use meta tag&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&amp;gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&amp;gt;
 Please within the `head` tag of your html document, this `meta` tag  
 will instruct the browser to refresh every `5` seconds.
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;AutoBuild系统中我想有个页面能够一直看到当前项目的状态，先用着这个方法去定时查询。
 以后看有没有办法实现通知。^_^&lt;/p&gt;
 
 &lt;h2 id=&quot;click-to-refresh&quot;&gt;click to refresh&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;body onclick=&quot;window.location.reload();&quot;&amp;gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;body onclick=&quot;window.location.reload();&quot;&amp;gt;
     ...
 &amp;lt;/body&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;scroll-to-bottom&quot;&gt;scroll to bottom&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;window.scrollTo(0, document.body.scrollHeight);
+&lt;pre&gt;&lt;code&gt;window.scrollTo(0, document.body.scrollHeight);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160116.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20160116.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 16 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/html/2016/01/16/html-auto-refresh.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/html/2016/01/16/html-auto-refresh.html</guid>
+        <link>/html-auto-refresh</link>
+        <guid isPermaLink="true">/html-auto-refresh</guid>
         
         
         <category>html</category>
@@ -203,12 +389,12 @@ will instruct the browser to refresh every `5` seconds.
     
       <item>
         <title>erlang/opt doc</title>
-        <description>&lt;p&gt;&lt;a href=&quot;http://xiaobin0860.github.io/otp_doc/doc/index.html&quot;&gt;erlang/opt doc&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;a href=&quot;/otp_doc/doc/index.html&quot;&gt;erlang/opt doc&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 12 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/erlang/2016/01/12/otp-doc.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/erlang/2016/01/12/otp-doc.html</guid>
+        <link>/otp-doc</link>
+        <guid isPermaLink="true">/otp-doc</guid>
         
         
         <category>erlang</category>
@@ -219,15 +405,14 @@ will instruct the browser to refresh every `5` seconds.
         <title>erlang执行shell</title>
         <description>&lt;h2 id=&quot;oscmdcmd&quot;&gt;os:cmd(Cmd)&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cmd(Command) -&amp;gt; string()
+&lt;pre&gt;&lt;code&gt;cmd(Command) -&amp;gt; string()
 Types:
 Command = atom() | io_lib:chars()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;erlangopenportportname-portsettings&quot;&gt;erlang:open_port(PortName, PortSettings)&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;open_port(PortName, PortSettings) -&amp;gt; port()
+&lt;pre&gt;&lt;code&gt;open_port(PortName, PortSettings) -&amp;gt; port()
 Types:
 PortName = 
     {spawn, Command :: string() | binary()} |
@@ -254,11 +439,10 @@ Opt =
     {parallelism, Boolean :: boolean()} |
     hide
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loop2() -&amp;gt;
+&lt;pre&gt;&lt;code&gt;loop2() -&amp;gt;
     receive
         {build} -&amp;gt;
             io:format(&quot;build ...~n&quot;),
@@ -294,12 +478,11 @@ get_data(Port, Sofar) -&amp;gt;
             %{ExitCode, Sofar}
     end.
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 </description>
         <pubDate>Tue, 12 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/erlang/2016/01/12/erlang-shell.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/erlang/2016/01/12/erlang-shell.html</guid>
+        <link>/erlang-shell</link>
+        <guid isPermaLink="true">/erlang-shell</guid>
         
         
         <category>erlang</category>
@@ -321,8 +504,8 @@ get_data(Port, Sofar) -&amp;gt;
 
 </description>
         <pubDate>Mon, 11 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/cocos2d-x/debug/2016/01/11/2dx-debug.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/cocos2d-x/debug/2016/01/11/2dx-debug.html</guid>
+        <link>/2dx-debug</link>
+        <guid isPermaLink="true">/2dx-debug</guid>
         
         
         <category>cocos2d-x</category>
@@ -337,153 +520,17 @@ get_data(Port, Sofar) -&amp;gt;
 求知若饥，虚心若愚。&lt;br /&gt;
 2016.1.10&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://xiaobin0860.github.io/imgs/20160110.jpg&quot; alt=&quot;小宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20160110.jpg&quot; alt=&quot;小宝&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 10 Jan 2016 21:04:46 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/jekyll/update/2016/01/10/fist-post.html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/jekyll/update/2016/01/10/fist-post.html</guid>
+        <link>/fist-post</link>
+        <guid isPermaLink="true">/fist-post</guid>
         
         
         <category>jekyll</category>
         
         <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>AutoBuild(2)</title>
-        <description>&lt;h2 id=&quot;websocket&quot;&gt;Websocket&lt;/h2&gt;
-
-&lt;p&gt;WebSocket is an HTML5 technology used for two-way messaging from inside a web page.&lt;br /&gt;
-WebSocket is a protocol providing full-duplex communication channels over a single TCP connection.&lt;br /&gt;
-&lt;a href=&quot;https://en.wikipedia.org/wiki/WebSocket&quot;&gt;WebSocket&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;chicagoboss-websockets&quot;&gt;ChicagoBoss WebSockets&lt;/h2&gt;
-
-&lt;h3 id=&quot;server-code&quot;&gt;Server Code&lt;/h3&gt;
-
-&lt;p&gt;The server WebSocket API is based around Erlang message-passing;&lt;br /&gt;
-to send a message to a particular client, simply send it a message like:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WebSocket ! {text, &amp;lt;&amp;lt;&quot;some text&quot;&amp;gt;&amp;gt;}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Furthermore, you can broadcast a message that will be handled by your &lt;code class=&quot;highlighter-rouge&quot;&gt;handle_broadcast/2&lt;/code&gt; function by&lt;br /&gt;
-using the module name of your websocket module and the proper method of the &lt;code class=&quot;highlighter-rouge&quot;&gt;boss_service_worker&lt;/code&gt; module:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;boss_service_worker:broadcast(myapp_myservice_websocket, MyMessage).
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;To handle incoming messages from clients, you’ll need to create WebSocket controllers in your project’s&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;src/websocket&lt;/code&gt; directory. Each controller module should have a name of the form&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;app name&amp;gt;_&amp;lt;service name&amp;gt;_websocket.erl&lt;/code&gt; and be a parameterized module with parameters for&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Req&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;SessionId&lt;/code&gt;, e.g.:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-module(myapp_myservice_websocket, [Req, SessionId]).
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The module should implement the &lt;code class=&quot;highlighter-rouge&quot;&gt;boss_service_handler&lt;/code&gt; behavior.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-module(ab_status_websocket, [Req, SessionId]).
--behaviour(boss_service_handler).
--compile(export_all).
-
-init() -&amp;gt; {ok, []}.
-
-handle_join(_Url, WebsocketPid, State) -&amp;gt;
-    log:d(&quot;~p joined!&quot;, [WebsocketPid]),
-    WebsocketPid ! {text, &quot;Hello WebSocket!&quot;},
-    NewState = [WebsocketPid | State],
-    {noreply, NewState}.
-
-handle_close(_Reason, _Url, WebsocketPid, State) -&amp;gt;
-    log:d(&quot;~p closed!&quot;, [WebsocketPid]),
-    NewState = lists:delete(WebsocketPid, State),
-    {noreply, NewState}.
-
-handle_incoming(_Url, _WebsocketPid, _Message, State) -&amp;gt;
-    {noreply, State}.
-
-handle_broadcast(Message, State) -&amp;gt;
-    broadcast_message(Message, State),
-    {noreply, State}.
-
-handle_info(_Info, State) -&amp;gt;
-    {noreply, State}.
-
-terminate(_Reason, _State) -&amp;gt; ok.
-
-broadcast_message(Message, [H|R]) -&amp;gt;
-    log:d(&quot;send ~p to ~p ...&quot;, [Message, H]),
-    H ! {text, Message},
-    broadcast_message(Message, R);
-broadcast_message(_Message, []) -&amp;gt; ok.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;client-code&quot;&gt;Client code&lt;/h3&gt;
-
-&lt;p&gt;WebSocket URLs are automatically generated from the WebSocket controllers in your project’s&lt;br /&gt;
-src/websocket directory. For example, if you have &lt;code class=&quot;highlighter-rouge&quot;&gt;myapp_foobar_websocket.erl&lt;/code&gt;, then to create&lt;br /&gt;
-a new WebSocket on the client:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;head&amp;gt;
-    &amp;lt;!--&amp;lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&amp;gt;--&amp;gt;
-    &amp;lt;script&amp;gt;
-        function createWebsocket()
-        {
-            ws = new WebSocket(&quot;ws://localhost:8001/websocket/status&quot;);
-            ws.onmessage = function(e){
-                &amp;lt;!--alert(e.data);--&amp;gt;
-                document.getElementById(&quot;status&quot;).innerHTML = e.data;
-                scrollToBottom();
-            }
-        }
-        function scrollToBottom()
-        {
-            window.scrollTo(0, document.body.scrollHeight);
-        }
-        function reloadPage()
-        {
-            window.location.reload();
-        }
-        function load()
-        {
-            scrollToBottom();
-            createWebsocket();
-        }
-    &amp;lt;/script&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;!--&amp;lt;body bgcolor=&quot;#000000&quot; onclick=&quot;reloadPage()&quot; onload=&quot;load()&quot;&amp;gt;--&amp;gt;
-&amp;lt;body bgcolor=&quot;#000000&quot; onload=&quot;load()&quot;&amp;gt;
-&amp;lt;div&amp;gt;
-    &amp;lt;pre style=&quot;color:#00ff00&quot; id=&quot;status&quot;&amp;gt;
-    
-    &amp;lt;/pre&amp;gt;
-&amp;lt;/div&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;到此AutoBuild初步完成状态通知。&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 08 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://xiaobin0860.github.io/erlang/autobuild/chicagoboss/websocket/2016/01/08/autobuild(2).html</link>
-        <guid isPermaLink="true">http://xiaobin0860.github.io/erlang/autobuild/chicagoboss/websocket/2016/01/08/autobuild(2).html</guid>
-        
-        
-        <category>erlang</category>
-        
-        <category>autobuild</category>
-        
-        <category>chicagoboss</category>
-        
-        <category>websocket</category>
         
       </item>
     
