@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>AutoBuild(2)</title>
+		<title>chicagoboss return json</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>AutoBuild(2) </h1>
+  <h1>chicagoboss return json </h1>
 </div>
   
 <article>
@@ -150,125 +150,60 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     January 
-     8th,
+     February 
+     5th,
      
      2016
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="websocket">Websocket</h2>
+    <p>return <code>{json, Data::proplist()}</code></p>
 
-<p>WebSocket is an HTML5 technology used for two-way messaging from inside a web page.<br />
-WebSocket is a protocol providing full-duplex communication channels over a single TCP connection.<br />
-<a href="https://en.wikipedia.org/wiki/WebSocket">WebSocket</a></p>
-
-<h2 id="chicagoboss-websockets">ChicagoBoss WebSockets</h2>
-
-<h3 id="server-code">Server Code</h3>
-
-<p>The server WebSocket API is based around Erlang message-passing;<br />
-to send a message to a particular client, simply send it a message like:</p>
-
-<pre><code>WebSocket ! {text, &lt;&lt;"some text"&gt;&gt;}
-</code></pre>
-
-<p>Furthermore, you can broadcast a message that will be handled by your <code>handle_broadcast/2</code> function by<br />
-using the module name of your websocket module and the proper method of the <code>boss_service_worker</code> module:</p>
-
-<pre><code>boss_service_worker:broadcast(myapp_myservice_websocket, MyMessage).
-</code></pre>
-
-<p>To handle incoming messages from clients, you’ll need to create WebSocket controllers in your project’s<br />
-<code>src/websocket</code> directory. Each controller module should have a name of the form<br />
-<code>&lt;app name&gt;_&lt;service name&gt;_websocket.erl</code> and be a parameterized module with parameters for<br />
-<code>Req</code> and <code>SessionId</code>, e.g.:</p>
-
-<pre><code>-module(myapp_myservice_websocket, [Req, SessionId]).
-</code></pre>
-
-<p>The module should implement the <code>boss_service_handler</code> behavior.</p>
-
-<pre><code>-module(ab_status_websocket, [Req, SessionId]).
--behaviour(boss_service_handler).
+<pre><code>-module(hhs_realtor_controller, [Req]).
 -compile(export_all).
+-include("hhs_config.hrl").
 
-init() -&gt; {ok, []}.
+register('POST', []) -&gt;
+    log:d("register post_params: ~p", [Req:post_params()]),
+    Phone = Req:post_param("phone"),
+    Pass = Req:post_param("pass"),
+    log:d("register: phone=~p, pass=~p", [Phone, Pass]),
+    case boss_db:find(realtor, [phone, equals, Phone]) of
+        [_SavedRealtor] -&gt;
+            log:w("realtor with phone ~p already exists!", [Phone]),
+            {json, [{success, false}, {message, "already exists!"}]};
+        [] -&gt;
+            log:d("create new realotr: phone=~p, pass=~p", [Phone, Pass]),
+            NewRealtor = realtor:new(id, Phone, "", user_lib:hash_password(Pass), "", ""),
+            case NewRealtor:save() of   %{ok, SavedBossRecord} | {error, [ErrorMessages]}
+                {ok, Saved} -&gt;
+                    %{json, #result{success=true, json=Saved}};
+                    {json, [{success, true}, {realtor, Saved}]};
+                {error, [Errors]} -&gt;
+                    {json, [{success, false}, {message, Errors}]}
+            end
+    end.
 
-handle_join(_Url, WebsocketPid, State) -&gt;
-    log:d("~p joined!", [WebsocketPid]),
-    WebsocketPid ! {text, "Hello WebSocket!"},
-    NewState = [WebsocketPid | State],
-    {noreply, NewState}.
-
-handle_close(_Reason, _Url, WebsocketPid, State) -&gt;
-    log:d("~p closed!", [WebsocketPid]),
-    NewState = lists:delete(WebsocketPid, State),
-    {noreply, NewState}.
-
-handle_incoming(_Url, _WebsocketPid, _Message, State) -&gt;
-    {noreply, State}.
-
-handle_broadcast(Message, State) -&gt;
-    broadcast_message(Message, State),
-    {noreply, State}.
-
-handle_info(_Info, State) -&gt;
-    {noreply, State}.
-
-terminate(_Reason, _State) -&gt; ok.
-
-broadcast_message(Message, [H|R]) -&gt;
-    log:d("send ~p to ~p ...", [Message, H]),
-    H ! {text, Message},
-    broadcast_message(Message, R);
-broadcast_message(_Message, []) -&gt; ok.
+login('POST', []) -&gt;
+    log:d("login post_params: ~p", [Req:post_params()]),
+    Phone = Req:post_param("phone"),
+    Pass = Req:post_param("pass"),
+    log:d("login: phone=~p, pass=~p", [Phone, Pass]),
+    case boss_db:find(realtor, [phone, equals, Phone]) of
+        [SavedRealtor] -&gt;
+            case SavedRealtor:check_password(Pass) of
+                true -&gt;
+                    %{json, #result{success=true, json=SavedRealtor}};
+                    {json, [{success, true}, {realtor, SavedRealtor}]};
+                false -&gt;
+                    %{json, #result{success=false, message="wrong password"}}
+                    {json, [{success, false}, {message, "wrong password"}]}
+            end;
+        [] -&gt;
+            log:w("realtor with phone ~p not exists!", [Phone]),
+            {json, [{success, false}, {message, "no account"}]}
+    end.
 </code></pre>
-
-<h3 id="client-code">Client code</h3>
-
-<p>WebSocket URLs are automatically generated from the WebSocket controllers in your project’s<br />
-src/websocket directory. For example, if you have <code>myapp_foobar_websocket.erl</code>, then to create<br />
-a new WebSocket on the client:</p>
-
-<pre><code>&lt;head&gt;
-    &lt;!--&lt;meta http-equiv="refresh" content="5"&gt;--&gt;
-    &lt;script&gt;
-        function createWebsocket()
-        {
-            ws = new WebSocket("ws://localhost:8001/websocket/status");
-            ws.onmessage = function(e){
-                &lt;!--alert(e.data);--&gt;
-                document.getElementById("status").innerHTML = e.data;
-                scrollToBottom();
-            }
-        }
-        function scrollToBottom()
-        {
-            window.scrollTo(0, document.body.scrollHeight);
-        }
-        function reloadPage()
-        {
-            window.location.reload();
-        }
-        function load()
-        {
-            scrollToBottom();
-            createWebsocket();
-        }
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;!--&lt;body bgcolor="#000000" onclick="reloadPage()" onload="load()"&gt;--&gt;
-&lt;body bgcolor="#000000" onload="load()"&gt;
-&lt;div&gt;
-    &lt;pre style="color:#00ff00" id="status"&gt;
-    
-    &lt;/pre&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-
-<p>到此AutoBuild初步完成状态通知。</p>
 
 
     </div>
@@ -279,23 +214,8 @@ a new WebSocket on the client:</p>
       
       
        
-        <li><a href="/categories.html#erlang-ref">
-          erlang <span>(4)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#autobuild-ref">
-          autobuild <span>(3)</span>
-          ,
-        </a></li>
-       
         <li><a href="/categories.html#chicagoboss-ref">
           chicagoboss <span>(2)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#websocket-ref">
-          websocket <span>(1)</span>
           
         </a></li>
       
@@ -310,7 +230,7 @@ a new WebSocket on the client:</p>
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=AutoBuild(2)"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=chicagoboss return json"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -338,10 +258,10 @@ a new WebSocket on the client:</p>
 
     <ul class="pager">
       
-      <li class="previous"><a href="/autobuild(1)" title="AutoBuild(1)">&larr; Previous</a></li>
+      <li class="previous"><a href="/c++shared_ptr" title="shared ptr">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/fist-post" title="My first post">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

@@ -5,9 +5,69 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 28 Jan 2016 23:17:43 +0800</pubDate>
-    <lastBuildDate>Thu, 28 Jan 2016 23:17:43 +0800</lastBuildDate>
+    <pubDate>Fri, 05 Feb 2016 01:15:14 +0800</pubDate>
+    <lastBuildDate>Fri, 05 Feb 2016 01:15:14 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>chicagoboss return json</title>
+        <description>&lt;p&gt;return &lt;code&gt;{json, Data::proplist()}&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-module(hhs_realtor_controller, [Req]).
+-compile(export_all).
+-include(&quot;hhs_config.hrl&quot;).
+
+register(&#39;POST&#39;, []) -&amp;gt;
+    log:d(&quot;register post_params: ~p&quot;, [Req:post_params()]),
+    Phone = Req:post_param(&quot;phone&quot;),
+    Pass = Req:post_param(&quot;pass&quot;),
+    log:d(&quot;register: phone=~p, pass=~p&quot;, [Phone, Pass]),
+    case boss_db:find(realtor, [phone, equals, Phone]) of
+        [_SavedRealtor] -&amp;gt;
+            log:w(&quot;realtor with phone ~p already exists!&quot;, [Phone]),
+            {json, [{success, false}, {message, &quot;already exists!&quot;}]};
+        [] -&amp;gt;
+            log:d(&quot;create new realotr: phone=~p, pass=~p&quot;, [Phone, Pass]),
+            NewRealtor = realtor:new(id, Phone, &quot;&quot;, user_lib:hash_password(Pass), &quot;&quot;, &quot;&quot;),
+            case NewRealtor:save() of   %{ok, SavedBossRecord} | {error, [ErrorMessages]}
+                {ok, Saved} -&amp;gt;
+                    %{json, #result{success=true, json=Saved}};
+                    {json, [{success, true}, {realtor, Saved}]};
+                {error, [Errors]} -&amp;gt;
+                    {json, [{success, false}, {message, Errors}]}
+            end
+    end.
+
+login(&#39;POST&#39;, []) -&amp;gt;
+    log:d(&quot;login post_params: ~p&quot;, [Req:post_params()]),
+    Phone = Req:post_param(&quot;phone&quot;),
+    Pass = Req:post_param(&quot;pass&quot;),
+    log:d(&quot;login: phone=~p, pass=~p&quot;, [Phone, Pass]),
+    case boss_db:find(realtor, [phone, equals, Phone]) of
+        [SavedRealtor] -&amp;gt;
+            case SavedRealtor:check_password(Pass) of
+                true -&amp;gt;
+                    %{json, #result{success=true, json=SavedRealtor}};
+                    {json, [{success, true}, {realtor, SavedRealtor}]};
+                false -&amp;gt;
+                    %{json, #result{success=false, message=&quot;wrong password&quot;}}
+                    {json, [{success, false}, {message, &quot;wrong password&quot;}]}
+            end;
+        [] -&amp;gt;
+            log:w(&quot;realtor with phone ~p not exists!&quot;, [Phone]),
+            {json, [{success, false}, {message, &quot;no account&quot;}]}
+    end.
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Fri, 05 Feb 2016 00:00:00 +0800</pubDate>
+        <link>/chicagoboss-json</link>
+        <guid isPermaLink="true">/chicagoboss-json</guid>
+        
+        
+        <category>chicagoboss</category>
+        
+      </item>
     
       <item>
         <title>shared ptr</title>
@@ -511,26 +571,6 @@ get_data(Port, Sofar) -&amp;gt;
         <category>cocos2d-x</category>
         
         <category>debug</category>
-        
-      </item>
-    
-      <item>
-        <title>My first post</title>
-        <description>&lt;p&gt;Stay hungry, Stay foolish.&lt;br /&gt;
-求知若饥，虚心若愚。&lt;br /&gt;
-2016.1.10&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/imgs/20160110.jpg&quot; alt=&quot;小宝&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 10 Jan 2016 21:04:46 +0800</pubDate>
-        <link>/fist-post</link>
-        <guid isPermaLink="true">/fist-post</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
         
       </item>
     
