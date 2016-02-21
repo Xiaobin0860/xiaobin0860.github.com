@@ -5,9 +5,163 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 15 Feb 2016 23:17:10 +0800</pubDate>
-    <lastBuildDate>Mon, 15 Feb 2016 23:17:10 +0800</lastBuildDate>
+    <pubDate>Mon, 22 Feb 2016 00:36:55 +0800</pubDate>
+    <lastBuildDate>Mon, 22 Feb 2016 00:36:55 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Learn You Some Erlang(4)</title>
+        <description>&lt;h2 id=&quot;bit-syntax&quot;&gt;Bit Syntax!&lt;/h2&gt;
+
+&lt;p&gt;Bit syntax encloses binary data between « and »,
+splits it in readable segments, and each segment is separated by a comma.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1&amp;gt; Color = 16#F09A29.
+15768105
+2&amp;gt; Pixel = &amp;lt;&amp;lt;Color:24&amp;gt;&amp;gt;.
+&amp;lt;&amp;lt;240,154,41&amp;gt;&amp;gt;
+3&amp;gt; Pixels = &amp;lt;&amp;lt;213,45,132,64,76,32,76,0,0,234,32,15&amp;gt;&amp;gt;.
+&amp;lt;&amp;lt;213,45,132,64,76,32,76,0,0,234,32,15&amp;gt;&amp;gt;
+4&amp;gt; &amp;lt;&amp;lt;Pix1,Pix2,Pix3,Pix4&amp;gt;&amp;gt; = Pixels.
+** exception error: no match of right hand side value 
+5&amp;gt; &amp;lt;&amp;lt;Pix1:24, Pix2:24, Pix3:24, Pix4:24&amp;gt;&amp;gt; = Pixels.
+&amp;lt;&amp;lt;213,45,132,64,76,32,76,0,0,234,32,15&amp;gt;&amp;gt;
+6&amp;gt; &amp;lt;&amp;lt;R:8, G:8, B:8&amp;gt;&amp;gt; = &amp;lt;&amp;lt;Pix1:24&amp;gt;&amp;gt;.
+&amp;lt;&amp;lt;213,45,132&amp;gt;&amp;gt;
+7&amp;gt; R.
+213
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;modules&quot;&gt;Modules&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What are modules&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Modules are a bunch of functions regrouped in a single file,
+under a single name. Additionally, all functions in Erlang must be defined in modules.
+Function defined in a module needs to be called with the form &lt;code&gt;Module:Function(Arguments).&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Module Declaration&lt;/p&gt;
+
+    &lt;p&gt;-module(Name).
+  -export([Function1/Arity, Function2/Arity, …, FunctionN/Arity]).
+  -Name(Attribute).   #-compile([debug_info, export_all]).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Compiling the code&lt;/p&gt;
+
+    &lt;p&gt;$ erlc flags file.erl&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;syntax-in-functions&quot;&gt;Syntax in functions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pattern Matching&lt;/p&gt;
+
+    &lt;p&gt;greet(male, Name) -&amp;gt;
+  io:format(“Hello, Mr. ~s!”, [Name]);
+  greet(female, Name) -&amp;gt;
+  io:format(“Hello, Mrs. ~s!”, [Name]);
+  greet(_, Name) -&amp;gt;
+  io:format(“Hello, ~s!”, [Name]).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Guards&lt;/p&gt;
+
+    &lt;p&gt;right_age(X) when X &amp;gt;= 16, X =&amp;lt; 104 -&amp;gt;
+  true;
+  right_age(_) -&amp;gt;
+  false.&lt;/p&gt;
+
+    &lt;p&gt;is_atom/1           is_binary/1 
+  is_bitstring/1      is_boolean/1        is_builtin/3 
+  is_float/1          is_function/1       is_function/2 
+  is_integer/1        is_list/1           is_number/1 
+  is_pid/1            is_port/1           is_record/2 
+  is_record/3         is_reference/1      is_tuple/1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If&lt;/p&gt;
+
+    &lt;p&gt;%% note, this one would be better as a pattern match in function heads!
+  %% I’m doing it this way for the sake of the example.
+  help_me(Animal) -&amp;gt;
+      Talk = if Animal == cat  -&amp;gt; “meow”;
+          Animal == beef -&amp;gt; “mooo”;
+          Animal == dog  -&amp;gt; “bark”;
+          Animal == tree -&amp;gt; “bark”;
+          true -&amp;gt; “fgdadfgna”
+      end,
+      {Animal, “says “ ++ Talk ++ “!”}.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Case&lt;/p&gt;
+
+    &lt;p&gt;beach(Temperature) -&amp;gt;
+      case Temperature of
+          {celsius, N} when N &amp;gt;= 20, N =&amp;lt; 45 -&amp;gt;
+              ‘favorable’;
+          {kelvin, N} when N &amp;gt;= 293, N =&amp;lt; 318 -&amp;gt;
+              ‘scientifically favorable’;
+          {fahrenheit, N} when N &amp;gt;= 68, N =&amp;lt; 113 -&amp;gt;
+              ‘favorable in the US’;
+          _ -&amp;gt;
+              ‘avoid beach’
+      end.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sun, 21 Feb 2016 00:00:00 +0800</pubDate>
+        <link>/LYSE</link>
+        <guid isPermaLink="true">/LYSE</guid>
+        
+        
+        <category>erlang</category>
+        
+      </item>
+    
+      <item>
+        <title>Learn You Some Erlang(3)</title>
+        <description>&lt;h2 id=&quot;lists&quot;&gt;Lists&lt;/h2&gt;
+
+&lt;p&gt;Lists can contain anything! &lt;code&gt;[Element1, Element2, ..., ElementN]&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1&amp;gt; [1, 2, 3, {numbers,[4,5,6]}, 5.34, atom].
+[1,2,3,{numbers,[4,5,6]},5.34,atom]
+
+2&amp;gt; [97, 98, 99].
+&quot;abc&quot;
+
+[New] ++ [OldList]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;BIFS&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hd([1,2,3,4]).
+tl([1,2,3,4]).
+length(List).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;pattern matching:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Head|Tail].
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Tue, 16 Feb 2016 00:00:00 +0800</pubDate>
+        <link>/LYSE</link>
+        <guid isPermaLink="true">/LYSE</guid>
+        
+        
+        <category>erlang</category>
+        
+      </item>
     
       <item>
         <title>Learn You Some Erlang(2)</title>
@@ -100,6 +254,56 @@ login(&#39;POST&#39;, []) -&amp;gt;
         
         
         <category>chicagoboss</category>
+        
+      </item>
+    
+      <item>
+        <title>erlang gen tcp</title>
+        <description>&lt;pre&gt;&lt;code&gt;connect(Address, Port, Options) -&amp;gt; {ok, Socket} | {error, Reason}
+connect(Address, Port, Options, Timeout) -&amp;gt;
+    {ok, Socket} | {error, Reason}
+
+    Types:
+
+        Address = inet:ip_address() | inet:hostname()
+        Port = inet:port_number()
+        Options = [connect_option()]
+        Timeout = timeout()
+        Socket = socket()
+        Reason = inet:posix()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;client() -&amp;gt;
+    SomeHostInNet = &quot;localhost&quot;, % to make it runnable on one machine
+    {ok, Sock} = gen_tcp:connect(SomeHostInNet, 5678, [binary, {packet, 0}]),
+    ok = gen_tcp:send(Sock, &quot;Some Data&quot;),
+    ok = gen_tcp:close(Sock).
+
+server() -&amp;gt;
+    {ok, LSock} = gen_tcp:listen(5678, [binary, {packet, 0}, {active, false}]),
+    {ok, Sock} = gen_tcp:accept(LSock),
+    {ok, Bin} = do_recv(Sock, []),
+    ok = gen_tcp:close(Sock),
+    Bin.
+
+do_recv(Sock, Bs) -&amp;gt;
+    case gen_tcp:recv(Sock, 0) of
+        {ok, B} -&amp;gt;
+            do_recv(Sock, [Bs, B]);
+        {error, closed} -&amp;gt;
+            {ok, list_to_binary(Bs)}
+    end.
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Fri, 29 Jan 2016 00:00:00 +0800</pubDate>
+        <link>/gen_tcp</link>
+        <guid isPermaLink="true">/gen_tcp</guid>
+        
+        
+        <category>erlang</category>
         
       </item>
     
@@ -443,143 +647,6 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
         
         
         <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>Auto-Refresh code in HTML</title>
-        <description>&lt;h2 id=&quot;use-meta-tag&quot;&gt;use meta tag&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;meta http-equiv=&quot;refresh&quot; content=&quot;5&quot;&amp;gt;
-Please within the `head` tag of your html document, this `meta` tag  
-will instruct the browser to refresh every `5` seconds.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;AutoBuild系统中我想有个页面能够一直看到当前项目的状态，先用着这个方法去定时查询。
-以后看有没有办法实现通知。^_^&lt;/p&gt;
-
-&lt;h2 id=&quot;click-to-refresh&quot;&gt;click to refresh&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;body onclick=&quot;window.location.reload();&quot;&amp;gt;
-    ...
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;scroll-to-bottom&quot;&gt;scroll to bottom&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;window.scrollTo(0, document.body.scrollHeight);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/imgs/20160116.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 16 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/html-auto-refresh</link>
-        <guid isPermaLink="true">/html-auto-refresh</guid>
-        
-        
-        <category>html</category>
-        
-      </item>
-    
-      <item>
-        <title>erlang/opt doc</title>
-        <description>&lt;p&gt;&lt;a href=&quot;/otp_doc/doc/index.html&quot;&gt;erlang/opt doc&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 12 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/otp-doc</link>
-        <guid isPermaLink="true">/otp-doc</guid>
-        
-        
-        <category>erlang</category>
-        
-      </item>
-    
-      <item>
-        <title>erlang执行shell</title>
-        <description>&lt;h2 id=&quot;oscmdcmd&quot;&gt;os:cmd(Cmd)&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;cmd(Command) -&amp;gt; string()
-Types:
-Command = atom() | io_lib:chars()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;erlangopenportportname-portsettings&quot;&gt;erlang:open_port(PortName, PortSettings)&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;open_port(PortName, PortSettings) -&amp;gt; port()
-Types:
-PortName = 
-    {spawn, Command :: string() | binary()} |
-    {spawn_driver, Command :: string() | binary()} |
-    {spawn_executable, FileName :: file:name()} |
-    {fd, In :: integer() &amp;gt;= 0, Out :: integer() &amp;gt;= 0}
-PortSettings = [Opt]
-Opt = 
-    {packet, N :: 1 | 2 | 4} |
-    stream |
-    {line, L :: integer() &amp;gt;= 0} |
-    {cd, Dir :: string() | binary()} |
-    {env, Env :: [{Name :: string(), Val :: string() | false}]} |
-    {args, [string() | binary()]} |
-    {arg0, string() | binary()} |
-    exit_status |
-    use_stdio |
-    nouse_stdio |
-    stderr_to_stdout |
-    in |
-    out |
-    binary |
-    eof |
-    {parallelism, Boolean :: boolean()} |
-    hide
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;loop2() -&amp;gt;
-    receive
-        {build} -&amp;gt;
-            io:format(&quot;build ...~n&quot;),
-            Port = open_port({spawn_executable, &quot;path/build_ios_nolog.sh&quot;}, [stream, exit_status, eof, hide]),
-            Result = get_data(Port, []),
-            io:format(&quot;~p~n&quot;, [Result]),
-            loop2();
-        stop -&amp;gt;
-            ok;
-        _ -&amp;gt;
-            io:format(&quot;recv unknown message!~n&quot;),
-            loop2()
-    end.
-
-get_data(Port, Sofar) -&amp;gt;
-    receive
-        {Port, {data, Bytes}} -&amp;gt;
-            get_data(Port, [Sofar|Bytes]);
-        {Port, eof} -&amp;gt;
-            Port ! {self(), close},
-            receive
-                {Port, closed} -&amp;gt; true
-            end,
-            receive
-                {&#39;EXIT&#39;,  Port,  _} -&amp;gt; ok
-            after 1 -&amp;gt; ok
-            end,
-            ExitCode =
-            receive
-                {Port, {exit_status, Code}} -&amp;gt; Code
-            end,
-            {ExitCode, lists:flatten(Sofar)}
-            %{ExitCode, Sofar}
-    end.
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Tue, 12 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/erlang-shell</link>
-        <guid isPermaLink="true">/erlang-shell</guid>
-        
-        
-        <category>erlang</category>
         
       </item>
     

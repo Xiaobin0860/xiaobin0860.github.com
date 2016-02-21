@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>erlang执行shell</title>
+		<title>erlang gen tcp</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>erlang执行shell </h1>
+  <h1>erlang gen tcp </h1>
 </div>
   
 <article>
@@ -151,85 +151,47 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      January 
-     12th,
+     29th,
      
      2016
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="oscmdcmd">os:cmd(Cmd)</h2>
+    <pre><code>connect(Address, Port, Options) -&gt; {ok, Socket} | {error, Reason}
+connect(Address, Port, Options, Timeout) -&gt;
+    {ok, Socket} | {error, Reason}
 
-<pre><code>cmd(Command) -&gt; string()
-Types:
-Command = atom() | io_lib:chars()
+    Types:
+
+        Address = inet:ip_address() | inet:hostname()
+        Port = inet:port_number()
+        Options = [connect_option()]
+        Timeout = timeout()
+        Socket = socket()
+        Reason = inet:posix()
 </code></pre>
 
-<h2 id="erlangopenportportname-portsettings">erlang:open_port(PortName, PortSettings)</h2>
+<p>example:</p>
 
-<pre><code>open_port(PortName, PortSettings) -&gt; port()
-Types:
-PortName = 
-    {spawn, Command :: string() | binary()} |
-    {spawn_driver, Command :: string() | binary()} |
-    {spawn_executable, FileName :: file:name()} |
-    {fd, In :: integer() &gt;= 0, Out :: integer() &gt;= 0}
-PortSettings = [Opt]
-Opt = 
-    {packet, N :: 1 | 2 | 4} |
-    stream |
-    {line, L :: integer() &gt;= 0} |
-    {cd, Dir :: string() | binary()} |
-    {env, Env :: [{Name :: string(), Val :: string() | false}]} |
-    {args, [string() | binary()]} |
-    {arg0, string() | binary()} |
-    exit_status |
-    use_stdio |
-    nouse_stdio |
-    stderr_to_stdout |
-    in |
-    out |
-    binary |
-    eof |
-    {parallelism, Boolean :: boolean()} |
-    hide
-</code></pre>
+<pre><code>client() -&gt;
+    SomeHostInNet = "localhost", % to make it runnable on one machine
+    {ok, Sock} = gen_tcp:connect(SomeHostInNet, 5678, [binary, {packet, 0}]),
+    ok = gen_tcp:send(Sock, "Some Data"),
+    ok = gen_tcp:close(Sock).
 
-<h2 id="example">Example</h2>
+server() -&gt;
+    {ok, LSock} = gen_tcp:listen(5678, [binary, {packet, 0}, {active, false}]),
+    {ok, Sock} = gen_tcp:accept(LSock),
+    {ok, Bin} = do_recv(Sock, []),
+    ok = gen_tcp:close(Sock),
+    Bin.
 
-<pre><code>loop2() -&gt;
-    receive
-        {build} -&gt;
-            io:format("build ...~n"),
-            Port = open_port({spawn_executable, "path/build_ios_nolog.sh"}, [stream, exit_status, eof, hide]),
-            Result = get_data(Port, []),
-            io:format("~p~n", [Result]),
-            loop2();
-        stop -&gt;
-            ok;
-        _ -&gt;
-            io:format("recv unknown message!~n"),
-            loop2()
-    end.
-
-get_data(Port, Sofar) -&gt;
-    receive
-        {Port, {data, Bytes}} -&gt;
-            get_data(Port, [Sofar|Bytes]);
-        {Port, eof} -&gt;
-            Port ! {self(), close},
-            receive
-                {Port, closed} -&gt; true
-            end,
-            receive
-                {'EXIT',  Port,  _} -&gt; ok
-            after 1 -&gt; ok
-            end,
-            ExitCode =
-            receive
-                {Port, {exit_status, Code}} -&gt; Code
-            end,
-            {ExitCode, lists:flatten(Sofar)}
-            %{ExitCode, Sofar}
+do_recv(Sock, Bs) -&gt;
+    case gen_tcp:recv(Sock, 0) of
+        {ok, B} -&gt;
+            do_recv(Sock, [Bs, B]);
+        {error, closed} -&gt;
+            {ok, list_to_binary(Bs)}
     end.
 </code></pre>
 
@@ -258,7 +220,7 @@ get_data(Port, Sofar) -&gt;
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=erlang执行shell"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=erlang gen tcp"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -286,10 +248,10 @@ get_data(Port, Sofar) -&gt;
 
     <ul class="pager">
       
-      <li class="previous"><a href="/2dx-debug" title="记录一次内存错误debug">&larr; Previous</a></li>
+      <li class="previous"><a href="/c++shared_ptr" title="shared ptr">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/otp-doc" title="erlang/opt doc">Next &rarr;</a></li>
+      <li class="next"><a href="/chicagoboss-json" title="chicagoboss return json">Next &rarr;</a></li>
       
     </ul>
 

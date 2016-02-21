@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Learn You Some Erlang(2)</title>
+		<title>Learn You Some Erlang(4)</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Learn You Some Erlang(2) </h1>
+  <h1>Learn You Some Erlang(4) </h1>
 </div>
   
 <article>
@@ -151,33 +151,116 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      February 
-     15th,
-     
+     21st,
+       
      2016
       
    </span>
     <div class="article_body" id="article_body">
-    <p>不用找(1)了，记本上了^_^</p>
+    <h2 id="bit-syntax">Bit Syntax!</h2>
 
-<h2 id="tuples">Tuples</h2>
+<p>Bit syntax encloses binary data between « and »,
+splits it in readable segments, and each segment is separated by a comma.</p>
 
-<p>A tuple is a way to organize data. It’s a way to group togeter many terms 
-when you known how many there are.</p>
-
-<pre><code>{Element1, Element2, ..., ElementN}
+<pre><code>1&gt; Color = 16#F09A29.
+15768105
+2&gt; Pixel = &lt;&lt;Color:24&gt;&gt;.
+&lt;&lt;240,154,41&gt;&gt;
+3&gt; Pixels = &lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;.
+&lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;
+4&gt; &lt;&lt;Pix1,Pix2,Pix3,Pix4&gt;&gt; = Pixels.
+** exception error: no match of right hand side value 
+5&gt; &lt;&lt;Pix1:24, Pix2:24, Pix3:24, Pix4:24&gt;&gt; = Pixels.
+&lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;
+6&gt; &lt;&lt;R:8, G:8, B:8&gt;&gt; = &lt;&lt;Pix1:24&gt;&gt;.
+&lt;&lt;213,45,132&gt;&gt;
+7&gt; R.
+213
 </code></pre>
 
-<p>通常使用<code>tagged tuple</code>, 例如:</p>
+<h2 id="modules">Modules</h2>
 
-<pre><code>Temperature = {celsius, 23.213}.
-Point = {point, {1, 2}}.
-</code></pre>
+<ul>
+  <li>What are modules</li>
+</ul>
 
-<p>取值</p>
+<p>Modules are a bunch of functions regrouped in a single file,
+under a single name. Additionally, all functions in Erlang must be defined in modules.
+Function defined in a module needs to be called with the form <code>Module:Function(Arguments).</code></p>
 
-<pre><code>{celsius, T} = Temperature.
-{point, {X, _}} = Point.
-</code></pre>
+<ul>
+  <li>
+    <p>Module Declaration</p>
+
+    <p>-module(Name).
+  -export([Function1/Arity, Function2/Arity, …, FunctionN/Arity]).
+  -Name(Attribute).   #-compile([debug_info, export_all]).</p>
+  </li>
+  <li>
+    <p>Compiling the code</p>
+
+    <p>$ erlc flags file.erl</p>
+  </li>
+</ul>
+
+<h2 id="syntax-in-functions">Syntax in functions</h2>
+
+<ul>
+  <li>
+    <p>Pattern Matching</p>
+
+    <p>greet(male, Name) -&gt;
+  io:format(“Hello, Mr. ~s!”, [Name]);
+  greet(female, Name) -&gt;
+  io:format(“Hello, Mrs. ~s!”, [Name]);
+  greet(_, Name) -&gt;
+  io:format(“Hello, ~s!”, [Name]).</p>
+  </li>
+  <li>
+    <p>Guards</p>
+
+    <p>right_age(X) when X &gt;= 16, X =&lt; 104 -&gt;
+  true;
+  right_age(_) -&gt;
+  false.</p>
+
+    <p>is_atom/1           is_binary/1 
+  is_bitstring/1      is_boolean/1        is_builtin/3 
+  is_float/1          is_function/1       is_function/2 
+  is_integer/1        is_list/1           is_number/1 
+  is_pid/1            is_port/1           is_record/2 
+  is_record/3         is_reference/1      is_tuple/1</p>
+  </li>
+  <li>
+    <p>If</p>
+
+    <p>%% note, this one would be better as a pattern match in function heads!
+  %% I’m doing it this way for the sake of the example.
+  help_me(Animal) -&gt;
+      Talk = if Animal == cat  -&gt; “meow”;
+          Animal == beef -&gt; “mooo”;
+          Animal == dog  -&gt; “bark”;
+          Animal == tree -&gt; “bark”;
+          true -&gt; “fgdadfgna”
+      end,
+      {Animal, “says “ ++ Talk ++ “!”}.</p>
+  </li>
+  <li>
+    <p>Case</p>
+
+    <p>beach(Temperature) -&gt;
+      case Temperature of
+          {celsius, N} when N &gt;= 20, N =&lt; 45 -&gt;
+              ‘favorable’;
+          {kelvin, N} when N &gt;= 293, N =&lt; 318 -&gt;
+              ‘scientifically favorable’;
+          {fahrenheit, N} when N &gt;= 68, N =&lt; 113 -&gt;
+              ‘favorable in the US’;
+          _ -&gt;
+              ‘avoid beach’
+      end.</p>
+  </li>
+</ul>
 
 
     </div>
@@ -189,7 +272,7 @@ Point = {point, {1, 2}}.
       
        
         <li><a href="/categories.html#erlang-ref">
-          erlang <span>(5)</span>
+          erlang <span>(8)</span>
           
         </a></li>
       
@@ -204,7 +287,7 @@ Point = {point, {1, 2}}.
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Learn You Some Erlang(2)"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Learn You Some Erlang(4)"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -232,7 +315,7 @@ Point = {point, {1, 2}}.
 
     <ul class="pager">
       
-      <li class="previous"><a href="/chicagoboss-json" title="chicagoboss return json">&larr; Previous</a></li>
+      <li class="previous"><a href="/LYSE" title="Learn You Some Erlang(3)">&larr; Previous</a></li>
       
       
       <li class="next disabled"><a>Next &rarr;</a>
