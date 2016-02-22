@@ -5,9 +5,70 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Feb 2016 00:36:55 +0800</pubDate>
-    <lastBuildDate>Mon, 22 Feb 2016 00:36:55 +0800</lastBuildDate>
+    <pubDate>Tue, 23 Feb 2016 00:17:14 +0800</pubDate>
+    <lastBuildDate>Tue, 23 Feb 2016 00:17:14 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Learn You Some Erlang(5)</title>
+        <description>&lt;h2 id=&quot;recursion&quot;&gt;Recursion&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fac&lt;/p&gt;
+
+    &lt;p&gt;fac(0) -&amp;gt; 1;
+  fac(N) when N &amp;gt; 0 -&amp;gt; N*fac(N-1).&lt;/p&gt;
+
+    &lt;p&gt;tail_fac(N) -&amp;gt; tail_fac(N, 1).
+  tail_fac(0, Fac) -&amp;gt; Fac;
+  tail_fac(N, Fac) when N&amp;gt;0 -&amp;gt; tail_fac(N-1, N*Fac).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Len
+  len([]) -&amp;gt; 0;
+  len([_|T]) -&amp;gt; 1 + len(T).&lt;/p&gt;
+
+    &lt;p&gt;tail_len(L) -&amp;gt; tail_len(L,0).
+  tail_len([], Acc) -&amp;gt; Acc;
+  tail_len([_|T], Acc) -&amp;gt; tail_len(T,Acc+1).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;higher-order-functions&quot;&gt;Higher Order Functions&lt;/h2&gt;
+
+&lt;p&gt;pass functions from outside a module&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fun Module:Function/Arity
+
+map(_, []) -&amp;gt; [];
+map(F, [H|T]) -&amp;gt; [F(H)|map(F,T)].
+incr(X) -&amp;gt; X + 1.
+decr(X) -&amp;gt; X - 1.
+
+1&amp;gt; c(hhfuns).
+{ok, hhfuns}
+2&amp;gt; L = [1,2,3,4,5].
+[1,2,3,4,5]
+3&amp;gt; hhfuns:increment(L).
+[2,3,4,5,6]
+4&amp;gt; hhfuns:decrement(L).
+[0,1,2,3,4]
+5&amp;gt; hhfuns:map(fun hhfuns:incr/1, L).
+[2,3,4,5,6]
+6&amp;gt; hhfuns:map(fun hhfuns:decr/1, L).
+[0,1,2,3,4]
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Mon, 22 Feb 2016 00:00:00 +0800</pubDate>
+        <link>/LYSE</link>
+        <guid isPermaLink="true">/LYSE</guid>
+        
+        
+        <category>erlang</category>
+        
+      </item>
     
       <item>
         <title>Learn You Some Erlang(4)</title>
@@ -605,48 +666,6 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
         
         
         <category>redmine</category>
-        
-      </item>
-    
-      <item>
-        <title>jekyll templates</title>
-        <description>&lt;h2 id=&quot;variables&quot;&gt;Variables&lt;/h2&gt;
-
-&lt;p&gt;Variables are surrounded by &lt;code&gt;\{\{&lt;/code&gt; and &lt;code&gt;}}&lt;/code&gt; like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;tags&quot;&gt;Tags&lt;/h2&gt;
-
-&lt;p&gt;Tags provide arbitrary logic in the rendering process.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;filters&quot;&gt;Filters&lt;/h2&gt;
-
-&lt;p&gt;Filters transform the values of variables and tag arguments.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;\{\{ site.time | date_to_xmlschema  }}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;comments&quot;&gt;Comments&lt;/h2&gt;
-
-&lt;p&gt;Comments look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;\{\# this won&#39;t be rendered #}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/imgs/20160117.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 17 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/jekyll-templates</link>
-        <guid isPermaLink="true">/jekyll-templates</guid>
-        
-        
-        <category>jekyll</category>
         
       </item>
     
