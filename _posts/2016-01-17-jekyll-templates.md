@@ -33,5 +33,10 @@ Comments look like this:
 
     \{\# this won't be rendered #}
 
+Build
+-----
+
+    jekyll build
+
 ![大宝]({{ site.url }}/imgs/20160117.jpg)
 

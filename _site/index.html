@@ -148,6 +148,32 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <h2>
  <p class="post-date">
     
+    June
+    16th,
+    
+    2016
+  </p>
+    <a href="/LYSE" style="font-family: ubuntu">Learn You Some Erlang(6)</a>
+  </h2>
+
+  <div style="font-family: 'Raleway', sans-serif;font-size:large">
+    
+    
+    <h2 id="concurrency">Concurrency</h2>
+
+
+    
+    
+    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
+  </div>
+</article>
+
+
+<article class="home">
+
+  <h2>
+ <p class="post-date">
+    
     February
     22nd,
     
@@ -510,38 +536,6 @@ connect(Address, Port, Options, Timeout) -&gt;
     
     
     <h2 id="oscmdcmd">os:cmd(Cmd)</h2>
-
-
-    
-    
-    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
-  </div>
-</article>
-
-
-<article class="home">
-
-  <h2>
- <p class="post-date">
-    
-    January
-    11th,
-    
-    2016
-  </p>
-    <a href="/2dx-debug" style="font-family: ubuntu">记录一次内存错误debug</a>
-  </h2>
-
-  <div style="font-family: 'Raleway', sans-serif;font-size:large">
-    
-    
-    <p>项目在某页面崩溃，ide断在EventDispatcher::cleanToRemovedListeners()。
-据断点处信息_toRemovedListeners里有的值retaincount已经为0了，一定是多释放了。
-但找半天没找到哪些地方用的不对，都是在onEnter里添加监听，在onExit里取消监听。
-去到2dx里代码仓库看最新的提交也没发现有修复类似bug的，应该还是自己代码的原因。
-最后没办法了，在所有代码使用listener的地方，添加时先retain，remove时再release。
-改着改着就发现一个自定义控件的一个方法在remove里没把listener指针置空，导致onExit时
-又释放了一遍。再回头看崩溃页面，果然用到过这个控件。我*</p>
 
 
     

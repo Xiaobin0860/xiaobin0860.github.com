@@ -5,9 +5,45 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 23 Feb 2016 00:17:14 +0800</pubDate>
-    <lastBuildDate>Tue, 23 Feb 2016 00:17:14 +0800</lastBuildDate>
+    <pubDate>Fri, 17 Jun 2016 00:23:01 +0800</pubDate>
+    <lastBuildDate>Fri, 17 Jun 2016 00:23:01 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Learn You Some Erlang(6)</title>
+        <description>&lt;h2 id=&quot;concurrency&quot;&gt;Concurrency&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;start new process, &lt;code&gt;spawn/1&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;G = fun(X) -&amp;gt; timer:sleep(X), io:format(“~p~n”, [X]) end.
+ [spawn(fun(X) -&amp;gt; G(X) end) || X &amp;lt;= list:seq(1,10)].&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;send message&lt;/p&gt;
+
+    &lt;p&gt;self() ! self() ! double&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;receive message&lt;/p&gt;
+
+    &lt;p&gt;receive
+     Pattern1 when Guard1 -&amp;gt; Expr1;
+     Partern2 when Guard2 -&amp;gt; Expr2;
+     _ -&amp;gt; Expr3
+ end.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 16 Jun 2016 00:00:00 +0800</pubDate>
+        <link>/LYSE</link>
+        <guid isPermaLink="true">/LYSE</guid>
+        
+        
+        <category>erlang</category>
+        
+      </item>
     
       <item>
         <title>Learn You Some Erlang(5)</title>
@@ -637,35 +673,6 @@ Global Heartbeat由于无压力，通常认为其不能挂掉，如果它挂掉�
         <category>server</category>
         
         <category>分布式</category>
-        
-      </item>
-    
-      <item>
-        <title>redmine</title>
-        <description>&lt;ol&gt;
-  &lt;li&gt;
-    &lt;h2 id=&quot;ruby&quot;&gt;安装ruby&lt;/h2&gt;
-
-    &lt;p&gt;gpg2 –keyserver hkp://keys.gnupg.net –recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
- curl -L https://get.rvm.io | bash -s stable
- source /etc/profile.d/rvm.sh
- rvm list known
- rvm install ruby-head&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h2 id=&quot;rails&quot;&gt;安装rails&lt;/h2&gt;
-
-    &lt;p&gt;gem install rails&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Mon, 18 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/redmine</link>
-        <guid isPermaLink="true">/redmine</guid>
-        
-        
-        <category>redmine</category>
         
       </item>
     

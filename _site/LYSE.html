@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Learn You Some Erlang(5)</title>
+		<title>Learn You Some Erlang(6)</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Learn You Some Erlang(5) </h1>
+  <h1>Learn You Some Erlang(6) </h1>
 </div>
   
 <article>
@@ -150,62 +150,37 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     February 
-     22nd,
-       
+     June 
+     16th,
+     
      2016
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="recursion">Recursion</h2>
+    <h2 id="concurrency">Concurrency</h2>
 
-<ul>
+<ol>
   <li>
-    <p>Fac</p>
+    <p>start new process, <code>spawn/1</code></p>
 
-    <p>fac(0) -&gt; 1;
-  fac(N) when N &gt; 0 -&gt; N*fac(N-1).</p>
-
-    <p>tail_fac(N) -&gt; tail_fac(N, 1).
-  tail_fac(0, Fac) -&gt; Fac;
-  tail_fac(N, Fac) when N&gt;0 -&gt; tail_fac(N-1, N*Fac).</p>
+    <p>G = fun(X) -&gt; timer:sleep(X), io:format(“~p~n”, [X]) end.
+ [spawn(fun(X) -&gt; G(X) end) || X &lt;= list:seq(1,10)].</p>
   </li>
   <li>
-    <p>Len
-  len([]) -&gt; 0;
-  len([_|T]) -&gt; 1 + len(T).</p>
+    <p>send message</p>
 
-    <p>tail_len(L) -&gt; tail_len(L,0).
-  tail_len([], Acc) -&gt; Acc;
-  tail_len([_|T], Acc) -&gt; tail_len(T,Acc+1).</p>
+    <p>self() ! self() ! double</p>
   </li>
-</ul>
+  <li>
+    <p>receive message</p>
 
-<h2 id="higher-order-functions">Higher Order Functions</h2>
-
-<p>pass functions from outside a module</p>
-
-<pre><code>fun Module:Function/Arity
-
-map(_, []) -&gt; [];
-map(F, [H|T]) -&gt; [F(H)|map(F,T)].
-incr(X) -&gt; X + 1.
-decr(X) -&gt; X - 1.
-
-1&gt; c(hhfuns).
-{ok, hhfuns}
-2&gt; L = [1,2,3,4,5].
-[1,2,3,4,5]
-3&gt; hhfuns:increment(L).
-[2,3,4,5,6]
-4&gt; hhfuns:decrement(L).
-[0,1,2,3,4]
-5&gt; hhfuns:map(fun hhfuns:incr/1, L).
-[2,3,4,5,6]
-6&gt; hhfuns:map(fun hhfuns:decr/1, L).
-[0,1,2,3,4]
-</code></pre>
-
+    <p>receive
+     Pattern1 when Guard1 -&gt; Expr1;
+     Partern2 when Guard2 -&gt; Expr2;
+     _ -&gt; Expr3
+ end.</p>
+  </li>
+</ol>
 
     </div>
 
@@ -216,7 +191,7 @@ decr(X) -&gt; X - 1.
       
        
         <li><a href="/categories.html#erlang-ref">
-          erlang <span>(9)</span>
+          erlang <span>(10)</span>
           
         </a></li>
       
@@ -231,7 +206,7 @@ decr(X) -&gt; X - 1.
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Learn You Some Erlang(5)"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Learn You Some Erlang(6)"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -259,7 +234,7 @@ decr(X) -&gt; X - 1.
 
     <ul class="pager">
       
-      <li class="previous"><a href="/LYSE" title="Learn You Some Erlang(4)">&larr; Previous</a></li>
+      <li class="previous"><a href="/LYSE" title="Learn You Some Erlang(5)">&larr; Previous</a></li>
       
       
       <li class="next disabled"><a>Next &rarr;</a>
