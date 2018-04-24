@@ -5,13 +5,37 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 15 Jan 2017 02:11:26 +0800</pubDate>
-    <lastBuildDate>Sun, 15 Jan 2017 02:11:26 +0800</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+    <pubDate>Wed, 25 Apr 2018 00:33:52 +0800</pubDate>
+    <lastBuildDate>Wed, 25 Apr 2018 00:33:52 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>ife day1: Why?</title>
+        <description>&lt;h2 id=&quot;我为什么学习前端&quot;&gt;我为什么学习前端&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;更容易、更快速地实现自己的想法&lt;/li&gt;
+  &lt;li&gt;跨平台&lt;/li&gt;
+  &lt;li&gt;随着设备硬件、网络速度提升，Web一统江湖也不是不可能。起码会有很大发展空间&lt;/li&gt;
+  &lt;li&gt;补齐短板&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 25 Apr 2018 00:00:00 +0800</pubDate>
+        <link>/ife_day1</link>
+        <guid isPermaLink="true">/ife_day1</guid>
+        
+        
+        <category>front-end</category>
+        
+        <category>html</category>
+        
+        <category>ife</category>
+        
+      </item>
     
       <item>
         <title>hook程序崩溃</title>
-        <description>&lt;h2 id=&quot;hook&quot;&gt;参数类型错误导致hook程序崩溃&lt;/h2&gt;
+        <description>&lt;p&gt;##参数类型错误导致hook程序崩溃&lt;/p&gt;
 
 &lt;p&gt;不要完全信任class-dump，class-dump出来的参数类型可能是错误的。&lt;/p&gt;
 
@@ -29,7 +53,7 @@
     
       <item>
         <title>分析block函数签名</title>
-        <description>&lt;h2 id=&quot;block&quot;&gt;block结构&lt;/h2&gt;
+        <description>&lt;p&gt;##block结构&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://clang.llvm.org/docs/Block-ABI-Apple.html&quot;&gt;Block&lt;/a&gt;&lt;/p&gt;
 
@@ -51,7 +75,7 @@
 };
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;函数签名&lt;/h2&gt;
+&lt;p&gt;##函数签名&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html&quot;&gt;Type Encodings&lt;/a&gt;&lt;/p&gt;
 
@@ -71,7 +95,7 @@
     
       <item>
         <title>Elixir(1)</title>
-        <description>&lt;h2 id=&quot;interactive-mode&quot;&gt;Interactive mode&lt;/h2&gt;
+        <description>&lt;p&gt;##Interactive mode&lt;/p&gt;
 
 &lt;p&gt;Open up &lt;code&gt;iex&lt;/code&gt;&lt;/p&gt;
 
@@ -81,7 +105,7 @@ iex&amp;gt; &quot;hello&quot; &amp;lt;&amp;gt; &quot; world&quot;
 &quot;hello world&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;running-scripts&quot;&gt;Running scripts&lt;/h2&gt;
+&lt;p&gt;##Running scripts&lt;/p&gt;
 
 &lt;p&gt;demo.exs&lt;/p&gt;
 
@@ -94,7 +118,7 @@ iex&amp;gt; &quot;hello&quot; &amp;lt;&amp;gt; &quot; world&quot;
 Hello world from Elixir.
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;basic-types&quot;&gt;Basic types&lt;/h2&gt;
+&lt;p&gt;##Basic types&lt;/p&gt;
 
 &lt;p&gt;Elixir basic types: integers,floats,booleans,strings,list,atoms,tuples.&lt;/p&gt;
 
@@ -120,7 +144,7 @@ true
     
       <item>
         <title>Learn You Some Erlang(6)</title>
-        <description>&lt;h2 id=&quot;concurrency&quot;&gt;Concurrency&lt;/h2&gt;
+        <description>&lt;p&gt;##Concurrency&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -411,7 +435,7 @@ Point = {point, {1, 2}}.
 -compile(export_all).
 -include(&quot;hhs_config.hrl&quot;).
 
-register(&#39;POST&#39;, []) -&amp;gt;
+register('POST', []) -&amp;gt;
     log:d(&quot;register post_params: ~p&quot;, [Req:post_params()]),
     Phone = Req:post_param(&quot;phone&quot;),
     Pass = Req:post_param(&quot;pass&quot;),
@@ -432,7 +456,7 @@ register(&#39;POST&#39;, []) -&amp;gt;
             end
     end.
 
-login(&#39;POST&#39;, []) -&amp;gt;
+login('POST', []) -&amp;gt;
     log:d(&quot;login post_params: ~p&quot;, [Req:post_params()]),
     Phone = Req:post_param(&quot;phone&quot;),
     Pass = Req:post_param(&quot;pass&quot;),
@@ -460,56 +484,6 @@ login(&#39;POST&#39;, []) -&amp;gt;
         
         
         <category>chicagoboss</category>
-        
-      </item>
-    
-      <item>
-        <title>erlang gen tcp</title>
-        <description>&lt;pre&gt;&lt;code&gt;connect(Address, Port, Options) -&amp;gt; {ok, Socket} | {error, Reason}
-connect(Address, Port, Options, Timeout) -&amp;gt;
-    {ok, Socket} | {error, Reason}
-
-    Types:
-
-        Address = inet:ip_address() | inet:hostname()
-        Port = inet:port_number()
-        Options = [connect_option()]
-        Timeout = timeout()
-        Socket = socket()
-        Reason = inet:posix()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;client() -&amp;gt;
-    SomeHostInNet = &quot;localhost&quot;, % to make it runnable on one machine
-    {ok, Sock} = gen_tcp:connect(SomeHostInNet, 5678, [binary, {packet, 0}]),
-    ok = gen_tcp:send(Sock, &quot;Some Data&quot;),
-    ok = gen_tcp:close(Sock).
-
-server() -&amp;gt;
-    {ok, LSock} = gen_tcp:listen(5678, [binary, {packet, 0}, {active, false}]),
-    {ok, Sock} = gen_tcp:accept(LSock),
-    {ok, Bin} = do_recv(Sock, []),
-    ok = gen_tcp:close(Sock),
-    Bin.
-
-do_recv(Sock, Bs) -&amp;gt;
-    case gen_tcp:recv(Sock, 0) of
-        {ok, B} -&amp;gt;
-            do_recv(Sock, [Bs, B]);
-        {error, closed} -&amp;gt;
-            {ok, list_to_binary(Bs)}
-    end.
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Fri, 29 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/gen_tcp</link>
-        <guid isPermaLink="true">/gen_tcp</guid>
-        
-        
-        <category>erlang</category>
         
       </item>
     
