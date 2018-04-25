@@ -3,7 +3,7 @@
 permalink: /:title
 # https://help.github.com/articles/migrating-your-pages-site-from-maruku
 markdown: kramdown
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 highlighter: pygments
 paginate: 15 # pagination based on number of posts
 paginate_path: "page/:num"
