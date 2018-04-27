@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Auto-Refresh code in HTML</title>
+		<title>ife day3: CSS基础</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Auto-Refresh code in HTML </h1>
+  <h1>ife day3: CSS基础 </h1>
 </div>
   
 <article>
@@ -150,36 +150,53 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     January 
-     16th,
+     April 
+     27th,
      
-     2016
+     2018
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="use-meta-tag">use meta tag</h2>
+    <h2 id="css规则">CSS规则</h2>
+<p>由两部分组成： 选择器及一条或多条声明。
+<img src="/imgs/ct_css_selector.gif" alt="CSS语法" /></p>
 
-<pre><code>&lt;meta http-equiv="refresh" content="5"&gt;
-Please within the `head` tag of your html document, this `meta` tag  
-will instruct the browser to refresh every `5` seconds.
-</code></pre>
+<h2 id="选择器">选择器</h2>
+<ul>
+  <li>元素/类型选择器
+  p {}</li>
+  <li>类选择器
+  class=”first done”
+  .first {}
+  .done {}</li>
+  <li>id选择器
+  id=”rude” id唯一
+  #rude {}</li>
+  <li>通用选择器
+  * {}</li>
+  <li>属性选择器
+  [attr] {} 有attr的元素
+  [attr=val] {} attr值为val的元素
+  [attr~=val] {} attr值包含val</li>
+  <li>伪类
+  :active, :focus, :hover, …
+  a:visited {}</li>
+  <li>组合器
+  A,B {} 或
+  A B {} B是A的后代结点</li>
+</ul>
 
-<p>AutoBuild系统中我想有个页面能够一直看到当前项目的状态，先用着这个方法去定时查询。
-以后看有没有办法实现通知。^_^</p>
-
-<h2 id="click-to-refresh">click to refresh</h2>
-
-<pre><code>&lt;body onclick="window.location.reload();"&gt;
-    ...
-&lt;/body&gt;
-</code></pre>
-
-<h2 id="scroll-to-bottom">scroll to bottom</h2>
-
-<pre><code>window.scrollTo(0, document.body.scrollHeight);
-</code></pre>
-
-<p><img src="/imgs/20160116.jpg" alt="大宝" /></p>
+<h2 id="常用属性">常用属性</h2>
+<ul>
+  <li>color</li>
+  <li>font-family</li>
+  <li>font-style</li>
+  <li>font-weight</li>
+  <li>font-size</li>
+  <li>text-align</li>
+  <li>text-shadow</li>
+  <li>line-height</li>
+</ul>
 
     </div>
 
@@ -189,8 +206,18 @@ will instruct the browser to refresh every `5` seconds.
       
       
        
+        <li><a href="/categories.html#front-end-ref">
+          front-end <span>(3)</span>
+          ,
+        </a></li>
+       
         <li><a href="/categories.html#html-ref">
           html <span>(4)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#ife-ref">
+          ife <span>(3)</span>
           
         </a></li>
       
@@ -205,7 +232,7 @@ will instruct the browser to refresh every `5` seconds.
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Auto-Refresh code in HTML"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=ife day3: CSS基础"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -233,10 +260,10 @@ will instruct the browser to refresh every `5` seconds.
 
     <ul class="pager">
       
-      <li class="previous"><a href="/otp-doc" title="erlang/opt doc">&larr; Previous</a></li>
+      <li class="previous"><a href="/ife_day2" title="ife day2: HTML基本标签">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/jekyll-templates" title="jekyll templates">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

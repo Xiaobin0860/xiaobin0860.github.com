@@ -5,9 +5,65 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 26 Apr 2018 00:54:24 +0800</pubDate>
-    <lastBuildDate>Thu, 26 Apr 2018 00:54:24 +0800</lastBuildDate>
+    <pubDate>Fri, 27 Apr 2018 16:18:37 +0800</pubDate>
+    <lastBuildDate>Fri, 27 Apr 2018 16:18:37 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>ife day3: CSS基础</title>
+        <description>&lt;h2 id=&quot;css规则&quot;&gt;CSS规则&lt;/h2&gt;
+&lt;p&gt;由两部分组成： 选择器及一条或多条声明。
+&lt;img src=&quot;/imgs/ct_css_selector.gif&quot; alt=&quot;CSS语法&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;选择器&quot;&gt;选择器&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;元素/类型选择器
+  p {}&lt;/li&gt;
+  &lt;li&gt;类选择器
+  class=”first done”
+  .first {}
+  .done {}&lt;/li&gt;
+  &lt;li&gt;id选择器
+  id=”rude” id唯一
+  #rude {}&lt;/li&gt;
+  &lt;li&gt;通用选择器
+  * {}&lt;/li&gt;
+  &lt;li&gt;属性选择器
+  [attr] {} 有attr的元素
+  [attr=val] {} attr值为val的元素
+  [attr~=val] {} attr值包含val&lt;/li&gt;
+  &lt;li&gt;伪类
+  :active, :focus, :hover, …
+  a:visited {}&lt;/li&gt;
+  &lt;li&gt;组合器
+  A,B {} 或
+  A B {} B是A的后代结点&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;常用属性&quot;&gt;常用属性&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;color&lt;/li&gt;
+  &lt;li&gt;font-family&lt;/li&gt;
+  &lt;li&gt;font-style&lt;/li&gt;
+  &lt;li&gt;font-weight&lt;/li&gt;
+  &lt;li&gt;font-size&lt;/li&gt;
+  &lt;li&gt;text-align&lt;/li&gt;
+  &lt;li&gt;text-shadow&lt;/li&gt;
+  &lt;li&gt;line-height&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
+        <link>/ife_day3</link>
+        <guid isPermaLink="true">/ife_day3</guid>
+        
+        
+        <category>front-end</category>
+        
+        <category>html</category>
+        
+        <category>ife</category>
+        
+      </item>
     
       <item>
         <title>ife day2: HTML基本标签</title>
@@ -35,7 +91,7 @@ HTML5是最新的HTML标准，拥有更丰富的语义、图形以及多媒体�
 
 &lt;p&gt;6、链接是什么概念，对应什么标签？&lt;/p&gt;
 
-&lt;p&gt;答：HTML &lt;a&gt; 元素 (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;答：HTML &amp;lt;\a&amp;gt; 元素 (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。&lt;/p&gt;
 
 &lt;p&gt;7、常用标签都有哪些，都适合用在什么场景&lt;/p&gt;
 
@@ -450,40 +506,6 @@ length(List).
 
 </description>
         <pubDate>Tue, 16 Feb 2016 00:00:00 +0800</pubDate>
-        <link>/LYSE</link>
-        <guid isPermaLink="true">/LYSE</guid>
-        
-        
-        <category>erlang</category>
-        
-      </item>
-    
-      <item>
-        <title>Learn You Some Erlang(2)</title>
-        <description>&lt;p&gt;不用找(1)了，记本上了^_^&lt;/p&gt;
-
-&lt;h2 id=&quot;tuples&quot;&gt;Tuples&lt;/h2&gt;
-
-&lt;p&gt;A tuple is a way to organize data. It’s a way to group togeter many terms 
-when you known how many there are.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{Element1, Element2, ..., ElementN}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通常使用&lt;code&gt;tagged tuple&lt;/code&gt;, 例如:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Temperature = {celsius, 23.213}.
-Point = {point, {1, 2}}.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;取值&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{celsius, T} = Temperature.
-{point, {X, _}} = Point.
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Mon, 15 Feb 2016 00:00:00 +0800</pubDate>
         <link>/LYSE</link>
         <guid isPermaLink="true">/LYSE</guid>
         
