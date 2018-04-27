@@ -5,42 +5,129 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 27 Apr 2018 16:18:37 +0800</pubDate>
-    <lastBuildDate>Fri, 27 Apr 2018 16:18:37 +0800</lastBuildDate>
+    <pubDate>Fri, 27 Apr 2018 16:39:19 +0800</pubDate>
+    <lastBuildDate>Fri, 27 Apr 2018 16:39:19 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>ife day4: 背景边框列表链接</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;background&lt;/li&gt;
+  &lt;li&gt;background-color&lt;/li&gt;
+  &lt;li&gt;background-image&lt;/li&gt;
+  &lt;li&gt;background-repeat&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;background-position&lt;/p&gt;
+
+    &lt;p&gt;body {
+      font-family: sans-serif;
+      background-color: #F0F8FF;
+      border: 40px solid black;
+      border-image-source: url(https://mdn.mozillademos.org/files/13060/border-image.png);
+      border-image-slice: 40;
+      border-image-repeat: round;
+  }&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;边框&quot;&gt;边框&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;border&lt;/li&gt;
+  &lt;li&gt;border-color&lt;/li&gt;
+  &lt;li&gt;border-style&lt;/li&gt;
+  &lt;li&gt;border-width&lt;/li&gt;
+  &lt;li&gt;border-radius&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;列表&quot;&gt;列表&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;list-style&lt;/li&gt;
+  &lt;li&gt;list-style-type&lt;/li&gt;
+  &lt;li&gt;list-style-image&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;链接&quot;&gt;链接&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a:link&lt;/li&gt;
+  &lt;li&gt;a:visited&lt;/li&gt;
+  &lt;li&gt;a:hover&lt;/li&gt;
+  &lt;li&gt;a:active&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
+        <link>/ife_day4</link>
+        <guid isPermaLink="true">/ife_day4</guid>
+        
+        
+        <category>front-end</category>
+        
+        <category>html</category>
+        
+        <category>ife</category>
+        
+      </item>
     
       <item>
         <title>ife day3: CSS基础</title>
         <description>&lt;h2 id=&quot;css规则&quot;&gt;CSS规则&lt;/h2&gt;
+
 &lt;p&gt;由两部分组成： 选择器及一条或多条声明。
 &lt;img src=&quot;/imgs/ct_css_selector.gif&quot; alt=&quot;CSS语法&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;选择器&quot;&gt;选择器&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;元素/类型选择器
-  p {}&lt;/li&gt;
-  &lt;li&gt;类选择器
-  class=”first done”
+  &lt;li&gt;
+    &lt;p&gt;元素/类型选择器&lt;/p&gt;
+
+    &lt;p&gt;p {}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;类选择器&lt;/p&gt;
+
+    &lt;p&gt;class=”first done”
   .first {}
-  .done {}&lt;/li&gt;
-  &lt;li&gt;id选择器
-  id=”rude” id唯一
-  #rude {}&lt;/li&gt;
-  &lt;li&gt;通用选择器
-  * {}&lt;/li&gt;
-  &lt;li&gt;属性选择器
-  [attr] {} 有attr的元素
+  .done {}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;id选择器&lt;/p&gt;
+
+    &lt;p&gt;id=”rude” id唯一
+  #rude {}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通用选择器&lt;/p&gt;
+
+    &lt;p&gt;* {}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;属性选择器&lt;/p&gt;
+
+    &lt;p&gt;[attr] {} 有attr的元素
   [attr=val] {} attr值为val的元素
-  [attr~=val] {} attr值包含val&lt;/li&gt;
-  &lt;li&gt;伪类
-  :active, :focus, :hover, …
-  a:visited {}&lt;/li&gt;
-  &lt;li&gt;组合器
-  A,B {} 或
-  A B {} B是A的后代结点&lt;/li&gt;
+  [attr~=val] {} attr值包含val&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;伪类&lt;/p&gt;
+
+    &lt;p&gt;:active, :focus, :hover, …
+  a:visited {}&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;组合器&lt;/p&gt;
+
+    &lt;p&gt;A,B {} 或
+  A B {} B是A的后代结点&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;常用属性&quot;&gt;常用属性&lt;/h2&gt;
+
 &lt;ul&gt;
   &lt;li&gt;color&lt;/li&gt;
   &lt;li&gt;font-family&lt;/li&gt;
@@ -469,43 +556,6 @@ Function defined in a module needs to be called with the form &lt;code&gt;Module
 
 </description>
         <pubDate>Sun, 21 Feb 2016 00:00:00 +0800</pubDate>
-        <link>/LYSE</link>
-        <guid isPermaLink="true">/LYSE</guid>
-        
-        
-        <category>erlang</category>
-        
-      </item>
-    
-      <item>
-        <title>Learn You Some Erlang(3)</title>
-        <description>&lt;h2 id=&quot;lists&quot;&gt;Lists&lt;/h2&gt;
-
-&lt;p&gt;Lists can contain anything! &lt;code&gt;[Element1, Element2, ..., ElementN]&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1&amp;gt; [1, 2, 3, {numbers,[4,5,6]}, 5.34, atom].
-[1,2,3,{numbers,[4,5,6]},5.34,atom]
-
-2&amp;gt; [97, 98, 99].
-&quot;abc&quot;
-
-[New] ++ [OldList]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;BIFS&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hd([1,2,3,4]).
-tl([1,2,3,4]).
-length(List).
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;pattern matching:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[Head|Tail].
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Tue, 16 Feb 2016 00:00:00 +0800</pubDate>
         <link>/LYSE</link>
         <guid isPermaLink="true">/LYSE</guid>
         
