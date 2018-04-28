@@ -5,9 +5,159 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 27 Apr 2018 19:37:03 +0800</pubDate>
-    <lastBuildDate>Fri, 27 Apr 2018 19:37:03 +0800</lastBuildDate>
+    <pubDate>Sat, 28 Apr 2018 17:20:17 +0800</pubDate>
+    <lastBuildDate>Sat, 28 Apr 2018 17:20:17 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>Docker getting started</title>
+        <description>&lt;h2 id=&quot;一认识docker&quot;&gt;一、认识Docker&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/containers-vms-together.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;二install-docker-ce&quot;&gt;二、Install Docker-CE&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Linux以&lt;a href=&quot;https://docs.docker.com/install/linux/docker-ce/centos/&quot;&gt;Centos&lt;/a&gt;为例
+    &lt;pre&gt;&lt;code&gt; #Centos7
+ yum install -y yum-utils device-mapper-persistent-data lvm2
+ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+ yum install docker-ce
+
+ #Centos6
+ rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+ yum install docker-io
+
+ 镜像加速
+ /etc/docker/daemon.json
+ {
+     &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
+ }
+ service docker start
+
+ 查看Docker版本
+ docker -v
+ docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://store.docker.com/editions/community/docker-ce-desktop-mac&quot;&gt;macOS&lt;/a&gt;
+    &lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt; brew install docker
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://store.docker.com/editions/community/docker-ce-desktop-windows&quot;&gt;Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;三容器运行第1个程序&quot;&gt;三、容器，运行第1个程序&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Dockerfile
+    &lt;pre&gt;&lt;code&gt;  # 将官方 Python 运行时用作父镜像
+  FROM python:2.7-slim
+
+  # 将工作目录设置为 /app
+  WORKDIR /app
+
+  # 将当前目录内容复制到位于 /app 中的容器中
+  ADD . /app
+
+  # 安装 requirements.txt 中指定的任何所需软件包
+  RUN pip install -r requirements.txt
+
+  # 使端口 80 可供此容器外的环境使用
+  EXPOSE 80
+
+  # 定义环境变量
+  ENV NAME World
+
+  # 在容器启动时运行 app.py
+  CMD [&quot;python&quot;, &quot;app.py&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;requirements.txt
+    &lt;pre&gt;&lt;code&gt;  Flask
+  Redis
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;app.py
+    &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;  from flask import Flask
+  from redis import Redis, RedisError
+  import os
+  import socket
+
+  # Connect to Redis
+  redis = Redis(host=&quot;redis&quot;, db=0, socket_connect_timeout=2, socket_timeout=2)
+
+  app = Flask(__name__)
+
+  @app.route(&quot;/&quot;)
+  def hello():
+      try:
+          visits = redis.incr(&quot;counter&quot;)
+      except RedisError:
+          visits = &quot;&amp;lt;i&amp;gt;cannot connect to Redis, counter disabled&amp;lt;/i&amp;gt;&quot;
+
+      html = &quot;&amp;lt;h3&amp;gt;Hello {name}!&amp;lt;/h3&amp;gt;&quot; \
+          &quot;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; {hostname}&amp;lt;br/&amp;gt;&quot; \
+          &quot;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; {visits}&quot;
+      return html.format(name=os.getenv(&quot;NAME&quot;, &quot;world&quot;), hostname=socket.gethostname(), visits=visits)
+
+  if __name__ == &quot;__main__&quot;:
+      app.run(host='0.0.0.0', port=80)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;构建运行
+    &lt;pre&gt;&lt;code&gt;  docker build -t hello_docker .
+  docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+hello_docker            latest              940a583806b0        4 minutes ago       155.6 MB
+
+  docker run -p 888:80 hello_docker
+后台运行
+  docker run -d -p 888:80 hello_docker
+  docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                 NAMES
+73e81f97609c        hello_docker        &quot;python app.py&quot;     57 seconds ago      Up 56 seconds       0.0.0.0:888-&amp;gt;80/tcp   gloomy_tesla
+  docker stop 73e81f97609c
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;共享镜像
+    &lt;pre&gt;&lt;code&gt;  docker login
+  docker tag hello_docker raina7325/get-started:part1
+  docker push raina7325/get-started:part1
+  docker run -p 8888:80 raina7325/get-started:part1
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;常用命令
+    &lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;  docker build -t friendlyname .# 使用此目录的 Dockerfile 创建镜像
+  docker run -p 4000:80 friendlyname  # 运行端口 4000 到 90 的“友好名称”映射
+  docker run -d -p 4000:80 friendlyname         # 内容相同，但在分离模式下
+  docker ps                                 # 查看所有正在运行的容器的列表
+  docker stop &amp;lt;hash&amp;gt;                     # 平稳地停止指定的容器
+  docker ps -a           # 查看所有容器的列表，甚至包含未运行的容器
+  docker kill &amp;lt;hash&amp;gt;                   # 强制关闭指定的容器
+  docker rm &amp;lt;hash&amp;gt;              # 从此机器中删除指定的容器
+  docker rm $(docker ps -a -q)           # 从此机器中删除所有容器
+  docker images -a                               # 显示此机器上的所有镜像
+  docker rmi &amp;lt;imagename&amp;gt;            # 从此机器中删除指定的镜像
+  docker rmi $(docker images -q)             # 从此机器中删除所有镜像
+  docker login             # 使用您的 Docker 凭证登录此 CLI 会话
+  docker tag &amp;lt;image&amp;gt; username/repository:tag  # 标记 &amp;lt;image&amp;gt; 以上传到镜像库
+  docker push username/repository:tag            # 将已标记的镜像上传到镜像库
+  docker run username/repository:tag                   # 运行镜像库中的镜像
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/20180428.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
+        <link>/docker</link>
+        <guid isPermaLink="true">/docker</guid>
+        
+        
+        <category>docker</category>
+        
+      </item>
     
       <item>
         <title>ife day4: 背景边框列表链接</title>
@@ -73,6 +223,68 @@
       </item>
     
       <item>
+        <title>ife day4: 背景边框列表链接</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;background&lt;/li&gt;
+  &lt;li&gt;background-color&lt;/li&gt;
+  &lt;li&gt;background-image&lt;/li&gt;
+  &lt;li&gt;background-repeat&lt;/li&gt;
+  &lt;li&gt;background-position
+    &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;  body {
+      font-family: sans-serif;
+      background-color: #F0F8FF;
+      border: 40px solid black;
+      border-image-source: url(https://mdn.mozillademos.org/files/13060/border-image.png);
+      border-image-slice: 40;
+      border-image-repeat: round;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;边框&quot;&gt;边框&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;border&lt;/li&gt;
+  &lt;li&gt;border-color&lt;/li&gt;
+  &lt;li&gt;border-style&lt;/li&gt;
+  &lt;li&gt;border-width&lt;/li&gt;
+  &lt;li&gt;border-radius&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;列表&quot;&gt;列表&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;list-style&lt;/li&gt;
+  &lt;li&gt;list-style-type&lt;/li&gt;
+  &lt;li&gt;list-style-image&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;链接&quot;&gt;链接&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a:link&lt;/li&gt;
+  &lt;li&gt;a:visited&lt;/li&gt;
+  &lt;li&gt;a:hover&lt;/li&gt;
+  &lt;li&gt;a:active&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
+        <link>/ife_day4.1</link>
+        <guid isPermaLink="true">/ife_day4.1</guid>
+        
+        
+        <category>front-end</category>
+        
+        <category>html</category>
+        
+        <category>ife</category>
+        
+      </item>
+    
+      <item>
         <title>ife day3: CSS基础</title>
         <description>&lt;h2 id=&quot;css规则&quot;&gt;CSS规则&lt;/h2&gt;
 
@@ -82,47 +294,40 @@
 &lt;h2 id=&quot;选择器&quot;&gt;选择器&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;元素/类型选择器&lt;/p&gt;
-
-    &lt;p&gt;p {}&lt;/p&gt;
+  &lt;li&gt;元素/类型选择器
+    &lt;pre&gt;&lt;code&gt;  p {}
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;类选择器&lt;/p&gt;
-
-    &lt;p&gt;class=”first done”
+  &lt;li&gt;类选择器
+    &lt;pre&gt;&lt;code&gt;  class=&quot;first done&quot;
   .first {}
-  .done {}&lt;/p&gt;
+  .done {}
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;id选择器&lt;/p&gt;
-
-    &lt;p&gt;id=”rude” id唯一
-  #rude {}&lt;/p&gt;
+  &lt;li&gt;id选择器
+    &lt;pre&gt;&lt;code&gt;  id=&quot;rude&quot; id唯一
+  #rude {}
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;通用选择器&lt;/p&gt;
-
-    &lt;p&gt;* {}&lt;/p&gt;
+  &lt;li&gt;通用选择器
+    &lt;pre&gt;&lt;code&gt;  \* {}
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;属性选择器&lt;/p&gt;
-
-    &lt;p&gt;[attr] {} 有attr的元素
+  &lt;li&gt;属性选择器
+    &lt;pre&gt;&lt;code&gt;  [attr] {} 有attr的元素
   [attr=val] {} attr值为val的元素
-  [attr~=val] {} attr值包含val&lt;/p&gt;
+  [attr~=val] {} attr值包含val
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;伪类&lt;/p&gt;
-
-    &lt;p&gt;:active, :focus, :hover, …
-  a:visited {}&lt;/p&gt;
+  &lt;li&gt;伪类
+    &lt;pre&gt;&lt;code&gt;  :active, :focus, :hover, ...
+  a:visited {}
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;组合器&lt;/p&gt;
-
-    &lt;p&gt;A,B {} 或
-  A B {} B是A的后代结点&lt;/p&gt;
+  &lt;li&gt;组合器
+    &lt;pre&gt;&lt;code&gt;  A,B {} 或
+  A B {} B是A的后代结点
+&lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -631,103 +836,6 @@ true
         
         
         <category>elixir</category>
-        
-        <category>erlang</category>
-        
-      </item>
-    
-      <item>
-        <title>Learn You Some Erlang(6)</title>
-        <description>&lt;p&gt;##Concurrency&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;start new process, &lt;code&gt;spawn/1&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;G = fun(X) -&amp;gt; timer:sleep(X), io:format(“~p~n”, [X]) end.
- [spawn(fun(X) -&amp;gt; G(X) end) || X &amp;lt;= list:seq(1,10)].&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;send message&lt;/p&gt;
-
-    &lt;p&gt;self() ! self() ! double&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;receive message&lt;/p&gt;
-
-    &lt;p&gt;receive
-     Pattern1 when Guard1 -&amp;gt; Expr1;
-     Partern2 when Guard2 -&amp;gt; Expr2;
-     _ -&amp;gt; Expr3
- end.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 16 Jun 2016 00:00:00 +0800</pubDate>
-        <link>/LYSE</link>
-        <guid isPermaLink="true">/LYSE</guid>
-        
-        
-        <category>erlang</category>
-        
-      </item>
-    
-      <item>
-        <title>Learn You Some Erlang(5)</title>
-        <description>&lt;h2 id=&quot;recursion&quot;&gt;Recursion&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Fac&lt;/p&gt;
-
-    &lt;p&gt;fac(0) -&amp;gt; 1;
-  fac(N) when N &amp;gt; 0 -&amp;gt; N*fac(N-1).&lt;/p&gt;
-
-    &lt;p&gt;tail_fac(N) -&amp;gt; tail_fac(N, 1).
-  tail_fac(0, Fac) -&amp;gt; Fac;
-  tail_fac(N, Fac) when N&amp;gt;0 -&amp;gt; tail_fac(N-1, N*Fac).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Len
-  len([]) -&amp;gt; 0;
-  len([_|T]) -&amp;gt; 1 + len(T).&lt;/p&gt;
-
-    &lt;p&gt;tail_len(L) -&amp;gt; tail_len(L,0).
-  tail_len([], Acc) -&amp;gt; Acc;
-  tail_len([_|T], Acc) -&amp;gt; tail_len(T,Acc+1).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;higher-order-functions&quot;&gt;Higher Order Functions&lt;/h2&gt;
-
-&lt;p&gt;pass functions from outside a module&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;fun Module:Function/Arity
-
-map(_, []) -&amp;gt; [];
-map(F, [H|T]) -&amp;gt; [F(H)|map(F,T)].
-incr(X) -&amp;gt; X + 1.
-decr(X) -&amp;gt; X - 1.
-
-1&amp;gt; c(hhfuns).
-{ok, hhfuns}
-2&amp;gt; L = [1,2,3,4,5].
-[1,2,3,4,5]
-3&amp;gt; hhfuns:increment(L).
-[2,3,4,5,6]
-4&amp;gt; hhfuns:decrement(L).
-[0,1,2,3,4]
-5&amp;gt; hhfuns:map(fun hhfuns:incr/1, L).
-[2,3,4,5,6]
-6&amp;gt; hhfuns:map(fun hhfuns:decr/1, L).
-[0,1,2,3,4]
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Mon, 22 Feb 2016 00:00:00 +0800</pubDate>
-        <link>/LYSE</link>
-        <guid isPermaLink="true">/LYSE</guid>
-        
         
         <category>erlang</category>
         

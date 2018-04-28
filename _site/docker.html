@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Auto-Refresh code in HTML</title>
+		<title>Docker getting started</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Auto-Refresh code in HTML </h1>
+  <h1>Docker getting started </h1>
 </div>
   
 <article>
@@ -150,36 +150,151 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     January 
-     16th,
+     April 
+     27th,
      
-     2016
+     2018
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="use-meta-tag">use meta tag</h2>
+    <h2 id="一认识docker">一、认识Docker</h2>
 
-<pre><code>&lt;meta http-equiv="refresh" content="5"&gt;
-Please within the `head` tag of your html document, this `meta` tag  
-will instruct the browser to refresh every `5` seconds.
+<p><img src="/imgs/containers-vms-together.png" alt="Docker" /></p>
+
+<h2 id="二install-docker-ce">二、Install Docker-CE</h2>
+
+<ol>
+  <li>Linux以<a href="https://docs.docker.com/install/linux/docker-ce/centos/">Centos</a>为例
+    <pre><code> #Centos7
+ yum install -y yum-utils device-mapper-persistent-data lvm2
+ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+ yum install docker-ce
+
+ #Centos6
+ rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+ yum install docker-io
+
+ 镜像加速
+ /etc/docker/daemon.json
+ {
+     "registry-mirrors": ["https://registry.docker-cn.com"]
+ }
+ service docker start
+
+ 查看Docker版本
+ docker -v
+ docker run hello-world
 </code></pre>
-
-<p>AutoBuild系统中我想有个页面能够一直看到当前项目的状态，先用着这个方法去定时查询。
-以后看有没有办法实现通知。^_^</p>
-
-<h2 id="click-to-refresh">click to refresh</h2>
-
-<pre><code>&lt;body onclick="window.location.reload();"&gt;
-    ...
-&lt;/body&gt;
+  </li>
+  <li><a href="https://store.docker.com/editions/community/docker-ce-desktop-mac">macOS</a>
+    <pre><code class="language-sh"> brew install docker
 </code></pre>
+  </li>
+  <li><a href="https://store.docker.com/editions/community/docker-ce-desktop-windows">Windows</a></li>
+</ol>
 
-<h2 id="scroll-to-bottom">scroll to bottom</h2>
+<h2 id="三容器运行第1个程序">三、容器，运行第1个程序</h2>
 
-<pre><code>window.scrollTo(0, document.body.scrollHeight);
+<ul>
+  <li>Dockerfile
+    <pre><code>  # 将官方 Python 运行时用作父镜像
+  FROM python:2.7-slim
+
+  # 将工作目录设置为 /app
+  WORKDIR /app
+
+  # 将当前目录内容复制到位于 /app 中的容器中
+  ADD . /app
+
+  # 安装 requirements.txt 中指定的任何所需软件包
+  RUN pip install -r requirements.txt
+
+  # 使端口 80 可供此容器外的环境使用
+  EXPOSE 80
+
+  # 定义环境变量
+  ENV NAME World
+
+  # 在容器启动时运行 app.py
+  CMD ["python", "app.py"]
 </code></pre>
+  </li>
+  <li>requirements.txt
+    <pre><code>  Flask
+  Redis
+</code></pre>
+  </li>
+  <li>app.py
+    <pre><code class="language-python">  from flask import Flask
+  from redis import Redis, RedisError
+  import os
+  import socket
 
-<p><img src="/imgs/20160116.jpg" alt="大宝" /></p>
+  # Connect to Redis
+  redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
+
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      try:
+          visits = redis.incr("counter")
+      except RedisError:
+          visits = "&lt;i&gt;cannot connect to Redis, counter disabled&lt;/i&gt;"
+
+      html = "&lt;h3&gt;Hello {name}!&lt;/h3&gt;" \
+          "&lt;b&gt;Hostname:&lt;/b&gt; {hostname}&lt;br/&gt;" \
+          "&lt;b&gt;Visits:&lt;/b&gt; {visits}"
+      return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+
+  if __name__ == "__main__":
+      app.run(host='0.0.0.0', port=80)
+</code></pre>
+  </li>
+  <li>构建运行
+    <pre><code>  docker build -t hello_docker .
+  docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+hello_docker            latest              940a583806b0        4 minutes ago       155.6 MB
+
+  docker run -p 888:80 hello_docker
+后台运行
+  docker run -d -p 888:80 hello_docker
+  docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                 NAMES
+73e81f97609c        hello_docker        "python app.py"     57 seconds ago      Up 56 seconds       0.0.0.0:888-&gt;80/tcp   gloomy_tesla
+  docker stop 73e81f97609c
+</code></pre>
+  </li>
+  <li>共享镜像
+    <pre><code>  docker login
+  docker tag hello_docker raina7325/get-started:part1
+  docker push raina7325/get-started:part1
+  docker run -p 8888:80 raina7325/get-started:part1
+</code></pre>
+  </li>
+  <li>常用命令
+    <pre><code class="language-sh">  docker build -t friendlyname .# 使用此目录的 Dockerfile 创建镜像
+  docker run -p 4000:80 friendlyname  # 运行端口 4000 到 90 的“友好名称”映射
+  docker run -d -p 4000:80 friendlyname         # 内容相同，但在分离模式下
+  docker ps                                 # 查看所有正在运行的容器的列表
+  docker stop &lt;hash&gt;                     # 平稳地停止指定的容器
+  docker ps -a           # 查看所有容器的列表，甚至包含未运行的容器
+  docker kill &lt;hash&gt;                   # 强制关闭指定的容器
+  docker rm &lt;hash&gt;              # 从此机器中删除指定的容器
+  docker rm $(docker ps -a -q)           # 从此机器中删除所有容器
+  docker images -a                               # 显示此机器上的所有镜像
+  docker rmi &lt;imagename&gt;            # 从此机器中删除指定的镜像
+  docker rmi $(docker images -q)             # 从此机器中删除所有镜像
+  docker login             # 使用您的 Docker 凭证登录此 CLI 会话
+  docker tag &lt;image&gt; username/repository:tag  # 标记 &lt;image&gt; 以上传到镜像库
+  docker push username/repository:tag            # 将已标记的镜像上传到镜像库
+  docker run username/repository:tag                   # 运行镜像库中的镜像
+</code></pre>
+  </li>
+</ul>
+
+<p><img src="/imgs/20180428.png" alt="大宝" /></p>
 
     </div>
 
@@ -189,8 +304,8 @@ will instruct the browser to refresh every `5` seconds.
       
       
        
-        <li><a href="/categories.html#html-ref">
-          html <span>(6)</span>
+        <li><a href="/categories.html#docker-ref">
+          docker <span>(1)</span>
           
         </a></li>
       
@@ -205,7 +320,7 @@ will instruct the browser to refresh every `5` seconds.
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Auto-Refresh code in HTML"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Docker getting started"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -233,10 +348,10 @@ will instruct the browser to refresh every `5` seconds.
 
     <ul class="pager">
       
-      <li class="previous"><a href="/otp-doc" title="erlang/opt doc">&larr; Previous</a></li>
+      <li class="previous"><a href="/ife_day4" title="ife day4: 背景边框列表链接">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/jekyll-templates" title="jekyll templates">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
