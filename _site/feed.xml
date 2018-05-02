@@ -5,9 +5,44 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 28 Apr 2018 17:20:17 +0800</pubDate>
-    <lastBuildDate>Sat, 28 Apr 2018 17:20:17 +0800</lastBuildDate>
+    <pubDate>Wed, 02 May 2018 19:38:12 +0800</pubDate>
+    <lastBuildDate>Wed, 02 May 2018 19:38:12 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>ife layout: 三栏网页宽度自适应布局方法</title>
+        <description>&lt;h2 id=&quot;绝对定位法&quot;&gt;绝对定位法&lt;/h2&gt;
+
+&lt;p&gt;最直观，最容易理解：左右两栏采用绝对定位，分别固定于页面的左右两侧，中间的主体栏用左右&lt;code&gt;margin&lt;/code&gt;值撑开距离。于是实现了三栏自适应布局。&lt;/p&gt;
+
+&lt;h2 id=&quot;margin负值法&quot;&gt;margin负值法&lt;/h2&gt;
+
+&lt;p&gt;中间的主体要使用双层标签。外层&lt;code&gt;div&lt;/code&gt;宽度100%显示，并且浮动（本例左浮动，下面所述依次为基础），内层&lt;code&gt;div&lt;/code&gt;为真正的主体内容，含有左右210像素的&lt;code&gt;margin&lt;/code&gt;值。左栏与右栏都是采用&lt;code&gt;margin&lt;/code&gt;负值定位的，左栏左浮动，&lt;code&gt;margin-left&lt;/code&gt;为-100%，由于前面的&lt;code&gt;div&lt;/code&gt;宽度100%与浏览器，所以这里的-100% &lt;code&gt;margin&lt;/code&gt;值正好使左栏div定位到了页面的左侧；右侧栏也是左浮动，其&lt;code&gt;margin-left&lt;/code&gt;也是负值，大小为其本身的宽度即200像素。
+注意几个&lt;code&gt;div&lt;/code&gt;的顺序，无论是左浮动还是右浮动，先是主体部分&lt;code&gt;div&lt;/code&gt;，然后是左右两栏。&lt;/p&gt;
+
+&lt;h2 id=&quot;自身浮动法&quot;&gt;自身浮动法&lt;/h2&gt;
+
+&lt;p&gt;左栏左浮动，右栏右浮动，主体直接放后面，就实现了自适应。
+三个&lt;code&gt;div&lt;/code&gt;标签的顺序的关键是要把主体div放在最后，左右两栏&lt;code&gt;div&lt;/code&gt;顺序任意。&lt;/p&gt;
+
+&lt;h2 id=&quot;flex&quot;&gt;Flex&lt;/h2&gt;
+
+&lt;p&gt;两侧&lt;code&gt;flex: 0 0 auto;&lt;/code&gt;，主体&lt;code&gt;flex: 1 1 auto;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/20180502.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
+        <link>/ife_layout</link>
+        <guid isPermaLink="true">/ife_layout</guid>
+        
+        
+        <category>front-end</category>
+        
+        <category>html</category>
+        
+        <category>ife</category>
+        
+      </item>
     
       <item>
         <title>Docker getting started</title>
@@ -789,55 +824,6 @@ dl、dd、dt适用有描述的列表 例如：简历页面，介绍自己的信�
         <category>ios</category>
         
         <category>reverse</category>
-        
-      </item>
-    
-      <item>
-        <title>Elixir(1)</title>
-        <description>&lt;p&gt;##Interactive mode&lt;/p&gt;
-
-&lt;p&gt;Open up &lt;code&gt;iex&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;iex&amp;gt; 40+2
-42
-iex&amp;gt; &quot;hello&quot; &amp;lt;&amp;gt; &quot; world&quot;
-&quot;hello world&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;##Running scripts&lt;/p&gt;
-
-&lt;p&gt;demo.exs&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;IO.puts &quot;Hello world from Elixir.&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;run with &lt;code&gt;elixir&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ elixir demo.exs
-Hello world from Elixir.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;##Basic types&lt;/p&gt;
-
-&lt;p&gt;Elixir basic types: integers,floats,booleans,strings,list,atoms,tuples.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;iex&amp;gt; is_atom(false)
-true
-iex&amp;gt; true == :true
-true
-iex&amp;gt; is_binary(&quot;hello&quot;)
-true
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Sun, 03 Jul 2016 00:00:00 +0800</pubDate>
-        <link>/Elixir</link>
-        <guid isPermaLink="true">/Elixir</guid>
-        
-        
-        <category>elixir</category>
-        
-        <category>erlang</category>
         
       </item>
     
