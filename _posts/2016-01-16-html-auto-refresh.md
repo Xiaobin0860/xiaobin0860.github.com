@@ -27,4 +27,6 @@ scroll to bottom
 
     window.scrollTo(0, document.body.scrollHeight);
 
+---
+
 ![大宝]({{ site.url }}/imgs/20160116.jpg)

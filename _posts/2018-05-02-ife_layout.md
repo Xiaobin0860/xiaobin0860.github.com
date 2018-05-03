@@ -23,4 +23,6 @@ categories: front-end html ife
 
 两侧`flex: 0 0 auto;`，主体`flex: 1 1 auto;`
 
+---
+
 ![大宝]({{ site.url }}/imgs/20180502.png)
