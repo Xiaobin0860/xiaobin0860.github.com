@@ -302,4 +302,6 @@ Interactive Elixir (1.5.0) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
+---
+
 ![大宝]({{ site.url }}/imgs/20180427.png)

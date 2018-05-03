@@ -38,5 +38,7 @@ Build
 
     jekyll build
 
+---
+
 ![大宝]({{ site.url }}/imgs/20160117.jpg)
 

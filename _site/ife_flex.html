@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>erlang/opt doc</title>
+		<title>Flexible Box Layout</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>erlang/opt doc </h1>
+  <h1>Flexible Box Layout </h1>
 </div>
   
 <article>
@@ -150,15 +150,123 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     January 
-     12th,
-     
-     2016
+     May 
+     3rd,
+       
+     2018
       
    </span>
     <div class="article_body" id="article_body">
-    <p><a href="/otp_doc/doc/index.html">erlang/opt doc</a></p>
+    <h2 id="flex-layout-overview">Flex Layout Overview</h2>
 
+<p>Flex layout is designed for laying out more complex applications and webpages.The contents of a flex container:</p>
+<ul>
+  <li>can be laid out in any flow direction (leftwards, rightwards, downwards, or even upwards!)</li>
+  <li>can have their display order reversed or rearranged at the style layer (i.e., visual order can be independent of source and speech order)</li>
+  <li>can be laid out linearly along a single (main) axis or wrapped into multiple lines along a secondary (cross) axis</li>
+  <li>can “flex” their sizes to respond to the available space</li>
+  <li>can be aligned with respect to their container or each other on the secondary (cross)</li>
+  <li>can be dynamically collapsed or uncollapsed along the main axis while preserving the container’s cross size</li>
+</ul>
+
+<h2 id="开始使用flexlayout">开始使用FlexLayout</h2>
+
+<p>在父元素中显式的设置<code>display:flex</code>或者<code>display:inline-flex</code>就会自动变成Flex容器，而其子元素就变成了Flex项目。</p>
+<ul>
+  <li>Flex容器（<code>Flex Container</code>）：父元素显式设置了<code>display:flex</code></li>
+  <li>Flex项目（<code>Flex Items</code>）：Flex容器内的子元素</li>
+</ul>
+
+<h2 id="flex容器属性">Flex容器属性</h2>
+
+<h3 id="flex-direction">flex-direction</h3>
+<p>flex-direction属性控制Flex项目沿着主轴（<code>Main Axis</code>）的排列方向。</p>
+<pre><code class="language-css">/* ul 是一个flex容器 */
+ul {
+    flex-direction: row || column || row-reverse || column-reverse;
+}
+</code></pre>
+<p>简单点来说，就是<code>flex-direction</code>属性让你决定Flex项目如何排列。它可以是行（水平）、列（垂直）或者行和列的反向。
+从技术上讲，水平和垂直在Flex世界中不是什么方向（概念）。它们常常被称为主轴（<code>Main-Axis</code>）和侧轴（<code>Cross-Axis</code>）。</p>
+
+<p><img src="/imgs/understanding-flexbox-11.jpg" alt="flex-direction" /></p>
+
+<h3 id="flex-wrap">flex-wrap</h3>
+<pre><code class="language-css">ul { flex-wrap: wrap || nowrap || wrap-reverse; }
+</code></pre>
+
+<h3 id="flex-flow">flex-flow</h3>
+<p><code>flex-flow</code>是<code>flex-direction</code>和<code>flex-wrap</code>两个属性的速记属性。</p>
+<pre><code class="language-css">ul { flex-flow: row wrap; }
+</code></pre>
+
+<h3 id="justify-content">justify-content</h3>
+<p>决定Flex项在<code>Main-Axis</code>上的排列方式</p>
+<pre><code class="language-css">ul { justify-content: flex-start || flex-end || center || space-between || space-around }
+</code></pre>
+
+<ul>
+  <li>默认<code>flex-start</code>让所有Flex项目靠Main-Axis开始边缘（左对齐）</li>
+  <li><code>flex-end</code>让所有Flex项目靠Main-Axis结束边缘（右对齐）</li>
+  <li><code>center</code>让所有Flex项目排在Main-Axis中间（居中对齐）</li>
+  <li>
+    <p><code>space-between</code>让除了第一个和最一个Flex项目的两者间间距相同（两端对齐）
+<img src="/imgs/understanding-flexbox-24.jpeg" alt="flex-direction" /></p>
+  </li>
+  <li><code>space-around</code>让每个Flex项目具有相同的空间
+<img src="/imgs/understanding-flexbox-26.jpeg" alt="flex-direction" /></li>
+</ul>
+
+<h3 id="align-items">align-items</h3>
+<p>决定Flex项在<code>Cross-Axis</code>上的排列方式</p>
+<pre><code class="language-css">ul { align-items: flex-start || flex-end || center || stretch || baseline }
+</code></pre>
+
+<ul>
+  <li>默认<code>stretch</code>让所有的Flex项目高度和Flex容器高度一样</li>
+  <li><code>flex-start</code>让所有Flex项目靠Cross-Axis开始边缘（顶部对齐）</li>
+  <li><code>flex-end</code>让所有Flex项目靠Cross-Axis结束边缘（底部对齐）</li>
+  <li><code>center</code>让Flex项目在Cross-Axis中间（居中对齐）</li>
+  <li><code>baseline</code>让所有Flex项目在Cross-Axis上沿着他们自己的基线对齐</li>
+</ul>
+
+<h3 id="align-content">align-content</h3>
+<p><code>align-content</code>属性用于多行的Flex容器。它也是用来控制Flex项目在Flex容器里的排列方式，排列效果和<code>align-items</code>值一样，但没有baseline属性值。</p>
+
+<h2 id="flex项目属性">Flex项目属性</h2>
+<pre><code>order || flex-grow || flex-shrink || flex-basis
+</code></pre>
+
+<h3 id="order">order</h3>
+<p>允许Flex项目在一个Flex容器中重新排序。<code>order</code>属性的默认值是0。它可以接受一个正值，也可以接受一个负值。Flex项目会根据<code>order</code>值重新排序。从底到高。</p>
+
+<h3 id="flex-grow-和-flex-shrink">flex-grow 和 flex-shrink</h3>
+<p><code>flex-grow</code>和<code>flex-shrink</code>属性控制Flex项目在容器有多余的空间如何放大（扩展），在没有额外空间又如何缩小。
+他们可能接受0或者大于0的任何正数。
+默认情况下，<code>flex-grow</code>属性值设置为0。表示Flex项目不会增长，填充Flex容器可用空间。
+<code>flex-shrink</code>的值是1，也就是说空间缩小Flex项目也会缩小，以适应新的空间。</p>
+
+<h3 id="flex-basis">flex-basis</h3>
+<p><code>flex-basis</code>属性可以指定Flex项目的初始大小。也就是<code>flex-grow</code>和<code>flex-shrink</code>属性调整它的大小以适应Flex容器之前。
+默认的值是<code>auto</code>。<code>flex-basis</code>可以取任何用于<code>width</code>属性的任何值。比如 <code>% || em || rem || px</code>等。</p>
+
+<h3 id="flex速记">flex速记</h3>
+<p><code>flex</code>是<code>flex-grow</code>、<code>flex-shrink</code>和<code>flex-basis</code>三个属性的速记（简写）</p>
+
+<h3 id="align-self">align-self</h3>
+<pre><code>auto || flex-start || flex-end || center || baseline || stretch
+</code></pre>
+<p>与Flex容器的<code>align-items</code>属性类似，只不过只改变本Flex项目沿着侧轴的位置。</p>
+
+<h2 id="绝对和相对flex项目">绝对和相对Flex项目</h2>
+<p>绝对Flex项目的宽度只基于 flex 属性，而相对Flex项目的宽度基于内容大小。
+当Flex项目因为被设置为<code>flex-basis: auto</code>，而导致宽度被自动计算时，是基于Flex项目内包含的内容的大小而计算。
+Flex项目的初始宽度是零<code>flex-basis: 0</code>，并且它们会伸展以适应可用空间。当有两到多个Flex项目的<code>flex-basis</code>取值为0时，它们会基于<code>flex-grow</code>值共享可用空间。</p>
+
+<h2 id="auto-margin对齐">Auto-margin对齐</h2>
+<p>当心Flex项目上的<code>margin: auto</code>对齐。值为<code>auto</code>的方向（左、右或者二者都是）会占据所有剩余空间。
+—
+<img src="/imgs/20180503.png" alt="大宝" /></p>
 
     </div>
 
@@ -168,8 +276,18 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
       
        
-        <li><a href="/categories.html#erlang-ref">
-          erlang <span>(11)</span>
+        <li><a href="/categories.html#front-end-ref">
+          front-end <span>(7)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#html-ref">
+          html <span>(8)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#ife-ref">
+          ife <span>(7)</span>
           
         </a></li>
       
@@ -184,7 +302,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=erlang/opt doc"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Flexible Box Layout"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -212,10 +330,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/erlang-shell" title="erlang执行shell">&larr; Previous</a></li>
+      <li class="previous"><a href="/ife_layout" title="ife layout: 三栏网页宽度自适应布局方法">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/html-auto-refresh" title="Auto-Refresh code in HTML">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

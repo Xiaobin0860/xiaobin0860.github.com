@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "ife layout: 三栏网页宽度自适应布局方法"
-date:   2018-04-27
+date:   2018-05-02
 categories: front-end html ife
 ---
 
