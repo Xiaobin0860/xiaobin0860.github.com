@@ -27,4 +27,4 @@ iex> with {:ok, role} when not is_binary(role) <- Map.fetch(users, "bob"),
 
 ---
 
-![大宝]({{ site.url }}/imgs/20180427.png)
+![大宝]({{ site.url }}/imgs/20180504.jpg)
