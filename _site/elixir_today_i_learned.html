@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Elixir - Today I Learned</title>
+		<title>Elixir - with</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Elixir - Today I Learned </h1>
+  <h1>Elixir - with </h1>
 </div>
   
 <article>
@@ -150,287 +150,34 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     April 
-     27th,
+     May 
+     4th,
      
      2018
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="1-elixir-with-macro---and-">1. Elixir with macro <code>&lt;-</code> and <code>=</code></h2>
+    <h2 id="macrowithargs"><a href="https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1">macrowith(args)</a></h2>
 
-<p>So Elixir <a href="https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1">with macro</a> accepts <strong>Matching clauses</strong> <code>&lt;-</code> and <strong>Bare expressions</strong> <code>=</code>. Both match patterns and do not leak variables assigned inside these structures.</p>
-
-<pre><code class="language-elixir">with {:ok, width} &lt;- Map.fetch(%{width: 10}, :width),
-  do: {:ok, 2 * width}
-#=&gt; {:ok, 20}
-
-with {:ok, width} = Map.fetch(%{width: 10}, :width),
-  do: {:ok, 2 * width}
-#=&gt; {:ok, 20}
+<p>Used to combine matching clauses.</p>
+<pre><code>iex&gt; opts = %{width: 10, height: 15}
+iex&gt; with {:ok, width} &lt;- Map.fetch(opts, :width),
+...&gt;      {:ok, height} &lt;- Map.fetch(opts, :height),
+...&gt;      do: {:ok, width * height}
+{:ok, 150}
 </code></pre>
+<p>If all clauses match, the <code>do</code> block is executed, returning its result. Otherwise the chain is aborted and the non-matched value is returned.</p>
 
-<p>So what is the difference between these?</p>
-
-<p>When a match fails, matching clauses <code>&lt;-</code> returns <strong>failed result</strong> but bare expressions <code>=</code> raises a <code>MatchError</code>:</p>
-
-<pre><code class="language-elixir">with {:ok, width} &lt;- Map.fetch(%{height: 10}, :width),
-  do: {:ok, 2 * width}
-#=&gt; :error
-
-with {:ok, width} = Map.fetch(%{height: 10}, :width),
-  do: {:ok, 2 * width}
-#=&gt; ** (MatchError) no match of right hand side value: :error
-</code></pre>
-
-<p>Another difference is that <code>when</code> guard is only available for matching clause.</p>
-
-<pre><code class="language-elixir">with {:ok, width} when is_number(width) &lt;- Map.fetch(%{width: 10}, :width),
-  do: {:ok, 2 * width}
-#=&gt; {:ok, 20}
-</code></pre>
-
-<h2 id="2-binary-pattern-matching">2. Binary pattern matching</h2>
-
-<p>You might be familiar with the most popular form of Elixir pattern matching involving tuples:</p>
-
-<pre><code class="language-elixir">iex &gt; {:ok, x} = {:ok, 1000}
-{:ok, 1000}
-iex &gt; x
-1000
-</code></pre>
-
-<p>You can also pattern match binaries:</p>
-
-<pre><code class="language-elixir">iex &gt; &lt;&lt;1, y, 2&gt;&gt; = &lt;&lt;1, 255, 2&gt;&gt;
-&lt;&lt;1, 255, 2&gt;&gt;
-iex &gt; y
-255
-</code></pre>
-
-<p>This gets powerful when you’re able to match binary formats.</p>
-
-<pre><code class="language-elixir">iex &gt; &lt;&lt;x :: binary-1, y :: binary-2, z :: binary&gt;&gt; = &lt;&lt;1, 255, 254, 2&gt;&gt;
-&lt;&lt;1, 255, 254, 2&gt;&gt;
-iex &gt; x
-&lt;&lt;1&gt;&gt;
-iex &gt; y
-&lt;&lt;255, 254&gt;&gt;
-iex &gt; z
-&lt;&lt;2&gt;&gt;
-</code></pre>
-
-<p>Here’s an <a href="http://www.zohaib.me/binary-pattern-matching-in-elixir/">article</a> about using binary pattern matching to parse a png file.</p>
-
-<h2 id="3-word-lists-for-atoms">3. Word Lists For Atoms</h2>
-
-<p>The <code>~w</code> sigil allows you to create a list of words (i.e. strings).</p>
-
-<pre><code class="language-elixir">&gt; ~w(one two three)
-["one", "two", "three"]
-</code></pre>
-
-<p>It sets itself apart though with some modifiers. The default behavior
-matches the <code>s</code> modifier (for strings).</p>
-
-<pre><code class="language-elixir">&gt; ~w(one two three)s
-["one", "two", "three"]
-</code></pre>
-
-<p>Where it gets more interesting is with the <code>a</code> modifier allowing you to
-create a list of atoms.</p>
-
-<pre><code class="language-elixir">&gt; ~w(one two three)a
-[:one, :two, :three]
-</code></pre>
-
-<p>Note: there is a third modifier, <code>c</code>, for char lists.</p>
-
-<pre><code class="language-elixir">&gt; ~w(one two three)c
-['one', 'two', 'three']
-</code></pre>
-
-<p><a href="http://elixir-lang.org/getting-started/sigils.html">source</a></p>
-
-<h2 id="4-find-and-open-port-with-elixir">4. Find and Open Port with Elixir</h2>
-
-<pre><code class="language-elixir">iex(1)&gt; {:ok, port} = :gen_tcp.listen(0, []) #listen on an available port
-{:ok, #Port&lt;0.1465&gt;}
-iex(2)&gt; {:ok, port_number} = :inet.port(port) #get the port number of that port
-{:ok, 63470}
-iex(3)&gt; port_number #here is the port number!
-63470
-iex(4)&gt; Port.close port #go ahead and close that port if you want
-true
-</code></pre>
-
-<h2 id="5-virtual-fields-with-ecto-schema">5. Virtual Fields With Ecto Schema</h2>
-
-<p>If you’d like to include a particular key-value pair in an Ecto changeset,
-it needs to be included as a field in the schema. In the case of something
-akin to a password field, you want to be able to perform validations against
-it, but the password itself does not have a column in the database. In other
-words, you want to use the password in memory as part of the validation
-process but not save it to the database. To accomplish this, you need to
-specify that it is a <code>virtual</code> field.</p>
-
-<pre><code class="language-elixir">schema "users" do
-  field :username, :string
-  field :password_digest, :string
-  field :password, :string, virtual: true
-end
-</code></pre>
-
-<p>With that schema, you can then validate the <code>:password</code> and transform it
-into the corresponding <code>:password_digest</code> field.</p>
-
-<pre><code class="language-elixir">def registration_changeset(model, params) do
-  model
-  |&gt; changeset(params)                  # do other standard validations
-  |&gt; cast(params, [:password])          # include :password in the changeset
-  |&gt; validate_length(:password, min: 8) # validations
-  |&gt; put_pass_hash()                    # transform into :password_digest
-end
-</code></pre>
-<p>Mix xref and Elixir compiler warnings</p>
-
-<p>The <a href="https://elixir-lang.org/blog/2016/06/21/elixir-v1-3-0-released/">release</a> of Elixir v1.3 added a mix task called <code>xref</code> for performing cross reference checks of your code. <code>mix xref</code> gives us some handy tools!</p>
-
-<h2 id="6-find-unreachable-code">6. Find unreachable code:</h2>
-
-<pre><code class="language-sh">❯ mix xref unreachable
-lib/exonk8s/foo.ex:16: SomeModule.non_existant/0
-</code></pre>
-
-<p>Find callers of modules and functions:</p>
-<pre><code class="language-sh">❯ mix xref callers SomeModule
-lib/exonk8s/foo.ex:16: SomeModule.non_existant/0
-</code></pre>
-
-<p>Generate a dependency graph:</p>
-<pre><code class="language-sh">&gt; mix xref graph
-lib/exonk8s.ex
-├── lib/exonk8s/repo.ex
-└── lib/router.ex
-    └── lib/exonk8s/musician_controller.ex (compile)
-        ├── lib/exonk8s/foo.ex
-        ├── lib/exonk8s/musician.ex
-        └── lib/exonk8s/repo.ex
-...snipped for brevity
-</code></pre>
-
-<p>The <a href="https://elixir-lang.org/blog/2018/01/17/elixir-v1-6-0-released/">release</a> of Elixir v1.6 added the module attribute <code>@deprecated</code> to enable library authors to warn users of deprecated functions.</p>
-
-<pre><code class="language-sh">❯ mix xref deprecated
-Compiling 2 files (.ex)
-Foo Loaded
-warning: ExOnK8s.Foo.lazy/0 is deprecated. You should be more eager.
-  lib/exonk8s/musician_controller.ex:10
-
-lib/exonk8s/musician_controller.ex:10: ExOnK8s.Foo.lazy/0
-</code></pre>
-
-<p>Lastly I should note that <code>xref deprecated</code> and <code>xref unreachable</code> are included in the compiler warnings, so you you’ve likely seen these at work even if you didn’t know they were there.</p>
-
-<p><a href="https://hexdocs.pm/mix/Mix.Tasks.Xref.html#content">Learn more</a></p>
-
-<h2 id="7-view-your-outdated-packages">7. View your outdated packages</h2>
-
-<p>To see which packages in a mix app need updating, you can run <code>mix hex.outdated</code></p>
-
-<pre><code class="language-shell">$ mix hex.outdated
-Dependency           Current  Latest  Update possible
-appsignal            1.3.2    1.3.3   Yes
-basic_auth           2.1.4    2.1.4
-cachex               2.1.0    2.1.0
-...
-</code></pre>
-<p>It prints out a handy table letting you quickly view the current and latest versions and if they can be updated. If <code>Update possible</code> is <code>No</code>, check your semantic version lockdown of that package in <code>mix.exs</code>.</p>
-
-<p><code>mix hex.outdated</code> accepts a few arguments:</p>
-
-<ul>
-  <li><code>--all</code>  which shows all outdated packages, including children of packages defined in mix.exs</li>
-  <li><code>--pre</code> which include pre-releases when checking for newer versions (be adventurous!)</li>
-</ul>
-
-<p>Visualize Your Elixir Dependencies</p>
-
-<h2 id="8-to-visualize-your-elixir-dependencies-try-this">8. To visualize your Elixir dependencies, try this:</h2>
-
-<pre><code class="language-sh">$ mix deps.tree
-</code></pre>
-
-<p>This prints a tree showing your dependencies (and their dependencies):</p>
-
-<pre><code class="language-sh">$ mix deps.tree
-tilex
-├── gettext ~&gt; 0.13 (Hex package)
-├── hackney 1.8.0 (Hex package)
-│   ├── certifi 1.1.0 (Hex package)
-│   ├── idna 4.0.0 (Hex package)
-│   ├── metrics 1.0.1 (Hex package)
-│   ├── mimerl 1.0.2 (Hex package)
-│   └── ssl_verify_fun 1.1.1 (Hex package)
-</code></pre>
-
-<h2 id="9-phoenix-will-watch-your-js-for-you-just-watch">9. Phoenix will watch your JS for you, just watch!</h2>
-
-<p>With es6 javascript ecosystems most compilation/transpilation is done with watchers, programs that watch for changes in your code and then trigger compilation based on the changes you’ve made.</p>
-
-<p>Phoenix has a method of integrating those watchers into the server itself.</p>
-
-<pre><code class="language-elixir">config :myapp, MyApp.Endpoint,
-  watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
-</code></pre>
-
-<p>The above configuration goes in <code>config/dev.exs</code> and runs the watch command whenever you start the server/endpoint.  The keyword option <code>cd</code> is as of yet undocumented, but does what you think it does, changes the directory to the path you configure, which by convention in Phoenix 1.3 would be the assets directory.  <code>cd</code> is the only keyword option.</p>
-
-<p>The watchers start when you run your server.  Just make a change to your javascript and refresh the page!</p>
-
-<h2 id="10-setting-breaks-in-iex-for-debugging">10. Setting breaks in IEx for debugging</h2>
-
-<p>With the release of Elixir 1.5 comes some handy new IEx helpers, one of which is the ability to add break points throughout your code.</p>
-
-<p>You can add a break to any function using <code>break!/2</code> or <code>break!/4</code>:</p>
-<pre><code class="language-elixir">defmodule MyModule do
-  def hello(name) do
-    "hello " &lt;&gt; name
-  end
-end
-</code></pre>
-<pre><code class="language-shell">iex(1)&gt; break!(MyModule.hello/ 1)
-or
-iex(1)&gt; break!(MyModule, :hello, 1)
-</code></pre>
-<p>Both <code>break/2</code> and <code>break/4</code> accept an additional argument for how many stops you want to make. Useful for recursive functions where you may want to stop multiple times.</p>
-
-<p>To see what breaks you have use  <code>breaks/0</code></p>
-<pre><code class="language-shell">iex(1)&gt; breaks()
- ID   Module.function/arity   Pending stops
----- ----------------------- ---------------
- 1    MyModule.hello/1        1
-</code></pre>
-<p>Now when you call the function, you’ll be placed into the a debugger and you can inspect whats being passed in:</p>
-<pre><code class="language-shell">iex(4)&gt; MyModule.hello("world")
-Break reached: MyModule.hello/1 (lib/my_module.ex:2)
-    1: defmodule MyModule do
-    2:   def hello(name) do
-    3:     "hello " &lt;&gt; name
-    4:   end
-pry(1)&gt; name
-"world"
-</code></pre>
-<p>To exit the break and start a new shell process use <code>respawn/0</code></p>
-<pre><code class="language-shell">pry(2)&gt; respawn
-Interactive Elixir (1.5.0) - press Ctrl+C to exit (type h() ENTER for help)
-"hello world"
-iex(1)&gt;
+<p>Guards can be used in patterns as well:</p>
+<pre><code>iex&gt; users = %{"melany" =&gt; "guest", "bob" =&gt; :admin}
+iex&gt; with {:ok, role} when not is_binary(role) &lt;- Map.fetch(users, "bob"),
+...&gt;      do: {:ok, to_string(role)}
+{:ok, "admin"}
 </code></pre>
 
 <hr />
 
-<p><img src="/imgs/20180427.png" alt="大宝" /></p>
+<p><img src="http://localhost:4000/imgs/20180427.png" alt="大宝" /></p>
 
     </div>
 
@@ -441,12 +188,7 @@ iex(1)&gt;
       
        
         <li><a href="/categories.html#elixir-ref">
-          elixir <span>(2)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#phoenix-ref">
-          phoenix <span>(1)</span>
+          elixir <span>(3)</span>
           
         </a></li>
       
@@ -461,7 +203,7 @@ iex(1)&gt;
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Elixir - Today I Learned"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Elixir - with"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -489,10 +231,10 @@ iex(1)&gt;
 
     <ul class="pager">
       
-      <li class="previous"><a href="/ife_day2" title="ife day2: HTML基本标签">&larr; Previous</a></li>
+      <li class="previous"><a href="/ife_flex" title="Flexible Box Layout">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/ife_day3" title="ife day3: CSS基础">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
