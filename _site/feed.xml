@@ -3,11 +3,38 @@
   <channel>
     <title>乌托邦</title>
     <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 04 May 2018 17:02:24 +0800</pubDate>
-    <lastBuildDate>Fri, 04 May 2018 17:02:24 +0800</lastBuildDate>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 05 May 2018 22:50:08 +0800</pubDate>
+    <lastBuildDate>Sat, 05 May 2018 22:50:08 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>Elixir String Manipulation</title>
+        <description>&lt;p&gt;To get the list of string that compose a longer string, use String.codepoints/1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex(1)&amp;gt; String.codepoints(&quot;你好a&quot;)
+[&quot;你&quot;, &quot;好&quot;, &quot;a&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get the list of codepoints that represent each letter in the string, use String.to_charlist/1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex(2)&amp;gt; String.to_charlist(&quot;你好a&quot;)
+[20320, 22909, 97]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/20180505.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 05 May 2018 00:00:00 +0800</pubDate>
+        <link>/elixir_today_i_learned</link>
+        <guid isPermaLink="true">/elixir_today_i_learned</guid>
+        
+        
+        <category>elixir</category>
+        
+      </item>
     
       <item>
         <title>Elixir - with</title>
@@ -31,11 +58,11 @@ iex&amp;gt; with {:ok, role} when not is_binary(role) &amp;lt;- Map.fetch(users,
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20180504.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20180504.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 04 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/elixir_today_i_learned</link>
-        <guid isPermaLink="true">http://localhost:4000/elixir_today_i_learned</guid>
+        <link>/elixir_today_i_learned</link>
+        <guid isPermaLink="true">/elixir_today_i_learned</guid>
         
         
         <category>elixir</category>
@@ -76,7 +103,7 @@ ul {
 &lt;p&gt;简单点来说，就是&lt;code&gt;flex-direction&lt;/code&gt;属性让你决定Flex项目如何排列。它可以是行（水平）、列（垂直）或者行和列的反向。
 从技术上讲，水平和垂直在Flex世界中不是什么方向（概念）。它们常常被称为主轴（&lt;code&gt;Main-Axis&lt;/code&gt;）和侧轴（&lt;code&gt;Cross-Axis&lt;/code&gt;）。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/understanding-flexbox-11.jpg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/understanding-flexbox-11.jpg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;flex-wrap&quot;&gt;flex-wrap&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul { flex-wrap: wrap || nowrap || wrap-reverse; }
@@ -98,10 +125,10 @@ ul {
   &lt;li&gt;&lt;code&gt;center&lt;/code&gt;让所有Flex项目排在Main-Axis中间（居中对齐）&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;code&gt;space-between&lt;/code&gt;让除了第一个和最一个Flex项目的两者间间距相同（两端对齐）
-&lt;img src=&quot;http://localhost:4000/imgs/understanding-flexbox-24.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/imgs/understanding-flexbox-24.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;code&gt;space-around&lt;/code&gt;让每个Flex项目具有相同的空间
-&lt;img src=&quot;http://localhost:4000/imgs/understanding-flexbox-26.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;/imgs/understanding-flexbox-26.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;align-items&quot;&gt;align-items&lt;/h3&gt;
@@ -155,11 +182,11 @@ Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且�
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20180503.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20180503.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 03 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_flex</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_flex</guid>
+        <link>/ife_flex</link>
+        <guid isPermaLink="true">/ife_flex</guid>
         
         
         <category>front-end</category>
@@ -192,11 +219,11 @@ Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且�
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20180502.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20180502.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_layout</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_layout</guid>
+        <link>/ife_layout</link>
+        <guid isPermaLink="true">/ife_layout</guid>
         
         
         <category>front-end</category>
@@ -211,7 +238,7 @@ Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且�
         <title>Docker getting started</title>
         <description>&lt;h2 id=&quot;一认识docker&quot;&gt;一、认识Docker&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/containers-vms-together.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/containers-vms-together.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;二install-docker-ce&quot;&gt;二、Install Docker-CE&lt;/h2&gt;
 
@@ -348,11 +375,11 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20180428.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20180428.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 28 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/docker</link>
-        <guid isPermaLink="true">http://localhost:4000/docker</guid>
+        <link>/docker</link>
+        <guid isPermaLink="true">/docker</guid>
         
         
         <category>docker</category>
@@ -410,8 +437,8 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_day4</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_day4</guid>
+        <link>/ife_day4</link>
+        <guid isPermaLink="true">/ife_day4</guid>
         
         
         <category>front-end</category>
@@ -472,8 +499,8 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_day4.1</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_day4.1</guid>
+        <link>/ife_day4.1</link>
+        <guid isPermaLink="true">/ife_day4.1</guid>
         
         
         <category>front-end</category>
@@ -489,7 +516,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
         <description>&lt;h2 id=&quot;css规则&quot;&gt;CSS规则&lt;/h2&gt;
 
 &lt;p&gt;由两部分组成： 选择器及一条或多条声明。
-&lt;img src=&quot;http://localhost:4000/imgs/ct_css_selector.gif&quot; alt=&quot;CSS语法&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/imgs/ct_css_selector.gif&quot; alt=&quot;CSS语法&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;选择器&quot;&gt;选择器&lt;/h2&gt;
 
@@ -545,8 +572,8 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_day3</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_day3</guid>
+        <link>/ife_day3</link>
+        <guid isPermaLink="true">/ife_day3</guid>
         
         
         <category>front-end</category>
@@ -832,11 +859,11 @@ iex(1)&amp;gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20180427.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20180427.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/elixir_today_i_learned</link>
-        <guid isPermaLink="true">http://localhost:4000/elixir_today_i_learned</guid>
+        <link>/elixir_today_i_learned</link>
+        <guid isPermaLink="true">/elixir_today_i_learned</guid>
         
         
         <category>elixir</category>
@@ -898,32 +925,8 @@ submit:使用提交按钮，提交数据,input type=”submit” value=”提交
 dl、dd、dt适用有描述的列表 例如：简历页面，介绍自己的信息、年龄、住址等。&lt;/p&gt;
 </description>
         <pubDate>Thu, 26 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_day2</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_day2</guid>
-        
-        
-        <category>front-end</category>
-        
-        <category>html</category>
-        
-        <category>ife</category>
-        
-      </item>
-    
-      <item>
-        <title>ife day1: Why?</title>
-        <description>&lt;h2 id=&quot;我为什么学习前端&quot;&gt;我为什么学习前端&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;更容易、更快速地实现自己的想法&lt;/li&gt;
-  &lt;li&gt;跨平台&lt;/li&gt;
-  &lt;li&gt;随着设备硬件、网络速度提升，Web一统江湖也不是不可能。起码会有很大发展空间&lt;/li&gt;
-  &lt;li&gt;补齐短板&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 25 Apr 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/ife_day1</link>
-        <guid isPermaLink="true">http://localhost:4000/ife_day1</guid>
+        <link>/ife_day2</link>
+        <guid isPermaLink="true">/ife_day2</guid>
         
         
         <category>front-end</category>

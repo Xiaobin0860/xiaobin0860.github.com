@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Elixir - with</title>
+		<title>Elixir String Manipulation</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Elixir - with </h1>
+  <h1>Elixir String Manipulation </h1>
 </div>
   
 <article>
@@ -151,33 +151,27 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      May 
-     4th,
+     5th,
      
      2018
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="macrowithargs"><a href="https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1">macrowith(args)</a></h2>
+    <p>To get the list of string that compose a longer string, use String.codepoints/1</p>
 
-<p>Used to combine matching clauses.</p>
-<pre><code>iex&gt; opts = %{width: 10, height: 15}
-iex&gt; with {:ok, width} &lt;- Map.fetch(opts, :width),
-...&gt;      {:ok, height} &lt;- Map.fetch(opts, :height),
-...&gt;      do: {:ok, width * height}
-{:ok, 150}
+<pre><code class="language-elixir">iex(1)&gt; String.codepoints("你好a")
+["你", "好", "a"]
 </code></pre>
-<p>If all clauses match, the <code>do</code> block is executed, returning its result. Otherwise the chain is aborted and the non-matched value is returned.</p>
 
-<p>Guards can be used in patterns as well:</p>
-<pre><code>iex&gt; users = %{"melany" =&gt; "guest", "bob" =&gt; :admin}
-iex&gt; with {:ok, role} when not is_binary(role) &lt;- Map.fetch(users, "bob"),
-...&gt;      do: {:ok, to_string(role)}
-{:ok, "admin"}
+<p>To get the list of codepoints that represent each letter in the string, use String.to_charlist/1</p>
+
+<pre><code class="language-elixir">iex(2)&gt; String.to_charlist("你好a")
+[20320, 22909, 97]
 </code></pre>
 
 <hr />
 
-<p><img src="http://localhost:4000/imgs/20180504.jpg" alt="大宝" /></p>
+<p><img src="/imgs/20180505.jpg" alt="大宝" /></p>
 
     </div>
 
@@ -188,7 +182,7 @@ iex&gt; with {:ok, role} when not is_binary(role) &lt;- Map.fetch(users, "bob"),
       
        
         <li><a href="/categories.html#elixir-ref">
-          elixir <span>(3)</span>
+          elixir <span>(4)</span>
           
         </a></li>
       
@@ -203,7 +197,7 @@ iex&gt; with {:ok, role} when not is_binary(role) &lt;- Map.fetch(users, "bob"),
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Elixir - with"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Elixir String Manipulation"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -231,7 +225,7 @@ iex&gt; with {:ok, role} when not is_binary(role) &lt;- Map.fetch(users, "bob"),
 
     <ul class="pager">
       
-      <li class="previous"><a href="/ife_flex" title="Flexible Box Layout">&larr; Previous</a></li>
+      <li class="previous"><a href="/elixir_today_i_learned" title="Elixir - with">&larr; Previous</a></li>
       
       
       <li class="next disabled"><a>Next &rarr;</a>
