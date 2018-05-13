@@ -5,9 +5,55 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 May 2018 10:00:27 +0800</pubDate>
-    <lastBuildDate>Thu, 10 May 2018 10:00:27 +0800</lastBuildDate>
-    <generator>Jekyll v3.8.0</generator>
+    <pubDate>Mon, 14 May 2018 00:24:52 +0800</pubDate>
+    <lastBuildDate>Mon, 14 May 2018 00:24:52 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.1</generator>
+    
+      <item>
+        <title>理解计算机系统(1)</title>
+        <description>&lt;h2 id=&quot;编译四个阶段&quot;&gt;编译四个阶段&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;预处理阶段
+&lt;code&gt;#include&lt;/code&gt;告诉预处理器将指定文件内容插入到本文件中&lt;/li&gt;
+  &lt;li&gt;编译阶段
+生成汇编文件&lt;/li&gt;
+  &lt;li&gt;汇编阶段
+汇编文件 =&amp;gt; 可重定位目标程序(.o)&lt;/li&gt;
+  &lt;li&gt;链接阶段
+.o =&amp;gt; 可执行文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;硬件组成&quot;&gt;硬件组成&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;总线
+传送定长字节块 =&amp;gt; 字(word)&lt;/li&gt;
+  &lt;li&gt;I/O设备&lt;/li&gt;
+  &lt;li&gt;主存&lt;/li&gt;
+  &lt;li&gt;CPU&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;操作系统&quot;&gt;操作系统&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;文件(字节序列)，是对I/O设备的抽象&lt;/li&gt;
+  &lt;li&gt;虚拟内存是对主存和磁盘的抽象&lt;/li&gt;
+  &lt;li&gt;进程是对CPU、主存和I/O设备的抽象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/20180513.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 13 May 2018 00:00:00 +0800</pubDate>
+        <link>/computer_systems</link>
+        <guid isPermaLink="true">/computer_systems</guid>
+        
+        
+        <category>system</category>
+        
+      </item>
     
       <item>
         <title>coincoin源码之token</title>
@@ -624,294 +670,6 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
         <category>html</category>
         
         <category>ife</category>
-        
-      </item>
-    
-      <item>
-        <title>Elixir - Today I Learned</title>
-        <description>&lt;h2 id=&quot;1-elixir-with-macro---and-&quot;&gt;1. Elixir with macro &lt;code&gt;&amp;lt;-&lt;/code&gt; and &lt;code&gt;=&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;So Elixir &lt;a href=&quot;https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1&quot;&gt;with macro&lt;/a&gt; accepts &lt;strong&gt;Matching clauses&lt;/strong&gt; &lt;code&gt;&amp;lt;-&lt;/code&gt; and &lt;strong&gt;Bare expressions&lt;/strong&gt; &lt;code&gt;=&lt;/code&gt;. Both match patterns and do not leak variables assigned inside these structures.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;with {:ok, width} &amp;lt;- Map.fetch(%{width: 10}, :width),
-  do: {:ok, 2 * width}
-#=&amp;gt; {:ok, 20}
-
-with {:ok, width} = Map.fetch(%{width: 10}, :width),
-  do: {:ok, 2 * width}
-#=&amp;gt; {:ok, 20}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So what is the difference between these?&lt;/p&gt;
-
-&lt;p&gt;When a match fails, matching clauses &lt;code&gt;&amp;lt;-&lt;/code&gt; returns &lt;strong&gt;failed result&lt;/strong&gt; but bare expressions &lt;code&gt;=&lt;/code&gt; raises a &lt;code&gt;MatchError&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;with {:ok, width} &amp;lt;- Map.fetch(%{height: 10}, :width),
-  do: {:ok, 2 * width}
-#=&amp;gt; :error
-
-with {:ok, width} = Map.fetch(%{height: 10}, :width),
-  do: {:ok, 2 * width}
-#=&amp;gt; ** (MatchError) no match of right hand side value: :error
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Another difference is that &lt;code&gt;when&lt;/code&gt; guard is only available for matching clause.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;with {:ok, width} when is_number(width) &amp;lt;- Map.fetch(%{width: 10}, :width),
-  do: {:ok, 2 * width}
-#=&amp;gt; {:ok, 20}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;2-binary-pattern-matching&quot;&gt;2. Binary pattern matching&lt;/h2&gt;
-
-&lt;p&gt;You might be familiar with the most popular form of Elixir pattern matching involving tuples:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex &amp;gt; {:ok, x} = {:ok, 1000}
-{:ok, 1000}
-iex &amp;gt; x
-1000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can also pattern match binaries:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex &amp;gt; &amp;lt;&amp;lt;1, y, 2&amp;gt;&amp;gt; = &amp;lt;&amp;lt;1, 255, 2&amp;gt;&amp;gt;
-&amp;lt;&amp;lt;1, 255, 2&amp;gt;&amp;gt;
-iex &amp;gt; y
-255
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This gets powerful when you’re able to match binary formats.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex &amp;gt; &amp;lt;&amp;lt;x :: binary-1, y :: binary-2, z :: binary&amp;gt;&amp;gt; = &amp;lt;&amp;lt;1, 255, 254, 2&amp;gt;&amp;gt;
-&amp;lt;&amp;lt;1, 255, 254, 2&amp;gt;&amp;gt;
-iex &amp;gt; x
-&amp;lt;&amp;lt;1&amp;gt;&amp;gt;
-iex &amp;gt; y
-&amp;lt;&amp;lt;255, 254&amp;gt;&amp;gt;
-iex &amp;gt; z
-&amp;lt;&amp;lt;2&amp;gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here’s an &lt;a href=&quot;http://www.zohaib.me/binary-pattern-matching-in-elixir/&quot;&gt;article&lt;/a&gt; about using binary pattern matching to parse a png file.&lt;/p&gt;
-
-&lt;h2 id=&quot;3-word-lists-for-atoms&quot;&gt;3. Word Lists For Atoms&lt;/h2&gt;
-
-&lt;p&gt;The &lt;code&gt;~w&lt;/code&gt; sigil allows you to create a list of words (i.e. strings).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;&amp;gt; ~w(one two three)
-[&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It sets itself apart though with some modifiers. The default behavior
-matches the &lt;code&gt;s&lt;/code&gt; modifier (for strings).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;&amp;gt; ~w(one two three)s
-[&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Where it gets more interesting is with the &lt;code&gt;a&lt;/code&gt; modifier allowing you to
-create a list of atoms.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;&amp;gt; ~w(one two three)a
-[:one, :two, :three]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note: there is a third modifier, &lt;code&gt;c&lt;/code&gt;, for char lists.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;&amp;gt; ~w(one two three)c
-['one', 'two', 'three']
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://elixir-lang.org/getting-started/sigils.html&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;4-find-and-open-port-with-elixir&quot;&gt;4. Find and Open Port with Elixir&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex(1)&amp;gt; {:ok, port} = :gen_tcp.listen(0, []) #listen on an available port
-{:ok, #Port&amp;lt;0.1465&amp;gt;}
-iex(2)&amp;gt; {:ok, port_number} = :inet.port(port) #get the port number of that port
-{:ok, 63470}
-iex(3)&amp;gt; port_number #here is the port number!
-63470
-iex(4)&amp;gt; Port.close port #go ahead and close that port if you want
-true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;5-virtual-fields-with-ecto-schema&quot;&gt;5. Virtual Fields With Ecto Schema&lt;/h2&gt;
-
-&lt;p&gt;If you’d like to include a particular key-value pair in an Ecto changeset,
-it needs to be included as a field in the schema. In the case of something
-akin to a password field, you want to be able to perform validations against
-it, but the password itself does not have a column in the database. In other
-words, you want to use the password in memory as part of the validation
-process but not save it to the database. To accomplish this, you need to
-specify that it is a &lt;code&gt;virtual&lt;/code&gt; field.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;schema &quot;users&quot; do
-  field :username, :string
-  field :password_digest, :string
-  field :password, :string, virtual: true
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With that schema, you can then validate the &lt;code&gt;:password&lt;/code&gt; and transform it
-into the corresponding &lt;code&gt;:password_digest&lt;/code&gt; field.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;def registration_changeset(model, params) do
-  model
-  |&amp;gt; changeset(params)                  # do other standard validations
-  |&amp;gt; cast(params, [:password])          # include :password in the changeset
-  |&amp;gt; validate_length(:password, min: 8) # validations
-  |&amp;gt; put_pass_hash()                    # transform into :password_digest
-end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Mix xref and Elixir compiler warnings&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://elixir-lang.org/blog/2016/06/21/elixir-v1-3-0-released/&quot;&gt;release&lt;/a&gt; of Elixir v1.3 added a mix task called &lt;code&gt;xref&lt;/code&gt; for performing cross reference checks of your code. &lt;code&gt;mix xref&lt;/code&gt; gives us some handy tools!&lt;/p&gt;
-
-&lt;h2 id=&quot;6-find-unreachable-code&quot;&gt;6. Find unreachable code:&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;❯ mix xref unreachable
-lib/exonk8s/foo.ex:16: SomeModule.non_existant/0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Find callers of modules and functions:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;❯ mix xref callers SomeModule
-lib/exonk8s/foo.ex:16: SomeModule.non_existant/0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Generate a dependency graph:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;&amp;gt; mix xref graph
-lib/exonk8s.ex
-├── lib/exonk8s/repo.ex
-└── lib/router.ex
-    └── lib/exonk8s/musician_controller.ex (compile)
-        ├── lib/exonk8s/foo.ex
-        ├── lib/exonk8s/musician.ex
-        └── lib/exonk8s/repo.ex
-...snipped for brevity
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://elixir-lang.org/blog/2018/01/17/elixir-v1-6-0-released/&quot;&gt;release&lt;/a&gt; of Elixir v1.6 added the module attribute &lt;code&gt;@deprecated&lt;/code&gt; to enable library authors to warn users of deprecated functions.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;❯ mix xref deprecated
-Compiling 2 files (.ex)
-Foo Loaded
-warning: ExOnK8s.Foo.lazy/0 is deprecated. You should be more eager.
-  lib/exonk8s/musician_controller.ex:10
-
-lib/exonk8s/musician_controller.ex:10: ExOnK8s.Foo.lazy/0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lastly I should note that &lt;code&gt;xref deprecated&lt;/code&gt; and &lt;code&gt;xref unreachable&lt;/code&gt; are included in the compiler warnings, so you you’ve likely seen these at work even if you didn’t know they were there.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hexdocs.pm/mix/Mix.Tasks.Xref.html#content&quot;&gt;Learn more&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;7-view-your-outdated-packages&quot;&gt;7. View your outdated packages&lt;/h2&gt;
-
-&lt;p&gt;To see which packages in a mix app need updating, you can run &lt;code&gt;mix hex.outdated&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;$ mix hex.outdated
-Dependency           Current  Latest  Update possible
-appsignal            1.3.2    1.3.3   Yes
-basic_auth           2.1.4    2.1.4
-cachex               2.1.0    2.1.0
-...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It prints out a handy table letting you quickly view the current and latest versions and if they can be updated. If &lt;code&gt;Update possible&lt;/code&gt; is &lt;code&gt;No&lt;/code&gt;, check your semantic version lockdown of that package in &lt;code&gt;mix.exs&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;mix hex.outdated&lt;/code&gt; accepts a few arguments:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;--all&lt;/code&gt;  which shows all outdated packages, including children of packages defined in mix.exs&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;--pre&lt;/code&gt; which include pre-releases when checking for newer versions (be adventurous!)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Visualize Your Elixir Dependencies&lt;/p&gt;
-
-&lt;h2 id=&quot;8-to-visualize-your-elixir-dependencies-try-this&quot;&gt;8. To visualize your Elixir dependencies, try this:&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ mix deps.tree
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This prints a tree showing your dependencies (and their dependencies):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;$ mix deps.tree
-tilex
-├── gettext ~&amp;gt; 0.13 (Hex package)
-├── hackney 1.8.0 (Hex package)
-│   ├── certifi 1.1.0 (Hex package)
-│   ├── idna 4.0.0 (Hex package)
-│   ├── metrics 1.0.1 (Hex package)
-│   ├── mimerl 1.0.2 (Hex package)
-│   └── ssl_verify_fun 1.1.1 (Hex package)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;9-phoenix-will-watch-your-js-for-you-just-watch&quot;&gt;9. Phoenix will watch your JS for you, just watch!&lt;/h2&gt;
-
-&lt;p&gt;With es6 javascript ecosystems most compilation/transpilation is done with watchers, programs that watch for changes in your code and then trigger compilation based on the changes you’ve made.&lt;/p&gt;
-
-&lt;p&gt;Phoenix has a method of integrating those watchers into the server itself.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;config :myapp, MyApp.Endpoint,
-  watchers: [yarn: [&quot;run&quot;, &quot;watch&quot;, cd: Path.expand(&quot;../assets&quot;, __DIR__)]]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above configuration goes in &lt;code&gt;config/dev.exs&lt;/code&gt; and runs the watch command whenever you start the server/endpoint.  The keyword option &lt;code&gt;cd&lt;/code&gt; is as of yet undocumented, but does what you think it does, changes the directory to the path you configure, which by convention in Phoenix 1.3 would be the assets directory.  &lt;code&gt;cd&lt;/code&gt; is the only keyword option.&lt;/p&gt;
-
-&lt;p&gt;The watchers start when you run your server.  Just make a change to your javascript and refresh the page!&lt;/p&gt;
-
-&lt;h2 id=&quot;10-setting-breaks-in-iex-for-debugging&quot;&gt;10. Setting breaks in IEx for debugging&lt;/h2&gt;
-
-&lt;p&gt;With the release of Elixir 1.5 comes some handy new IEx helpers, one of which is the ability to add break points throughout your code.&lt;/p&gt;
-
-&lt;p&gt;You can add a break to any function using &lt;code&gt;break!/2&lt;/code&gt; or &lt;code&gt;break!/4&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;defmodule MyModule do
-  def hello(name) do
-    &quot;hello &quot; &amp;lt;&amp;gt; name
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;iex(1)&amp;gt; break!(MyModule.hello/ 1)
-or
-iex(1)&amp;gt; break!(MyModule, :hello, 1)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Both &lt;code&gt;break/2&lt;/code&gt; and &lt;code&gt;break/4&lt;/code&gt; accept an additional argument for how many stops you want to make. Useful for recursive functions where you may want to stop multiple times.&lt;/p&gt;
-
-&lt;p&gt;To see what breaks you have use  &lt;code&gt;breaks/0&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;iex(1)&amp;gt; breaks()
- ID   Module.function/arity   Pending stops
----- ----------------------- ---------------
- 1    MyModule.hello/1        1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now when you call the function, you’ll be placed into the a debugger and you can inspect whats being passed in:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;iex(4)&amp;gt; MyModule.hello(&quot;world&quot;)
-Break reached: MyModule.hello/1 (lib/my_module.ex:2)
-    1: defmodule MyModule do
-    2:   def hello(name) do
-    3:     &quot;hello &quot; &amp;lt;&amp;gt; name
-    4:   end
-pry(1)&amp;gt; name
-&quot;world&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To exit the break and start a new shell process use &lt;code&gt;respawn/0&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;pry(2)&amp;gt; respawn
-Interactive Elixir (1.5.0) - press Ctrl+C to exit (type h() ENTER for help)
-&quot;hello world&quot;
-iex(1)&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;/imgs/20180427.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-        <link>/elixir_today_i_learned</link>
-        <guid isPermaLink="true">/elixir_today_i_learned</guid>
-        
-        
-        <category>elixir</category>
-        
-        <category>phoenix</category>
         
       </item>
     

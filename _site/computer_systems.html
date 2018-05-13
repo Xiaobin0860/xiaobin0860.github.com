@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>coincoin源码之token</title>
+		<title>理解计算机系统(1)</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>coincoin源码之token </h1>
+  <h1>理解计算机系统(1) </h1>
 </div>
   
 <article>
@@ -151,41 +151,46 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      May 
-     10th,
+     13th,
      
      2018
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="区块链是什么">区块链是什么</h2>
-
-<p>区块链是一个提供了拜占庭容错、并保证了最终一致性的分布式数据库；从数据结构上看，它是基于时间序列的链式数据块结构；从节点拓扑上看，它所有的节点互为冗余备份；从操作上看，它提供了基于密码学的公私钥管理体系来管理账户。</p>
+    <h2 id="编译四个阶段">编译四个阶段</h2>
 
 <ol>
-  <li>区块链是一个分布式网络；</li>
-  <li>区块链可以帮助多个节点达成共识去记录和 Token 相关的事情；</li>
-  <li>区块链可以帮助所有人无门槛地构建属于自己的小经济系统。</li>
+  <li>预处理阶段
+<code>#include</code>告诉预处理器将指定文件内容插入到本文件中</li>
+  <li>编译阶段
+生成汇编文件</li>
+  <li>汇编阶段
+汇编文件 =&gt; 可重定位目标程序(.o)</li>
+  <li>链接阶段
+.o =&gt; 可执行文件</li>
 </ol>
 
-<h2 id="区块链在技术上的-7-个特征">区块链在技术上的 7 个特征</h2>
+<h2 id="硬件组成">硬件组成</h2>
 
 <ol>
-  <li>区块链的存储基于分布式数据库；</li>
-  <li>数据库是区块链的数据载体，区块链是交易的业务逻辑载体；</li>
-  <li>区块链按时间序列化区块数据，整个网络有一个最终确定状态；</li>
-  <li>区块链只对添加有效，对其他操作无效；</li>
-  <li>交易基于非对称加密的公私钥验证；</li>
-  <li>区块链网络要求拜占庭将军容错；</li>
-  <li>共识算法能够“解决”双花问题。</li>
+  <li>总线
+传送定长字节块 =&gt; 字(word)</li>
+  <li>I/O设备</li>
+  <li>主存</li>
+  <li>CPU</li>
 </ol>
 
-<h2 id="coincoin之tokenblockchain-app">coincoin之token，blockchain app</h2>
+<h2 id="操作系统">操作系统</h2>
 
-<p><img src="/imgs/coincoin_token.jpg" alt="token" /></p>
+<ul>
+  <li>文件(字节序列)，是对I/O设备的抽象</li>
+  <li>虚拟内存是对主存和磁盘的抽象</li>
+  <li>进程是对CPU、主存和I/O设备的抽象</li>
+</ul>
 
 <hr />
 
-<p><img src="/imgs/20180510.jpg" alt="大宝" /></p>
+<p><img src="/imgs/20180513.jpg" alt="大宝" /></p>
 
     </div>
 
@@ -195,13 +200,8 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
       
        
-        <li><a href="/categories.html#elixir-ref">
-          elixir <span>(5)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#blockchain-ref">
-          blockchain <span>(1)</span>
+        <li><a href="/categories.html#system-ref">
+          system <span>(1)</span>
           
         </a></li>
       
@@ -216,7 +216,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=coincoin源码之token"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=理解计算机系统(1)"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -244,10 +244,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/elixir_today_i_learned" title="Elixir String Manipulation">&larr; Previous</a></li>
+      <li class="previous"><a href="/blockchain_coincoin" title="coincoin源码之token">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/computer_systems" title="理解计算机系统(1)">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
