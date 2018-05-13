@@ -5,9 +5,52 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 May 2018 22:50:08 +0800</pubDate>
-    <lastBuildDate>Sat, 05 May 2018 22:50:08 +0800</lastBuildDate>
+    <pubDate>Thu, 10 May 2018 10:00:27 +0800</pubDate>
+    <lastBuildDate>Thu, 10 May 2018 10:00:27 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>coincoin源码之token</title>
+        <description>&lt;h2 id=&quot;区块链是什么&quot;&gt;区块链是什么&lt;/h2&gt;
+
+&lt;p&gt;区块链是一个提供了拜占庭容错、并保证了最终一致性的分布式数据库；从数据结构上看，它是基于时间序列的链式数据块结构；从节点拓扑上看，它所有的节点互为冗余备份；从操作上看，它提供了基于密码学的公私钥管理体系来管理账户。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;区块链是一个分布式网络；&lt;/li&gt;
+  &lt;li&gt;区块链可以帮助多个节点达成共识去记录和 Token 相关的事情；&lt;/li&gt;
+  &lt;li&gt;区块链可以帮助所有人无门槛地构建属于自己的小经济系统。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;区块链在技术上的-7-个特征&quot;&gt;区块链在技术上的 7 个特征&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;区块链的存储基于分布式数据库；&lt;/li&gt;
+  &lt;li&gt;数据库是区块链的数据载体，区块链是交易的业务逻辑载体；&lt;/li&gt;
+  &lt;li&gt;区块链按时间序列化区块数据，整个网络有一个最终确定状态；&lt;/li&gt;
+  &lt;li&gt;区块链只对添加有效，对其他操作无效；&lt;/li&gt;
+  &lt;li&gt;交易基于非对称加密的公私钥验证；&lt;/li&gt;
+  &lt;li&gt;区块链网络要求拜占庭将军容错；&lt;/li&gt;
+  &lt;li&gt;共识算法能够“解决”双花问题。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;coincoin之tokenblockchain-app&quot;&gt;coincoin之token，blockchain app&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/coincoin_token.jpg&quot; alt=&quot;token&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/20180510.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 May 2018 00:00:00 +0800</pubDate>
+        <link>/blockchain_coincoin</link>
+        <guid isPermaLink="true">/blockchain_coincoin</guid>
+        
+        
+        <category>elixir</category>
+        
+        <category>blockchain</category>
+        
+      </item>
     
       <item>
         <title>Elixir String Manipulation</title>
@@ -869,71 +912,6 @@ iex(1)&amp;gt;
         <category>elixir</category>
         
         <category>phoenix</category>
-        
-      </item>
-    
-      <item>
-        <title>ife day2: HTML基本标签</title>
-        <description>&lt;p&gt;1、HTML是什么，HTML5是什么&lt;/p&gt;
-
-&lt;p&gt;答：HTML 指的是超文本标记语言 (Hyper Text Markup Language)。
-HTML5是最新的HTML标准，拥有更丰富的语义、图形以及多媒体元素等内容。&lt;/p&gt;
-
-&lt;p&gt;2、HTML元素标签、属性都是什么概念？&lt;/p&gt;
-
-&lt;p&gt;答：HTML不是编程语言，是标记语言，所以要使用标记标签来描述网页。
-属性是用来提供HTML标签更多的信息。&lt;/p&gt;
-
-&lt;p&gt;3、文档类型是什么概念，起什么作用？&lt;/p&gt;
-
-&lt;p&gt;答：在互联网上有许多不同的文档，只有了解文档的类型，浏览器才能正确的显示文档。提前声明文档类型可以帮助浏览器正确的显示网页。&lt;/p&gt;
-
-&lt;p&gt;4、meta标签都用来做什么的？&lt;/p&gt;
-
-&lt;p&gt;答：通常所说的META标签，是在HTML网页源代码中一个重要的html标签。META标签用来描述一个HTML网页文档的属性，例如作者、日期和时间、网页描述、关键词、页面刷新等。&lt;/p&gt;
-
-&lt;p&gt;5、Web语义化是什么，是为了解决什么问题&lt;/p&gt;
-
-&lt;p&gt;答：HTML的每个标签都有其特定含义(语义),Web语义化是指使用语义恰当的标签,使页面有良好的结构,页面元素有含义,能够让人和搜索引擎都容易理解。&lt;/p&gt;
-
-&lt;p&gt;6、链接是什么概念，对应什么标签？&lt;/p&gt;
-
-&lt;p&gt;答：HTML &amp;lt;\a&amp;gt; 元素 (或锚元素) 可以创建一个到其他网页、文件、同一页面内的位置、电子邮件地址或任何其他URL的超链接。&lt;/p&gt;
-
-&lt;p&gt;7、常用标签都有哪些，都适合用在什么场景&lt;/p&gt;
-
-&lt;p&gt;答：
-body:在网页上要展示出来的页面内容一定要放在body标签中
-p:如果想在网页上显示文章，这时就需要p标签了，把文章的段落放到p标签中。标签的默认样式，段前段后都会有空白，如果不喜欢这个空白，可以用css样式来删除或改变它。
-span:标签是没有语义的，它的作用就是为了设置单独的样式用的。
-br:在需要加回车换行的地方加入br，br标签作用相当于word文档中的回车。在 html 代码中输入回车、空格都是没有作用的。在html文本中想输入回车换行，就必须输入br。没有HTML内容的标签就是空标签，空标签只需要写一个开始标签，这样的标签有br、hr和img。
-div:在网页制作过程过中，可以把一些独立的逻辑部分划分出来，放在一个div标签中，这个div标签的作用就相当于一个容器。什么是逻辑部分？它是页面上相互关联的一组元素。如网页中的独立的栏目版块，就是一个典型的逻辑部分。用id属性来为div提供唯一的名称，必须唯一。
-img:插入图片,img src=”图片地址” alt=”下载失败时的替换文本” title = “提示文本” src：标识图像的位置；alt：指定图像的描述性文本，当图像不可见时（下载不成功时），可看到该属性指定的文本；title：提供在图像可见时对图像的描述(鼠标滑过图片时显示的文本)；图像可以是GIF，PNG，JPEG格式的图像文件。&lt;/p&gt;
-
-&lt;p&gt;8、表单标签都有哪些，对应着什么功能，都有哪些属性&lt;/p&gt;
-
-&lt;p&gt;答：
-form:可以把浏览者输入的数据传送到服务器端，这样服务器端程序就可以处理表单传过来的数据。form method=”传送方式” action=”服务器文件” . form标签是成对出现的，以form开始，以/form结束。action ：浏览者输入的数据被传送到的地方,比如一个PHP页面(save.php)。method ： 数据传送的方式（get/post）。所有表单控件（文本框、文本域、按钮、单选框、复选框等）都必须放在标签之间
-input:当用户要在表单中键入字母、数字等内容时，就会用到文本输入框。文本框也可以转化为密码输入框。input type=”text/password” name=”名称” value=”文本” / 当type=”text”时，输入框为文本输入框;当type=”password”时, 输入框为密码输入框。name：为文本框命名，以备后台程序ASP 、PHP使用。value：为文本输入框设置默认值。(一般起到提示作用)
-textarea:当用户需要在表单中输入大段文字时，需要用到文本输入域。textarea rows=”行数” cols=”列数” 文本 /textarea rows ：多行输入域的行数。cols ：多行输入域的列数。在textarea /textarea 标签之间可以输入默认值。
-radio/checkbox:使用单选框、复选框，让用户选择,input type=”radio/checkbox” value=”值” name=”名称” checked=”checked”/&amp;gt; 当 type=”radio” 时，控件为单选框,当 type=”checkbox” 时，控件为复选框,value：提交数据到服务器的值（后台程序PHP使用）,name：为控件命名，以备后台程序 ASP、PHP 使用,checked：当设置 checked=”checked” 时，该选项被默认选中,同一组的单选按钮，name 取值一定要一致，这样同一组的单选按钮才可以起到单选的作用。
-submit:使用提交按钮，提交数据,input type=”submit” value=”提交”&amp;gt; type：只有当type值设置为submit时，按钮才有提交作用,value：按钮上显示的文字&lt;/p&gt;
-
-&lt;p&gt;9、ol, ul, li, dl, dd, dt等这些标签都适合用在什么地方，举个例子&lt;/p&gt;
-
-&lt;p&gt;答：ol、ul、li适用无描述的列表。例如：新闻展示页面，一共N条新闻，点进去可浏览详情。
-dl、dd、dt适用有描述的列表 例如：简历页面，介绍自己的信息、年龄、住址等。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 26 Apr 2018 00:00:00 +0800</pubDate>
-        <link>/ife_day2</link>
-        <guid isPermaLink="true">/ife_day2</guid>
-        
-        
-        <category>front-end</category>
-        
-        <category>html</category>
-        
-        <category>ife</category>
         
       </item>
     
