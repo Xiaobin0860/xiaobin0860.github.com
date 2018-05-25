@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>Elixir(1)</title>
+		<title>Elixir Application Supervisor</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>Elixir(1) </h1>
+  <h1>Elixir Application Supervisor </h1>
 </div>
   
 <article>
@@ -150,48 +150,133 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     July 
-     3rd,
-       
-     2016
+     May 
+     25th,
+     
+     2018
       
    </span>
     <div class="article_body" id="article_body">
-    <p>##Interactive mode</p>
+    <h2 id="application-behaviour"><code>Application</code> behaviour</h2>
 
-<p>Open up <code>iex</code></p>
+<p>In Elixir (actually, in Erlang/OTP), an application is a component implementing some specific functionality, that can be started and stopped as a unit, and which can be re-used in other systems.</p>
 
-<pre><code>iex&gt; 40+2
-42
-iex&gt; "hello" &lt;&gt; " world"
-"hello world"
+<h3 id="start-and-shutdown">Start and shutdown</h3>
+
+<p>Starting an application is done via the “application module callback”, which is a module that defines the <code>start/2</code> function. The <code>start/2</code> function should then start a supervisor, which is often called as the top-level supervisor, since it sits at the root of a potentially long supervision tree. When the system is shutting down, all applications shut down their top-level supervisor, which terminates children in the opposite order they are started.</p>
+
+<h3 id="application-module-callback">Application module callback</h3>
+
+<p>The first step is to pass the module callback in the application definition in the mix.exs file:</p>
+
+<pre><code class="language-elixir">def application do
+  [mod: {MyApp, []}]
+end
 </code></pre>
 
-<p>##Running scripts</p>
+<p>Our application now requires the <code>MyApp</code> module to provide an application callback. This can be done by invoking <code>use Application</code> in that module and defining a <code>start/2</code> callback, for example:</p>
 
-<p>demo.exs</p>
+<pre><code class="language-elixir">defmodule MyApp do
+  use Application
 
-<pre><code>IO.puts "Hello world from Elixir."
+  def start(_type, _args) do
+    children = []
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
+end
 </code></pre>
 
-<p>run with <code>elixir</code></p>
+<p><code>start/2</code> typically returns <code>{:ok, pid}</code> or <code>{:ok, pid, state}</code> where <code>pid</code> identifies the supervision tree and <code>state</code> is the application state. <code>args</code> is the second element of the tuple given to the <code>:mod</code> option.</p>
 
-<pre><code>$ elixir demo.exs
-Hello world from Elixir.
+<p>When an application is shutting down, its <code>stop/1</code> callback is called after the supervision tree has been stopped by the runtime. This callback allows the application to do any final cleanup. The argument is the state returned by <code>start/2</code>, if it did, or <code>[]</code> otherwise. The return value of <code>stop/1</code> is ignored.</p>
+
+<h2 id="supervisor-behaviour"><code>Supervisor</code> behaviour</h2>
+
+<p>A supervisor is a process which supervises other processes, which we refer to as <code>child processes</code>. Supervisors are used to build a hierarchical process structure called a <code>supervision tree</code>. Supervision trees provide fault-tolerance and encapsulate how our applications start and shutdown.</p>
+
+<p>A supervisor may be started directly with a list of children via <code>start_link/2</code> or you may define a module-based supervisor that implements the required callbacks.</p>
+
+<h3 id="examples">Examples</h3>
+
+<p>As an example, we will define a GenServer that represents a stack. The stack is a small wrapper around lists. It allows us to put an element on the top of the stack, by prepending to the list, and to get the top of the stack by pattern matching.</p>
+
+<pre><code class="language-elixir">defmodule Stack do
+  use GenServer
+
+  def start_link(state) do
+    GenServer.start_link(__MODULE__, state, name: __MODULE__)
+  end
+
+  ## Callbacks
+
+  @impl true
+  def init(stack) do
+    {:ok, stack}
+  end
+
+  @impl true
+  def handle_call(:pop, _from, [h | t]) do
+    {:reply, h, t}
+  end
+
+  @impl true
+  def handle_cast({:push, h}, t) do
+    {:noreply, [h | t]}
+  end
+end
 </code></pre>
 
-<p>##Basic types</p>
+<p>We can now start a supervisor that will start and supervise our stack process. The first step is to define a list of <code>child specifications</code> that control how each child behaves. Each child specification is a map, as shown below:</p>
 
-<p>Elixir basic types: integers,floats,booleans,strings,list,atoms,tuples.</p>
+<pre><code class="language-elixir">children = [
+  # The Stack is a child started via Stack.start_link([:hello])
+  %{
+    id: Stack,
+    start: {Stack, :start_link, [[:hello]]}
+  }
+]
 
-<pre><code>iex&gt; is_atom(false)
-true
-iex&gt; true == :true
-true
-iex&gt; is_binary("hello")
-true
+# Now we start the supervisor with the children and a strategy
+{:ok, pid} = Supervisor.start_link(children, strategy: :one_for_one)
 </code></pre>
 
+<p>Notice that when starting the GenServer, we are registering it with name Stack, which allows us to call it directly and get what is on the stack:</p>
+
+<pre><code class="language-elixir">GenServer.call(Stack, :pop)
+#=&gt; :hello
+GenServer.cast(Stack, {:push, :world})
+#=&gt; :ok
+GenServer.call(Stack, :pop)
+#=&gt; :world
+</code></pre>
+
+<h3 id="child-specification">Child specification</h3>
+
+<p>The child specification describes how the supervisor start, shutdown and restart child processes.</p>
+
+<ul>
+  <li>
+    <p><code>:id</code> - a value used to identify the child specification internally by the supervisor; defaults to the given module. In case of conflicting <code>:id</code>, the supervisor will refuse to initialize and require explicit IDs. This key is required.</p>
+  </li>
+  <li>
+    <p><code>:start</code> - a tuple with the module-function-args to be invoked to start the child process. This key is required.</p>
+  </li>
+  <li>
+    <p><code>:restart</code> - an atom that defines when a terminated child process should be restarted (see the “Restart values” section below). This key is optional and defaults to <code>:permanent</code>.</p>
+  </li>
+  <li>
+    <p><code>:shutdown</code> - an atom that defines how a child process should be terminated (see the “Shutdown values” section below). This key is optional and defaults to 5000 if the type is <code>:worker</code> or <code>:infinity</code> if the type is <code>:supervisor</code>.</p>
+  </li>
+  <li>
+    <p><code>:type</code> - if the child process is a <code>:worker</code> or a <code>:supervisor</code>. This key is optional and defaults to <code>:worker</code>.</p>
+  </li>
+</ul>
+
+<p>There is a sixth key, called <code>:modules</code>, which is rarely changed and it is set automatically based on the value in <code>:start</code>.</p>
+
+<hr />
+
+<p><img src="/imgs/20180525.jpg" alt="大宝" /></p>
 
     </div>
 
@@ -203,11 +288,6 @@ true
        
         <li><a href="/categories.html#elixir-ref">
           elixir <span>(6)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#erlang-ref">
-          erlang <span>(10)</span>
           
         </a></li>
       
@@ -222,7 +302,7 @@ true
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Elixir(1)"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Elixir Application Supervisor"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -250,10 +330,10 @@ true
 
     <ul class="pager">
       
-      <li class="previous"><a href="/LYSE" title="Learn You Some Erlang(6)">&larr; Previous</a></li>
+      <li class="previous"><a href="/computer_systems" title="理解计算机系统(1)">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/ios-block-reverse" title="分析block函数签名">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

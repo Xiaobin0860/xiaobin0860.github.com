@@ -5,9 +5,141 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 14 May 2018 00:24:52 +0800</pubDate>
-    <lastBuildDate>Mon, 14 May 2018 00:24:52 +0800</lastBuildDate>
-    <generator>Jekyll v3.8.1</generator>
+    <pubDate>Fri, 25 May 2018 18:13:04 +0800</pubDate>
+    <lastBuildDate>Fri, 25 May 2018 18:13:04 +0800</lastBuildDate>
+    <generator>Jekyll v3.8.0</generator>
+    
+      <item>
+        <title>Elixir Application Supervisor</title>
+        <description>&lt;h2 id=&quot;application-behaviour&quot;&gt;&lt;code&gt;Application&lt;/code&gt; behaviour&lt;/h2&gt;
+
+&lt;p&gt;In Elixir (actually, in Erlang/OTP), an application is a component implementing some specific functionality, that can be started and stopped as a unit, and which can be re-used in other systems.&lt;/p&gt;
+
+&lt;h3 id=&quot;start-and-shutdown&quot;&gt;Start and shutdown&lt;/h3&gt;
+
+&lt;p&gt;Starting an application is done via the “application module callback”, which is a module that defines the &lt;code&gt;start/2&lt;/code&gt; function. The &lt;code&gt;start/2&lt;/code&gt; function should then start a supervisor, which is often called as the top-level supervisor, since it sits at the root of a potentially long supervision tree. When the system is shutting down, all applications shut down their top-level supervisor, which terminates children in the opposite order they are started.&lt;/p&gt;
+
+&lt;h3 id=&quot;application-module-callback&quot;&gt;Application module callback&lt;/h3&gt;
+
+&lt;p&gt;The first step is to pass the module callback in the application definition in the mix.exs file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;def application do
+  [mod: {MyApp, []}]
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our application now requires the &lt;code&gt;MyApp&lt;/code&gt; module to provide an application callback. This can be done by invoking &lt;code&gt;use Application&lt;/code&gt; in that module and defining a &lt;code&gt;start/2&lt;/code&gt; callback, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;defmodule MyApp do
+  use Application
+
+  def start(_type, _args) do
+    children = []
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;start/2&lt;/code&gt; typically returns &lt;code&gt;{:ok, pid}&lt;/code&gt; or &lt;code&gt;{:ok, pid, state}&lt;/code&gt; where &lt;code&gt;pid&lt;/code&gt; identifies the supervision tree and &lt;code&gt;state&lt;/code&gt; is the application state. &lt;code&gt;args&lt;/code&gt; is the second element of the tuple given to the &lt;code&gt;:mod&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;p&gt;When an application is shutting down, its &lt;code&gt;stop/1&lt;/code&gt; callback is called after the supervision tree has been stopped by the runtime. This callback allows the application to do any final cleanup. The argument is the state returned by &lt;code&gt;start/2&lt;/code&gt;, if it did, or &lt;code&gt;[]&lt;/code&gt; otherwise. The return value of &lt;code&gt;stop/1&lt;/code&gt; is ignored.&lt;/p&gt;
+
+&lt;h2 id=&quot;supervisor-behaviour&quot;&gt;&lt;code&gt;Supervisor&lt;/code&gt; behaviour&lt;/h2&gt;
+
+&lt;p&gt;A supervisor is a process which supervises other processes, which we refer to as &lt;code&gt;child processes&lt;/code&gt;. Supervisors are used to build a hierarchical process structure called a &lt;code&gt;supervision tree&lt;/code&gt;. Supervision trees provide fault-tolerance and encapsulate how our applications start and shutdown.&lt;/p&gt;
+
+&lt;p&gt;A supervisor may be started directly with a list of children via &lt;code&gt;start_link/2&lt;/code&gt; or you may define a module-based supervisor that implements the required callbacks.&lt;/p&gt;
+
+&lt;h3 id=&quot;examples&quot;&gt;Examples&lt;/h3&gt;
+
+&lt;p&gt;As an example, we will define a GenServer that represents a stack. The stack is a small wrapper around lists. It allows us to put an element on the top of the stack, by prepending to the list, and to get the top of the stack by pattern matching.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;defmodule Stack do
+  use GenServer
+
+  def start_link(state) do
+    GenServer.start_link(__MODULE__, state, name: __MODULE__)
+  end
+
+  ## Callbacks
+
+  @impl true
+  def init(stack) do
+    {:ok, stack}
+  end
+
+  @impl true
+  def handle_call(:pop, _from, [h | t]) do
+    {:reply, h, t}
+  end
+
+  @impl true
+  def handle_cast({:push, h}, t) do
+    {:noreply, [h | t]}
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now start a supervisor that will start and supervise our stack process. The first step is to define a list of &lt;code&gt;child specifications&lt;/code&gt; that control how each child behaves. Each child specification is a map, as shown below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;children = [
+  # The Stack is a child started via Stack.start_link([:hello])
+  %{
+    id: Stack,
+    start: {Stack, :start_link, [[:hello]]}
+  }
+]
+
+# Now we start the supervisor with the children and a strategy
+{:ok, pid} = Supervisor.start_link(children, strategy: :one_for_one)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice that when starting the GenServer, we are registering it with name Stack, which allows us to call it directly and get what is on the stack:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;GenServer.call(Stack, :pop)
+#=&amp;gt; :hello
+GenServer.cast(Stack, {:push, :world})
+#=&amp;gt; :ok
+GenServer.call(Stack, :pop)
+#=&amp;gt; :world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;child-specification&quot;&gt;Child specification&lt;/h3&gt;
+
+&lt;p&gt;The child specification describes how the supervisor start, shutdown and restart child processes.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;:id&lt;/code&gt; - a value used to identify the child specification internally by the supervisor; defaults to the given module. In case of conflicting &lt;code&gt;:id&lt;/code&gt;, the supervisor will refuse to initialize and require explicit IDs. This key is required.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;:start&lt;/code&gt; - a tuple with the module-function-args to be invoked to start the child process. This key is required.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;:restart&lt;/code&gt; - an atom that defines when a terminated child process should be restarted (see the “Restart values” section below). This key is optional and defaults to &lt;code&gt;:permanent&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;:shutdown&lt;/code&gt; - an atom that defines how a child process should be terminated (see the “Shutdown values” section below). This key is optional and defaults to 5000 if the type is &lt;code&gt;:worker&lt;/code&gt; or &lt;code&gt;:infinity&lt;/code&gt; if the type is &lt;code&gt;:supervisor&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;:type&lt;/code&gt; - if the child process is a &lt;code&gt;:worker&lt;/code&gt; or a &lt;code&gt;:supervisor&lt;/code&gt;. This key is optional and defaults to &lt;code&gt;:worker&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is a sixth key, called &lt;code&gt;:modules&lt;/code&gt;, which is rarely changed and it is set automatically based on the value in &lt;code&gt;:start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/imgs/20180525.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 25 May 2018 00:00:00 +0800</pubDate>
+        <link>/elixir_app_sup</link>
+        <guid isPermaLink="true">/elixir_app_sup</guid>
+        
+        
+        <category>elixir</category>
+        
+      </item>
     
       <item>
         <title>理解计算机系统(1)</title>
@@ -590,79 +722,6 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
         <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
         <link>/ife_day4.1</link>
         <guid isPermaLink="true">/ife_day4.1</guid>
-        
-        
-        <category>front-end</category>
-        
-        <category>html</category>
-        
-        <category>ife</category>
-        
-      </item>
-    
-      <item>
-        <title>ife day3: CSS基础</title>
-        <description>&lt;h2 id=&quot;css规则&quot;&gt;CSS规则&lt;/h2&gt;
-
-&lt;p&gt;由两部分组成： 选择器及一条或多条声明。
-&lt;img src=&quot;/imgs/ct_css_selector.gif&quot; alt=&quot;CSS语法&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;选择器&quot;&gt;选择器&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;元素/类型选择器
-    &lt;pre&gt;&lt;code&gt;  p {}
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;类选择器
-    &lt;pre&gt;&lt;code&gt;  class=&quot;first done&quot;
-  .first {}
-  .done {}
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;id选择器
-    &lt;pre&gt;&lt;code&gt;  id=&quot;rude&quot; id唯一
-  #rude {}
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;通用选择器
-    &lt;pre&gt;&lt;code&gt;  \* {}
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;属性选择器
-    &lt;pre&gt;&lt;code&gt;  [attr] {} 有attr的元素
-  [attr=val] {} attr值为val的元素
-  [attr~=val] {} attr值包含val
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;伪类
-    &lt;pre&gt;&lt;code&gt;  :active, :focus, :hover, ...
-  a:visited {}
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;组合器
-    &lt;pre&gt;&lt;code&gt;  A,B {} 或
-  A B {} B是A的后代结点
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;常用属性&quot;&gt;常用属性&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;color&lt;/li&gt;
-  &lt;li&gt;font-family&lt;/li&gt;
-  &lt;li&gt;font-style&lt;/li&gt;
-  &lt;li&gt;font-weight&lt;/li&gt;
-  &lt;li&gt;font-size&lt;/li&gt;
-  &lt;li&gt;text-align&lt;/li&gt;
-  &lt;li&gt;text-shadow&lt;/li&gt;
-  &lt;li&gt;line-height&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-        <link>/ife_day3</link>
-        <guid isPermaLink="true">/ife_day3</guid>
         
         
         <category>front-end</category>
