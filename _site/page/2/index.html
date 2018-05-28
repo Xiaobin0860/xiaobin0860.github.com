@@ -153,6 +153,32 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     2017
   </p>
+    <a href="/ios-reverse" style="font-family: ubuntu">hook程序崩溃</a>
+  </h2>
+
+  <div style="font-family: 'Raleway', sans-serif;font-size:large">
+    
+    
+    <p>##参数类型错误导致hook程序崩溃</p>
+
+
+    
+    
+    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
+  </div>
+</article>
+
+
+<article class="home">
+
+  <h2>
+ <p class="post-date">
+    
+    January
+    14th,
+    
+    2017
+  </p>
     <a href="/ios-block-reverse" style="font-family: ubuntu">分析block函数签名</a>
   </h2>
 
@@ -512,31 +538,40 @@ connect(Address, Port, Options, Timeout) -&gt;
     
     <h2 id="variables">Variables</h2>
 
+<p>Variables are surrounded by <code>\{\{</code> and <code>}}</code> like this:</p>
 
-    
-    
-    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
-  </div>
-</article>
+<pre><code>My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
+</code></pre>
 
+<h2 id="tags">Tags</h2>
 
-<article class="home">
+<p>Tags provide arbitrary logic in the rendering process.</p>
 
-  <h2>
- <p class="post-date">
-    
-    January
-    16th,
-    
-    2016
-  </p>
-    <a href="/html-auto-refresh" style="font-family: ubuntu">Auto-Refresh code in HTML</a>
-  </h2>
+<pre><code>\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
+</code></pre>
 
-  <div style="font-family: 'Raleway', sans-serif;font-size:large">
-    
-    
-    <h2 id="use-meta-tag">use meta tag</h2>
+<h2 id="filters">Filters</h2>
+
+<p>Filters transform the values of variables and tag arguments.</p>
+
+<pre><code>\{\{ site.time | date_to_xmlschema  }}
+</code></pre>
+
+<h2 id="comments">Comments</h2>
+
+<p>Comments look like this:</p>
+
+<pre><code>\{\# this won't be rendered #}
+</code></pre>
+
+<h2 id="build">Build</h2>
+
+<pre><code>jekyll build
+</code></pre>
+
+<hr />
+
+<p><img src="/imgs/20160117.jpg" alt="大宝" /></p>
 
 
     
