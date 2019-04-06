@@ -149,6 +149,67 @@ border: 3px solid #FFF; height:150px;width:150px" />
  <p class="post-date">
     
     January
+    17th,
+    
+    2016
+  </p>
+    <a href="/jekyll-templates" style="font-family: ubuntu">jekyll templates</a>
+  </h2>
+
+  <div style="font-family: 'Raleway', sans-serif;font-size:large">
+    
+    
+    <h2 id="variables">Variables</h2>
+
+<p>Variables are surrounded by <code>\{\{</code> and <code>}}</code> like this:</p>
+
+<pre><code>My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
+</code></pre>
+
+<h2 id="tags">Tags</h2>
+
+<p>Tags provide arbitrary logic in the rendering process.</p>
+
+<pre><code>\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
+</code></pre>
+
+<h2 id="filters">Filters</h2>
+
+<p>Filters transform the values of variables and tag arguments.</p>
+
+<pre><code>\{\{ site.time | date_to_xmlschema  }}
+</code></pre>
+
+<h2 id="comments">Comments</h2>
+
+<p>Comments look like this:</p>
+
+<pre><code>\{\# this won't be rendered #}
+</code></pre>
+
+<h2 id="build">Build</h2>
+
+<pre><code>jekyll build
+</code></pre>
+
+<hr />
+
+<p><img src="{{ site.url }}/imgs/20160117.jpg" alt="大宝" /></p>
+
+
+    
+    
+    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
+  </div>
+</article>
+
+
+<article class="home">
+
+  <h2>
+ <p class="post-date">
+    
+    January
     16th,
     
     2016
@@ -183,7 +244,7 @@ will instruct the browser to refresh every `5` seconds.
 
 <hr />
 
-<p><img src="/imgs/20160116.jpg" alt="大宝" /></p>
+<p><img src="{{ site.url }}/imgs/20160116.jpg" alt="大宝" /></p>
 
     
     
@@ -272,7 +333,7 @@ will instruct the browser to refresh every `5` seconds.
 
 <hr />
 
-<p><img src="/imgs/20160110.jpg" alt="小宝" /></p>
+<p><img src="{{ site.url }}/imgs/20160110.jpg" alt="小宝" /></p>
 
 
     
@@ -378,7 +439,7 @@ will instruct the browser to refresh every `5` seconds.
 
 <hr />
 
-<p><img src="/imgs/20160108.jpg" alt="亲" /></p>
+<p><img src="{{ site.url }}/imgs/20160108.jpg" alt="亲" /></p>
 
 
     
@@ -549,7 +610,7 @@ test() -&gt;
 
 <footer class="navbar navbar-default">
     <div class="container">
-      <p class="navbar-text pull-left">Some rights reserved &copy; 2018 xiaobin. </br>
+      <p class="navbar-text pull-left">Some rights reserved &copy; 2019 xiaobin. </br>
       Created using <a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> and <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a>. Theme : <a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> by talk2ankan.
  </p>
  </div>
