@@ -5,8 +5,8 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 06 Apr 2019 12:35:28 +0800</pubDate>
-    <lastBuildDate>Sat, 06 Apr 2019 12:35:28 +0800</lastBuildDate>
+    <pubDate>Sat, 06 Apr 2019 12:39:55 +0800</pubDate>
+    <lastBuildDate>Sat, 06 Apr 2019 12:39:55 +0800</lastBuildDate>
     <generator>Jekyll v3.8.0</generator>
     
       <item>
@@ -82,7 +82,7 @@ location ~ /(phx|phoenix) {
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20190406.png&quot; alt=&quot;宝宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/imgs/20190406.jpg&quot; alt=&quot;宝宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 06 Apr 2019 00:00:00 +0800</pubDate>
         <link>/phx_nginx</link>
