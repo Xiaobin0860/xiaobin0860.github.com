@@ -3,11 +3,147 @@
   <channel>
     <title>乌托邦</title>
     <description></description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 06 Apr 2019 12:39:55 +0800</pubDate>
-    <lastBuildDate>Sat, 06 Apr 2019 12:39:55 +0800</lastBuildDate>
-    <generator>Jekyll v3.8.0</generator>
+    <link>https://xiaobin0860.github.io/</link>
+    <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 21 Jul 2021 03:27:25 +0000</pubDate>
+    <lastBuildDate>Wed, 21 Jul 2021 03:27:25 +0000</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>VS Code的使用</title>
+        <description>&lt;h2 id=&quot;vs-code-快捷键&quot;&gt;VS Code 快捷键&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;光标移动&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;方向键&lt;/code&gt;: 在&lt;strong&gt;单个字符&lt;/strong&gt;之间移动光标&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;Option + 左右方向键&lt;/code&gt;(Windows 上是&lt;code&gt;Ctrl + 左右方向键&lt;/code&gt;): 在&lt;strong&gt;单词&lt;/strong&gt;之间移动光标&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;Cmd + 左右方向键&lt;/code&gt;(Windows 上是&lt;code&gt;Home/End&lt;/code&gt;): 把光标移动到行首或者行末&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;Option + Shift + \&lt;/code&gt;(Windows 上是&lt;code&gt;Ctrl + Shift + \&lt;/code&gt;): 光标在&lt;strong&gt;代码块&lt;/strong&gt;的始末跳转&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;Cmd + 上下方向键&lt;/code&gt;(Windows 上是&lt;code&gt;Ctrl + Home/End&lt;/code&gt;): 光标移动到文档的第一行或者最后一行&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;文本选择&lt;/p&gt;
+
+    &lt;p&gt;只需要多按一个 Shift 键，就可以在移动光标的同时选中其中的文本&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;删除操作&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;Mac 快捷键&lt;/th&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;Win 快捷键&lt;/th&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;作用&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Option + Backspace&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Ctrl + Backspace&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;删除光标之前的一个单词&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Option + Delete&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Ctrl + Delete&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;删除光标之后的一个单词&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Cmd + Backspace&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;删除光标之前的整行内容&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Cmd + Delete&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;删除光标之后的整行内容&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Cmd + Shift + K&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Ctrl + Shift + K&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;删除整行(剪切 Cmd+X 也可用于删除整行)&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;编辑操作&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;Mac 快捷键&lt;/th&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;Win 快捷键&lt;/th&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;作用&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Cmd + Enter&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Ctrl + Enter&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;在当前行下面新增一行，然后跳至该行&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Cmd + Shift + Enter&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Ctrl + Shift + Enter&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;在当前行上面新增一行，然后跳至该行&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Option + ↑&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Alt + ↑&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;将代码向上移动&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Option + ↓&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Alt + ↓&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;将代码向下移动&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Option + Shift + ↑&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Alt + Shift + ↑&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;将代码向上复制&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Option + Shift + ↓&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Alt + Shift + ↓&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;将代码向下复制&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;自定义快捷键&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;Cmd+K, Cmd+S&lt;/code&gt;(Windows 上是&lt;code&gt;Ctrl+K, Ctrl+S&lt;/code&gt;)打开”Keyboard Shortcuts”窗口修改&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Win &lt;code&gt;Alt + Backspace&lt;/code&gt; 删除光标之前的整行内容(Delete All Left)&lt;/li&gt;
+      &lt;li&gt;Win &lt;code&gt;Alt + Delete&lt;/code&gt; 删除光标之后的整行内容(Delete All Right)&lt;/li&gt;
+      &lt;li&gt;Win &lt;code&gt;Alt + Shift + ]&lt;/code&gt; 选择括号内所有内容(Select to Bracket)&lt;/li&gt;
+      &lt;li&gt;All &lt;code&gt;Ctrl + U&lt;/code&gt; Transform to Uppercase&lt;/li&gt;
+      &lt;li&gt;All &lt;code&gt;Ctrl + L&lt;/code&gt; Transform to Lowercase&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20191012.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 12 Oct 2019 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/VSCode</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/VSCode</guid>
+        
+        
+        <category>vscode</category>
+        
+        <category>editor</category>
+        
+      </item>
     
       <item>
         <title>用nginx代理phoenix应用</title>
@@ -82,11 +218,11 @@ location ~ /(phx|phoenix) {
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20190406.jpg&quot; alt=&quot;宝宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20190406.jpg&quot; alt=&quot;宝宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 06 Apr 2019 00:00:00 +0800</pubDate>
-        <link>/phx_nginx</link>
-        <guid isPermaLink="true">/phx_nginx</guid>
+        <pubDate>Sat, 06 Apr 2019 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/phx_nginx</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/phx_nginx</guid>
         
         
         <category>phoenix</category>
@@ -108,11 +244,11 @@ location ~ /(phx|phoenix) {
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180528.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180528.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 28 May 2018 00:00:00 +0800</pubDate>
-        <link>/vim_format</link>
-        <guid isPermaLink="true">/vim_format</guid>
+        <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/vim_format</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/vim_format</guid>
         
         
         <category>vim</category>
@@ -240,11 +376,11 @@ GenServer.call(Stack, :pop)
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180525.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180525.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 25 May 2018 00:00:00 +0800</pubDate>
-        <link>/elixir_app_sup</link>
-        <guid isPermaLink="true">/elixir_app_sup</guid>
+        <pubDate>Fri, 25 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/elixir_app_sup</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_app_sup</guid>
         
         
         <category>elixir</category>
@@ -286,11 +422,11 @@ GenServer.call(Stack, :pop)
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180513.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180513.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sun, 13 May 2018 00:00:00 +0800</pubDate>
-        <link>/computer_systems</link>
-        <guid isPermaLink="true">/computer_systems</guid>
+        <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/computer_systems</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/computer_systems</guid>
         
         
         <category>system</category>
@@ -323,15 +459,15 @@ GenServer.call(Stack, :pop)
 
 &lt;h2 id=&quot;coincoin之tokenblockchain-app&quot;&gt;coincoin之token，blockchain app&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/coincoin_token.jpg&quot; alt=&quot;token&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/coincoin_token.jpg&quot; alt=&quot;token&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180510.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180510.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 10 May 2018 00:00:00 +0800</pubDate>
-        <link>/blockchain_coincoin</link>
-        <guid isPermaLink="true">/blockchain_coincoin</guid>
+        <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/blockchain_coincoin</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/blockchain_coincoin</guid>
         
         
         <category>elixir</category>
@@ -356,11 +492,11 @@ GenServer.call(Stack, :pop)
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180505.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180505.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 05 May 2018 00:00:00 +0800</pubDate>
-        <link>/elixir_today_i_learned</link>
-        <guid isPermaLink="true">/elixir_today_i_learned</guid>
+        <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/elixir_today_i_learned3</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_today_i_learned3</guid>
         
         
         <category>elixir</category>
@@ -389,11 +525,11 @@ iex&amp;gt; with {:ok, role} when not is_binary(role) &amp;lt;- Map.fetch(users,
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180504.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180504.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 04 May 2018 00:00:00 +0800</pubDate>
-        <link>/elixir_today_i_learned</link>
-        <guid isPermaLink="true">/elixir_today_i_learned</guid>
+        <pubDate>Fri, 04 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/elixir_today_i_learned2</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_today_i_learned2</guid>
         
         
         <category>elixir</category>
@@ -434,7 +570,7 @@ ul {
 &lt;p&gt;简单点来说，就是&lt;code&gt;flex-direction&lt;/code&gt;属性让你决定Flex项目如何排列。它可以是行（水平）、列（垂直）或者行和列的反向。
 从技术上讲，水平和垂直在Flex世界中不是什么方向（概念）。它们常常被称为主轴（&lt;code&gt;Main-Axis&lt;/code&gt;）和侧轴（&lt;code&gt;Cross-Axis&lt;/code&gt;）。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/understanding-flexbox-11.jpg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/understanding-flexbox-11.jpg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;flex-wrap&quot;&gt;flex-wrap&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul { flex-wrap: wrap || nowrap || wrap-reverse; }
@@ -456,10 +592,10 @@ ul {
   &lt;li&gt;&lt;code&gt;center&lt;/code&gt;让所有Flex项目排在Main-Axis中间（居中对齐）&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;code&gt;space-between&lt;/code&gt;让除了第一个和最一个Flex项目的两者间间距相同（两端对齐）
-&lt;img src=&quot;/imgs/understanding-flexbox-24.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://xiaobin0860.github.io/imgs/understanding-flexbox-24.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;code&gt;space-around&lt;/code&gt;让每个Flex项目具有相同的空间
-&lt;img src=&quot;/imgs/understanding-flexbox-26.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;https://xiaobin0860.github.io/imgs/understanding-flexbox-26.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;align-items&quot;&gt;align-items&lt;/h3&gt;
@@ -513,11 +649,11 @@ Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且�
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180503.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180503.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 03 May 2018 00:00:00 +0800</pubDate>
-        <link>/ife_flex</link>
-        <guid isPermaLink="true">/ife_flex</guid>
+        <pubDate>Thu, 03 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/ife_flex</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/ife_flex</guid>
         
         
         <category>front-end</category>
@@ -550,11 +686,11 @@ Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且�
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;/imgs/20180502.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180502.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 02 May 2018 00:00:00 +0800</pubDate>
-        <link>/ife_layout</link>
-        <guid isPermaLink="true">/ife_layout</guid>
+        <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/ife_layout</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/ife_layout</guid>
         
         
         <category>front-end</category>
@@ -562,158 +698,6 @@ Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且�
         <category>html</category>
         
         <category>ife</category>
-        
-      </item>
-    
-      <item>
-        <title>Docker getting started</title>
-        <description>&lt;h2 id=&quot;一认识docker&quot;&gt;一、认识Docker&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/imgs/containers-vms-together.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;二install-docker-ce&quot;&gt;二、Install Docker-CE&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Linux以&lt;a href=&quot;https://docs.docker.com/install/linux/docker-ce/centos/&quot;&gt;Centos&lt;/a&gt;为例
-    &lt;pre&gt;&lt;code&gt; #Centos7
- yum install -y yum-utils device-mapper-persistent-data lvm2
- yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
- yum install docker-ce
-
- #Centos6
- rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
- yum install docker-io
-
- 镜像加速
- /etc/docker/daemon.json
- {
-     &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
- }
- service docker start
-
- 查看Docker版本
- docker -v
- docker run hello-world
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://store.docker.com/editions/community/docker-ce-desktop-mac&quot;&gt;macOS&lt;/a&gt;
-    &lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt; brew install docker
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://store.docker.com/editions/community/docker-ce-desktop-windows&quot;&gt;Windows&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;三容器运行第1个程序&quot;&gt;三、容器，运行第1个程序&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Dockerfile
-    &lt;pre&gt;&lt;code&gt;  # 将官方 Python 运行时用作父镜像
-  FROM python:2.7-slim
-
-  # 将工作目录设置为 /app
-  WORKDIR /app
-
-  # 将当前目录内容复制到位于 /app 中的容器中
-  ADD . /app
-
-  # 安装 requirements.txt 中指定的任何所需软件包
-  RUN pip install -r requirements.txt
-
-  # 使端口 80 可供此容器外的环境使用
-  EXPOSE 80
-
-  # 定义环境变量
-  ENV NAME World
-
-  # 在容器启动时运行 app.py
-  CMD [&quot;python&quot;, &quot;app.py&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;requirements.txt
-    &lt;pre&gt;&lt;code&gt;  Flask
-  Redis
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;app.py
-    &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;  from flask import Flask
-  from redis import Redis, RedisError
-  import os
-  import socket
-
-  # Connect to Redis
-  redis = Redis(host=&quot;redis&quot;, db=0, socket_connect_timeout=2, socket_timeout=2)
-
-  app = Flask(__name__)
-
-  @app.route(&quot;/&quot;)
-  def hello():
-      try:
-          visits = redis.incr(&quot;counter&quot;)
-      except RedisError:
-          visits = &quot;&amp;lt;i&amp;gt;cannot connect to Redis, counter disabled&amp;lt;/i&amp;gt;&quot;
-
-      html = &quot;&amp;lt;h3&amp;gt;Hello {name}!&amp;lt;/h3&amp;gt;&quot; \
-          &quot;&amp;lt;b&amp;gt;Hostname:&amp;lt;/b&amp;gt; {hostname}&amp;lt;br/&amp;gt;&quot; \
-          &quot;&amp;lt;b&amp;gt;Visits:&amp;lt;/b&amp;gt; {visits}&quot;
-      return html.format(name=os.getenv(&quot;NAME&quot;, &quot;world&quot;), hostname=socket.gethostname(), visits=visits)
-
-  if __name__ == &quot;__main__&quot;:
-      app.run(host='0.0.0.0', port=80)
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;构建运行
-    &lt;pre&gt;&lt;code&gt;  docker build -t hello_docker .
-  docker images
-REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-hello_docker            latest              940a583806b0        4 minutes ago       155.6 MB
-
-  docker run -p 888:80 hello_docker
-后台运行
-  docker run -d -p 888:80 hello_docker
-  docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                 NAMES
-73e81f97609c        hello_docker        &quot;python app.py&quot;     57 seconds ago      Up 56 seconds       0.0.0.0:888-&amp;gt;80/tcp   gloomy_tesla
-  docker stop 73e81f97609c
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;共享镜像
-    &lt;pre&gt;&lt;code&gt;  docker login
-  docker tag hello_docker raina7325/get-started:part1
-  docker push raina7325/get-started:part1
-  docker run -p 8888:80 raina7325/get-started:part1
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;常用命令
-    &lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;  docker build -t friendlyname .# 使用此目录的 Dockerfile 创建镜像
-  docker run -p 4000:80 friendlyname  # 运行端口 4000 到 90 的“友好名称”映射
-  docker run -d -p 4000:80 friendlyname         # 内容相同，但在分离模式下
-  docker ps                                 # 查看所有正在运行的容器的列表
-  docker stop &amp;lt;hash&amp;gt;                     # 平稳地停止指定的容器
-  docker ps -a           # 查看所有容器的列表，甚至包含未运行的容器
-  docker kill &amp;lt;hash&amp;gt;                   # 强制关闭指定的容器
-  docker rm &amp;lt;hash&amp;gt;              # 从此机器中删除指定的容器
-  docker rm $(docker ps -a -q)           # 从此机器中删除所有容器
-  docker images -a                               # 显示此机器上的所有镜像
-  docker rmi &amp;lt;imagename&amp;gt;            # 从此机器中删除指定的镜像
-  docker rmi $(docker images -q)             # 从此机器中删除所有镜像
-  docker login             # 使用您的 Docker 凭证登录此 CLI 会话
-  docker tag &amp;lt;image&amp;gt; username/repository:tag  # 标记 &amp;lt;image&amp;gt; 以上传到镜像库
-  docker push username/repository:tag            # 将已标记的镜像上传到镜像库
-  docker run username/repository:tag                   # 运行镜像库中的镜像
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;/imgs/20180428.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 28 Apr 2018 00:00:00 +0800</pubDate>
-        <link>/docker</link>
-        <guid isPermaLink="true">/docker</guid>
-        
-        
-        <category>docker</category>
         
       </item>
     

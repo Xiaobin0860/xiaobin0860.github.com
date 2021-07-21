@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>ife layout: 三栏网页宽度自适应布局方法</title>
+		<title>Learn You Some Erlang(3)</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>ife layout: 三栏网页宽度自适应布局方法 </h1>
+  <h1>Learn You Some Erlang(3) </h1>
 </div>
   
 <article>
@@ -150,34 +150,38 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     May 
-     2nd,
-       
-     2018
+     February 
+     16th,
+     
+     2016
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="绝对定位法">绝对定位法</h2>
+    <h2 id="lists">Lists</h2>
 
-<p>最直观，最容易理解：左右两栏采用绝对定位，分别固定于页面的左右两侧，中间的主体栏用左右<code>margin</code>值撑开距离。于是实现了三栏自适应布局。</p>
+<p>Lists can contain anything! <code>[Element1, Element2, ..., ElementN]</code></p>
 
-<h2 id="margin负值法">margin负值法</h2>
+<pre><code>1&gt; [1, 2, 3, {numbers,[4,5,6]}, 5.34, atom].
+[1,2,3,{numbers,[4,5,6]},5.34,atom]
 
-<p>中间的主体要使用双层标签。外层<code>div</code>宽度100%显示，并且浮动（本例左浮动，下面所述依次为基础），内层<code>div</code>为真正的主体内容，含有左右210像素的<code>margin</code>值。左栏与右栏都是采用<code>margin</code>负值定位的，左栏左浮动，<code>margin-left</code>为-100%，由于前面的<code>div</code>宽度100%与浏览器，所以这里的-100% <code>margin</code>值正好使左栏div定位到了页面的左侧；右侧栏也是左浮动，其<code>margin-left</code>也是负值，大小为其本身的宽度即200像素。
-注意几个<code>div</code>的顺序，无论是左浮动还是右浮动，先是主体部分<code>div</code>，然后是左右两栏。</p>
+2&gt; [97, 98, 99].
+"abc"
 
-<h2 id="自身浮动法">自身浮动法</h2>
+[New] ++ [OldList]
+</code></pre>
 
-<p>左栏左浮动，右栏右浮动，主体直接放后面，就实现了自适应。
-三个<code>div</code>标签的顺序的关键是要把主体div放在最后，左右两栏<code>div</code>顺序任意。</p>
+<p>BIFS</p>
 
-<h2 id="flex">Flex</h2>
+<pre><code>hd([1,2,3,4]).
+tl([1,2,3,4]).
+length(List).
+</code></pre>
 
-<p>两侧<code>flex: 0 0 auto;</code>，主体<code>flex: 1 1 auto;</code></p>
+<p>pattern matching:</p>
 
-<hr />
+<pre><code>[Head|Tail].
+</code></pre>
 
-<p><img src="https://xiaobin0860.github.io/imgs/20180502.png" alt="大宝" /></p>
 
     </div>
 
@@ -187,18 +191,8 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
       
        
-        <li><a href="/categories.html#front-end-ref">
-          front-end <span>(7)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#html-ref">
-          html <span>(8)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#ife-ref">
-          ife <span>(7)</span>
+        <li><a href="/categories.html#erlang-ref">
+          erlang <span>(10)</span>
           
         </a></li>
       
@@ -213,7 +207,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=ife layout: 三栏网页宽度自适应布局方法"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Learn You Some Erlang(3)"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -241,10 +235,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/docker" title="Docker getting started">&larr; Previous</a></li>
+      <li class="previous"><a href="/LYSE2" title="Learn You Some Erlang(2)">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/ife_flex" title="Flexible Box Layout">Next &rarr;</a></li>
+      <li class="next"><a href="/LYSE4" title="Learn You Some Erlang(4)">Next &rarr;</a></li>
       
     </ul>
 

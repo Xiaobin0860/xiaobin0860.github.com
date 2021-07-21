@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>ife layout: 三栏网页宽度自适应布局方法</title>
+		<title>VS Code的使用</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>ife layout: 三栏网页宽度自适应布局方法 </h1>
+  <h1>VS Code的使用 </h1>
 </div>
   
 <article>
@@ -150,34 +150,135 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     May 
-     2nd,
-       
-     2018
+     October 
+     12th,
+     
+     2019
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="绝对定位法">绝对定位法</h2>
+    <h2 id="vs-code-快捷键">VS Code 快捷键</h2>
 
-<p>最直观，最容易理解：左右两栏采用绝对定位，分别固定于页面的左右两侧，中间的主体栏用左右<code>margin</code>值撑开距离。于是实现了三栏自适应布局。</p>
+<ol>
+  <li>
+    <p>光标移动</p>
 
-<h2 id="margin负值法">margin负值法</h2>
+    <ul>
+      <li><code>方向键</code>: 在<strong>单个字符</strong>之间移动光标</li>
+      <li><code>Option + 左右方向键</code>(Windows 上是<code>Ctrl + 左右方向键</code>): 在<strong>单词</strong>之间移动光标</li>
+      <li><code>Cmd + 左右方向键</code>(Windows 上是<code>Home/End</code>): 把光标移动到行首或者行末</li>
+      <li><code>Option + Shift + \</code>(Windows 上是<code>Ctrl + Shift + \</code>): 光标在<strong>代码块</strong>的始末跳转</li>
+      <li><code>Cmd + 上下方向键</code>(Windows 上是<code>Ctrl + Home/End</code>): 光标移动到文档的第一行或者最后一行</li>
+    </ul>
+  </li>
+  <li>
+    <p>文本选择</p>
 
-<p>中间的主体要使用双层标签。外层<code>div</code>宽度100%显示，并且浮动（本例左浮动，下面所述依次为基础），内层<code>div</code>为真正的主体内容，含有左右210像素的<code>margin</code>值。左栏与右栏都是采用<code>margin</code>负值定位的，左栏左浮动，<code>margin-left</code>为-100%，由于前面的<code>div</code>宽度100%与浏览器，所以这里的-100% <code>margin</code>值正好使左栏div定位到了页面的左侧；右侧栏也是左浮动，其<code>margin-left</code>也是负值，大小为其本身的宽度即200像素。
-注意几个<code>div</code>的顺序，无论是左浮动还是右浮动，先是主体部分<code>div</code>，然后是左右两栏。</p>
+    <p>只需要多按一个 Shift 键，就可以在移动光标的同时选中其中的文本</p>
+  </li>
+  <li>
+    <p>删除操作</p>
 
-<h2 id="自身浮动法">自身浮动法</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Mac 快捷键</th>
+          <th style="text-align: left">Win 快捷键</th>
+          <th style="text-align: left">作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code>Option + Backspace</code></td>
+          <td style="text-align: left"><code>Ctrl + Backspace</code></td>
+          <td style="text-align: left">删除光标之前的一个单词</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Option + Delete</code></td>
+          <td style="text-align: left"><code>Ctrl + Delete</code></td>
+          <td style="text-align: left">删除光标之后的一个单词</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Cmd + Backspace</code></td>
+          <td style="text-align: left"> </td>
+          <td style="text-align: left">删除光标之前的整行内容</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Cmd + Delete</code></td>
+          <td style="text-align: left"> </td>
+          <td style="text-align: left">删除光标之后的整行内容</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Cmd + Shift + K</code></td>
+          <td style="text-align: left"><code>Ctrl + Shift + K</code></td>
+          <td style="text-align: left">删除整行(剪切 Cmd+X 也可用于删除整行)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>编辑操作</p>
 
-<p>左栏左浮动，右栏右浮动，主体直接放后面，就实现了自适应。
-三个<code>div</code>标签的顺序的关键是要把主体div放在最后，左右两栏<code>div</code>顺序任意。</p>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Mac 快捷键</th>
+          <th style="text-align: left">Win 快捷键</th>
+          <th style="text-align: left">作用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code>Cmd + Enter</code></td>
+          <td style="text-align: left"><code>Ctrl + Enter</code></td>
+          <td style="text-align: left">在当前行下面新增一行，然后跳至该行</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Cmd + Shift + Enter</code></td>
+          <td style="text-align: left"><code>Ctrl + Shift + Enter</code></td>
+          <td style="text-align: left">在当前行上面新增一行，然后跳至该行</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Option + ↑</code></td>
+          <td style="text-align: left"><code>Alt + ↑</code></td>
+          <td style="text-align: left">将代码向上移动</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Option + ↓</code></td>
+          <td style="text-align: left"><code>Alt + ↓</code></td>
+          <td style="text-align: left">将代码向下移动</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Option + Shift + ↑</code></td>
+          <td style="text-align: left"><code>Alt + Shift + ↑</code></td>
+          <td style="text-align: left">将代码向上复制</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>Option + Shift + ↓</code></td>
+          <td style="text-align: left"><code>Alt + Shift + ↓</code></td>
+          <td style="text-align: left">将代码向下复制</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>自定义快捷键</p>
 
-<h2 id="flex">Flex</h2>
+    <p><code>Cmd+K, Cmd+S</code>(Windows 上是<code>Ctrl+K, Ctrl+S</code>)打开”Keyboard Shortcuts”窗口修改</p>
 
-<p>两侧<code>flex: 0 0 auto;</code>，主体<code>flex: 1 1 auto;</code></p>
+    <ul>
+      <li>Win <code>Alt + Backspace</code> 删除光标之前的整行内容(Delete All Left)</li>
+      <li>Win <code>Alt + Delete</code> 删除光标之后的整行内容(Delete All Right)</li>
+      <li>Win <code>Alt + Shift + ]</code> 选择括号内所有内容(Select to Bracket)</li>
+      <li>All <code>Ctrl + U</code> Transform to Uppercase</li>
+      <li>All <code>Ctrl + L</code> Transform to Lowercase</li>
+    </ul>
+  </li>
+</ol>
 
 <hr />
 
-<p><img src="https://xiaobin0860.github.io/imgs/20180502.png" alt="大宝" /></p>
+<p><img src="https://xiaobin0860.github.io/imgs/20191012.png" alt="大宝" /></p>
 
     </div>
 
@@ -187,18 +288,13 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
       
        
-        <li><a href="/categories.html#front-end-ref">
-          front-end <span>(7)</span>
+        <li><a href="/categories.html#vscode-ref">
+          vscode <span>(1)</span>
           ,
         </a></li>
        
-        <li><a href="/categories.html#html-ref">
-          html <span>(8)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#ife-ref">
-          ife <span>(7)</span>
+        <li><a href="/categories.html#editor-ref">
+          editor <span>(1)</span>
           
         </a></li>
       
@@ -213,7 +309,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=ife layout: 三栏网页宽度自适应布局方法"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=VS Code的使用"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -241,10 +337,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/docker" title="Docker getting started">&larr; Previous</a></li>
+      <li class="previous"><a href="/phx_nginx" title="用nginx代理phoenix应用">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/ife_flex" title="Flexible Box Layout">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

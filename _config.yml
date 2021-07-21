@@ -12,25 +12,27 @@ paginate_path: "page/:num"
 exclude: [HelloCocosJs, README.md, otp_doc, bs]
 # source: .
 destination: _site
-keep_files: [about.md]
+keep_files: [about.md, ".git"]
 timezone: Asia/Shanghai
 encoding: utf-8
+baseurl: ""
+url: "https://xiaobin0860.github.io"
 
 # These paths are to the main pages Jekyll-Bootstrap ships with.
 # Some JB helpers refer to these paths; change them here if needed.
 #
-categories_path : categories.html
-tags_path : tags.html
+categories_path: categories.html
+tags_path: tags.html
 
-title : 乌托邦
+title: 乌托邦
 
 author:
   name: xiaobin
   role: xl
-  email: xiaobin0860@gmail.com
+  email: l_xb@foxmail.com
   github: xiaobin0860
-  twitter: 
-  facebook: 
-  googleplus: 
+  twitter:
+  facebook:
+  googleplus:
   bio: "Stay hungry, Stay foolish."
   uno-dbyll: https://xiaobin0860.github.io/imgs/head.jpg
