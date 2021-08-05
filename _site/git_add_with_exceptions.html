@@ -157,24 +157,33 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="http-代理">HTTP 代理</h2>
+    <p>Add a folder to git with exceptions</p>
 
-<pre><code class="language-shell">git config --global http.proxy 127.0.0.1:1080
-git config --global https.proxy 127.0.0.1:1080
+<p>Given this folder structure:</p>
+
+<pre><code>app
+├── bin
+│  └── parse-ansi-codes.rs
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+├── src
+│  ├── cursor.rs
+│  ├── lib.rs
+│  └── style.rs
+├── target
+│  └── debug
+└── test
 </code></pre>
 
-<h2 id="ssh-代理">SSH 代理</h2>
+<p>I can add the entire <code>app</code> directory to git, while ignoring the bin folder:</p>
 
-<p>SSH 代理需要在密钥目录<code>~/.ssh</code>(Windows 下是<code>C:\Users\{UserName}\.ssh</code>)新建一个<code>config</code>文件</p>
-
-<pre><code class="language-shell">$ cat ~/.ssh/config
-Host github.com
-    ProxyCommand connect -S 127.0.0.1:1080 %h %p
+<pre><code>$ git add . ':!bin'
 </code></pre>
 
 <hr />
 
-<p><img src="https://xiaobin0860.github.io/imgs/20210803.jpg" alt="大宝" /></p>
+<p><img src="https://xiaobin0860.github.io/imgs/20210805.jpg" alt="宝" /></p>
 
     </div>
 
@@ -228,10 +237,10 @@ Host github.com
 
     <ul class="pager">
       
-      <li class="previous"><a href="/VSCode" title="VS Code的使用">&larr; Previous</a></li>
+      <li class="previous"><a href="/git_proxy" title="Git Proxy">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/git_add_with_exceptions" title="Git Proxy">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

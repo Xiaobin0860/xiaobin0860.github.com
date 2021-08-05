@@ -5,9 +5,48 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Aug 2021 06:47:45 +0000</pubDate>
-    <lastBuildDate>Tue, 03 Aug 2021 06:47:45 +0000</lastBuildDate>
+    <pubDate>Thu, 05 Aug 2021 12:23:34 +0000</pubDate>
+    <lastBuildDate>Thu, 05 Aug 2021 12:23:34 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Git Proxy</title>
+        <description>&lt;p&gt;Add a folder to git with exceptions&lt;/p&gt;
+
+&lt;p&gt;Given this folder structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app
+├── bin
+│  └── parse-ansi-codes.rs
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+├── src
+│  ├── cursor.rs
+│  ├── lib.rs
+│  └── style.rs
+├── target
+│  └── debug
+└── test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I can add the entire &lt;code&gt;app&lt;/code&gt; directory to git, while ignoring the bin folder:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git add . ':!bin'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210805.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Aug 2021 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/git_add_with_exceptions</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/git_add_with_exceptions</guid>
+        
+        
+        <category>git</category>
+        
+      </item>
     
       <item>
         <title>Git Proxy</title>
@@ -563,134 +602,6 @@ iex&amp;gt; with {:ok, role} when not is_binary(role) &amp;lt;- Map.fetch(users,
         
         
         <category>elixir</category>
-        
-      </item>
-    
-      <item>
-        <title>Flexible Box Layout</title>
-        <description>&lt;h2 id=&quot;flex-layout-overview&quot;&gt;Flex Layout Overview&lt;/h2&gt;
-
-&lt;p&gt;Flex layout is designed for laying out more complex applications and webpages.The contents of a flex container:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;can be laid out in any flow direction (leftwards, rightwards, downwards, or even upwards!)&lt;/li&gt;
-  &lt;li&gt;can have their display order reversed or rearranged at the style layer (i.e., visual order can be independent of source and speech order)&lt;/li&gt;
-  &lt;li&gt;can be laid out linearly along a single (main) axis or wrapped into multiple lines along a secondary (cross) axis&lt;/li&gt;
-  &lt;li&gt;can “flex” their sizes to respond to the available space&lt;/li&gt;
-  &lt;li&gt;can be aligned with respect to their container or each other on the secondary (cross)&lt;/li&gt;
-  &lt;li&gt;can be dynamically collapsed or uncollapsed along the main axis while preserving the container’s cross size&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;开始使用flexlayout&quot;&gt;开始使用FlexLayout&lt;/h2&gt;
-
-&lt;p&gt;在父元素中显式的设置&lt;code&gt;display:flex&lt;/code&gt;或者&lt;code&gt;display:inline-flex&lt;/code&gt;就会自动变成Flex容器，而其子元素就变成了Flex项目。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Flex容器（&lt;code&gt;Flex Container&lt;/code&gt;）：父元素显式设置了&lt;code&gt;display:flex&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Flex项目（&lt;code&gt;Flex Items&lt;/code&gt;）：Flex容器内的子元素&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;flex容器属性&quot;&gt;Flex容器属性&lt;/h2&gt;
-
-&lt;h3 id=&quot;flex-direction&quot;&gt;flex-direction&lt;/h3&gt;
-&lt;p&gt;flex-direction属性控制Flex项目沿着主轴（&lt;code&gt;Main Axis&lt;/code&gt;）的排列方向。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;/* ul 是一个flex容器 */
-ul {
-    flex-direction: row || column || row-reverse || column-reverse;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;简单点来说，就是&lt;code&gt;flex-direction&lt;/code&gt;属性让你决定Flex项目如何排列。它可以是行（水平）、列（垂直）或者行和列的反向。
-从技术上讲，水平和垂直在Flex世界中不是什么方向（概念）。它们常常被称为主轴（&lt;code&gt;Main-Axis&lt;/code&gt;）和侧轴（&lt;code&gt;Cross-Axis&lt;/code&gt;）。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/understanding-flexbox-11.jpg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;flex-wrap&quot;&gt;flex-wrap&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul { flex-wrap: wrap || nowrap || wrap-reverse; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;flex-flow&quot;&gt;flex-flow&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;flex-flow&lt;/code&gt;是&lt;code&gt;flex-direction&lt;/code&gt;和&lt;code&gt;flex-wrap&lt;/code&gt;两个属性的速记属性。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul { flex-flow: row wrap; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;justify-content&quot;&gt;justify-content&lt;/h3&gt;
-&lt;p&gt;决定Flex项在&lt;code&gt;Main-Axis&lt;/code&gt;上的排列方式&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul { justify-content: flex-start || flex-end || center || space-between || space-around }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;默认&lt;code&gt;flex-start&lt;/code&gt;让所有Flex项目靠Main-Axis开始边缘（左对齐）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;flex-end&lt;/code&gt;让所有Flex项目靠Main-Axis结束边缘（右对齐）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;center&lt;/code&gt;让所有Flex项目排在Main-Axis中间（居中对齐）&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;space-between&lt;/code&gt;让除了第一个和最一个Flex项目的两者间间距相同（两端对齐）
-&lt;img src=&quot;https://xiaobin0860.github.io/imgs/understanding-flexbox-24.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;space-around&lt;/code&gt;让每个Flex项目具有相同的空间
-&lt;img src=&quot;https://xiaobin0860.github.io/imgs/understanding-flexbox-26.jpeg&quot; alt=&quot;flex-direction&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;align-items&quot;&gt;align-items&lt;/h3&gt;
-&lt;p&gt;决定Flex项在&lt;code&gt;Cross-Axis&lt;/code&gt;上的排列方式&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul { align-items: flex-start || flex-end || center || stretch || baseline }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;默认&lt;code&gt;stretch&lt;/code&gt;让所有的Flex项目高度和Flex容器高度一样&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;flex-start&lt;/code&gt;让所有Flex项目靠Cross-Axis开始边缘（顶部对齐）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;flex-end&lt;/code&gt;让所有Flex项目靠Cross-Axis结束边缘（底部对齐）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;center&lt;/code&gt;让Flex项目在Cross-Axis中间（居中对齐）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;baseline&lt;/code&gt;让所有Flex项目在Cross-Axis上沿着他们自己的基线对齐&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;align-content&quot;&gt;align-content&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;align-content&lt;/code&gt;属性用于多行的Flex容器。它也是用来控制Flex项目在Flex容器里的排列方式，排列效果和&lt;code&gt;align-items&lt;/code&gt;值一样，但没有baseline属性值。&lt;/p&gt;
-
-&lt;h2 id=&quot;flex项目属性&quot;&gt;Flex项目属性&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;order || flex-grow || flex-shrink || flex-basis
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;order&quot;&gt;order&lt;/h3&gt;
-&lt;p&gt;允许Flex项目在一个Flex容器中重新排序。&lt;code&gt;order&lt;/code&gt;属性的默认值是0。它可以接受一个正值，也可以接受一个负值。Flex项目会根据&lt;code&gt;order&lt;/code&gt;值重新排序。从底到高。&lt;/p&gt;
-
-&lt;h3 id=&quot;flex-grow-和-flex-shrink&quot;&gt;flex-grow 和 flex-shrink&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;flex-grow&lt;/code&gt;和&lt;code&gt;flex-shrink&lt;/code&gt;属性控制Flex项目在容器有多余的空间如何放大（扩展），在没有额外空间又如何缩小。
-他们可能接受0或者大于0的任何正数。
-默认情况下，&lt;code&gt;flex-grow&lt;/code&gt;属性值设置为0。表示Flex项目不会增长，填充Flex容器可用空间。
-&lt;code&gt;flex-shrink&lt;/code&gt;的值是1，也就是说空间缩小Flex项目也会缩小，以适应新的空间。&lt;/p&gt;
-
-&lt;h3 id=&quot;flex-basis&quot;&gt;flex-basis&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;flex-basis&lt;/code&gt;属性可以指定Flex项目的初始大小。也就是&lt;code&gt;flex-grow&lt;/code&gt;和&lt;code&gt;flex-shrink&lt;/code&gt;属性调整它的大小以适应Flex容器之前。
-默认的值是&lt;code&gt;auto&lt;/code&gt;。&lt;code&gt;flex-basis&lt;/code&gt;可以取任何用于&lt;code&gt;width&lt;/code&gt;属性的任何值。比如 &lt;code&gt;% || em || rem || px&lt;/code&gt;等。&lt;/p&gt;
-
-&lt;h3 id=&quot;flex速记&quot;&gt;flex速记&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;flex&lt;/code&gt;是&lt;code&gt;flex-grow&lt;/code&gt;、&lt;code&gt;flex-shrink&lt;/code&gt;和&lt;code&gt;flex-basis&lt;/code&gt;三个属性的速记（简写）&lt;/p&gt;
-
-&lt;h3 id=&quot;align-self&quot;&gt;align-self&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;auto || flex-start || flex-end || center || baseline || stretch
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;与Flex容器的&lt;code&gt;align-items&lt;/code&gt;属性类似，只不过只改变本Flex项目沿着侧轴的位置。&lt;/p&gt;
-
-&lt;h2 id=&quot;绝对和相对flex项目&quot;&gt;绝对和相对Flex项目&lt;/h2&gt;
-&lt;p&gt;绝对Flex项目的宽度只基于 flex 属性，而相对Flex项目的宽度基于内容大小。
-当Flex项目因为被设置为&lt;code&gt;flex-basis: auto&lt;/code&gt;，而导致宽度被自动计算时，是基于Flex项目内包含的内容的大小而计算。
-Flex项目的初始宽度是零&lt;code&gt;flex-basis: 0&lt;/code&gt;，并且它们会伸展以适应可用空间。当有两到多个Flex项目的&lt;code&gt;flex-basis&lt;/code&gt;取值为0时，它们会基于&lt;code&gt;flex-grow&lt;/code&gt;值共享可用空间。&lt;/p&gt;
-
-&lt;h2 id=&quot;auto-margin对齐&quot;&gt;Auto-margin对齐&lt;/h2&gt;
-&lt;p&gt;当心Flex项目上的&lt;code&gt;margin: auto&lt;/code&gt;对齐。值为&lt;code&gt;auto&lt;/code&gt;的方向（左、右或者二者都是）会占据所有剩余空间。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180503.png&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 03 May 2018 00:00:00 +0000</pubDate>
-        <link>https://xiaobin0860.github.io/ife_flex</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/ife_flex</guid>
-        
-        
-        <category>front-end</category>
-        
-        <category>html</category>
-        
-        <category>ife</category>
         
       </item>
     
