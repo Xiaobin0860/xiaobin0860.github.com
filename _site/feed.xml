@@ -5,9 +5,69 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 05 Aug 2021 12:23:34 +0000</pubDate>
-    <lastBuildDate>Thu, 05 Aug 2021 12:23:34 +0000</lastBuildDate>
+    <pubDate>Sat, 07 Aug 2021 16:12:31 +0000</pubDate>
+    <lastBuildDate>Sat, 07 Aug 2021 16:12:31 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>AI数学基础-线性代数(1)</title>
+        <description>&lt;h2 id=&quot;人工智能理解&quot;&gt;人工智能理解&lt;/h2&gt;
+
+&lt;p&gt;建立在以线性代数和概率论为骨架的基础数学上，通过简单的模型组合实现复杂的功能。&lt;/p&gt;
+
+&lt;h2 id=&quot;线性代数的核心意义&quot;&gt;线性代数的核心意义&lt;/h2&gt;
+
+&lt;p&gt;万事万物都可以被抽象成某些特征的组合，并在由预置规则定义的框架之下以静态和动态的方式加以观察。&lt;/p&gt;
+
+&lt;p&gt;用虚拟数字世界表示真实物理世界的工具。&lt;/p&gt;
+
+&lt;h2 id=&quot;线性代数基本概念&quot;&gt;线性代数基本概念&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;集合(set)：某些特定对象汇总成的集体&lt;/li&gt;
+  &lt;li&gt;标量(scalar)：单独数&lt;code&gt;a&lt;/code&gt;构成的元素，&lt;code&gt;a&lt;/code&gt;可以是&lt;code&gt;整数&lt;/code&gt;、&lt;code&gt;实数&lt;/code&gt;或&lt;code&gt;复数&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;向量(vector)：多个标量按一定顺序组成一个序列&lt;/p&gt;
+
+    &lt;p&gt;向量可以看作标量的扩展，原始的数被替代为一组数，从而带来了维度的增加，给定表示索引的下标才能唯一确定向量中的元素&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;矩阵(matrix)：交向量的所有标量都替换成同规格的向量&lt;/p&gt;
+
+    &lt;p&gt;相对于向量，矩阵同样代表了维度的增加，矩阵中的每个元素需要两个索引确定&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;张量(tensor)：将矩阵中的每个标量再替换为向量，得到的就是张量。张量就是高阶矩阵&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;描述向量的数学语言&quot;&gt;描述向量的数学语言&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;范数(norm)：对单个向量大小的度量，描述的是向量自身的性质，其作用是将向量映射为一个非负的数值。通用$L^p 范数定义如下：&lt;/p&gt;
+
+    &lt;p&gt;$∣\vec x∣_p​ = (\sum_i∣x_i​∣^p)^\frac{1}{p}$​&lt;/p&gt;
+
+    &lt;p&gt;对于一个给定的向量，$L^1$范数计算的是向量所有元素绝对值的和，$L^2$范数计算的是通常意义的向量长度，$L^\infty$范数计算的则是向量中最大元素的取值。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;内积(inner product)：计算的是两个向量的关系。两个同维向量内积的表达式为&lt;/p&gt;
+
+    &lt;p&gt;$&amp;lt;\vec x, \vec y&amp;gt; = \sum_ix_i*y_i$&lt;/p&gt;
+
+    &lt;p&gt;即对应元素乘积的求和。内积能表示两个向量的相对位置，即向量之间的夹角。一种特殊的情况是内积是 0，即$&amp;lt;\vec x, \vec y&amp;gt; = 0$，在二维空间上，这意味着两个向量夹角 90 度，即相互垂直。而在高维空间上，这咱关系被称为&lt;code&gt;正交(orthogonality)&lt;/code&gt;。如果两个向量正交，说明它们线性无关，相互独立，互不影响。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A31</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A31</guid>
+        
+        
+        <category>AI</category>
+        
+      </item>
     
       <item>
         <title>Git Proxy</title>
@@ -566,39 +626,6 @@ GenServer.call(Stack, :pop)
         <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/elixir_today_i_learned3</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_today_i_learned3</guid>
-        
-        
-        <category>elixir</category>
-        
-      </item>
-    
-      <item>
-        <title>Elixir - with</title>
-        <description>&lt;h2 id=&quot;macrowithargs&quot;&gt;&lt;a href=&quot;https://hexdocs.pm/elixir/Kernel.SpecialForms.html#with/1&quot;&gt;macrowith(args)&lt;/a&gt;&lt;/h2&gt;
-
-&lt;p&gt;Used to combine matching clauses.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;iex&amp;gt; opts = %{width: 10, height: 15}
-iex&amp;gt; with {:ok, width} &amp;lt;- Map.fetch(opts, :width),
-...&amp;gt;      {:ok, height} &amp;lt;- Map.fetch(opts, :height),
-...&amp;gt;      do: {:ok, width * height}
-{:ok, 150}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If all clauses match, the &lt;code&gt;do&lt;/code&gt; block is executed, returning its result. Otherwise the chain is aborted and the non-matched value is returned.&lt;/p&gt;
-
-&lt;p&gt;Guards can be used in patterns as well:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;iex&amp;gt; users = %{&quot;melany&quot; =&amp;gt; &quot;guest&quot;, &quot;bob&quot; =&amp;gt; :admin}
-iex&amp;gt; with {:ok, role} when not is_binary(role) &amp;lt;- Map.fetch(users, &quot;bob&quot;),
-...&amp;gt;      do: {:ok, to_string(role)}
-{:ok, &quot;admin&quot;}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180504.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 04 May 2018 00:00:00 +0000</pubDate>
-        <link>https://xiaobin0860.github.io/elixir_today_i_learned2</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_today_i_learned2</guid>
         
         
         <category>elixir</category>
