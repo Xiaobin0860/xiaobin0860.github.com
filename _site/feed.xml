@@ -5,9 +5,56 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Aug 2021 16:12:31 +0000</pubDate>
-    <lastBuildDate>Sat, 07 Aug 2021 16:12:31 +0000</lastBuildDate>
+    <pubDate>Mon, 09 Aug 2021 13:12:37 +0000</pubDate>
+    <lastBuildDate>Mon, 09 Aug 2021 13:12:37 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>AI数学基础-线性代数(2)</title>
+        <description>&lt;h2 id=&quot;线性空间&quot;&gt;线性空间&lt;/h2&gt;
+
+&lt;p&gt;一个集合，它的元素是具有相同维数的向量，并且定义了加法和数乘结构化运算，这样的集合就被称为&lt;code&gt;线性空间&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;内积空间&quot;&gt;内积空间&lt;/h2&gt;
+
+&lt;p&gt;定义了内积运算的线性空间被称为&lt;code&gt;内积空间&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;内积空间中，一组两两正交的向量构成这个空间的&lt;code&gt;正交基&lt;/code&gt;，若正交基中基向量的$L^2$范数都是单位长度 1，这组正交基就是&lt;code&gt;标准正交基&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;矩阵&quot;&gt;矩阵&lt;/h2&gt;
+
+&lt;p&gt;线性空间点的变化对应着向量的线性变换，而描述对象变化抑或向量变化的语言，正是矩阵&lt;/p&gt;
+
+&lt;p&gt;线性空间中变化的实现有两种方式：一是点本身的变化，二是参考系的变化。
+在第一种方式中，使某个点发生变化的方法是用代表变化的矩阵乘以代表对象的向量。而对坐标系施加变换的方法，就是让表示原始坐标系的矩阵与表示变换的矩阵相乘。&lt;/p&gt;
+
+&lt;p&gt;描述矩阵的一对重要参数是&lt;code&gt;特征值&lt;/code&gt;和&lt;code&gt;特征向量&lt;/code&gt;。对于给定的矩阵$A$，假设其特征值为$\lambda$，特征向量为$\vec x$，则它们的关系如下：&lt;/p&gt;
+
+&lt;p&gt;$A\vec x = \lambda\vec x$&lt;/p&gt;
+
+&lt;p&gt;矩阵代表了向量的变换，其效果通常是对原始向量同时施加方向变化和尺度变化。可对于有些特殊的向量，矩阵的作用只有尺度变化而没有方向变化，也就是只有伸缩的效果而没有旋转的效果。对于给定的矩阵来说，这类特殊的向量就是矩阵的特征向量，特征向量的尺度变化系数就是特征值。&lt;/p&gt;
+
+&lt;p&gt;求解给定矩阵的特征值和特征向量的过程叫做特征值分解，但能够进行特征值分解的矩阵必须是 n 维方阵。将特征值分解算法推广到所有矩阵之上，就是更加通用的奇异值分解。&lt;/p&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;线性代数的本质在于将具体事物抽象为数学对象，并描述其静态和动态的特性&lt;/li&gt;
+  &lt;li&gt;向量的实质是 n 维线性空间中静止的点&lt;/li&gt;
+  &lt;li&gt;线性变换描述向量或作为参考系的坐标的变化，可以用矩阵表示&lt;/li&gt;
+  &lt;li&gt;矩阵的特征值和特征向量描述了变化的速度和方向&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</guid>
+        
+        
+        <category>AI</category>
+        
+      </item>
     
       <item>
         <title>AI数学基础-线性代数(1)</title>
@@ -70,7 +117,7 @@
       </item>
     
       <item>
-        <title>Git Proxy</title>
+        <title>Git Add</title>
         <description>&lt;p&gt;Add a folder to git with exceptions&lt;/p&gt;
 
 &lt;p&gt;Given this folder structure:&lt;/p&gt;
@@ -602,33 +649,6 @@ GenServer.call(Stack, :pop)
         <category>elixir</category>
         
         <category>blockchain</category>
-        
-      </item>
-    
-      <item>
-        <title>Elixir String Manipulation</title>
-        <description>&lt;p&gt;To get the list of string that compose a longer string, use String.codepoints/1&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex(1)&amp;gt; String.codepoints(&quot;你好a&quot;)
-[&quot;你&quot;, &quot;好&quot;, &quot;a&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To get the list of codepoints that represent each letter in the string, use String.to_charlist/1&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;iex(2)&amp;gt; String.to_charlist(&quot;你好a&quot;)
-[20320, 22909, 97]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180505.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
-        <link>https://xiaobin0860.github.io/elixir_today_i_learned3</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_today_i_learned3</guid>
-        
-        
-        <category>elixir</category>
         
       </item>
     
