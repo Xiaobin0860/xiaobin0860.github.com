@@ -5,9 +5,45 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 09 Aug 2021 13:47:42 +0000</pubDate>
-    <lastBuildDate>Mon, 09 Aug 2021 13:47:42 +0000</lastBuildDate>
+    <pubDate>Sat, 14 Aug 2021 01:31:59 +0000</pubDate>
+    <lastBuildDate>Sat, 14 Aug 2021 01:31:59 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>AI数学基础-数理统计</title>
+        <description>&lt;p&gt;&lt;code&gt;数理统计&lt;/code&gt;根据实验或观察得到的数据来研究随机现象，并对研究对象的客观规律做出合理的估计和判断。&lt;/p&gt;
+
+&lt;p&gt;在数理统计中，可用的资源是有限的数据集合，这个有限的数据集合称为&lt;code&gt;样本&lt;/code&gt;。
+相应的，观察对象的所有取值被称为&lt;code&gt;总体&lt;/code&gt;。数理统计的任务就是
+根据样本推断总体的数字特征。&lt;/p&gt;
+
+&lt;p&gt;推断的工具是统计量，统计量是样本的函数，是个随机变量。两个最重要的统计量是&lt;code&gt;样本均值&lt;/code&gt;和&lt;code&gt;样本方差&lt;/code&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;样本均值：$\overline{X} = \frac{1}{n}\sum_{i=1}^nX_i$&lt;/li&gt;
+  &lt;li&gt;样本方差：$S^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\overline{X})^2$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;统计推断的基本问题分为两大类：&lt;code&gt;参数估计&lt;/code&gt;和&lt;code&gt;假设检验&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;参数估计通过随机抽取样本来估计部分分布的未知参数，包括点估计和区间估计&lt;/p&gt;
+
+&lt;p&gt;假设检验通过随机抽取样本来接受或拒绝关于总体的某个判断，常用于估计机器学习模型的泛化错误率&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210813.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</guid>
+        
+        
+        <category>AI</category>
+        
+        <category>数理统计</category>
+        
+      </item>
     
       <item>
         <title>AI数学基础-概率论</title>
@@ -95,6 +131,8 @@
 &lt;/ul&gt;
 
 &lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210809.jpg&quot; alt=&quot;M&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 09 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</link>
@@ -144,6 +182,8 @@
 &lt;/ul&gt;
 
 &lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210808.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</link>
@@ -660,52 +700,6 @@ GenServer.call(Stack, :pop)
         
         
         <category>elixir</category>
-        
-      </item>
-    
-      <item>
-        <title>理解计算机系统(1)</title>
-        <description>&lt;h2 id=&quot;编译四个阶段&quot;&gt;编译四个阶段&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;预处理阶段
-&lt;code&gt;#include&lt;/code&gt;告诉预处理器将指定文件内容插入到本文件中&lt;/li&gt;
-  &lt;li&gt;编译阶段
-生成汇编文件&lt;/li&gt;
-  &lt;li&gt;汇编阶段
-汇编文件 =&amp;gt; 可重定位目标程序(.o)&lt;/li&gt;
-  &lt;li&gt;链接阶段
-.o =&amp;gt; 可执行文件&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;硬件组成&quot;&gt;硬件组成&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;总线
-传送定长字节块 =&amp;gt; 字(word)&lt;/li&gt;
-  &lt;li&gt;I/O设备&lt;/li&gt;
-  &lt;li&gt;主存&lt;/li&gt;
-  &lt;li&gt;CPU&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;操作系统&quot;&gt;操作系统&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;文件(字节序列)，是对I/O设备的抽象&lt;/li&gt;
-  &lt;li&gt;虚拟内存是对主存和磁盘的抽象&lt;/li&gt;
-  &lt;li&gt;进程是对CPU、主存和I/O设备的抽象&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180513.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-        <link>https://xiaobin0860.github.io/computer_systems</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/computer_systems</guid>
-        
-        
-        <category>system</category>
         
       </item>
     

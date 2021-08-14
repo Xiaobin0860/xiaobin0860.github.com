@@ -2,7 +2,7 @@
 <html>
 	<head>
 
-		<title>AI数学基础-线性代数(2)</title>
+		<title>AI数学基础-数理统计</title>
 
 	
 
@@ -142,7 +142,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
 <div class="col-sm-8 col-sm-offset-4" id="container">
   
 <div class="page-header">
-  <h1>AI数学基础-线性代数(2) </h1>
+  <h1>AI数学基础-数理统计 </h1>
 </div>
   
 <article>
@@ -151,49 +151,34 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      August 
-     8th,
+     13th,
      
      2021
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="线性空间">线性空间</h2>
+    <p><code>数理统计</code>根据实验或观察得到的数据来研究随机现象，并对研究对象的客观规律做出合理的估计和判断。</p>
 
-<p>一个集合，它的元素是具有相同维数的向量，并且定义了加法和数乘结构化运算，这样的集合就被称为<code>线性空间</code></p>
+<p>在数理统计中，可用的资源是有限的数据集合，这个有限的数据集合称为<code>样本</code>。
+相应的，观察对象的所有取值被称为<code>总体</code>。数理统计的任务就是
+根据样本推断总体的数字特征。</p>
 
-<h2 id="内积空间">内积空间</h2>
-
-<p>定义了内积运算的线性空间被称为<code>内积空间</code></p>
-
-<p>内积空间中，一组两两正交的向量构成这个空间的<code>正交基</code>，若正交基中基向量的$L^2$范数都是单位长度 1，这组正交基就是<code>标准正交基</code></p>
-
-<h2 id="矩阵">矩阵</h2>
-
-<p>线性空间点的变化对应着向量的线性变换，而描述对象变化抑或向量变化的语言，正是矩阵</p>
-
-<p>线性空间中变化的实现有两种方式：一是点本身的变化，二是参考系的变化。
-在第一种方式中，使某个点发生变化的方法是用代表变化的矩阵乘以代表对象的向量。而对坐标系施加变换的方法，就是让表示原始坐标系的矩阵与表示变换的矩阵相乘。</p>
-
-<p>描述矩阵的一对重要参数是<code>特征值</code>和<code>特征向量</code>。对于给定的矩阵$A$，假设其特征值为$\lambda$，特征向量为$\vec x$，则它们的关系如下：</p>
-
-<p>$A\vec x = \lambda\vec x$</p>
-
-<p>矩阵代表了向量的变换，其效果通常是对原始向量同时施加方向变化和尺度变化。可对于有些特殊的向量，矩阵的作用只有尺度变化而没有方向变化，也就是只有伸缩的效果而没有旋转的效果。对于给定的矩阵来说，这类特殊的向量就是矩阵的特征向量，特征向量的尺度变化系数就是特征值。</p>
-
-<p>求解给定矩阵的特征值和特征向量的过程叫做特征值分解，但能够进行特征值分解的矩阵必须是 n 维方阵。将特征值分解算法推广到所有矩阵之上，就是更加通用的奇异值分解。</p>
-
-<h2 id="总结">总结</h2>
+<p>推断的工具是统计量，统计量是样本的函数，是个随机变量。两个最重要的统计量是<code>样本均值</code>和<code>样本方差</code>：</p>
 
 <ul>
-  <li>线性代数的本质在于将具体事物抽象为数学对象，并描述其静态和动态的特性</li>
-  <li>向量的实质是 n 维线性空间中静止的点</li>
-  <li>线性变换描述向量或作为参考系的坐标的变化，可以用矩阵表示</li>
-  <li>矩阵的特征值和特征向量描述了变化的速度和方向</li>
+  <li>样本均值：$\overline{X} = \frac{1}{n}\sum_{i=1}^nX_i$</li>
+  <li>样本方差：$S^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\overline{X})^2$</li>
 </ul>
+
+<p>统计推断的基本问题分为两大类：<code>参数估计</code>和<code>假设检验</code></p>
+
+<p>参数估计通过随机抽取样本来估计部分分布的未知参数，包括点估计和区间估计</p>
+
+<p>假设检验通过随机抽取样本来接受或拒绝关于总体的某个判断，常用于估计机器学习模型的泛化错误率</p>
 
 <hr />
 
-<p><img src="https://xiaobin0860.github.io/imgs/20210808.jpg" alt="宝" /></p>
+<p><img src="https://xiaobin0860.github.io/imgs/20210813.jpg" alt="大宝" /></p>
 
     </div>
 
@@ -205,6 +190,11 @@ border: 3px solid #FFF; height:150px;width:150px" />
        
         <li><a href="/categories.html#AI-ref">
           AI <span>(4)</span>
+          ,
+        </a></li>
+       
+        <li><a href="/categories.html#数理统计-ref">
+          数理统计 <span>(1)</span>
           
         </a></li>
       
@@ -219,7 +209,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=AI数学基础-线性代数(2)"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=AI数学基础-数理统计"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -247,10 +237,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/AI_%E7%BA%BF%E4%BB%A31" title="AI数学基础-线性代数(1)">&larr; Previous</a></li>
+      <li class="previous"><a href="/AI_%E6%A6%82%E7%8E%87%E8%AE%BA" title="AI数学基础-概率论">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/AI_%E6%A6%82%E7%8E%87%E8%AE%BA" title="AI数学基础-概率论">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
