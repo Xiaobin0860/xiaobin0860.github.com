@@ -5,9 +5,49 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 15 Aug 2021 04:01:29 +0000</pubDate>
-    <lastBuildDate>Sun, 15 Aug 2021 04:01:29 +0000</lastBuildDate>
+    <pubDate>Sun, 15 Aug 2021 10:00:49 +0000</pubDate>
+    <lastBuildDate>Sun, 15 Aug 2021 10:00:49 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>AI数学基础-最优化理论</title>
+        <description>&lt;p&gt;人工智能的目标是最优化：在复杂环境和多体交互中做出最优决策。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;最优化理论&lt;/code&gt;研究的问题是给定的&lt;code&gt;目标函数&lt;/code&gt;的最大值（最小值）是否存在，并找到令目标函数取到最大值（最小值）的数值。
+如果把给定的目标函数看成连绵的山脉，最优化的过程就是判断顶峰的位置并找到到达顶峰路径的过程。
+大多数最优化问题都可以通过使目标函数$f(x)$最小化解决，最大化问题则可以通过最小化$−f(x)$实现。
+在人工智能和深度学习的应用场景下，只要目标函数的取值足够小，就可以把这个值当作全局最小值使用，作为对性能和复杂度的折中。&lt;/p&gt;
+
+&lt;p&gt;根据约束条件的不同，最优化问题可以分为&lt;code&gt;无约束优化&lt;/code&gt;和&lt;code&gt;约束优化&lt;/code&gt;两类。无约束优化对自变量 x 的取值没有限制，约束优化则把 x 的取值限制在特定的集合内，也就是满足一定的约束条件。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;线性规划&lt;/code&gt;就是一类典型的约束优化，其解决的问题通常是在有限的成本约束下取得最大的收益。约束优化问题通常比无约束优化问题更加复杂，但通过拉格朗日乘子的引入可以将含有$n$个变量和$k$个约束条件的问题转化为含有$(n+k)$个变量的无约束优化问题。&lt;/p&gt;
+
+&lt;p&gt;求解无约束优化问题最常用的方法是&lt;code&gt;梯度下降法&lt;/code&gt;。直观地说，梯度下降法就是沿着目标函数值下降最快的方向寻找最小值，就像爬山时要沿着坡度最陡的路径寻找山顶一样。在数学上，梯度的方向是目标函数导数的反方向。&lt;/p&gt;
+
+&lt;p&gt;如果将二阶导数引入优化过程，得到的典型方法就是牛顿法。在牛顿法中，目标函数首先被泰勒展开，写成二阶近似的形式（相比之下，梯度下降法只保留了目标函数的一阶近似）。此时再对二阶近似后的目标函数求导，并令其导数等于 0，得到的向量表示的就是下降最快的方向。相比于梯度下降法，牛顿法的收敛速度更快。&lt;/p&gt;
+
+&lt;p&gt;不管是利用一阶导数的梯度下降法，还是利用二阶导数的牛顿法，其寻找最小值点的基本思想都是先确定方向，再确定步长，因而统称为&lt;code&gt;线性搜索方法&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;还有一类算法，其寻找最小值点的基本思路是先确定步长，以步长为参数划定一个区域，再在这个区域内寻找最快下降的方向。这类算法被称为&lt;code&gt;置信域方法&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;相对于传统的基于数学理论的最优化方法，启发式算法显得返璞归真。启发式算法的核心思想就是大自然中”优胜劣汰”的生存法则，并在算法的实现中添加了选择和突变等经验因素。&lt;/p&gt;
+
+&lt;p&gt;启发式算法的核心思想就是大自然中”优胜劣汰”的生存法则，并在算法的实现中添加了选择和突变等经验因素。事实上，搜索越多并不意味着智能越高，智能高的表现恰恰是能够善用启发式策略，不用经过大量搜索也能解决问题。启发式算法的实例包括模拟生物进化规律的遗传算法、模拟统计物理中固体结晶过程的模拟退火算法、模拟低等动物产生集群智能的蚁群算法等。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210814.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</guid>
+        
+        
+        <category>AI</category>
+        
+        <category>最优化理论</category>
+        
+      </item>
     
       <item>
         <title>AI数学基础-数理统计</title>
@@ -568,138 +608,6 @@ location ~ /(phx|phoenix) {
         
         
         <category>vim</category>
-        
-      </item>
-    
-      <item>
-        <title>Elixir Application Supervisor</title>
-        <description>&lt;h2 id=&quot;application-behaviour&quot;&gt;&lt;code&gt;Application&lt;/code&gt; behaviour&lt;/h2&gt;
-
-&lt;p&gt;In Elixir (actually, in Erlang/OTP), an application is a component implementing some specific functionality, that can be started and stopped as a unit, and which can be re-used in other systems.&lt;/p&gt;
-
-&lt;h3 id=&quot;start-and-shutdown&quot;&gt;Start and shutdown&lt;/h3&gt;
-
-&lt;p&gt;Starting an application is done via the “application module callback”, which is a module that defines the &lt;code&gt;start/2&lt;/code&gt; function. The &lt;code&gt;start/2&lt;/code&gt; function should then start a supervisor, which is often called as the top-level supervisor, since it sits at the root of a potentially long supervision tree. When the system is shutting down, all applications shut down their top-level supervisor, which terminates children in the opposite order they are started.&lt;/p&gt;
-
-&lt;h3 id=&quot;application-module-callback&quot;&gt;Application module callback&lt;/h3&gt;
-
-&lt;p&gt;The first step is to pass the module callback in the application definition in the mix.exs file:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;def application do
-  [mod: {MyApp, []}]
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Our application now requires the &lt;code&gt;MyApp&lt;/code&gt; module to provide an application callback. This can be done by invoking &lt;code&gt;use Application&lt;/code&gt; in that module and defining a &lt;code&gt;start/2&lt;/code&gt; callback, for example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;defmodule MyApp do
-  use Application
-
-  def start(_type, _args) do
-    children = []
-    Supervisor.start_link(children, strategy: :one_for_one)
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;start/2&lt;/code&gt; typically returns &lt;code&gt;{:ok, pid}&lt;/code&gt; or &lt;code&gt;{:ok, pid, state}&lt;/code&gt; where &lt;code&gt;pid&lt;/code&gt; identifies the supervision tree and &lt;code&gt;state&lt;/code&gt; is the application state. &lt;code&gt;args&lt;/code&gt; is the second element of the tuple given to the &lt;code&gt;:mod&lt;/code&gt; option.&lt;/p&gt;
-
-&lt;p&gt;When an application is shutting down, its &lt;code&gt;stop/1&lt;/code&gt; callback is called after the supervision tree has been stopped by the runtime. This callback allows the application to do any final cleanup. The argument is the state returned by &lt;code&gt;start/2&lt;/code&gt;, if it did, or &lt;code&gt;[]&lt;/code&gt; otherwise. The return value of &lt;code&gt;stop/1&lt;/code&gt; is ignored.&lt;/p&gt;
-
-&lt;h2 id=&quot;supervisor-behaviour&quot;&gt;&lt;code&gt;Supervisor&lt;/code&gt; behaviour&lt;/h2&gt;
-
-&lt;p&gt;A supervisor is a process which supervises other processes, which we refer to as &lt;code&gt;child processes&lt;/code&gt;. Supervisors are used to build a hierarchical process structure called a &lt;code&gt;supervision tree&lt;/code&gt;. Supervision trees provide fault-tolerance and encapsulate how our applications start and shutdown.&lt;/p&gt;
-
-&lt;p&gt;A supervisor may be started directly with a list of children via &lt;code&gt;start_link/2&lt;/code&gt; or you may define a module-based supervisor that implements the required callbacks.&lt;/p&gt;
-
-&lt;h3 id=&quot;examples&quot;&gt;Examples&lt;/h3&gt;
-
-&lt;p&gt;As an example, we will define a GenServer that represents a stack. The stack is a small wrapper around lists. It allows us to put an element on the top of the stack, by prepending to the list, and to get the top of the stack by pattern matching.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;defmodule Stack do
-  use GenServer
-
-  def start_link(state) do
-    GenServer.start_link(__MODULE__, state, name: __MODULE__)
-  end
-
-  ## Callbacks
-
-  @impl true
-  def init(stack) do
-    {:ok, stack}
-  end
-
-  @impl true
-  def handle_call(:pop, _from, [h | t]) do
-    {:reply, h, t}
-  end
-
-  @impl true
-  def handle_cast({:push, h}, t) do
-    {:noreply, [h | t]}
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We can now start a supervisor that will start and supervise our stack process. The first step is to define a list of &lt;code&gt;child specifications&lt;/code&gt; that control how each child behaves. Each child specification is a map, as shown below:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;children = [
-  # The Stack is a child started via Stack.start_link([:hello])
-  %{
-    id: Stack,
-    start: {Stack, :start_link, [[:hello]]}
-  }
-]
-
-# Now we start the supervisor with the children and a strategy
-{:ok, pid} = Supervisor.start_link(children, strategy: :one_for_one)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notice that when starting the GenServer, we are registering it with name Stack, which allows us to call it directly and get what is on the stack:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-elixir&quot;&gt;GenServer.call(Stack, :pop)
-#=&amp;gt; :hello
-GenServer.cast(Stack, {:push, :world})
-#=&amp;gt; :ok
-GenServer.call(Stack, :pop)
-#=&amp;gt; :world
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;child-specification&quot;&gt;Child specification&lt;/h3&gt;
-
-&lt;p&gt;The child specification describes how the supervisor start, shutdown and restart child processes.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;:id&lt;/code&gt; - a value used to identify the child specification internally by the supervisor; defaults to the given module. In case of conflicting &lt;code&gt;:id&lt;/code&gt;, the supervisor will refuse to initialize and require explicit IDs. This key is required.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;:start&lt;/code&gt; - a tuple with the module-function-args to be invoked to start the child process. This key is required.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;:restart&lt;/code&gt; - an atom that defines when a terminated child process should be restarted (see the “Restart values” section below). This key is optional and defaults to &lt;code&gt;:permanent&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;:shutdown&lt;/code&gt; - an atom that defines how a child process should be terminated (see the “Shutdown values” section below). This key is optional and defaults to 5000 if the type is &lt;code&gt;:worker&lt;/code&gt; or &lt;code&gt;:infinity&lt;/code&gt; if the type is &lt;code&gt;:supervisor&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;:type&lt;/code&gt; - if the child process is a &lt;code&gt;:worker&lt;/code&gt; or a &lt;code&gt;:supervisor&lt;/code&gt;. This key is optional and defaults to &lt;code&gt;:worker&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There is a sixth key, called &lt;code&gt;:modules&lt;/code&gt;, which is rarely changed and it is set automatically based on the value in &lt;code&gt;:start&lt;/code&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20180525.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 25 May 2018 00:00:00 +0000</pubDate>
-        <link>https://xiaobin0860.github.io/elixir_app_sup</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/elixir_app_sup</guid>
-        
-        
-        <category>elixir</category>
         
       </item>
     
