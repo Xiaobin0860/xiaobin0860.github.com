@@ -175,6 +175,110 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     <h2 id="bit-syntax">Bit Syntax!</h2>
 
+<p>Bit syntax encloses binary data between « and »,
+splits it in readable segments, and each segment is separated by a comma.</p>
+
+<pre><code>1&gt; Color = 16#F09A29.
+15768105
+2&gt; Pixel = &lt;&lt;Color:24&gt;&gt;.
+&lt;&lt;240,154,41&gt;&gt;
+3&gt; Pixels = &lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;.
+&lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;
+4&gt; &lt;&lt;Pix1,Pix2,Pix3,Pix4&gt;&gt; = Pixels.
+** exception error: no match of right hand side value 
+5&gt; &lt;&lt;Pix1:24, Pix2:24, Pix3:24, Pix4:24&gt;&gt; = Pixels.
+&lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;
+6&gt; &lt;&lt;R:8, G:8, B:8&gt;&gt; = &lt;&lt;Pix1:24&gt;&gt;.
+&lt;&lt;213,45,132&gt;&gt;
+7&gt; R.
+213
+</code></pre>
+
+<h2 id="modules">Modules</h2>
+
+<ul>
+  <li>What are modules</li>
+</ul>
+
+<p>Modules are a bunch of functions regrouped in a single file,
+under a single name. Additionally, all functions in Erlang must be defined in modules.
+Function defined in a module needs to be called with the form <code>Module:Function(Arguments).</code></p>
+
+<ul>
+  <li>
+    <p>Module Declaration</p>
+
+    <p>-module(Name).
+  -export([Function1/Arity, Function2/Arity, …, FunctionN/Arity]).
+  -Name(Attribute).   #-compile([debug_info, export_all]).</p>
+  </li>
+  <li>
+    <p>Compiling the code</p>
+
+    <p>$ erlc flags file.erl</p>
+  </li>
+</ul>
+
+<h2 id="syntax-in-functions">Syntax in functions</h2>
+
+<ul>
+  <li>
+    <p>Pattern Matching</p>
+
+    <p>greet(male, Name) -&gt;
+  io:format(“Hello, Mr. ~s!”, [Name]);
+  greet(female, Name) -&gt;
+  io:format(“Hello, Mrs. ~s!”, [Name]);
+  greet(_, Name) -&gt;
+  io:format(“Hello, ~s!”, [Name]).</p>
+  </li>
+  <li>
+    <p>Guards</p>
+
+    <p>right_age(X) when X &gt;= 16, X =&lt; 104 -&gt;
+  true;
+  right_age(_) -&gt;
+  false.</p>
+
+    <p>is_atom/1           is_binary/1 
+  is_bitstring/1      is_boolean/1        is_builtin/3 
+  is_float/1          is_function/1       is_function/2 
+  is_integer/1        is_list/1           is_number/1 
+  is_pid/1            is_port/1           is_record/2 
+  is_record/3         is_reference/1      is_tuple/1</p>
+  </li>
+  <li>
+    <p>If</p>
+
+    <p>%% note, this one would be better as a pattern match in function heads!
+  %% I’m doing it this way for the sake of the example.
+  help_me(Animal) -&gt;
+      Talk = if Animal == cat  -&gt; “meow”;
+          Animal == beef -&gt; “mooo”;
+          Animal == dog  -&gt; “bark”;
+          Animal == tree -&gt; “bark”;
+          true -&gt; “fgdadfgna”
+      end,
+      {Animal, “says “ ++ Talk ++ “!”}.</p>
+  </li>
+  <li>
+    <p>Case</p>
+
+    <p>beach(Temperature) -&gt;
+      case Temperature of
+          {celsius, N} when N &gt;= 20, N =&lt; 45 -&gt;
+              ‘favorable’;
+          {kelvin, N} when N &gt;= 293, N =&lt; 318 -&gt;
+              ‘scientifically favorable’;
+          {fahrenheit, N} when N &gt;= 68, N =&lt; 113 -&gt;
+              ‘favorable in the US’;
+          _ -&gt;
+              ‘avoid beach’
+      end.</p>
+  </li>
+</ul>
+
+
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -200,6 +304,30 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     <h2 id="lists">Lists</h2>
 
+<p>Lists can contain anything! <code>[Element1, Element2, ..., ElementN]</code></p>
+
+<pre><code>1&gt; [1, 2, 3, {numbers,[4,5,6]}, 5.34, atom].
+[1,2,3,{numbers,[4,5,6]},5.34,atom]
+
+2&gt; [97, 98, 99].
+"abc"
+
+[New] ++ [OldList]
+</code></pre>
+
+<p>BIFS</p>
+
+<pre><code>hd([1,2,3,4]).
+tl([1,2,3,4]).
+length(List).
+</code></pre>
+
+<p>pattern matching:</p>
+
+<pre><code>[Head|Tail].
+</code></pre>
+
+
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -224,6 +352,27 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     
     <p>不用找(1)了，记本上了^_^</p>
+
+<h2 id="tuples">Tuples</h2>
+
+<p>A tuple is a way to organize data. It’s a way to group togeter many terms 
+when you known how many there are.</p>
+
+<pre><code>{Element1, Element2, ..., ElementN}
+</code></pre>
+
+<p>通常使用<code>tagged tuple</code>, 例如:</p>
+
+<pre><code>Temperature = {celsius, 23.213}.
+Point = {point, {1, 2}}.
+</code></pre>
+
+<p>取值</p>
+
+<pre><code>{celsius, T} = Temperature.
+{point, {X, _}} = Point.
+</code></pre>
+
 
     
     
@@ -413,6 +562,42 @@ connect(Address, Port, Options, Timeout) -&gt;
     
     <h2 id="variables">Variables</h2>
 
+<p>Variables are surrounded by <code>\{\{</code> and <code>}}</code> like this:</p>
+
+<pre><code>My first name is \{\{ first_name  }}. My last name is \{\{ last_name  }}.
+</code></pre>
+
+<h2 id="tags">Tags</h2>
+
+<p>Tags provide arbitrary logic in the rendering process.</p>
+
+<pre><code>\{\% if user.is_authenticated %}Hello, \{\{ user.username  }}.\{\% endif %}
+</code></pre>
+
+<h2 id="filters">Filters</h2>
+
+<p>Filters transform the values of variables and tag arguments.</p>
+
+<pre><code>\{\{ site.time | date_to_xmlschema  }}
+</code></pre>
+
+<h2 id="comments">Comments</h2>
+
+<p>Comments look like this:</p>
+
+<pre><code>\{\# this won't be rendered #}
+</code></pre>
+
+<h2 id="build">Build</h2>
+
+<pre><code>jekyll build
+</code></pre>
+
+<hr />
+
+<p><img src="https://xiaobin0860.github.io/imgs/20160117.jpg" alt="大宝" /></p>
+
+
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -437,6 +622,30 @@ connect(Address, Port, Options, Timeout) -&gt;
     
     
     <h2 id="use-meta-tag">use meta tag</h2>
+
+<pre><code>&lt;meta http-equiv="refresh" content="5"&gt;
+Please within the `head` tag of your html document, this `meta` tag  
+will instruct the browser to refresh every `5` seconds.
+</code></pre>
+
+<p>AutoBuild系统中我想有个页面能够一直看到当前项目的状态，先用着这个方法去定时查询。
+以后看有没有办法实现通知。^_^</p>
+
+<h2 id="click-to-refresh">click to refresh</h2>
+
+<pre><code>&lt;body onclick="window.location.reload();"&gt;
+    ...
+&lt;/body&gt;
+</code></pre>
+
+<h2 id="scroll-to-bottom">scroll to bottom</h2>
+
+<pre><code>window.scrollTo(0, document.body.scrollHeight);
+</code></pre>
+
+<hr />
+
+<p><img src="https://xiaobin0860.github.io/imgs/20160116.jpg" alt="大宝" /></p>
 
     
     
@@ -521,6 +730,11 @@ connect(Address, Port, Options, Timeout) -&gt;
 求知若饥，虚心若愚。<br />
 2016.1.10</p>
 
+<hr />
+
+<p><img src="https://xiaobin0860.github.io/imgs/20160110.jpg" alt="小宝" /></p>
+
+
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -579,7 +793,7 @@ connect(Address, Port, Options, Timeout) -&gt;
 
     <footer class="navbar navbar-default">
       <div class="container">
-        <p class="navbar-text pull-left">Some rights reserved &copy; 2021 xiaobin. </br>
+        <p class="navbar-text pull-left">Some rights reserved &copy; 2022 xiaobin. </br>
           Created using <a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> and <a
             class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a>. Theme : <a class="navbar-button"
             href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> by talk2ankan.
