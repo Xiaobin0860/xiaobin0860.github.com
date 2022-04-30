@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>AI数学基础-信息论</title>
+  <title>lua入门</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>AI数学基础-信息论 </h1>
+  <h1>lua入门 </h1>
 </div>
   
 <article>
@@ -164,54 +164,126 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     August 
-     15th,
+     April 
+     30th,
      
-     2021
+     2022
       
    </span>
     <div class="article_body" id="article_body">
-    <p>信息论使用<code>信息熵</code>的概念，对单个信号源的信息量和通讯中传递的信息的数量与效率等问题做出了解释，
-并在世界的不确定性和信息的可测量性之间搭起一座桥梁。
-<code>熵</code>表示一个系统内在的混乱程度。</p>
+    <h2 id="首先介绍一下-lua-语言">首先介绍一下 lua 语言：</h2>
 
-<p>事件$A$发生的概率为$p(A)$，则这个事件的<code>自信息量</code>定义为
-\(h(A) = -\log_2p(A)\)</p>
+<p>它是一门动态类型语言。所谓动态就是运行时，静态就是编译时。<br />
+静态语言会在编译时做类型检查，通过报错帮助程序员发现问题。<br />
+动态语言没有编译环节，类型检查发生在运行时，查到错误就会抛出异常，<br />
+程序员需要自己保证类型正确，或者做好异常处理。<br />
+因为没有类型的约束，lua 语言非常灵活，可以编写一些复杂的逻辑。<br />
+除了动态语言共同的优势以外，lua 自身有两大优势：</p>
 
-<p>根据单个事件的自信息量可以计算出包含多个符号的信源的<code>信息熵</code>。信源的信息熵是信源可能发出的各个符号的自信息量在信源构成的概率空间上的统计平均值。
-如果一个信源$X$包含$n$个符号，每个符号$a_i$的取值为$p(a_i)$，则$X$的信源熵为
-\(H(X) = -\sum_{i=1}^np(a_i)\log_2p(a_i)\)
-信源熵描述了信源每发送一个符号所提供的平均信息量，是信源总体信息测度的均值。当信源中的每个符号的取值概率相等时，信源熵取到最大值$\log_2​n$，意味着信源的随机程度最高。</p>
+<ul>
+  <li>尾调用，使得程序员可以放心的写递归算法，不必担心 StackOverflow</li>
+  <li>标准化的 c api，使得 lua 语言可以与 c 语言互相调用，并且所写的 c 代码是跨平台的，不会因 lua 解释器不同而不同</li>
+</ul>
 
-<p>在概率论中有<code>条件概率</code>的概念，将条件概率扩展到信息论中，就可以得到<code>条件熵</code>。如果两个信源之间具有相关性，那么在已知其中一个信源$X$的条件下，另一个信源$Y$的信源熵就会减小。
-条件熵$H(Y∣X)$表示的是在已知随机变量$X$的条件下另一个随机变量$Y$的不确定性，也就是在给定$X$时，根据$Y$的条件概率计算出的熵再对$X$求解数学期望：</p>
+<h2 id="一类型系统分为值类型和引用对象类型">一、类型系统分为“值类型”和“引用（对象）类型”</h2>
 
-\[H(Y|X) = \sum_{i=1}^np(x_i)H(Y|X=x_i) \\
-= -\sum_{i=1}^np(x_i)\sum_{j=1}^mp(y_j|x_i)\log_2p(y_j|x_i) \\
-= -\sum_{i=1}^n\sum_{j=1}^mp(x_i,y_j)\log_2p(y_j|x_i)\]
+<p>值类型有 5 种：</p>
 
-<p>条件熵的意义在于先按照变量$X$的取值对变量$Y$进行了一次分类，对每个分出来的类别计算其单独的信息熵，再将每个类的信息熵按照$X$的分布计算其数学期望。分类带来不确定性下降。</p>
+<ol>
+  <li><code>nil</code>类型，值也是<code>nil</code></li>
+  <li><code>boolean</code>类型，值为<code>true</code>、<code>false</code></li>
+  <li><code>number</code>类型，默认由<code>double</code>类型实现。<code>m^n</code>，求<code>m</code>的<code>n</code>次方</li>
+  <li><code>string</code>类型，<code>'\0'</code>字符不会截断字符串，可以用<code>'</code>、<code>"</code>、<code>[[]]</code>来构造字符串。<br />
+<code>#str</code>，求 str 的字节数。<code>str=str..str</code>，连接两个字符串</li>
+  <li><code>lightuserdata</code>类型，对应 C 语言的指针值，是值不是对象</li>
+</ol>
 
-<p>定义了条件信息熵后，就可以进一步得到<code>互信息</code>的概念
-\(I(X;Y) = H(Y)-H(Y|X)\)
-互信息等于$Y$的信源熵减去已知$X$时$Y$的条件熵，即由$X$提供的关于$Y$的不确定性的消除，也可以看成是$X$给$Y$带来的<code>信息增益</code>。互信息这个名称在通信领域经常使用，信息增益则在机器学习领域中经常使用，两者的本质是一样的。</p>
+<p>引用类型有 4 种：</p>
 
-<p>在机器学习中，信息增益常常被用于分类特征的选择。对于给定的训练数据集$Y$，$H(Y)$表示在未给定任何特征时，对训练集进行分类的不确定性；$H(Y∣X)$则表示了使用特征$X$对训练集$Y$进行分类的不确定性。信息增益表示的就是特征$X$带来的对训练集$Y$分类不确定性的减少程度，也就是特征$X$对训练集$Y$的区分度。</p>
+<ol>
+  <li><code>function</code>类型，用<code>function(参数列) end</code>来构造这种对象</li>
+  <li><code>table</code>类型，用<code>{}</code>来构造这种对象</li>
+  <li><code>thread</code>类型，不是线程，是协程，不具有并发功能，只能用来分隔不相干的逻辑。<br />
+每个<code>thread</code>有自己的<code>call stack</code>。由程序员调度所要执行的<code>thread</code>，其它<code>thread</code>会暂停</li>
+  <li><code>userdata</code>类型，Cocos2dx 里的 c++类的实例，在 lua 里就是这种类型。<br />
+对比<code>lightuserdata</code>，一个是指针本身（32 位或 64 位无符号整数），一个是指针指向的对象</li>
+</ol>
 
-<p>显然，信息增益更大的特征具有更强的分类能力。但信息增益的值很大程度上依赖于数据集的信息熵$H(Y)$，因而并不具有绝对意义。为解决这一问题，研究者又提出了信息增益比的概念，并将其定义为$g(X,Y)=I(X;Y)/H(Y)$。</p>
+<h2 id="二function-相关知识">二、function 相关知识</h2>
 
-<p>在机器学习中经常使用的信息论概念叫作<code>Kullback-Leibler散度</code>，简称<code>KL散度</code>。KL散度是描述两个概率分布$P$和$Q$之间的差异的一种方法，其定义为\(D_{KL}​(P∣∣Q)=\sum_{i=1}^n​p(x_i​)\log_2\frac{p(x_i​)}{​q(x_i​)}\)​</p>
+<ol>
+  <li>传参和传返回值的时候，根据上一讲分的两大类，来传值或传引用。</li>
+  <li>除了传参和传返回值，<code>function</code>还会自动捕获外部的变量，术语叫<code>upvalue</code>，意思是上文中的变量。<br />
+<code>upvalue</code> 一律传引用，也就是说，在函数内修改<code>upvalue</code>，那么函数外也能看到这一改变。<br />
+利用自动捕获，<code>function</code>可以当做容器用，要访问容器中的变量，就必须调用该函数，以达到封装的目的<br />
+lua 中很少做封装，常做的只有继承、多态。</li>
+  <li>尾调用。函数内出现<code>return func(...)</code>，那么调用栈会先 pop 当前函数，然后把 func 压入调用栈。<br />
+这一机制的好处是，可以无限制使用递归算法，而不会发生 stack overflow。<br />
+坏处是，调用栈不完整，在栈上看到一个函数，难以推断是哪个函数调用了这一函数，<br />
+因为上一个函数可能已经出栈了。写或不写 return，可以控制是否使用尾调用</li>
+</ol>
 
-<p>信息论中还有一个重要定理，叫作“最大熵原理”。<code>最大熵原理</code>是确定随机变量统计特性时力图最符合客观情况的一种准则。对于一个未知的概率分布，最坏的情况就是它以等可能性取到每个可能的取值。这个时候的概率分布最均匀，也就是随机变量的随机程度最高，对它进行预测也就最困难。</p>
+<h2 id="三table-相关知识">三、table 相关知识</h2>
 
-<p>将最大熵原理应用到分类问题上就可以得到<code>最大熵模型</code>。在分类问题中，首先要确定若干特征函数作为分类的依据。为了保证特征函数的有效性，其在模型真实分布$P(X)$上的数学期望和在由训练数据集推导出的经验分布$\widetilde{P}(X)$上的数学期望应该相等，即对给定特征函数数学期望的估计应该是个无偏估计量。</p>
+<ol>
+  <li><code>table</code>是哈希表，无序容器。当键是从 1 开始的连续整数时，可以当做数组来用（有序）</li>
+  <li>与函数自动捕获引用不同，table 可以存值进去</li>
+  <li>增、改：<code>t[k]=v</code><br />
+删：<code>t[k]=nil</code><br />
+查：<code>if t[k]~= nil then ...</code><br />
+无序遍历：<code>for k,v in pairs(t) do ...</code><br />
+有序遍历：<code>for i,v in ipairs(t) do ...</code></li>
+  <li><code>setmetatable(t,mt)</code>用来给表 t 设置一个元表 mt，元表中存放的主要是元方法，<br />
+比如<code>__add</code>, <code>__sub</code>, <code>__mul</code>, <code>__div</code>, <code>__len</code>, <code>__concat</code>, <code>__gc</code>。<br />
+前面几个相当于“运算符重载”，使 t 可以支持算术运算。gc 是垃圾回收的意思，相当于 t 的析构函数。<br />
+可以看出，mt 控制着 t 的行为</li>
+</ol>
 
-<p>这样一来，每一个特征函数就对应了一个约束条件。分类的任务就是在这些约束条件下，确定一个最好的分类模型。由于除了这些约束条件之外，没有任何关于分类的先验知识，因而需要利用最大熵原理，求解出不确定性最大的条件分布，即让以下函数的取值最大化\(H(p)=−\sum_{x,y}\widetilde{p}​(x)p(y∣x)\log_2​p(y∣x)\)
-式中的$p(y∣x)$就是分类问题要确定的目标条件分布。计算上式的最大值实质上就是一个约束优化问题，由特征函数确定的约束条件可以通过<code>拉格朗日乘子</code>的引入去除其影响，转化为无约束优化问题。从数学上可以证明，这个模型的解是存在且唯一的。</p>
+<h2 id="四类与类的实例">四、类与类的实例</h2>
 
-<hr />
+<ol>
+  <li>二者都是<code>table</code>，前者装有成员函数（共性），后者装有成员变量（个性）</li>
+  <li>语法糖 <code>instance:method(argument)</code><br />
+原型为 <code>instance['method'](instance,argument)</code><br />
+先在实例表里查找成员函数，通常表里只有成员变量没有成员函数，这种情况下会触发<code>__index</code>元方法，<br />
+元方法去类表里继续查找，若依然找不到，再触发类表的<code>__index</code>元方法，一路找下去。<br />
+找到之后，就把实例表、实参传入这个函数，于是函数内就能访问到成员变量了</li>
+  <li>语法糖<code>instance.method(argument)</code><br />
+原型为<code>instance['method'](argument)</code><br />
+这相当于其它语言中调用<code>static</code>成员函数，没有成员变量传入函数。<br />
+或者<code>class:method(argument)</code>类表会被传入函数，<br />
+static 成员变量应该存放在类表里，并且可以被 static 成员函数访问</li>
+  <li>上面的 class 指代一个类表，在 cocos 中，class 是一个全局函数，由 cocos 引擎提供。<br />
+这个函数的作用是返回一个新的类表，并为其设置好：元方法<code>__index</code>（去父类中查找）、<br />
+static 成员函数<code>create</code>（创建实例对象）、static 成员函数<code>new</code>（创建实例对象）、<br />
+一般成员函数<code>ctor</code>（在实例对象中放入初始内容）。<br />
+实例对象可能是<code>table</code>或<code>userdata</code>，而类一定是<code>table</code>。<br />
+Cocos 引擎创建<code>userdata</code>的时候，总是同时创建一个<code>table</code>，并将二者绑在一起，<br />
+所以可以对<code>userdata</code>使用<code>table</code>语法</li>
+  <li>上面说的语法糖，不止用于函数调用，也用于函数定义：
+    <pre><code class="language-lua">local class = {}
+function class:ctor(sth)
+self.field = sth
+end
+--等价于：
+local class = {}
+function class.ctor(self, sth)
+self.field = sth
+end
+</code></pre>
+  </li>
+</ol>
 
-<p><img src="https://xiaobin0860.github.io/imgs/20210816.jpg" alt="宝贝" /></p>
+<h2 id="其它">其它</h2>
+
+<ol>
+  <li>lua 中任意类型的值都可以代表真假。只有<code>nil</code>和<code>false</code>两个值代表假，其它值都代表真。</li>
+  <li><code>and</code>和<code>or</code>运算符，不会把它们所连接的表达式转成<code>boolean</code>型，这一点跟其他语言不同。<br />
+<code>a and b or c</code>与其它语言的 <code>a ? b : c</code>功能类似，具体是：若 a 和 b 为真，则返回 b；<br />
+若 a 为假，则返回 c。若 a 为真，b 为假，则返回 c，这与<code>?:</code>不同。</li>
+  <li>参考手册 https://www.lua.org/manual/5.1/</li>
+  <li>https://learnxinyminutes.com/docs/zh-cn/lua-cn/</li>
+</ol>
 
     </div>
 
@@ -221,13 +293,8 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
       
        
-        <li><a href="/categories.html#AI-ref">
-          AI <span>(6)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#信息论-ref">
-          信息论 <span>(1)</span>
+        <li><a href="/categories.html#lua-ref">
+          lua <span>(1)</span>
           
         </a></li>
       
@@ -242,7 +309,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=AI数学基础-信息论"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=lua入门"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -270,10 +337,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA" title="AI数学基础-最优化理论">&larr; Previous</a></li>
+      <li class="previous"><a href="/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA" title="AI数学基础-信息论">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/lua" title="lua入门">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
