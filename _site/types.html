@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>分析block函数签名</title>
+  <title>类型系统</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>分析block函数签名 </h1>
+  <h1>类型系统 </h1>
 </div>
   
 <article>
@@ -165,40 +165,46 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      January 
-     14th,
+     6th,
      
-     2017
+     2023
       
    </span>
     <div class="article_body" id="article_body">
-    <p>##block结构</p>
+    <h2 id="primitive-type">primitive type</h2>
 
-<p><a href="http://clang.llvm.org/docs/Block-ABI-Apple.html">Block</a></p>
+<p>基本类型：interger, string, bool, array …</p>
 
-<pre><code>struct Block_literal_1 {
-    void *isa; // initialized to &amp;_NSConcreteStackBlock or &amp;_NSConcreteGlobalBlock
-    int flags;
-    int reserved;
-    void (*invoke)(void *, ...);
-    struct Block_descriptor_1 {
-    unsigned long int reserved;         // NULL
-        unsigned long int size;         // sizeof(struct Block_literal_1)
-        // optional helper functions
-        void (*copy_helper)(void *dst, void *src);     // IFF (1&lt;&lt;25)
-        void (*dispose_helper)(void *src);             // IFF (1&lt;&lt;25)
-        // required ABI.2010.3.16
-        const char *signature;                         // IFF (1&lt;&lt;30)
-    } *descriptor;
-    // imported variables
-};
+<h2 id="product-type">product type</h2>
+
+<p>struct 不同类型的乘积，取值是所有组合类型的笛卡尔积</p>
+
+<h2 id="sum-type">sum type</h2>
+
+<p>enum 不同类型的不相交集</p>
+
+<pre><code class="language-rust">enum Option&lt;T&gt; {
+   Some(T),
+   None
+}
+enum Result&lt;T, E&gt; {
+   Ok(T),
+   Err(E)
+}
 </code></pre>
 
-<p>##函数签名</p>
+<h2 id="generic-type">generic type</h2>
 
-<p><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html">Type Encodings</a></p>
+<p>泛型，提升抽象程度，可看成是作用于类型的的特殊函数，
+展开为新类型</p>
 
-<p><code>[NSMethodSignature signatureWithObjCTypes:"v32@?0@"NSString"4@"NSURLResponse"8@"NSData"12@"NSError"16@"NSError"20i24i28"]</code></p>
+<p><code>Option&lt;u8&gt;</code>展开是</p>
 
+<pre><code class="language-rust">enum Option {
+   Some(u8),
+   None
+}
+</code></pre>
 
     </div>
 
@@ -208,13 +214,8 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
       
        
-        <li><a href="/categories.html#ios-ref">
-          ios <span>(2)</span>
-          ,
-        </a></li>
-       
-        <li><a href="/categories.html#reverse-ref">
-          reverse <span>(2)</span>
+        <li><a href="/categories.html#rust-ref">
+          rust <span>(1)</span>
           
         </a></li>
       
@@ -229,7 +230,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=分析block函数签名"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=类型系统"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -257,10 +258,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/Elixir" title="Elixir(1)">&larr; Previous</a></li>
+      <li class="previous"><a href="/lua" title="lua入门">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/ios-reverse" title="hook程序崩溃">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
