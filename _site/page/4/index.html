@@ -177,6 +177,11 @@ border: 3px solid #FFF; height:150px;width:150px" />
 求知若饥，虚心若愚。<br />
 2016.1.10</p>
 
+<hr />
+
+<p><img src="http://localhost:4000/imgs/20160110.jpg" alt="小宝" /></p>
+
+
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -230,6 +235,58 @@ border: 3px solid #FFF; height:150px;width:150px" />
 一着急还容易出错。一直想实现一个自动打包、发布系统，减少发布打包人为的修改操作。从页面上直接可以看到
 项目各平台编译状况，测试也可以直接从上面下载安装。</p>
 
+<pre><code>架构、思路
+
+                版本管理系统
+                    |
+               代码库版本变化
+                    |
+                ---------
+                |       |
+                V       V
+            平台编译 平台编译
+             服务器   服务器
+                        |
+                        V
+                    编译、打包系统
+                        |
+                        |
+                        V
+                    管理服务器
+                        |
+                        V
+                       结果
+反向：从管理服务器发发布请求到指定平台，平台服务器再向代码仓库拉取最新代码，进行编译。
+</code></pre>
+
+<p>目前已经实现代码库变化，通知编译服务器编译、打包。该系统使用Erlang语言+各种脚本实现。遇到一些问题记录如下：</p>
+
+<ol>
+  <li>
+    <p>svn提交通知，repos/hooks/下面参照post-commit.tmpl写post-commit脚本</p>
+  </li>
+  <li>
+    <p>svn check update，<code>svn status -u -q</code>，返回结果前面带<code>*</code>的是要更新的</p>
+  </li>
+  <li>erlang集群端口管理
+    <ul>
+      <li>epmd端口默认4369，使用erl的<code>-epmd "epmd -port 5000 -daemon"</code>参数调整</li>
+      <li>结点通讯端口使用erl的<code>-kernel inet_dist_listen_min 4000 inet_dist_listen_max 4000</code>控制</li>
+      <li>集群cookie必须相同, erl的<code>-setcookie xxxxx</code>可以设置，当然也可能通过HOME下<code>.erlang.cookie</code>文件修改</li>
+    </ul>
+  </li>
+  <li>本想直接利用Erlang天然的分布式支持实现远程通知，可能因为svn服务器对外端口转发我做不了(没权限)，最终没有实现。
+我所在办公室做了外网端口转发的两台机器是可以实现的。理论上实现目前的功能，svn服务器只要远程调用通知我的编译服务器，
+而我的服务器是做过端口转发的，应该能调到才前。不知道什么原因始终调不到。以后有时间再看是什么原因吧。也考虑过使用thrift，
+但之前用过，感觉在erlang中使用不是很方便，再加上考虑到以后要有web界面展示，干脆使用ChicagoBoss实现算了。立马使用ChicagoBoss
+创建工程，post-commit直接请求url通知，加上之前积累的编译、打包脚本，很快上面流程里的功能实现了。现在测试来要包立马就有新包了^_^</li>
+</ol>
+
+<hr />
+
+<p><img src="http://localhost:4000/imgs/20160108.jpg" alt="亲" /></p>
+
+
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -254,6 +311,170 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     
     <p>Markdown is a superset of HTML, so any HTML file is a valid Markdown.</p>
+
+<!-- This means we can use HTML elements in Markdown. -->
+
+<h2 id="headings">Headings</h2>
+
+<h1 id="this-is-an-h1">This is an h1</h1>
+
+<h2 id="this-is-an-h2">This is an h2</h2>
+
+<h3 id="this-is-an-h3">This is an h3</h3>
+
+<h4 id="this-is-an-h4">This is an h4</h4>
+
+<h5 id="this-is-an-h5">This is an h5</h5>
+
+<h6 id="this-is-an-h6">This is an h6</h6>
+
+<h1 id="this-is-an-h1-1">This is an h1</h1>
+
+<h2 id="this-is-an-h2-1">This is an h2</h2>
+
+<h2 id="text-styles">Text styles</h2>
+
+<p><em>This text is in italics.</em><br />
+<em>And so is this text</em></p>
+
+<p><strong>This text is in bold</strong><br />
+<strong>And so is this text</strong></p>
+
+<p><strong><em>This text is in both.</em></strong></p>
+
+<p><del>This text is rendered with strikethrough.</del></p>
+
+<p><code>monospace</code></p>
+
+<h2 id="paragraphs">Paragraphs</h2>
+
+<p>This is a paragraph.</p>
+
+<p>Now I’m in paragraph 2.
+I’m still in paragraph 2 too!</p>
+
+<p>I’m in paragraph three!</p>
+
+<p>Leave 2 spaces at the end of a line to to a<br />
+line break</p>
+
+<blockquote>
+  <p>This is a block quote. You can</p>
+</blockquote>
+
+<blockquote>
+  <p>manually wrap your lines and put a <code>&gt;</code> before every line.
+You can also use more than one level</p>
+
+  <blockquote>
+    <p>of indentation.
+How neat is that?</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="lists">Lists</h2>
+
+<p>Unordered lists</p>
+
+<ul>
+  <li>Item1</li>
+  <li>Item2</li>
+  <li>Item3</li>
+</ul>
+
+<p>or</p>
+
+<ul>
+  <li>Item1</li>
+  <li>Item2</li>
+  <li>Item3</li>
+</ul>
+
+<p>or</p>
+
+<ul>
+  <li>Item1</li>
+  <li>Item2</li>
+  <li>Item3</li>
+</ul>
+
+<p>Ordered lists</p>
+
+<ol>
+  <li>Item1
+    <ul>
+      <li>Sub1</li>
+      <li>Sub2</li>
+      <li>Sub3</li>
+    </ul>
+  </li>
+  <li>Item2</li>
+  <li>Item3</li>
+</ol>
+
+<h2 id="code-blocks">Code blocks</h2>
+
+<p>You can indicate a code block by indenting a line with four spaces or a tab.</p>
+
+<pre><code>-module(test).
+-export([test/0]).
+
+test() -&gt;
+    io:format("Hello World!~n").
+</code></pre>
+
+<p>json code block, use <strong>```</strong></p>
+
+<pre><code class="language-json">{
+  "data": {
+    "uid": 4097
+  }
+}
+</code></pre>
+
+<h2 id="tables">tables</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Mac 快捷键</th>
+      <th style="text-align: left">Win 快捷键</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Cmd + ←</strong></td>
+      <td style="text-align: left"><strong>Fn + ←</strong></td>
+      <td style="text-align: left">将光标定位到当前行的最左侧</td>
+      <td style="text-align: left">很常用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Cmd + →</strong></td>
+      <td style="text-align: left"><strong>Fn + →</strong></td>
+      <td style="text-align: left">将光标定位到当前行的最右侧</td>
+      <td style="text-align: left">很常用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Cmd + ↑</td>
+      <td style="text-align: left">Ctrl + Home</td>
+      <td style="text-align: left">将光标定位到文章的第一行</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Cmd + ↓</td>
+      <td style="text-align: left">Ctrl + End</td>
+      <td style="text-align: left">将光标定位到文章的最后一行</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="links">Links</h2>
+
+<p><a href="http://xiaobin0860.github.io">xl000</a><br />
+<a href="mailto:l_xb@foxmail.com">l_xb@foxmail.com</a></p>
 
     
     
