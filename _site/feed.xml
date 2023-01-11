@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Jan 2023 22:58:23 +0800</pubDate>
-    <lastBuildDate>Wed, 11 Jan 2023 22:58:23 +0800</lastBuildDate>
+    <pubDate>Wed, 11 Jan 2023 23:17:50 +0800</pubDate>
+    <lastBuildDate>Wed, 11 Jan 2023 23:17:50 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
     
       <item>
@@ -77,6 +77,57 @@
         <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
         <link>https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</guid>
+        
+        
+        <category>算法</category>
+        
+      </item>
+    
+      <item>
+        <title>数组</title>
+        <description>&lt;h2 id=&quot;概念&quot;&gt;概念&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一种线性表数据结构&lt;/li&gt;
+  &lt;li&gt;用一组连续内存，存储相同类型的数据&lt;/li&gt;
+  &lt;li&gt;支持随机访问，但插入删除低效&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;操作&quot;&gt;操作&lt;/h2&gt;
+
+&lt;h3 id=&quot;随机访问&quot;&gt;随机访问&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一维寻址公式：a[k]_address = base_address + k * type_size&lt;/li&gt;
+  &lt;li&gt;二维寻址公式：对m * n数组，a[i][j] = base_address + (i * n + j) * type_size&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;插入操作&quot;&gt;插入操作&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;最坏(在开头插入)O(n)，平均O(n)&lt;/li&gt;
+  &lt;li&gt;最好(在末尾插入)O(1)&lt;/li&gt;
+  &lt;li&gt;无序在第k位插入，可第k位插最后，写入第k位，O(1)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;删除操作&quot;&gt;删除操作&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;最坏(在开头删除)O(n)，平均O(n)&lt;/li&gt;
+  &lt;li&gt;最好(在末尾删除)O(1)&lt;/li&gt;
+  &lt;li&gt;标记删除，以后触发真正删除操作，均摊&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;应用&quot;&gt;应用&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;平时开发直接用编程语言提供的容器&lt;/li&gt;
+  &lt;li&gt;特别底层开发，直接使用数组&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/%E6%95%B0%E7%BB%84</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/%E6%95%B0%E7%BB%84</guid>
         
         
         <category>算法</category>
@@ -593,45 +644,6 @@ end
         <category>AI</category>
         
         <category>线性代数</category>
-        
-      </item>
-    
-      <item>
-        <title>Git Add</title>
-        <description>&lt;p&gt;Add a folder to git with exceptions&lt;/p&gt;
-
-&lt;p&gt;Given this folder structure:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;app
-├── bin
-│  └── parse-ansi-codes.rs
-├── Cargo.lock
-├── Cargo.toml
-├── README.md
-├── src
-│  ├── cursor.rs
-│  ├── lib.rs
-│  └── style.rs
-├── target
-│  └── debug
-└── test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I can add the entire &lt;code&gt;app&lt;/code&gt; directory to git, while ignoring the bin folder:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git add . &apos;:!bin&apos;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210805.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 03 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/git_add_with_exceptions</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/git_add_with_exceptions</guid>
-        
-        
-        <category>git</category>
         
       </item>
     
