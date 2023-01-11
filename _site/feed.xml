@@ -3,11 +3,85 @@
   <channel>
     <title>乌托邦</title>
     <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 08 Jan 2023 00:38:21 +0800</pubDate>
-    <lastBuildDate>Sun, 08 Jan 2023 00:38:21 +0800</lastBuildDate>
+    <link>https://xiaobin0860.github.io/</link>
+    <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 11 Jan 2023 22:58:23 +0800</pubDate>
+    <lastBuildDate>Wed, 11 Jan 2023 22:58:23 +0800</lastBuildDate>
     <generator>Jekyll v4.3.1</generator>
+    
+      <item>
+        <title>算法复杂度分析</title>
+        <description>&lt;p&gt;数据结构和算法解决的是快和省的问题，即如何让代码运行得更快，更省存储空间。
+可以用时间、空间复仇度分析来衡量算法好坏。&lt;/p&gt;
+
+&lt;h2 id=&quot;大o复杂度表示法&quot;&gt;大O复杂度表示法&lt;/h2&gt;
+
+&lt;p&gt;所有代码的执行时间&lt;code&gt;T(n)&lt;/code&gt;与每行代码的执行次数&lt;code&gt;f(n)&lt;/code&gt;成正比&lt;/p&gt;
+
+&lt;p&gt;$T(n) = O(f(n))$&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;大O时间复杂度&lt;/code&gt;表示代码执行时间随数据规模增长的变化趋势，也叫&lt;code&gt;渐进时间复杂度&lt;/code&gt;，简称&lt;code&gt;时间复杂度&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;时间复杂度分析&quot;&gt;时间复杂度分析&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;只关注循环执行次数最多的一段代码&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;加法法则：总复杂度等于量级最大的那段代码的复杂度&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;常见复杂度案例&quot;&gt;常见复杂度案例&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;多项式量级
+    &lt;ul&gt;
+      &lt;li&gt;常量阶$O(1)$&lt;/li&gt;
+      &lt;li&gt;对数阶$O(log_n)$&lt;/li&gt;
+      &lt;li&gt;线性阶$O(n)$&lt;/li&gt;
+      &lt;li&gt;线性对数阶$O(nlog_n)$&lt;/li&gt;
+      &lt;li&gt;平方阶$O(n^2)$、立方阶$O(n^3)$…k次方阶$O(n^k)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;非多项式量级
+    &lt;ul&gt;
+      &lt;li&gt;指数阶$O(2^n)$&lt;/li&gt;
+      &lt;li&gt;阶乘阶$O(n!)$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;最好最坏情况时间复杂度&quot;&gt;(最好/最坏)情况时间复杂度&lt;/h2&gt;
+
+&lt;p&gt;在(最理想/最糟糕)的情况下，执行这段代码的时间复杂度。&lt;/p&gt;
+
+&lt;h2 id=&quot;平均情况时间复杂度&quot;&gt;平均情况时间复杂度&lt;/h2&gt;
+
+&lt;p&gt;将各种情况发生的概率考虑进去，做加权平均。&lt;/p&gt;
+
+&lt;h2 id=&quot;均摊时间复杂度&quot;&gt;均摊时间复杂度&lt;/h2&gt;
+
+&lt;p&gt;特殊的平均时间复杂度&lt;/p&gt;
+
+&lt;p&gt;每一次 O(n) 的插入操作，都会跟着 n-1 次 O(1) 的插入操作，所以把耗时多的那次操作均摊到接下来的 n-1 次耗时少的操作上，均摊下来，这一组连续的操作的均摊时间复杂度就是 O(1)。&lt;/p&gt;
+
+&lt;h2 id=&quot;空间复杂度分析&quot;&gt;空间复杂度分析&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;空间复杂度&lt;/code&gt;全称是&lt;code&gt;渐进空间复杂度&lt;/code&gt;，表示算法的存储空间与数据规模之间的增长关系。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</guid>
+        
+        
+        <category>算法</category>
+        
+      </item>
     
       <item>
         <title>类型系统</title>
@@ -47,8 +121,8 @@ enum Result&amp;lt;T, E&amp;gt; {
 &lt;/code&gt;&lt;/pre&gt;
 </description>
         <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/types</link>
-        <guid isPermaLink="true">http://localhost:4000/types</guid>
+        <link>https://xiaobin0860.github.io/types</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/types</guid>
         
         
         <category>rust</category>
@@ -172,8 +246,8 @@ end
 &lt;/ol&gt;
 </description>
         <pubDate>Sat, 30 Apr 2022 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/lua</link>
-        <guid isPermaLink="true">http://localhost:4000/lua</guid>
+        <link>https://xiaobin0860.github.io/lua</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/lua</guid>
         
         
         <category>lua</category>
@@ -222,11 +296,11 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210816.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210816.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 15 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</link>
-        <guid isPermaLink="true">http://localhost:4000/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</guid>
+        <link>https://xiaobin0860.github.io/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</guid>
         
         
         <category>AI</category>
@@ -262,11 +336,11 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210814.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210814.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 14 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</link>
-        <guid isPermaLink="true">http://localhost:4000/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</guid>
+        <link>https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</guid>
         
         
         <category>AI</category>
@@ -298,11 +372,11 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210813.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210813.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</link>
-        <guid isPermaLink="true">http://localhost:4000/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</guid>
+        <link>https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</guid>
         
         
         <category>AI</category>
@@ -398,11 +472,11 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210809.jpg&quot; alt=&quot;M&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210809.jpg&quot; alt=&quot;M&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 09 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</link>
-        <guid isPermaLink="true">http://localhost:4000/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</guid>
+        <link>https://xiaobin0860.github.io/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</guid>
         
         
         <category>AI</category>
@@ -449,11 +523,11 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210808.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210808.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/AI_%E7%BA%BF%E4%BB%A32</link>
-        <guid isPermaLink="true">http://localhost:4000/AI_%E7%BA%BF%E4%BB%A32</guid>
+        <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</guid>
         
         
         <category>AI</category>
@@ -512,8 +586,8 @@ end
 &lt;hr /&gt;
 </description>
         <pubDate>Sat, 07 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/AI_%E7%BA%BF%E4%BB%A31</link>
-        <guid isPermaLink="true">http://localhost:4000/AI_%E7%BA%BF%E4%BB%A31</guid>
+        <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A31</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A31</guid>
         
         
         <category>AI</category>
@@ -550,41 +624,11 @@ end
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210805.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210805.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 03 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/git_add_with_exceptions</link>
-        <guid isPermaLink="true">http://localhost:4000/git_add_with_exceptions</guid>
-        
-        
-        <category>git</category>
-        
-      </item>
-    
-      <item>
-        <title>Git Proxy</title>
-        <description>&lt;h2 id=&quot;http-代理&quot;&gt;HTTP 代理&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;git config --global http.proxy 127.0.0.1:1080
-git config --global https.proxy 127.0.0.1:1080
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;ssh-代理&quot;&gt;SSH 代理&lt;/h2&gt;
-
-&lt;p&gt;SSH 代理需要在密钥目录&lt;code&gt;~/.ssh&lt;/code&gt;(Windows 下是&lt;code&gt;C:\Users\{UserName}\.ssh&lt;/code&gt;)新建一个&lt;code&gt;config&lt;/code&gt;文件&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;$ cat ~/.ssh/config
-Host github.com
-    ProxyCommand connect -S 127.0.0.1:1080 %h %p
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/imgs/20210803.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 03 Aug 2021 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/git_proxy</link>
-        <guid isPermaLink="true">http://localhost:4000/git_proxy</guid>
+        <link>https://xiaobin0860.github.io/git_add_with_exceptions</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/git_add_with_exceptions</guid>
         
         
         <category>git</category>
