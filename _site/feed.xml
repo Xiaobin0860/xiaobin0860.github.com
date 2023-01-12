@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 12 Jan 2023 12:15:04 +0000</pubDate>
-    <lastBuildDate>Thu, 12 Jan 2023 12:15:04 +0000</lastBuildDate>
+    <pubDate>Thu, 12 Jan 2023 12:18:56 +0000</pubDate>
+    <lastBuildDate>Thu, 12 Jan 2023 12:18:56 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -28,8 +28,8 @@
       &lt;li&gt;插入和删除 O(1)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;循环链表&lt;/li&gt;
-  &lt;li&gt;双向链表&lt;/li&gt;
+  &lt;li&gt;循环链表 尾结点&lt;code&gt;next&lt;/code&gt;指向头结点&lt;/li&gt;
+  &lt;li&gt;双向链表 &lt;code&gt;next&lt;/code&gt;后继指针，&lt;code&gt;prev&lt;/code&gt;前驱指针&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;应用&quot;&gt;应用&lt;/h2&gt;
