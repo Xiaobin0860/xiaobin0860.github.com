@@ -5,9 +5,70 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Jan 2023 23:17:50 +0800</pubDate>
-    <lastBuildDate>Wed, 11 Jan 2023 23:17:50 +0800</lastBuildDate>
-    <generator>Jekyll v4.3.1</generator>
+    <pubDate>Thu, 12 Jan 2023 12:15:04 +0000</pubDate>
+    <lastBuildDate>Thu, 12 Jan 2023 12:15:04 +0000</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>链表</title>
+        <description>&lt;h2 id=&quot;概念&quot;&gt;概念&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一种线性表数据结构&lt;/li&gt;
+  &lt;li&gt;用&lt;code&gt;指针&lt;/code&gt;将一组零散的内存块(&lt;code&gt;结点&lt;/code&gt;)串联起来使用&lt;/li&gt;
+  &lt;li&gt;插入、删除数据非常快速&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;操作&quot;&gt;操作&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单链表
+    &lt;ul&gt;
+      &lt;li&gt;查找 O(n)&lt;/li&gt;
+      &lt;li&gt;插入和删除 O(1)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;循环链表&lt;/li&gt;
+  &lt;li&gt;双向链表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;应用&quot;&gt;应用&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;链表适合插入、删除操作频繁的场景&lt;/li&gt;
+  &lt;li&gt;双向链表比单链表插入、删除等操作简单、高效，适用更多情况&lt;/li&gt;
+  &lt;li&gt;循环链表适合处理具有环型特点的数据，比如约瑟夫问题&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;练习&quot;&gt;练习&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;单链表反转&lt;/li&gt;
+  &lt;li&gt;链表中环的检测&lt;/li&gt;
+  &lt;li&gt;两个有序链表合并&lt;/li&gt;
+  &lt;li&gt;删除链表倒数第 n 个结点&lt;/li&gt;
+  &lt;li&gt;求链表的中间结点&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;编码技巧&quot;&gt;编码技巧&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;理解指针和引用的含义(地址)&lt;/li&gt;
+  &lt;li&gt;警惕指针丢失和内存泄露&lt;/li&gt;
+  &lt;li&gt;利用哨兵简化实现难度&lt;/li&gt;
+  &lt;li&gt;重点留意边界条件处理&lt;/li&gt;
+  &lt;li&gt;举例画图，辅助思考&lt;/li&gt;
+  &lt;li&gt;多写多练，没有捷径&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/%E9%93%BE%E8%A1%A8</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/%E9%93%BE%E8%A1%A8</guid>
+        
+        
+        <category>算法</category>
+        
+      </item>
     
       <item>
         <title>算法复杂度分析</title>
@@ -74,7 +135,7 @@
 
 &lt;p&gt;&lt;code&gt;空间复杂度&lt;/code&gt;全称是&lt;code&gt;渐进空间复杂度&lt;/code&gt;，表示算法的存储空间与数据规模之间的增长关系。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</guid>
         
@@ -125,7 +186,7 @@
   &lt;li&gt;特别底层开发，直接使用数组&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/%E6%95%B0%E7%BB%84</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/%E6%95%B0%E7%BB%84</guid>
         
@@ -171,7 +232,7 @@ enum Result&amp;lt;T, E&amp;gt; {
 }
 &lt;/code&gt;&lt;/pre&gt;
 </description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
+        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/types</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/types</guid>
         
@@ -204,7 +265,7 @@ enum Result&amp;lt;T, E&amp;gt; {
   &lt;li&gt;&lt;code&gt;nil&lt;/code&gt;类型，值也是&lt;code&gt;nil&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;boolean&lt;/code&gt;类型，值为&lt;code&gt;true&lt;/code&gt;、&lt;code&gt;false&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;number&lt;/code&gt;类型，默认由&lt;code&gt;double&lt;/code&gt;类型实现。&lt;code&gt;m^n&lt;/code&gt;，求&lt;code&gt;m&lt;/code&gt;的&lt;code&gt;n&lt;/code&gt;次方&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;string&lt;/code&gt;类型，&lt;code&gt;&apos;\0&apos;&lt;/code&gt;字符不会截断字符串，可以用&lt;code&gt;&apos;&lt;/code&gt;、&lt;code&gt;&quot;&lt;/code&gt;、&lt;code&gt;[[]]&lt;/code&gt;来构造字符串。&lt;br /&gt;
+  &lt;li&gt;&lt;code&gt;string&lt;/code&gt;类型，&lt;code&gt;'\0'&lt;/code&gt;字符不会截断字符串，可以用&lt;code&gt;'&lt;/code&gt;、&lt;code&gt;&quot;&lt;/code&gt;、&lt;code&gt;[[]]&lt;/code&gt;来构造字符串。&lt;br /&gt;
 &lt;code&gt;#str&lt;/code&gt;，求 str 的字节数。&lt;code&gt;str=str..str&lt;/code&gt;，连接两个字符串&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;lightuserdata&lt;/code&gt;类型，对应 C 语言的指针值，是值不是对象&lt;/li&gt;
 &lt;/ol&gt;
@@ -255,12 +316,12 @@ lua 中很少做封装，常做的只有继承、多态。&lt;/li&gt;
 &lt;ol&gt;
   &lt;li&gt;二者都是&lt;code&gt;table&lt;/code&gt;，前者装有成员函数（共性），后者装有成员变量（个性）&lt;/li&gt;
   &lt;li&gt;语法糖 &lt;code&gt;instance:method(argument)&lt;/code&gt;&lt;br /&gt;
-原型为 &lt;code&gt;instance[&apos;method&apos;](instance,argument)&lt;/code&gt;&lt;br /&gt;
+原型为 &lt;code&gt;instance['method'](instance,argument)&lt;/code&gt;&lt;br /&gt;
 先在实例表里查找成员函数，通常表里只有成员变量没有成员函数，这种情况下会触发&lt;code&gt;__index&lt;/code&gt;元方法，&lt;br /&gt;
 元方法去类表里继续查找，若依然找不到，再触发类表的&lt;code&gt;__index&lt;/code&gt;元方法，一路找下去。&lt;br /&gt;
 找到之后，就把实例表、实参传入这个函数，于是函数内就能访问到成员变量了&lt;/li&gt;
   &lt;li&gt;语法糖&lt;code&gt;instance.method(argument)&lt;/code&gt;&lt;br /&gt;
-原型为&lt;code&gt;instance[&apos;method&apos;](argument)&lt;/code&gt;&lt;br /&gt;
+原型为&lt;code&gt;instance['method'](argument)&lt;/code&gt;&lt;br /&gt;
 这相当于其它语言中调用&lt;code&gt;static&lt;/code&gt;成员函数，没有成员变量传入函数。&lt;br /&gt;
 或者&lt;code&gt;class:method(argument)&lt;/code&gt;类表会被传入函数，&lt;br /&gt;
 static 成员变量应该存放在类表里，并且可以被 static 成员函数访问&lt;/li&gt;
@@ -296,7 +357,7 @@ end
   &lt;li&gt;https://learnxinyminutes.com/docs/zh-cn/lua-cn/&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Sat, 30 Apr 2022 00:00:00 +0800</pubDate>
+        <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/lua</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/lua</guid>
         
@@ -349,7 +410,7 @@ end
 
 &lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210816.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sun, 15 Aug 2021 00:00:00 +0800</pubDate>
+        <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</guid>
         
@@ -389,7 +450,7 @@ end
 
 &lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210814.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 14 Aug 2021 00:00:00 +0800</pubDate>
+        <pubDate>Sat, 14 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</guid>
         
@@ -425,7 +486,7 @@ end
 
 &lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210813.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 13 Aug 2021 00:00:00 +0800</pubDate>
+        <pubDate>Fri, 13 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</guid>
         
@@ -525,7 +586,7 @@ end
 
 &lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210809.jpg&quot; alt=&quot;M&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 09 Aug 2021 00:00:00 +0800</pubDate>
+        <pubDate>Mon, 09 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%A6%82%E7%8E%87%E8%AE%BA</guid>
         
@@ -576,74 +637,12 @@ end
 
 &lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210808.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sun, 08 Aug 2021 00:00:00 +0800</pubDate>
+        <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</guid>
         
         
         <category>AI</category>
-        
-      </item>
-    
-      <item>
-        <title>AI数学基础-线性代数(1)</title>
-        <description>&lt;h2 id=&quot;人工智能理解&quot;&gt;人工智能理解&lt;/h2&gt;
-
-&lt;p&gt;建立在以线性代数和概率论为骨架的基础数学上，通过简单的模型组合实现复杂的功能。&lt;/p&gt;
-
-&lt;h2 id=&quot;线性代数的核心意义&quot;&gt;线性代数的核心意义&lt;/h2&gt;
-
-&lt;p&gt;万事万物都可以被抽象成某些特征的组合，并在由预置规则定义的框架之下以静态和动态的方式加以观察。&lt;/p&gt;
-
-&lt;p&gt;用虚拟数字世界表示真实物理世界的工具。&lt;/p&gt;
-
-&lt;h2 id=&quot;线性代数基本概念&quot;&gt;线性代数基本概念&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;集合(set)：某些特定对象汇总成的集体&lt;/li&gt;
-  &lt;li&gt;标量(scalar)：单独数&lt;code&gt;a&lt;/code&gt;构成的元素，&lt;code&gt;a&lt;/code&gt;可以是&lt;code&gt;整数&lt;/code&gt;、&lt;code&gt;实数&lt;/code&gt;或&lt;code&gt;复数&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;向量(vector)：多个标量按一定顺序组成一个序列&lt;/p&gt;
-
-    &lt;p&gt;向量可以看作标量的扩展，原始的数被替代为一组数，从而带来了维度的增加，给定表示索引的下标才能唯一确定向量中的元素&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;矩阵(matrix)：交向量的所有标量都替换成同规格的向量&lt;/p&gt;
-
-    &lt;p&gt;相对于向量，矩阵同样代表了维度的增加，矩阵中的每个元素需要两个索引确定&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;张量(tensor)：将矩阵中的每个标量再替换为向量，得到的就是张量。张量就是高阶矩阵&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;描述向量的数学语言&quot;&gt;描述向量的数学语言&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;范数(norm)：对单个向量大小的度量，描述的是向量自身的性质，其作用是将向量映射为一个非负的数值。通用$L^p 范数定义如下：&lt;/p&gt;
-
-    &lt;p&gt;$∣\vec x∣_p​ = (\sum_i∣x_i​∣^p)^\frac{1}{p}$​&lt;/p&gt;
-
-    &lt;p&gt;对于一个给定的向量，$L^1$范数计算的是向量所有元素绝对值的和，$L^2$范数计算的是通常意义的向量长度，$L^\infty$范数计算的则是向量中最大元素的取值。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;内积(inner product)：计算的是两个向量的关系。两个同维向量内积的表达式为&lt;/p&gt;
-
-    &lt;p&gt;$&amp;lt;\vec x, \vec y&amp;gt; = \sum_ix_i*y_i$&lt;/p&gt;
-
-    &lt;p&gt;即对应元素乘积的求和。内积能表示两个向量的相对位置，即向量之间的夹角。一种特殊的情况是内积是 0，即$&amp;lt;\vec x, \vec y&amp;gt; = 0$，在二维空间上，这意味着两个向量夹角 90 度，即相互垂直。而在高维空间上，这咱关系被称为&lt;code&gt;正交(orthogonality)&lt;/code&gt;。如果两个向量正交，说明它们线性无关，相互独立，互不影响。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-</description>
-        <pubDate>Sat, 07 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A31</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A31</guid>
-        
-        
-        <category>AI</category>
-        
-        <category>线性代数</category>
         
       </item>
     
