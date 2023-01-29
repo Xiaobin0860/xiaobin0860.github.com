@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>算法复杂度分析</title>
+  <title>栈</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>算法复杂度分析 </h1>
+  <h1>栈 </h1>
 </div>
   
 <article>
@@ -165,77 +165,38 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      January 
-     11th,
+     29th,
      
      2023
       
    </span>
     <div class="article_body" id="article_body">
-    <p>数据结构和算法解决的是快和省的问题，即如何让代码运行得更快，更省存储空间。
-可以用时间、空间复仇度分析来衡量算法好坏。</p>
-
-<h2 id="大-o-复杂度表示法">大 O 复杂度表示法</h2>
-
-<p>所有代码的执行时间<code>T(n)</code>与每行代码的执行次数<code>f(n)</code>成正比</p>
-
-<p>$T(n) = O(f(n))$</p>
-
-<p><code>大O时间复杂度</code>表示代码执行时间随数据规模增长的变化趋势，也叫<code>渐进时间复杂度</code>，简称<code>时间复杂度</code>。</p>
-
-<h2 id="时间复杂度分析">时间复杂度分析</h2>
+    <h2 id="概念">概念</h2>
 
 <ol>
-  <li>
-    <p>只关注循环执行次数最多的一段代码</p>
-  </li>
-  <li>
-    <p>加法法则：总复杂度等于量级最大的那段代码的复杂度</p>
-  </li>
-  <li>
-    <p>乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</p>
-  </li>
+  <li>一种“操作受限”的线性表，只允许从一端插入删除数据</li>
+  <li>后进先出，先进后出</li>
+  <li>顺序栈(数组)，链式栈(链表)</li>
 </ol>
 
-<h2 id="常见复杂度案例">常见复杂度案例</h2>
+<h2 id="操作">操作</h2>
+
+<ul>
+  <li>入栈 O(1)</li>
+  <li>出栈 O(1)</li>
+</ul>
+
+<h2 id="动态扩容">动态扩容</h2>
+
+<p>底层动态扩容数组，栈满后申请更大空间，进行数据搬移</p>
+
+<h2 id="应用">应用</h2>
 
 <ol>
-  <li>
-    <p>多项式量级</p>
-
-    <ul>
-      <li>常量阶$O(1)$</li>
-      <li>对数阶$O(log_n)$</li>
-      <li>线性阶$O(n)$</li>
-      <li>线性对数阶$O(nlog_n)$</li>
-      <li>平方阶$O(n^2)$、立方阶$O(n^3)$…k 次方阶$O(n^k)$</li>
-    </ul>
-  </li>
-  <li>
-    <p>非多项式量级</p>
-    <ul>
-      <li>指数阶$O(2^n)$</li>
-      <li>阶乘阶$O(n!)$</li>
-    </ul>
-  </li>
+  <li>函数调用栈</li>
+  <li>表达式求值</li>
+  <li>括号匹配</li>
 </ol>
-
-<h2 id="最好最坏情况时间复杂度">(最好/最坏)情况时间复杂度</h2>
-
-<p>在(最理想/最糟糕)的情况下，执行这段代码的时间复杂度。</p>
-
-<h2 id="平均情况时间复杂度">平均情况时间复杂度</h2>
-
-<p>将各种情况发生的概率考虑进去，做加权平均。</p>
-
-<h2 id="均摊时间复杂度">均摊时间复杂度</h2>
-
-<p>特殊的平均时间复杂度</p>
-
-<p>每一次 O(n) 的插入操作，都会跟着 n-1 次 O(1) 的插入操作，所以把耗时多的那次操作均摊到接下来的 n-1 次耗时少的操作上，均摊下来，这一组连续的操作的均摊时间复杂度就是 O(1)。</p>
-
-<h2 id="空间复杂度分析">空间复杂度分析</h2>
-
-<p><code>空间复杂度</code>全称是<code>渐进空间复杂度</code>，表示算法的存储空间与数据规模之间的增长关系。</p>
 
     </div>
 
@@ -261,7 +222,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=算法复杂度分析"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=栈"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -289,10 +250,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/%E6%95%B0%E7%BB%84" title="数组">&larr; Previous</a></li>
+      <li class="previous"><a href="/%E9%93%BE%E8%A1%A8" title="链表">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/%E9%93%BE%E8%A1%A8" title="链表">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

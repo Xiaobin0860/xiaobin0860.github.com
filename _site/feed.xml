@@ -5,9 +5,47 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 12 Jan 2023 12:18:56 +0000</pubDate>
-    <lastBuildDate>Thu, 12 Jan 2023 12:18:56 +0000</lastBuildDate>
+    <pubDate>Sun, 29 Jan 2023 02:35:37 +0000</pubDate>
+    <lastBuildDate>Sun, 29 Jan 2023 02:35:37 +0000</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>栈</title>
+        <description>&lt;h2 id=&quot;概念&quot;&gt;概念&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一种“操作受限”的线性表，只允许从一端插入删除数据&lt;/li&gt;
+  &lt;li&gt;后进先出，先进后出&lt;/li&gt;
+  &lt;li&gt;顺序栈(数组)，链式栈(链表)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;操作&quot;&gt;操作&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;入栈 O(1)&lt;/li&gt;
+  &lt;li&gt;出栈 O(1)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;动态扩容&quot;&gt;动态扩容&lt;/h2&gt;
+
+&lt;p&gt;底层动态扩容数组，栈满后申请更大空间，进行数据搬移&lt;/p&gt;
+
+&lt;h2 id=&quot;应用&quot;&gt;应用&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;函数调用栈&lt;/li&gt;
+  &lt;li&gt;表达式求值&lt;/li&gt;
+  &lt;li&gt;括号匹配&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+        <link>https://xiaobin0860.github.io/%E6%A0%88</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/%E6%A0%88</guid>
+        
+        
+        <category>算法</category>
+        
+      </item>
     
       <item>
         <title>链表</title>
@@ -61,7 +99,7 @@
   &lt;li&gt;多写多练，没有捷径&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/%E9%93%BE%E8%A1%A8</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/%E9%93%BE%E8%A1%A8</guid>
         
@@ -75,7 +113,7 @@
         <description>&lt;p&gt;数据结构和算法解决的是快和省的问题，即如何让代码运行得更快，更省存储空间。
 可以用时间、空间复仇度分析来衡量算法好坏。&lt;/p&gt;
 
-&lt;h2 id=&quot;大o复杂度表示法&quot;&gt;大O复杂度表示法&lt;/h2&gt;
+&lt;h2 id=&quot;大-o-复杂度表示法&quot;&gt;大 O 复杂度表示法&lt;/h2&gt;
 
 &lt;p&gt;所有代码的执行时间&lt;code&gt;T(n)&lt;/code&gt;与每行代码的执行次数&lt;code&gt;f(n)&lt;/code&gt;成正比&lt;/p&gt;
 
@@ -100,16 +138,19 @@
 &lt;h2 id=&quot;常见复杂度案例&quot;&gt;常见复杂度案例&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;多项式量级
+  &lt;li&gt;
+    &lt;p&gt;多项式量级&lt;/p&gt;
+
     &lt;ul&gt;
       &lt;li&gt;常量阶$O(1)$&lt;/li&gt;
       &lt;li&gt;对数阶$O(log_n)$&lt;/li&gt;
       &lt;li&gt;线性阶$O(n)$&lt;/li&gt;
       &lt;li&gt;线性对数阶$O(nlog_n)$&lt;/li&gt;
-      &lt;li&gt;平方阶$O(n^2)$、立方阶$O(n^3)$…k次方阶$O(n^k)$&lt;/li&gt;
+      &lt;li&gt;平方阶$O(n^2)$、立方阶$O(n^3)$…k 次方阶$O(n^k)$&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;非多项式量级
+  &lt;li&gt;
+    &lt;p&gt;非多项式量级&lt;/p&gt;
     &lt;ul&gt;
       &lt;li&gt;指数阶$O(2^n)$&lt;/li&gt;
       &lt;li&gt;阶乘阶$O(n!)$&lt;/li&gt;
@@ -135,7 +176,7 @@
 
 &lt;p&gt;&lt;code&gt;空间复杂度&lt;/code&gt;全称是&lt;code&gt;渐进空间复杂度&lt;/code&gt;，表示算法的存储空间与数据规模之间的增长关系。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 11 Jan 2023 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90</guid>
         
@@ -186,7 +227,7 @@
   &lt;li&gt;特别底层开发，直接使用数组&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 11 Jan 2023 00:00:00 +0000</pubDate>
         <link>https://xiaobin0860.github.io/%E6%95%B0%E7%BB%84</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/%E6%95%B0%E7%BB%84</guid>
         
@@ -594,55 +635,6 @@ end
         <category>AI</category>
         
         <category>概率论</category>
-        
-      </item>
-    
-      <item>
-        <title>AI数学基础-线性代数(2)</title>
-        <description>&lt;h2 id=&quot;线性空间&quot;&gt;线性空间&lt;/h2&gt;
-
-&lt;p&gt;一个集合，它的元素是具有相同维数的向量，并且定义了加法和数乘结构化运算，这样的集合就被称为&lt;code&gt;线性空间&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;内积空间&quot;&gt;内积空间&lt;/h2&gt;
-
-&lt;p&gt;定义了内积运算的线性空间被称为&lt;code&gt;内积空间&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;内积空间中，一组两两正交的向量构成这个空间的&lt;code&gt;正交基&lt;/code&gt;，若正交基中基向量的$L^2$范数都是单位长度 1，这组正交基就是&lt;code&gt;标准正交基&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;矩阵&quot;&gt;矩阵&lt;/h2&gt;
-
-&lt;p&gt;线性空间点的变化对应着向量的线性变换，而描述对象变化抑或向量变化的语言，正是矩阵&lt;/p&gt;
-
-&lt;p&gt;线性空间中变化的实现有两种方式：一是点本身的变化，二是参考系的变化。
-在第一种方式中，使某个点发生变化的方法是用代表变化的矩阵乘以代表对象的向量。而对坐标系施加变换的方法，就是让表示原始坐标系的矩阵与表示变换的矩阵相乘。&lt;/p&gt;
-
-&lt;p&gt;描述矩阵的一对重要参数是&lt;code&gt;特征值&lt;/code&gt;和&lt;code&gt;特征向量&lt;/code&gt;。对于给定的矩阵$A$，假设其特征值为$\lambda$，特征向量为$\vec x$，则它们的关系如下：&lt;/p&gt;
-
-&lt;p&gt;$A\vec x = \lambda\vec x$&lt;/p&gt;
-
-&lt;p&gt;矩阵代表了向量的变换，其效果通常是对原始向量同时施加方向变化和尺度变化。可对于有些特殊的向量，矩阵的作用只有尺度变化而没有方向变化，也就是只有伸缩的效果而没有旋转的效果。对于给定的矩阵来说，这类特殊的向量就是矩阵的特征向量，特征向量的尺度变化系数就是特征值。&lt;/p&gt;
-
-&lt;p&gt;求解给定矩阵的特征值和特征向量的过程叫做特征值分解，但能够进行特征值分解的矩阵必须是 n 维方阵。将特征值分解算法推广到所有矩阵之上，就是更加通用的奇异值分解。&lt;/p&gt;
-
-&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;线性代数的本质在于将具体事物抽象为数学对象，并描述其静态和动态的特性&lt;/li&gt;
-  &lt;li&gt;向量的实质是 n 维线性空间中静止的点&lt;/li&gt;
-  &lt;li&gt;线性变换描述向量或作为参考系的坐标的变化，可以用矩阵表示&lt;/li&gt;
-  &lt;li&gt;矩阵的特征值和特征向量描述了变化的速度和方向&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210808.jpg&quot; alt=&quot;宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 08 Aug 2021 00:00:00 +0000</pubDate>
-        <link>https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E7%BA%BF%E4%BB%A32</guid>
-        
-        
-        <category>AI</category>
         
       </item>
     
