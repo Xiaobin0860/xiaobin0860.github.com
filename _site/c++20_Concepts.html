@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>c++ Modules</title>
+  <title>c++ Concepts</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>c++ Modules </h1>
+  <h1>c++ Concepts </h1>
 </div>
   
 <article>
@@ -164,108 +164,130 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-10">
    <span class="post-date">
      
-     January 
-     29th,
+     February 
+     7th,
      
      2023
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="概念">概念</h2>
+    <h2 id="泛型编程">泛型编程</h2>
 
-<p>现在模块化编程，替代头文件，解决模块间符号可见性控制问题</p>
+<p>长期以来，软件重用一直都是软件工程追求的目标，而泛型编程为软件重用创造了可能性。所谓泛型编程，指的是通过组件的灵活组合来实现软件，而这些组件通过对定义做出最小“假设”来实现最大灵活性。</p>
 
-<h2 id="模块声明">模块声明</h2>
+<h2 id="c模板">c++模板</h2>
 
-<p>编译单元默认<code>普通单元</code>，<code>module</code>关键字<code>模块单元</code>，<code>export module</code>定义模块对外接口</p>
+<p>在函数与类的定义 / 声明前，加上模板列表，在列表中指定在函数以及类的定义 / 声明中使用的模板参数</p>
 
-<pre><code class="language-c++">export module helloworld;
-//符号默认对模块外不可见
-void private_hello() {
-    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
-}
-//定义外部可见函数
-export void hello() {
-    private_hello():
-}
-//导出整个namespace，不推荐
-export namespace hname {
-    int get_num() {
-        return 0;
-    }
-}
-//推荐namespace内细粒度控制
-namespace xname {
-    export int get_num() {
-        return 0;
+<pre><code class="language-c++">//class/typename定义的T/U是类型参数，size_t定义的S是非类型参数
+template&lt;size_t S, class T, typename u&gt;
+void fill_container(T&amp; container, U v) {
+    for (size_t i=0;i&lt;S;++i) {
+        container.push_back(v);
     }
 }
 </code></pre>
+<ul>
+  <li>显示实例化，加快编译速度，其它编译单元直接用显示实例化的符号
+    <pre><code class="language-c++"> template&lt;typename T, typename U&gt;
+ void fill_container(T&amp; container, U v, size_t s) {
+     for (size_t i=0;i&lt;s;++i) {
+         container.push_back(v);
+     }
+ }
+ template
+ void fill_container&lt;std::vector&lt;int&gt;, int&gt;(std::vector&lt;int&gt;&amp;, int, size_t);
+</code></pre>
+  </li>
+  <li>特化 为特定参数类型提供特定实现版本，提供类似函数重载的支持
+    <pre><code class="language-c++"> template&lt;size_t Size, class T, typename U&gt;
+ void fill(T&amp; collection, U value) {
+     std::cout &lt;&lt; "Universal" &lt;&lt; std::endl;
+     for (size_t i = 0; i != Size; ++i) {
+         collection.push_back(value);
+     }
+ }
+ template &lt;&gt;
+ void fill&lt;10, std::vector, double&gt;(std::vector&amp; collection, double value) {
+     std::cout &lt;&lt; "Explicit (full) template specialization" &lt;&lt; std::endl;
+     for (size_t i = 0; i != 10; ++i) {
+         collection.push_back(value + 2.0);
+     }
+ }
+</code></pre>
+  </li>
+  <li>偏特化</li>
+  <li>不定参模板
+    <pre><code class="language-c++"> double sum() {
+     return 0.0;
+ }
+ template &lt;typename T, typename... Targs&gt;
+ double sum(T value, Targs... Fargs) {
+     return static_cast&lt;double&gt;(value) + sum(Fargs...);
+ }
+</code></pre>
+  </li>
+</ul>
 
-<h2 id="导入模块">导入模块</h2>
+<h2 id="问题">问题</h2>
 
-<p><code>import</code>关键字导入模块，让被引用模块的符号在本编译单元可见，类似<code>using namespace</code>，可以用<code>export import</code>将导入符号对外导出</p>
+<ol>
+  <li>类型约束晦涩难懂</li>
+  <li>生成的代码急速膨胀</li>
+  <li>ABI 兼容性糟糕 接口不要使用STL</li>
+  <li>错误消息很难理解</li>
+</ol>
 
-<pre><code class="language-c++">///bye.cpp
-export module bye;
-import &lt;iostream&gt;
-export void goodbye() {
-    std::cout &lt;&lt; "Goodbye" &lt;&lt; std::endl;
-}
+<h2 id="concepts">Concepts</h2>
 
-///helloworld.cpp
-export module helloworld;
-export import bye;
-export void hello() {
-    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
-}
+<p>解决问题1和4，将一组通用的约束定义为一个<code>concept</code>，并且，在定义模板函数与模板类中，直接使用这些<code>concept</code>替换通用的<code>typename</code>和<code>class</code></p>
+<pre><code>template &lt;参数模板&gt;
+concept 名称 = 约束表达式;
+</code></pre>
+<pre><code class="language-c++">class BaseClass {
+public:
+    int32_t getValue() const {
+        return 1;
+    }
+};
+template&lt;class T&gt;
+concept DerivedOfBaseClass = std::is_base_of_v&lt;BaseClass, T&gt;;
 
-///main.cpp
-import helloworld;
-int main() {
-    helloe();
-    goodbye();
-    return 0;
+template &lt;DerivedOfBaseClass T&gt;
+void doGetValue(const T&amp; a) {
+    std::cout &lt;&lt; "Get value:" &lt;&lt; a.getValue() &lt;&lt; std::endl;
 }
 </code></pre>
 
-<h2 id="导入头文件">导入头文件</h2>
+<ul>
+  <li><code>通过约束与 concept 这两个 C++ 核心语言特性变更（高级抽象），实现了对模板参数列表与参数的约束的逻辑分离</code></li>
+  <li><code>从 C++20 标准及其演进标准之后，concept 之于 C++ 泛型编程，正如 class 之于 C++ 面向对象</code></li>
+</ul>
 
-<p><code>import</code>与<code>include</code>区别是，通过<code>impor</code>导入头文件的编译单元定义的<code>预处理宏</code>，是无法被<code>import</code>导入的文件访问的，可以用<code>模块片段</code>来实现使用<code>预处理宏</code>影响头文件</p>
+<h2 id="约束表达式">约束表达式</h2>
 
-<p>全局模块片段</p>
-<pre><code class="language-c++">module;
-//预处理宏指令
-//模块声明
-</code></pre>
+<p>通过逻辑操作符的方式进行组合的，用于定义更复杂的 concept</p>
+<pre><code class="language-c++">template&lt;class T&gt;
+concept Integral = std::is_integral_v&lt;T&gt;;
+ 
+template&lt;class T&gt;
+concept SignedIntegral = Integral&lt;T&gt; &amp;&amp; std::is_signed_v&lt;T&gt;;
+ 
+template&lt;class T&gt;
+concept UnsignedIntegral = Integral&lt;T&gt; &amp;&amp; !SignedIntegral&lt;T&gt;;
+ 
+template &lt;class T&gt;
+concept FloatingPoint = std::is_floating_point_v&lt;T&gt;;
+ 
+template &lt;class T&gt;
+concept Number = Integral&lt;T&gt; || FloatingPoint&lt;T&gt;;
 
-<h2 id="模块分区">模块分区</h2>
-
-<p>模块的一个关键特性是可以划分为更多的子模块。在 C++ Modules 中，子模块主要有两种实现方式：通过模块名称进行区分(<code>utils.image</code>)、利用模块分区特性(<code>模块名:分区名</code>)。</p>
-
-<pre><code class="language-c++">//helloworld_a.cpp
-export module helloworld:A;
-
-//helloworld_b.cpp
-export module helloworld:B
-
-//helloworld.cpp
-export module helloworld;
-export import :A;
-import :B;
-
-</code></pre>
-
-<h2 id="模块所有权">模块所有权</h2>
-
-<p>使用模块的时候需要注意符号声明的所有权问题，这影响符号的实现位置和符号的<code>链接性(linkage)</code></p>
-
-<pre><code class="language-c++">export module lib;
-namespace hello { //命名空间不属于lib
-    extern "C++" int32_t f(); //外部链接c++方式符号，不属于lib
-    extern "C" int32_t g(); //外部链接c方式符号，不属于lib
-    int32_t x(); //hello::x属于lib，只能被同模块编译单元使用
-    export int32_t z(); //hello::z属于lib，可被其它模块编译单元使用
+template&lt;typename T&gt;
+constexpr bool get_value() { return T::value; }
+template&lt;typename T&gt;
+    requires (sizeof(T) &gt; 1 &amp;&amp; get_value&lt;T&gt;())
+void f(T) {
+    std::cout &lt;&lt; "template version" &lt;&lt; std::endl;
 }
 </code></pre>
 
@@ -293,7 +315,7 @@ namespace hello { //命名空间不属于lib
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=c++ Modules"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=c++ Concepts"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -321,10 +343,10 @@ namespace hello { //命名空间不属于lib
 
     <ul class="pager">
       
-      <li class="previous"><a href="/%E6%A0%88" title="栈">&larr; Previous</a></li>
+      <li class="previous"><a href="/c++20_Modules" title="c++ Modules">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/c++20_Concepts" title="c++ Concepts">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 

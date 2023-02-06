@@ -5,9 +5,140 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Feb 2023 01:11:20 +0800</pubDate>
-    <lastBuildDate>Mon, 06 Feb 2023 01:11:20 +0800</lastBuildDate>
+    <pubDate>Tue, 07 Feb 2023 01:04:29 +0800</pubDate>
+    <lastBuildDate>Tue, 07 Feb 2023 01:04:29 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>c++ Concepts</title>
+        <description>&lt;h2 id=&quot;泛型编程&quot;&gt;泛型编程&lt;/h2&gt;
+
+&lt;p&gt;长期以来，软件重用一直都是软件工程追求的目标，而泛型编程为软件重用创造了可能性。所谓泛型编程，指的是通过组件的灵活组合来实现软件，而这些组件通过对定义做出最小“假设”来实现最大灵活性。&lt;/p&gt;
+
+&lt;h2 id=&quot;c模板&quot;&gt;c++模板&lt;/h2&gt;
+
+&lt;p&gt;在函数与类的定义 / 声明前，加上模板列表，在列表中指定在函数以及类的定义 / 声明中使用的模板参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-c++&quot;&gt;//class/typename定义的T/U是类型参数，size_t定义的S是非类型参数
+template&amp;lt;size_t S, class T, typename u&amp;gt;
+void fill_container(T&amp;amp; container, U v) {
+    for (size_t i=0;i&amp;lt;S;++i) {
+        container.push_back(v);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;显示实例化，加快编译速度，其它编译单元直接用显示实例化的符号
+    &lt;pre&gt;&lt;code class=&quot;language-c++&quot;&gt; template&amp;lt;typename T, typename U&amp;gt;
+ void fill_container(T&amp;amp; container, U v, size_t s) {
+     for (size_t i=0;i&amp;lt;s;++i) {
+         container.push_back(v);
+     }
+ }
+ template
+ void fill_container&amp;lt;std::vector&amp;lt;int&amp;gt;, int&amp;gt;(std::vector&amp;lt;int&amp;gt;&amp;amp;, int, size_t);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;特化 为特定参数类型提供特定实现版本，提供类似函数重载的支持
+    &lt;pre&gt;&lt;code class=&quot;language-c++&quot;&gt; template&amp;lt;size_t Size, class T, typename U&amp;gt;
+ void fill(T&amp;amp; collection, U value) {
+     std::cout &amp;lt;&amp;lt; &quot;Universal&quot; &amp;lt;&amp;lt; std::endl;
+     for (size_t i = 0; i != Size; ++i) {
+         collection.push_back(value);
+     }
+ }
+ template &amp;lt;&amp;gt;
+ void fill&amp;lt;10, std::vector, double&amp;gt;(std::vector&amp;amp; collection, double value) {
+     std::cout &amp;lt;&amp;lt; &quot;Explicit (full) template specialization&quot; &amp;lt;&amp;lt; std::endl;
+     for (size_t i = 0; i != 10; ++i) {
+         collection.push_back(value + 2.0);
+     }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;偏特化&lt;/li&gt;
+  &lt;li&gt;不定参模板
+    &lt;pre&gt;&lt;code class=&quot;language-c++&quot;&gt; double sum() {
+     return 0.0;
+ }
+ template &amp;lt;typename T, typename... Targs&amp;gt;
+ double sum(T value, Targs... Fargs) {
+     return static_cast&amp;lt;double&amp;gt;(value) + sum(Fargs...);
+ }
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;类型约束晦涩难懂&lt;/li&gt;
+  &lt;li&gt;生成的代码急速膨胀&lt;/li&gt;
+  &lt;li&gt;ABI 兼容性糟糕 接口不要使用STL&lt;/li&gt;
+  &lt;li&gt;错误消息很难理解&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;concepts&quot;&gt;Concepts&lt;/h2&gt;
+
+&lt;p&gt;解决问题1和4，将一组通用的约束定义为一个&lt;code&gt;concept&lt;/code&gt;，并且，在定义模板函数与模板类中，直接使用这些&lt;code&gt;concept&lt;/code&gt;替换通用的&lt;code&gt;typename&lt;/code&gt;和&lt;code&gt;class&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;template &amp;lt;参数模板&amp;gt;
+concept 名称 = 约束表达式;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-c++&quot;&gt;class BaseClass {
+public:
+    int32_t getValue() const {
+        return 1;
+    }
+};
+template&amp;lt;class T&amp;gt;
+concept DerivedOfBaseClass = std::is_base_of_v&amp;lt;BaseClass, T&amp;gt;;
+
+template &amp;lt;DerivedOfBaseClass T&amp;gt;
+void doGetValue(const T&amp;amp; a) {
+    std::cout &amp;lt;&amp;lt; &quot;Get value:&quot; &amp;lt;&amp;lt; a.getValue() &amp;lt;&amp;lt; std::endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;通过约束与 concept 这两个 C++ 核心语言特性变更（高级抽象），实现了对模板参数列表与参数的约束的逻辑分离&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;从 C++20 标准及其演进标准之后，concept 之于 C++ 泛型编程，正如 class 之于 C++ 面向对象&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;约束表达式&quot;&gt;约束表达式&lt;/h2&gt;
+
+&lt;p&gt;通过逻辑操作符的方式进行组合的，用于定义更复杂的 concept&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-c++&quot;&gt;template&amp;lt;class T&amp;gt;
+concept Integral = std::is_integral_v&amp;lt;T&amp;gt;;
+ 
+template&amp;lt;class T&amp;gt;
+concept SignedIntegral = Integral&amp;lt;T&amp;gt; &amp;amp;&amp;amp; std::is_signed_v&amp;lt;T&amp;gt;;
+ 
+template&amp;lt;class T&amp;gt;
+concept UnsignedIntegral = Integral&amp;lt;T&amp;gt; &amp;amp;&amp;amp; !SignedIntegral&amp;lt;T&amp;gt;;
+ 
+template &amp;lt;class T&amp;gt;
+concept FloatingPoint = std::is_floating_point_v&amp;lt;T&amp;gt;;
+ 
+template &amp;lt;class T&amp;gt;
+concept Number = Integral&amp;lt;T&amp;gt; || FloatingPoint&amp;lt;T&amp;gt;;
+
+template&amp;lt;typename T&amp;gt;
+constexpr bool get_value() { return T::value; }
+template&amp;lt;typename T&amp;gt;
+    requires (sizeof(T) &amp;gt; 1 &amp;amp;&amp;amp; get_value&amp;lt;T&amp;gt;())
+void f(T) {
+    std::cout &amp;lt;&amp;lt; &quot;template version&quot; &amp;lt;&amp;lt; std::endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Tue, 07 Feb 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/c++20_Concepts</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/c++20_Concepts</guid>
+        
+        
+        <category>c++</category>
+        
+      </item>
     
       <item>
         <title>c++ Modules</title>
@@ -608,42 +739,6 @@ end
         <category>AI</category>
         
         <category>最优化理论</category>
-        
-      </item>
-    
-      <item>
-        <title>AI数学基础-数理统计</title>
-        <description>&lt;p&gt;&lt;code&gt;数理统计&lt;/code&gt;根据实验或观察得到的数据来研究随机现象，并对研究对象的客观规律做出合理的估计和判断。&lt;/p&gt;
-
-&lt;p&gt;在数理统计中，可用的资源是有限的数据集合，这个有限的数据集合称为&lt;code&gt;样本&lt;/code&gt;。
-相应的，观察对象的所有取值被称为&lt;code&gt;总体&lt;/code&gt;。数理统计的任务就是
-根据样本推断总体的数字特征。&lt;/p&gt;
-
-&lt;p&gt;推断的工具是统计量，统计量是样本的函数，是个随机变量。两个最重要的统计量是&lt;code&gt;样本均值&lt;/code&gt;和&lt;code&gt;样本方差&lt;/code&gt;：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;样本均值：$\overline{X} = \frac{1}{n}\sum_{i=1}^nX_i$&lt;/li&gt;
-  &lt;li&gt;样本方差：$S^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\overline{X})^2$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;统计推断的基本问题分为两大类：&lt;code&gt;参数估计&lt;/code&gt;和&lt;code&gt;假设检验&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;参数估计通过随机抽取样本来估计部分分布的未知参数，包括点估计和区间估计&lt;/p&gt;
-
-&lt;p&gt;假设检验通过随机抽取样本来接受或拒绝关于总体的某个判断，常用于估计机器学习模型的泛化错误率&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210813.jpg&quot; alt=&quot;大宝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 13 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1</guid>
-        
-        
-        <category>AI</category>
-        
-        <category>数理统计</category>
         
       </item>
     
