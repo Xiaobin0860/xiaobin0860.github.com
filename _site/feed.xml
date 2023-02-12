@@ -5,8 +5,8 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Feb 2023 23:00:53 +0800</pubDate>
-    <lastBuildDate>Sun, 12 Feb 2023 23:00:53 +0800</lastBuildDate>
+    <pubDate>Sun, 12 Feb 2023 23:56:04 +0800</pubDate>
+    <lastBuildDate>Sun, 12 Feb 2023 23:56:04 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -52,6 +52,51 @@
       </item>
     
       <item>
+        <title>Redis持久化</title>
+        <description>&lt;h2 id=&quot;aof实现&quot;&gt;AOF实现&lt;/h2&gt;
+
+&lt;p&gt;写后日志，“写后”的意思是 Redis 是先执行命令，把数据写入内存，然后才记录日志&lt;/p&gt;
+
+&lt;h2 id=&quot;三种写回策略&quot;&gt;三种写回策略&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;always&lt;/li&gt;
+  &lt;li&gt;everysec&lt;/li&gt;
+  &lt;li&gt;no&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;aof重写&quot;&gt;AOF重写&lt;/h2&gt;
+
+&lt;p&gt;重写过程是由后台子进程 bgrewriteaof 来完成的，这也是为了避免阻塞主线程，导致数据库性能下降。
+&lt;img src=&quot;https://static001.geekbang.org/resource/image/6b/e8/6b054eb1aed0734bd81ddab9a31d0be8.jpg?wh=3688*1920&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;rdb全量快照&quot;&gt;RDB全量快照&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;save：在主线程中执行，会导致阻塞&lt;/li&gt;
+  &lt;li&gt;bgsave：创建一个子进程，专门用于写入 RDB 文件，避免了主线程的阻塞&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://static001.geekbang.org/resource/image/a2/58/a2e5a3571e200cb771ed8a1cd14d5558.jpg?wh=13333*7500&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;持久化建议&quot;&gt;持久化建议&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数据不能丢失时，内存快照和 AOF 的混合使用是一个很好的选择&lt;/li&gt;
+  &lt;li&gt;允许分钟级别的数据丢失，可以只使用 RDB&lt;/li&gt;
+  &lt;li&gt;只用AOF，优先使用&lt;code&gt;everysec&lt;/code&gt;，它在可靠性和性能之间取了一个平衡&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 12 Feb 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/redis%E6%8C%81%E4%B9%85%E5%8C%96</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/redis%E6%8C%81%E4%B9%85%E5%8C%96</guid>
+        
+        
+        <category>redis</category>
+        
+      </item>
+    
+      <item>
         <title>键值数据库基本架构</title>
         <description>&lt;h2 id=&quot;考虑的问题&quot;&gt;考虑的问题&lt;/h2&gt;
 
@@ -88,6 +133,30 @@
         <pubDate>Sun, 12 Feb 2023 00:00:00 +0800</pubDate>
         <link>https://xiaobin0860.github.io/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6</link>
         <guid isPermaLink="true">https://xiaobin0860.github.io/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6</guid>
+        
+        
+        <category>redis</category>
+        
+      </item>
+    
+      <item>
+        <title>Redis IO模型</title>
+        <description>&lt;p&gt;Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。
+采用多线程开发一般会引入同步原语来保护共享资源的并发访问，这也会降低系统代码的易调试性和可维护性。为了避免这些问题，Redis 直接采用了单线程模式。
+但是 Redis 却能使用单线程模型达到每秒数十万级别的处理能力，这是为什么呢？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;操作在内存上完成&lt;/li&gt;
+  &lt;li&gt;高效的数据结构&lt;/li&gt;
+  &lt;li&gt;多路复用机制，IO操作中能并发处理大量请求，实现高吞吐率&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://static001.geekbang.org/resource/image/e1/c9/e18499ab244e4428a0e60b4da6575bc9.jpg?wh=2700*1493&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://static001.geekbang.org/resource/image/00/ea/00ff790d4f6225aaeeebba34a71d8bea.jpg?wh=3472*2250&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Feb 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/redis-IO%E6%A8%A1%E5%9E%8B</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/redis-IO%E6%A8%A1%E5%9E%8B</guid>
         
         
         <category>redis</category>
@@ -558,177 +627,6 @@ namespace hello { //命名空间不属于lib
         
         
         <category>算法</category>
-        
-      </item>
-    
-      <item>
-        <title>类型系统</title>
-        <description>&lt;h2 id=&quot;primitive-type&quot;&gt;primitive type&lt;/h2&gt;
-
-&lt;p&gt;基本类型：interger, string, bool, array …&lt;/p&gt;
-
-&lt;h2 id=&quot;product-type&quot;&gt;product type&lt;/h2&gt;
-
-&lt;p&gt;struct 不同类型的乘积，取值是所有组合类型的笛卡尔积&lt;/p&gt;
-
-&lt;h2 id=&quot;sum-type&quot;&gt;sum type&lt;/h2&gt;
-
-&lt;p&gt;enum 不同类型的不相交集&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;enum Option&amp;lt;T&amp;gt; {
-   Some(T),
-   None
-}
-enum Result&amp;lt;T, E&amp;gt; {
-   Ok(T),
-   Err(E)
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;generic-type&quot;&gt;generic type&lt;/h2&gt;
-
-&lt;p&gt;泛型，提升抽象程度，可看成是作用于类型的的特殊函数，
-展开为新类型&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Option&amp;lt;u8&amp;gt;&lt;/code&gt;展开是&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;enum Option {
-   Some(u8),
-   None
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Fri, 06 Jan 2023 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/types</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/types</guid>
-        
-        
-        <category>rust</category>
-        
-      </item>
-    
-      <item>
-        <title>lua入门</title>
-        <description>&lt;h2 id=&quot;首先介绍一下-lua-语言&quot;&gt;首先介绍一下 lua 语言：&lt;/h2&gt;
-
-&lt;p&gt;它是一门动态类型语言。所谓动态就是运行时，静态就是编译时。&lt;br /&gt;
-静态语言会在编译时做类型检查，通过报错帮助程序员发现问题。&lt;br /&gt;
-动态语言没有编译环节，类型检查发生在运行时，查到错误就会抛出异常，&lt;br /&gt;
-程序员需要自己保证类型正确，或者做好异常处理。&lt;br /&gt;
-因为没有类型的约束，lua 语言非常灵活，可以编写一些复杂的逻辑。&lt;br /&gt;
-除了动态语言共同的优势以外，lua 自身有两大优势：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;尾调用，使得程序员可以放心的写递归算法，不必担心 StackOverflow&lt;/li&gt;
-  &lt;li&gt;标准化的 c api，使得 lua 语言可以与 c 语言互相调用，并且所写的 c 代码是跨平台的，不会因 lua 解释器不同而不同&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;一类型系统分为值类型和引用对象类型&quot;&gt;一、类型系统分为“值类型”和“引用（对象）类型”&lt;/h2&gt;
-
-&lt;p&gt;值类型有 5 种：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;nil&lt;/code&gt;类型，值也是&lt;code&gt;nil&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;boolean&lt;/code&gt;类型，值为&lt;code&gt;true&lt;/code&gt;、&lt;code&gt;false&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;number&lt;/code&gt;类型，默认由&lt;code&gt;double&lt;/code&gt;类型实现。&lt;code&gt;m^n&lt;/code&gt;，求&lt;code&gt;m&lt;/code&gt;的&lt;code&gt;n&lt;/code&gt;次方&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;string&lt;/code&gt;类型，&lt;code&gt;&apos;\0&apos;&lt;/code&gt;字符不会截断字符串，可以用&lt;code&gt;&apos;&lt;/code&gt;、&lt;code&gt;&quot;&lt;/code&gt;、&lt;code&gt;[[]]&lt;/code&gt;来构造字符串。&lt;br /&gt;
-&lt;code&gt;#str&lt;/code&gt;，求 str 的字节数。&lt;code&gt;str=str..str&lt;/code&gt;，连接两个字符串&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;lightuserdata&lt;/code&gt;类型，对应 C 语言的指针值，是值不是对象&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;引用类型有 4 种：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;function&lt;/code&gt;类型，用&lt;code&gt;function(参数列) end&lt;/code&gt;来构造这种对象&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;table&lt;/code&gt;类型，用&lt;code&gt;{}&lt;/code&gt;来构造这种对象&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;thread&lt;/code&gt;类型，不是线程，是协程，不具有并发功能，只能用来分隔不相干的逻辑。&lt;br /&gt;
-每个&lt;code&gt;thread&lt;/code&gt;有自己的&lt;code&gt;call stack&lt;/code&gt;。由程序员调度所要执行的&lt;code&gt;thread&lt;/code&gt;，其它&lt;code&gt;thread&lt;/code&gt;会暂停&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;userdata&lt;/code&gt;类型，Cocos2dx 里的 c++类的实例，在 lua 里就是这种类型。&lt;br /&gt;
-对比&lt;code&gt;lightuserdata&lt;/code&gt;，一个是指针本身（32 位或 64 位无符号整数），一个是指针指向的对象&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;二function-相关知识&quot;&gt;二、function 相关知识&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;传参和传返回值的时候，根据上一讲分的两大类，来传值或传引用。&lt;/li&gt;
-  &lt;li&gt;除了传参和传返回值，&lt;code&gt;function&lt;/code&gt;还会自动捕获外部的变量，术语叫&lt;code&gt;upvalue&lt;/code&gt;，意思是上文中的变量。&lt;br /&gt;
-&lt;code&gt;upvalue&lt;/code&gt; 一律传引用，也就是说，在函数内修改&lt;code&gt;upvalue&lt;/code&gt;，那么函数外也能看到这一改变。&lt;br /&gt;
-利用自动捕获，&lt;code&gt;function&lt;/code&gt;可以当做容器用，要访问容器中的变量，就必须调用该函数，以达到封装的目的&lt;br /&gt;
-lua 中很少做封装，常做的只有继承、多态。&lt;/li&gt;
-  &lt;li&gt;尾调用。函数内出现&lt;code&gt;return func(...)&lt;/code&gt;，那么调用栈会先 pop 当前函数，然后把 func 压入调用栈。&lt;br /&gt;
-这一机制的好处是，可以无限制使用递归算法，而不会发生 stack overflow。&lt;br /&gt;
-坏处是，调用栈不完整，在栈上看到一个函数，难以推断是哪个函数调用了这一函数，&lt;br /&gt;
-因为上一个函数可能已经出栈了。写或不写 return，可以控制是否使用尾调用&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;三table-相关知识&quot;&gt;三、table 相关知识&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;table&lt;/code&gt;是哈希表，无序容器。当键是从 1 开始的连续整数时，可以当做数组来用（有序）&lt;/li&gt;
-  &lt;li&gt;与函数自动捕获引用不同，table 可以存值进去&lt;/li&gt;
-  &lt;li&gt;增、改：&lt;code&gt;t[k]=v&lt;/code&gt;&lt;br /&gt;
-删：&lt;code&gt;t[k]=nil&lt;/code&gt;&lt;br /&gt;
-查：&lt;code&gt;if t[k]~= nil then ...&lt;/code&gt;&lt;br /&gt;
-无序遍历：&lt;code&gt;for k,v in pairs(t) do ...&lt;/code&gt;&lt;br /&gt;
-有序遍历：&lt;code&gt;for i,v in ipairs(t) do ...&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;setmetatable(t,mt)&lt;/code&gt;用来给表 t 设置一个元表 mt，元表中存放的主要是元方法，&lt;br /&gt;
-比如&lt;code&gt;__add&lt;/code&gt;, &lt;code&gt;__sub&lt;/code&gt;, &lt;code&gt;__mul&lt;/code&gt;, &lt;code&gt;__div&lt;/code&gt;, &lt;code&gt;__len&lt;/code&gt;, &lt;code&gt;__concat&lt;/code&gt;, &lt;code&gt;__gc&lt;/code&gt;。&lt;br /&gt;
-前面几个相当于“运算符重载”，使 t 可以支持算术运算。gc 是垃圾回收的意思，相当于 t 的析构函数。&lt;br /&gt;
-可以看出，mt 控制着 t 的行为&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;四类与类的实例&quot;&gt;四、类与类的实例&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;二者都是&lt;code&gt;table&lt;/code&gt;，前者装有成员函数（共性），后者装有成员变量（个性）&lt;/li&gt;
-  &lt;li&gt;语法糖 &lt;code&gt;instance:method(argument)&lt;/code&gt;&lt;br /&gt;
-原型为 &lt;code&gt;instance[&apos;method&apos;](instance,argument)&lt;/code&gt;&lt;br /&gt;
-先在实例表里查找成员函数，通常表里只有成员变量没有成员函数，这种情况下会触发&lt;code&gt;__index&lt;/code&gt;元方法，&lt;br /&gt;
-元方法去类表里继续查找，若依然找不到，再触发类表的&lt;code&gt;__index&lt;/code&gt;元方法，一路找下去。&lt;br /&gt;
-找到之后，就把实例表、实参传入这个函数，于是函数内就能访问到成员变量了&lt;/li&gt;
-  &lt;li&gt;语法糖&lt;code&gt;instance.method(argument)&lt;/code&gt;&lt;br /&gt;
-原型为&lt;code&gt;instance[&apos;method&apos;](argument)&lt;/code&gt;&lt;br /&gt;
-这相当于其它语言中调用&lt;code&gt;static&lt;/code&gt;成员函数，没有成员变量传入函数。&lt;br /&gt;
-或者&lt;code&gt;class:method(argument)&lt;/code&gt;类表会被传入函数，&lt;br /&gt;
-static 成员变量应该存放在类表里，并且可以被 static 成员函数访问&lt;/li&gt;
-  &lt;li&gt;上面的 class 指代一个类表，在 cocos 中，class 是一个全局函数，由 cocos 引擎提供。&lt;br /&gt;
-这个函数的作用是返回一个新的类表，并为其设置好：元方法&lt;code&gt;__index&lt;/code&gt;（去父类中查找）、&lt;br /&gt;
-static 成员函数&lt;code&gt;create&lt;/code&gt;（创建实例对象）、static 成员函数&lt;code&gt;new&lt;/code&gt;（创建实例对象）、&lt;br /&gt;
-一般成员函数&lt;code&gt;ctor&lt;/code&gt;（在实例对象中放入初始内容）。&lt;br /&gt;
-实例对象可能是&lt;code&gt;table&lt;/code&gt;或&lt;code&gt;userdata&lt;/code&gt;，而类一定是&lt;code&gt;table&lt;/code&gt;。&lt;br /&gt;
-Cocos 引擎创建&lt;code&gt;userdata&lt;/code&gt;的时候，总是同时创建一个&lt;code&gt;table&lt;/code&gt;，并将二者绑在一起，&lt;br /&gt;
-所以可以对&lt;code&gt;userdata&lt;/code&gt;使用&lt;code&gt;table&lt;/code&gt;语法&lt;/li&gt;
-  &lt;li&gt;上面说的语法糖，不止用于函数调用，也用于函数定义：
-    &lt;pre&gt;&lt;code class=&quot;language-lua&quot;&gt;local class = {}
-function class:ctor(sth)
-self.field = sth
-end
---等价于：
-local class = {}
-function class.ctor(self, sth)
-self.field = sth
-end
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;其它&quot;&gt;其它&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;lua 中任意类型的值都可以代表真假。只有&lt;code&gt;nil&lt;/code&gt;和&lt;code&gt;false&lt;/code&gt;两个值代表假，其它值都代表真。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;and&lt;/code&gt;和&lt;code&gt;or&lt;/code&gt;运算符，不会把它们所连接的表达式转成&lt;code&gt;boolean&lt;/code&gt;型，这一点跟其他语言不同。&lt;br /&gt;
-&lt;code&gt;a and b or c&lt;/code&gt;与其它语言的 &lt;code&gt;a ? b : c&lt;/code&gt;功能类似，具体是：若 a 和 b 为真，则返回 b；&lt;br /&gt;
-若 a 为假，则返回 c。若 a 为真，b 为假，则返回 c，这与&lt;code&gt;?:&lt;/code&gt;不同。&lt;/li&gt;
-  &lt;li&gt;参考手册 https://www.lua.org/manual/5.1/&lt;/li&gt;
-  &lt;li&gt;https://learnxinyminutes.com/docs/zh-cn/lua-cn/&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sat, 30 Apr 2022 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/lua</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/lua</guid>
-        
-        
-        <category>lua</category>
         
       </item>
     

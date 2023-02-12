@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>Redis数据结构</title>
+  <title>Redis IO模型</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>Redis数据结构 </h1>
+  <h1>Redis IO模型 </h1>
 </div>
   
 <article>
@@ -171,36 +171,18 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="redis数据类型及底层数据结构">Redis数据类型及底层数据结构</h2>
+    <p>Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。
+采用多线程开发一般会引入同步原语来保护共享资源的并发访问，这也会降低系统代码的易调试性和可维护性。为了避免这些问题，Redis 直接采用了单线程模式。
+但是 Redis 却能使用单线程模型达到每秒数十万级别的处理能力，这是为什么呢？</p>
 
 <ul>
-  <li>String(字符串)：动态字符串 O(1)</li>
-  <li>List(列表)：双向链表，压缩列表</li>
-  <li>Hash(哈希)：哈希表，压缩列表</li>
-  <li>Set(集合)：哈希表，整数数组</li>
-  <li>Sorted Set(有序集合)：跳表，压缩列表</li>
+  <li>操作在内存上完成</li>
+  <li>高效的数据结构</li>
+  <li>多路复用机制，IO操作中能并发处理大量请求，实现高吞吐率</li>
 </ul>
 
-<h2 id="redis键值结构">Redis键值结构</h2>
-
-<p>全局哈希表，实现从键到值的快速访问
-<code>写入大量数据变慢：哈希冲突、rehash</code></p>
-
-<ul>
-  <li>哈希表 O(1)  String</li>
-  <li>整数数组和双向链表 O(n)</li>
-  <li>压缩列表 <code>zlbytes|zltail|zllen|entry1|entry2|..|entryN|zlend</code> O(n)</li>
-  <li>跳表 在链表基础上增加多级索引，实现快速定位 O(logN)</li>
-</ul>
-
-<h2 id="redis操作复杂度总结">Redis操作复杂度总结</h2>
-
-<ul>
-  <li>单元素操作是基础 O(1)</li>
-  <li>范围操作非常耗时 O(N)</li>
-  <li>统计操作非常高效 O(1)</li>
-  <li>List头尾操作 O(1)</li>
-</ul>
+<p><img src="https://static001.geekbang.org/resource/image/e1/c9/e18499ab244e4428a0e60b4da6575bc9.jpg?wh=2700*1493" alt="" />
+<img src="https://static001.geekbang.org/resource/image/00/ea/00ff790d4f6225aaeeebba34a71d8bea.jpg?wh=3472*2250" alt="" /></p>
 
     </div>
 
@@ -226,7 +208,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Redis数据结构"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Redis IO模型"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -254,10 +236,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/redis%E6%8C%81%E4%B9%85%E5%8C%96" title="Redis持久化">&larr; Previous</a></li>
+      <li class="previous"><a href="/c++20_Concepts" title="c++ Concepts">&larr; Previous</a></li>
       
       
-      <li class="next disabled"><a>Next &rarr;</a>
+      <li class="next"><a href="/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6" title="键值数据库基本架构">Next &rarr;</a></li>
       
     </ul>
 

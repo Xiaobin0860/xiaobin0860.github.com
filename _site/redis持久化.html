@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>Redis数据结构</title>
+  <title>Redis持久化</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>Redis数据结构 </h1>
+  <h1>Redis持久化 </h1>
 </div>
   
 <article>
@@ -171,35 +171,38 @@ border: 3px solid #FFF; height:150px;width:150px" />
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="redis数据类型及底层数据结构">Redis数据类型及底层数据结构</h2>
+    <h2 id="aof实现">AOF实现</h2>
+
+<p>写后日志，“写后”的意思是 Redis 是先执行命令，把数据写入内存，然后才记录日志</p>
+
+<h2 id="三种写回策略">三种写回策略</h2>
 
 <ul>
-  <li>String(字符串)：动态字符串 O(1)</li>
-  <li>List(列表)：双向链表，压缩列表</li>
-  <li>Hash(哈希)：哈希表，压缩列表</li>
-  <li>Set(集合)：哈希表，整数数组</li>
-  <li>Sorted Set(有序集合)：跳表，压缩列表</li>
+  <li>always</li>
+  <li>everysec</li>
+  <li>no</li>
 </ul>
 
-<h2 id="redis键值结构">Redis键值结构</h2>
+<h2 id="aof重写">AOF重写</h2>
 
-<p>全局哈希表，实现从键到值的快速访问
-<code>写入大量数据变慢：哈希冲突、rehash</code></p>
+<p>重写过程是由后台子进程 bgrewriteaof 来完成的，这也是为了避免阻塞主线程，导致数据库性能下降。
+<img src="https://static001.geekbang.org/resource/image/6b/e8/6b054eb1aed0734bd81ddab9a31d0be8.jpg?wh=3688*1920" alt="" /></p>
+
+<h2 id="rdb全量快照">RDB全量快照</h2>
 
 <ul>
-  <li>哈希表 O(1)  String</li>
-  <li>整数数组和双向链表 O(n)</li>
-  <li>压缩列表 <code>zlbytes|zltail|zllen|entry1|entry2|..|entryN|zlend</code> O(n)</li>
-  <li>跳表 在链表基础上增加多级索引，实现快速定位 O(logN)</li>
+  <li>save：在主线程中执行，会导致阻塞</li>
+  <li>bgsave：创建一个子进程，专门用于写入 RDB 文件，避免了主线程的阻塞</li>
 </ul>
 
-<h2 id="redis操作复杂度总结">Redis操作复杂度总结</h2>
+<p><img src="https://static001.geekbang.org/resource/image/a2/58/a2e5a3571e200cb771ed8a1cd14d5558.jpg?wh=13333*7500" alt="" /></p>
+
+<h2 id="持久化建议">持久化建议</h2>
 
 <ul>
-  <li>单元素操作是基础 O(1)</li>
-  <li>范围操作非常耗时 O(N)</li>
-  <li>统计操作非常高效 O(1)</li>
-  <li>List头尾操作 O(1)</li>
+  <li>数据不能丢失时，内存快照和 AOF 的混合使用是一个很好的选择</li>
+  <li>允许分钟级别的数据丢失，可以只使用 RDB</li>
+  <li>只用AOF，优先使用<code>everysec</code>，它在可靠性和性能之间取了一个平衡</li>
 </ul>
 
     </div>
@@ -226,7 +229,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Redis数据结构"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Redis持久化"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -254,10 +257,10 @@ border: 3px solid #FFF; height:150px;width:150px" />
 
     <ul class="pager">
       
-      <li class="previous"><a href="/redis%E6%8C%81%E4%B9%85%E5%8C%96" title="Redis持久化">&larr; Previous</a></li>
+      <li class="previous"><a href="/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6" title="键值数据库基本架构">&larr; Previous</a></li>
       
       
-      <li class="next disabled"><a>Next &rarr;</a>
+      <li class="next"><a href="/redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" title="Redis数据结构">Next &rarr;</a></li>
       
     </ul>
 
