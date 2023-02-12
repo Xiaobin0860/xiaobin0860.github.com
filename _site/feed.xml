@@ -5,9 +5,94 @@
     <description></description>
     <link>https://xiaobin0860.github.io/</link>
     <atom:link href="https://xiaobin0860.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 07 Feb 2023 01:05:22 +0800</pubDate>
-    <lastBuildDate>Tue, 07 Feb 2023 01:05:22 +0800</lastBuildDate>
+    <pubDate>Sun, 12 Feb 2023 23:00:53 +0800</pubDate>
+    <lastBuildDate>Sun, 12 Feb 2023 23:00:53 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>Redis数据结构</title>
+        <description>&lt;h2 id=&quot;redis数据类型及底层数据结构&quot;&gt;Redis数据类型及底层数据结构&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;String(字符串)：动态字符串 O(1)&lt;/li&gt;
+  &lt;li&gt;List(列表)：双向链表，压缩列表&lt;/li&gt;
+  &lt;li&gt;Hash(哈希)：哈希表，压缩列表&lt;/li&gt;
+  &lt;li&gt;Set(集合)：哈希表，整数数组&lt;/li&gt;
+  &lt;li&gt;Sorted Set(有序集合)：跳表，压缩列表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;redis键值结构&quot;&gt;Redis键值结构&lt;/h2&gt;
+
+&lt;p&gt;全局哈希表，实现从键到值的快速访问
+&lt;code&gt;写入大量数据变慢：哈希冲突、rehash&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;哈希表 O(1)  String&lt;/li&gt;
+  &lt;li&gt;整数数组和双向链表 O(n)&lt;/li&gt;
+  &lt;li&gt;压缩列表 &lt;code&gt;zlbytes|zltail|zllen|entry1|entry2|..|entryN|zlend&lt;/code&gt; O(n)&lt;/li&gt;
+  &lt;li&gt;跳表 在链表基础上增加多级索引，实现快速定位 O(logN)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;redis操作复杂度总结&quot;&gt;Redis操作复杂度总结&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单元素操作是基础 O(1)&lt;/li&gt;
+  &lt;li&gt;范围操作非常耗时 O(N)&lt;/li&gt;
+  &lt;li&gt;统计操作非常高效 O(1)&lt;/li&gt;
+  &lt;li&gt;List头尾操作 O(1)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 12 Feb 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84</guid>
+        
+        
+        <category>redis</category>
+        
+      </item>
+    
+      <item>
+        <title>键值数据库基本架构</title>
+        <description>&lt;h2 id=&quot;考虑的问题&quot;&gt;考虑的问题&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数据类型&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Redis 支持的 value 类型包括了 String、哈希表、列表、集合等&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数据操作&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;PUT/GET/DELETE/SCAN 是一个键值数据库的基本操作集合&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数据存储&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;内存：访问速度快(百ns)，掉电易失
+外存：避免数据丢失，受限于磁盘的慢速读写(几ms级别)，性能低&lt;/p&gt;
+
+&lt;h2 id=&quot;基本架构&quot;&gt;基本架构&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;访问框架&lt;/li&gt;
+  &lt;li&gt;操作模块&lt;/li&gt;
+  &lt;li&gt;索引模块&lt;/li&gt;
+  &lt;li&gt;存储模块&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://static001.geekbang.org/resource/image/30/44/30e0e0eb0b475e6082dd14e63c13ed44.jpg?wh=5319*3582&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Feb 2023 00:00:00 +0800</pubDate>
+        <link>https://xiaobin0860.github.io/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6</link>
+        <guid isPermaLink="true">https://xiaobin0860.github.io/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6</guid>
+        
+        
+        <category>redis</category>
+        
+      </item>
     
       <item>
         <title>c++ Concepts</title>
@@ -644,101 +729,6 @@ end
         
         
         <category>lua</category>
-        
-      </item>
-    
-      <item>
-        <title>AI数学基础-信息论</title>
-        <description>&lt;p&gt;信息论使用&lt;code&gt;信息熵&lt;/code&gt;的概念，对单个信号源的信息量和通讯中传递的信息的数量与效率等问题做出了解释，
-并在世界的不确定性和信息的可测量性之间搭起一座桥梁。
-&lt;code&gt;熵&lt;/code&gt;表示一个系统内在的混乱程度。&lt;/p&gt;
-
-&lt;p&gt;事件$A$发生的概率为$p(A)$，则这个事件的&lt;code&gt;自信息量&lt;/code&gt;定义为
-\(h(A) = -\log_2p(A)\)&lt;/p&gt;
-
-&lt;p&gt;根据单个事件的自信息量可以计算出包含多个符号的信源的&lt;code&gt;信息熵&lt;/code&gt;。信源的信息熵是信源可能发出的各个符号的自信息量在信源构成的概率空间上的统计平均值。
-如果一个信源$X$包含$n$个符号，每个符号$a_i$的取值为$p(a_i)$，则$X$的信源熵为
-\(H(X) = -\sum_{i=1}^np(a_i)\log_2p(a_i)\)
-信源熵描述了信源每发送一个符号所提供的平均信息量，是信源总体信息测度的均值。当信源中的每个符号的取值概率相等时，信源熵取到最大值$\log_2​n$，意味着信源的随机程度最高。&lt;/p&gt;
-
-&lt;p&gt;在概率论中有&lt;code&gt;条件概率&lt;/code&gt;的概念，将条件概率扩展到信息论中，就可以得到&lt;code&gt;条件熵&lt;/code&gt;。如果两个信源之间具有相关性，那么在已知其中一个信源$X$的条件下，另一个信源$Y$的信源熵就会减小。
-条件熵$H(Y∣X)$表示的是在已知随机变量$X$的条件下另一个随机变量$Y$的不确定性，也就是在给定$X$时，根据$Y$的条件概率计算出的熵再对$X$求解数学期望：&lt;/p&gt;
-
-\[H(Y|X) = \sum_{i=1}^np(x_i)H(Y|X=x_i) \\
-= -\sum_{i=1}^np(x_i)\sum_{j=1}^mp(y_j|x_i)\log_2p(y_j|x_i) \\
-= -\sum_{i=1}^n\sum_{j=1}^mp(x_i,y_j)\log_2p(y_j|x_i)\]
-
-&lt;p&gt;条件熵的意义在于先按照变量$X$的取值对变量$Y$进行了一次分类，对每个分出来的类别计算其单独的信息熵，再将每个类的信息熵按照$X$的分布计算其数学期望。分类带来不确定性下降。&lt;/p&gt;
-
-&lt;p&gt;定义了条件信息熵后，就可以进一步得到&lt;code&gt;互信息&lt;/code&gt;的概念
-\(I(X;Y) = H(Y)-H(Y|X)\)
-互信息等于$Y$的信源熵减去已知$X$时$Y$的条件熵，即由$X$提供的关于$Y$的不确定性的消除，也可以看成是$X$给$Y$带来的&lt;code&gt;信息增益&lt;/code&gt;。互信息这个名称在通信领域经常使用，信息增益则在机器学习领域中经常使用，两者的本质是一样的。&lt;/p&gt;
-
-&lt;p&gt;在机器学习中，信息增益常常被用于分类特征的选择。对于给定的训练数据集$Y$，$H(Y)$表示在未给定任何特征时，对训练集进行分类的不确定性；$H(Y∣X)$则表示了使用特征$X$对训练集$Y$进行分类的不确定性。信息增益表示的就是特征$X$带来的对训练集$Y$分类不确定性的减少程度，也就是特征$X$对训练集$Y$的区分度。&lt;/p&gt;
-
-&lt;p&gt;显然，信息增益更大的特征具有更强的分类能力。但信息增益的值很大程度上依赖于数据集的信息熵$H(Y)$，因而并不具有绝对意义。为解决这一问题，研究者又提出了信息增益比的概念，并将其定义为$g(X,Y)=I(X;Y)/H(Y)$。&lt;/p&gt;
-
-&lt;p&gt;在机器学习中经常使用的信息论概念叫作&lt;code&gt;Kullback-Leibler散度&lt;/code&gt;，简称&lt;code&gt;KL散度&lt;/code&gt;。KL散度是描述两个概率分布$P$和$Q$之间的差异的一种方法，其定义为\(D_{KL}​(P∣∣Q)=\sum_{i=1}^n​p(x_i​)\log_2\frac{p(x_i​)}{​q(x_i​)}\)​&lt;/p&gt;
-
-&lt;p&gt;信息论中还有一个重要定理，叫作“最大熵原理”。&lt;code&gt;最大熵原理&lt;/code&gt;是确定随机变量统计特性时力图最符合客观情况的一种准则。对于一个未知的概率分布，最坏的情况就是它以等可能性取到每个可能的取值。这个时候的概率分布最均匀，也就是随机变量的随机程度最高，对它进行预测也就最困难。&lt;/p&gt;
-
-&lt;p&gt;将最大熵原理应用到分类问题上就可以得到&lt;code&gt;最大熵模型&lt;/code&gt;。在分类问题中，首先要确定若干特征函数作为分类的依据。为了保证特征函数的有效性，其在模型真实分布$P(X)$上的数学期望和在由训练数据集推导出的经验分布$\widetilde{P}(X)$上的数学期望应该相等，即对给定特征函数数学期望的估计应该是个无偏估计量。&lt;/p&gt;
-
-&lt;p&gt;这样一来，每一个特征函数就对应了一个约束条件。分类的任务就是在这些约束条件下，确定一个最好的分类模型。由于除了这些约束条件之外，没有任何关于分类的先验知识，因而需要利用最大熵原理，求解出不确定性最大的条件分布，即让以下函数的取值最大化\(H(p)=−\sum_{x,y}\widetilde{p}​(x)p(y∣x)\log_2​p(y∣x)\)
-式中的$p(y∣x)$就是分类问题要确定的目标条件分布。计算上式的最大值实质上就是一个约束优化问题，由特征函数确定的约束条件可以通过&lt;code&gt;拉格朗日乘子&lt;/code&gt;的引入去除其影响，转化为无约束优化问题。从数学上可以证明，这个模型的解是存在且唯一的。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210816.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 15 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E4%BF%A1%E6%81%AF%E8%AE%BA</guid>
-        
-        
-        <category>AI</category>
-        
-        <category>信息论</category>
-        
-      </item>
-    
-      <item>
-        <title>AI数学基础-最优化理论</title>
-        <description>&lt;p&gt;人工智能的目标是最优化：在复杂环境和多体交互中做出最优决策。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;最优化理论&lt;/code&gt;研究的问题是给定的&lt;code&gt;目标函数&lt;/code&gt;的最大值（最小值）是否存在，并找到令目标函数取到最大值（最小值）的数值。
-如果把给定的目标函数看成连绵的山脉，最优化的过程就是判断顶峰的位置并找到到达顶峰路径的过程。
-大多数最优化问题都可以通过使目标函数$f(x)$最小化解决，最大化问题则可以通过最小化$−f(x)$实现。
-在人工智能和深度学习的应用场景下，只要目标函数的取值足够小，就可以把这个值当作全局最小值使用，作为对性能和复杂度的折中。&lt;/p&gt;
-
-&lt;p&gt;根据约束条件的不同，最优化问题可以分为&lt;code&gt;无约束优化&lt;/code&gt;和&lt;code&gt;约束优化&lt;/code&gt;两类。无约束优化对自变量 x 的取值没有限制，约束优化则把 x 的取值限制在特定的集合内，也就是满足一定的约束条件。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;线性规划&lt;/code&gt;就是一类典型的约束优化，其解决的问题通常是在有限的成本约束下取得最大的收益。约束优化问题通常比无约束优化问题更加复杂，但通过拉格朗日乘子的引入可以将含有$n$个变量和$k$个约束条件的问题转化为含有$(n+k)$个变量的无约束优化问题。&lt;/p&gt;
-
-&lt;p&gt;求解无约束优化问题最常用的方法是&lt;code&gt;梯度下降法&lt;/code&gt;。直观地说，梯度下降法就是沿着目标函数值下降最快的方向寻找最小值，就像爬山时要沿着坡度最陡的路径寻找山顶一样。在数学上，梯度的方向是目标函数导数的反方向。&lt;/p&gt;
-
-&lt;p&gt;如果将二阶导数引入优化过程，得到的典型方法就是牛顿法。在牛顿法中，目标函数首先被泰勒展开，写成二阶近似的形式（相比之下，梯度下降法只保留了目标函数的一阶近似）。此时再对二阶近似后的目标函数求导，并令其导数等于 0，得到的向量表示的就是下降最快的方向。相比于梯度下降法，牛顿法的收敛速度更快。&lt;/p&gt;
-
-&lt;p&gt;不管是利用一阶导数的梯度下降法，还是利用二阶导数的牛顿法，其寻找最小值点的基本思想都是先确定方向，再确定步长，因而统称为&lt;code&gt;线性搜索方法&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;还有一类算法，其寻找最小值点的基本思路是先确定步长，以步长为参数划定一个区域，再在这个区域内寻找最快下降的方向。这类算法被称为&lt;code&gt;置信域方法&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;相对于传统的基于数学理论的最优化方法，启发式算法显得返璞归真。启发式算法的核心思想就是大自然中”优胜劣汰”的生存法则，并在算法的实现中添加了选择和突变等经验因素。&lt;/p&gt;
-
-&lt;p&gt;启发式算法的核心思想就是大自然中”优胜劣汰”的生存法则，并在算法的实现中添加了选择和突变等经验因素。事实上，搜索越多并不意味着智能越高，智能高的表现恰恰是能够善用启发式策略，不用经过大量搜索也能解决问题。启发式算法的实例包括模拟生物进化规律的遗传算法、模拟统计物理中固体结晶过程的模拟退火算法、模拟低等动物产生集群智能的蚁群算法等。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://xiaobin0860.github.io/imgs/20210814.jpg&quot; alt=&quot;宝贝&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 14 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</link>
-        <guid isPermaLink="true">https://xiaobin0860.github.io/AI_%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA</guid>
-        
-        
-        <category>AI</category>
-        
-        <category>最优化理论</category>
         
       </item>
     

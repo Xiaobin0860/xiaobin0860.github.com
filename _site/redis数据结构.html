@@ -3,7 +3,7 @@
 
 <head>
 
-  <title>c++ Concepts</title>
+  <title>Redis数据结构</title>
 
   
 
@@ -156,7 +156,7 @@ border: 3px solid #FFF; height:150px;width:150px" />
   <div class="col-sm-8 col-sm-offset-4" id="container">
     
 <div class="page-header">
-  <h1>c++ Concepts </h1>
+  <h1>Redis数据结构 </h1>
 </div>
   
 <article>
@@ -165,131 +165,42 @@ border: 3px solid #FFF; height:150px;width:150px" />
    <span class="post-date">
      
      February 
-     7th,
+     12th,
      
      2023
       
    </span>
     <div class="article_body" id="article_body">
-    <h2 id="泛型编程">泛型编程</h2>
-
-<p>长期以来，软件重用一直都是软件工程追求的目标，而泛型编程为软件重用创造了可能性。所谓泛型编程，指的是通过组件的灵活组合来实现软件，而这些组件通过对定义做出最小“假设”来实现最大灵活性。</p>
-
-<h2 id="c模板">c++模板</h2>
-
-<p>在函数与类的定义 / 声明前，加上模板列表，在列表中指定在函数以及类的定义 / 声明中使用的模板参数</p>
-
-<pre><code class="language-c++">//class/typename定义的T/U是类型参数，size_t定义的S是非类型参数
-template&lt;size_t S, class T, typename u&gt;
-void fill_container(T&amp; container, U v) {
-    for (size_t i=0;i&lt;S;++i) {
-        container.push_back(v);
-    }
-}
-</code></pre>
-<ul>
-  <li>显示实例化，加快编译速度，其它编译单元直接用显示实例化的符号
-    <pre><code class="language-c++"> template&lt;typename T, typename U&gt;
- void fill_container(T&amp; container, U v, size_t s) {
-     for (size_t i=0;i&lt;s;++i) {
-         container.push_back(v);
-     }
- }
- template
- void fill_container&lt;std::vector&lt;int&gt;, int&gt;(std::vector&lt;int&gt;&amp;, int, size_t);
-</code></pre>
-  </li>
-  <li>特化 为特定参数类型提供特定实现版本，提供类似函数重载的支持
-    <pre><code class="language-c++"> template&lt;size_t Size, class T, typename U&gt;
- void fill(T&amp; collection, U value) {
-     std::cout &lt;&lt; "Universal" &lt;&lt; std::endl;
-     for (size_t i = 0; i != Size; ++i) {
-         collection.push_back(value);
-     }
- }
- template &lt;&gt;
- void fill&lt;10, std::vector, double&gt;(std::vector&amp; collection, double value) {
-     std::cout &lt;&lt; "Explicit (full) template specialization" &lt;&lt; std::endl;
-     for (size_t i = 0; i != 10; ++i) {
-         collection.push_back(value + 2.0);
-     }
- }
-</code></pre>
-  </li>
-  <li>偏特化</li>
-  <li>不定参模板
-    <pre><code class="language-c++"> double sum() {
-     return 0.0;
- }
- template &lt;typename T, typename... Targs&gt;
- double sum(T value, Targs... Fargs) {
-     return static_cast&lt;double&gt;(value) + sum(Fargs...);
- }
-</code></pre>
-  </li>
-</ul>
-
-<h2 id="问题">问题</h2>
-
-<ol>
-  <li>类型约束晦涩难懂</li>
-  <li>生成的代码急速膨胀</li>
-  <li>ABI 兼容性糟糕 接口不要使用STL</li>
-  <li>错误消息很难理解</li>
-</ol>
-
-<h2 id="concepts">Concepts</h2>
-
-<p>解决问题1和4，将一组通用的约束定义为一个<code>concept</code>，并且，在定义模板函数与模板类中，直接使用这些<code>concept</code>替换通用的<code>typename</code>和<code>class</code></p>
-<pre><code>template &lt;参数模板&gt;
-concept 名称 = 约束表达式;
-</code></pre>
-<pre><code class="language-c++">class BaseClass {
-public:
-    int32_t getValue() const {
-        return 1;
-    }
-};
-template&lt;class T&gt;
-concept DerivedOfBaseClass = std::is_base_of_v&lt;BaseClass, T&gt;;
-
-template &lt;DerivedOfBaseClass T&gt;
-void doGetValue(const T&amp; a) {
-    std::cout &lt;&lt; "Get value:" &lt;&lt; a.getValue() &lt;&lt; std::endl;
-}
-</code></pre>
+    <h2 id="redis数据类型及底层数据结构">Redis数据类型及底层数据结构</h2>
 
 <ul>
-  <li><code>通过约束与 concept 这两个 C++ 核心语言特性变更（高级抽象），实现了对模板参数列表与参数的约束的逻辑分离</code></li>
-  <li><code>从 C++20 标准及其演进标准之后，concept 之于 C++ 泛型编程，正如 class 之于 C++ 面向对象</code></li>
+  <li>String(字符串)：动态字符串 O(1)</li>
+  <li>List(列表)：双向链表，压缩列表</li>
+  <li>Hash(哈希)：哈希表，压缩列表</li>
+  <li>Set(集合)：哈希表，整数数组</li>
+  <li>Sorted Set(有序集合)：跳表，压缩列表</li>
 </ul>
 
-<h2 id="约束表达式">约束表达式</h2>
+<h2 id="redis键值结构">Redis键值结构</h2>
 
-<p>通过逻辑操作符的方式进行组合的，用于定义更复杂的 concept</p>
-<pre><code class="language-c++">template&lt;class T&gt;
-concept Integral = std::is_integral_v&lt;T&gt;;
- 
-template&lt;class T&gt;
-concept SignedIntegral = Integral&lt;T&gt; &amp;&amp; std::is_signed_v&lt;T&gt;;
- 
-template&lt;class T&gt;
-concept UnsignedIntegral = Integral&lt;T&gt; &amp;&amp; !SignedIntegral&lt;T&gt;;
- 
-template &lt;class T&gt;
-concept FloatingPoint = std::is_floating_point_v&lt;T&gt;;
- 
-template &lt;class T&gt;
-concept Number = Integral&lt;T&gt; || FloatingPoint&lt;T&gt;;
+<p>全局哈希表，实现从键到值的快速访问
+<code>写入大量数据变慢：哈希冲突、rehash</code></p>
 
-template&lt;typename T&gt;
-constexpr bool get_value() { return T::value; }
-template&lt;typename T&gt;
-    requires (sizeof(T) &gt; 1 &amp;&amp; get_value&lt;T&gt;())
-void f(T) {
-    std::cout &lt;&lt; "template version" &lt;&lt; std::endl;
-}
-</code></pre>
+<ul>
+  <li>哈希表 O(1)  String</li>
+  <li>整数数组和双向链表 O(n)</li>
+  <li>压缩列表 <code>zlbytes|zltail|zllen|entry1|entry2|..|entryN|zlend</code> O(n)</li>
+  <li>跳表 在链表基础上增加多级索引，实现快速定位 O(logN)</li>
+</ul>
+
+<h2 id="redis操作复杂度总结">Redis操作复杂度总结</h2>
+
+<ul>
+  <li>单元素操作是基础 O(1)</li>
+  <li>范围操作非常耗时 O(N)</li>
+  <li>统计操作非常高效 O(1)</li>
+  <li>List头尾操作 O(1)</li>
+</ul>
 
     </div>
 
@@ -299,8 +210,8 @@ void f(T) {
       
       
        
-        <li><a href="/categories.html#c++-ref">
-          c++ <span>(3)</span>
+        <li><a href="/categories.html#redis-ref">
+          redis <span>(2)</span>
           
         </a></li>
       
@@ -315,7 +226,7 @@ void f(T) {
     <div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=c++ Concepts"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Redis数据结构"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -343,10 +254,10 @@ void f(T) {
 
     <ul class="pager">
       
-      <li class="previous"><a href="/c++20_Modules" title="c++ Modules">&larr; Previous</a></li>
+      <li class="previous"><a href="/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6" title="键值数据库基本架构">&larr; Previous</a></li>
       
       
-      <li class="next"><a href="/redis%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%9E%B6" title="键值数据库基本架构">Next &rarr;</a></li>
+      <li class="next disabled"><a>Next &rarr;</a>
       
     </ul>
 
