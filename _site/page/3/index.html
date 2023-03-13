@@ -425,29 +425,6 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     <p>##Concurrency</p>
 
-<ol>
-  <li>
-    <p>start new process, <code>spawn/1</code></p>
-
-    <p>G = fun(X) -&gt; timer:sleep(X), io:format(“~p~n”, [X]) end.
- [spawn(fun(X) -&gt; G(X) end) || X &lt;= list:seq(1,10)].</p>
-  </li>
-  <li>
-    <p>send message</p>
-
-    <p>self() ! self() ! double</p>
-  </li>
-  <li>
-    <p>receive message</p>
-
-    <p>receive
-     Pattern1 when Guard1 -&gt; Expr1;
-     Partern2 when Guard2 -&gt; Expr2;
-     _ -&gt; Expr3
- end.</p>
-  </li>
-</ol>
-
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -472,54 +449,6 @@ border: 3px solid #FFF; height:150px;width:150px" />
     
     
     <h2 id="recursion">Recursion</h2>
-
-<ul>
-  <li>
-    <p>Fac</p>
-
-    <p>fac(0) -&gt; 1;
-  fac(N) when N &gt; 0 -&gt; N*fac(N-1).</p>
-
-    <p>tail_fac(N) -&gt; tail_fac(N, 1).
-  tail_fac(0, Fac) -&gt; Fac;
-  tail_fac(N, Fac) when N&gt;0 -&gt; tail_fac(N-1, N*Fac).</p>
-  </li>
-  <li>
-    <p>Len
-  len([]) -&gt; 0;
-  len([_|T]) -&gt; 1 + len(T).</p>
-
-    <p>tail_len(L) -&gt; tail_len(L,0).
-  tail_len([], Acc) -&gt; Acc;
-  tail_len([_|T], Acc) -&gt; tail_len(T,Acc+1).</p>
-  </li>
-</ul>
-
-<h2 id="higher-order-functions">Higher Order Functions</h2>
-
-<p>pass functions from outside a module</p>
-
-<pre><code>fun Module:Function/Arity
-
-map(_, []) -&gt; [];
-map(F, [H|T]) -&gt; [F(H)|map(F,T)].
-incr(X) -&gt; X + 1.
-decr(X) -&gt; X - 1.
-
-1&gt; c(hhfuns).
-{ok, hhfuns}
-2&gt; L = [1,2,3,4,5].
-[1,2,3,4,5]
-3&gt; hhfuns:increment(L).
-[2,3,4,5,6]
-4&gt; hhfuns:decrement(L).
-[0,1,2,3,4]
-5&gt; hhfuns:map(fun hhfuns:incr/1, L).
-[2,3,4,5,6]
-6&gt; hhfuns:map(fun hhfuns:decr/1, L).
-[0,1,2,3,4]
-</code></pre>
-
 
     
     
@@ -546,110 +475,6 @@ decr(X) -&gt; X - 1.
     
     <h2 id="bit-syntax">Bit Syntax!</h2>
 
-<p>Bit syntax encloses binary data between « and »,
-splits it in readable segments, and each segment is separated by a comma.</p>
-
-<pre><code>1&gt; Color = 16#F09A29.
-15768105
-2&gt; Pixel = &lt;&lt;Color:24&gt;&gt;.
-&lt;&lt;240,154,41&gt;&gt;
-3&gt; Pixels = &lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;.
-&lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;
-4&gt; &lt;&lt;Pix1,Pix2,Pix3,Pix4&gt;&gt; = Pixels.
-** exception error: no match of right hand side value 
-5&gt; &lt;&lt;Pix1:24, Pix2:24, Pix3:24, Pix4:24&gt;&gt; = Pixels.
-&lt;&lt;213,45,132,64,76,32,76,0,0,234,32,15&gt;&gt;
-6&gt; &lt;&lt;R:8, G:8, B:8&gt;&gt; = &lt;&lt;Pix1:24&gt;&gt;.
-&lt;&lt;213,45,132&gt;&gt;
-7&gt; R.
-213
-</code></pre>
-
-<h2 id="modules">Modules</h2>
-
-<ul>
-  <li>What are modules</li>
-</ul>
-
-<p>Modules are a bunch of functions regrouped in a single file,
-under a single name. Additionally, all functions in Erlang must be defined in modules.
-Function defined in a module needs to be called with the form <code>Module:Function(Arguments).</code></p>
-
-<ul>
-  <li>
-    <p>Module Declaration</p>
-
-    <p>-module(Name).
-  -export([Function1/Arity, Function2/Arity, …, FunctionN/Arity]).
-  -Name(Attribute).   #-compile([debug_info, export_all]).</p>
-  </li>
-  <li>
-    <p>Compiling the code</p>
-
-    <p>$ erlc flags file.erl</p>
-  </li>
-</ul>
-
-<h2 id="syntax-in-functions">Syntax in functions</h2>
-
-<ul>
-  <li>
-    <p>Pattern Matching</p>
-
-    <p>greet(male, Name) -&gt;
-  io:format(“Hello, Mr. ~s!”, [Name]);
-  greet(female, Name) -&gt;
-  io:format(“Hello, Mrs. ~s!”, [Name]);
-  greet(_, Name) -&gt;
-  io:format(“Hello, ~s!”, [Name]).</p>
-  </li>
-  <li>
-    <p>Guards</p>
-
-    <p>right_age(X) when X &gt;= 16, X =&lt; 104 -&gt;
-  true;
-  right_age(_) -&gt;
-  false.</p>
-
-    <p>is_atom/1           is_binary/1 
-  is_bitstring/1      is_boolean/1        is_builtin/3 
-  is_float/1          is_function/1       is_function/2 
-  is_integer/1        is_list/1           is_number/1 
-  is_pid/1            is_port/1           is_record/2 
-  is_record/3         is_reference/1      is_tuple/1</p>
-  </li>
-  <li>
-    <p>If</p>
-
-    <p>%% note, this one would be better as a pattern match in function heads!
-  %% I’m doing it this way for the sake of the example.
-  help_me(Animal) -&gt;
-      Talk = if Animal == cat  -&gt; “meow”;
-          Animal == beef -&gt; “mooo”;
-          Animal == dog  -&gt; “bark”;
-          Animal == tree -&gt; “bark”;
-          true -&gt; “fgdadfgna”
-      end,
-      {Animal, “says “ ++ Talk ++ “!”}.</p>
-  </li>
-  <li>
-    <p>Case</p>
-
-    <p>beach(Temperature) -&gt;
-      case Temperature of
-          {celsius, N} when N &gt;= 20, N =&lt; 45 -&gt;
-              ‘favorable’;
-          {kelvin, N} when N &gt;= 293, N =&lt; 318 -&gt;
-              ‘scientifically favorable’;
-          {fahrenheit, N} when N &gt;= 68, N =&lt; 113 -&gt;
-              ‘favorable in the US’;
-          _ -&gt;
-              ‘avoid beach’
-      end.</p>
-  </li>
-</ul>
-
-
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -675,30 +500,6 @@ Function defined in a module needs to be called with the form <code>Module:Funct
     
     <h2 id="lists">Lists</h2>
 
-<p>Lists can contain anything! <code>[Element1, Element2, ..., ElementN]</code></p>
-
-<pre><code>1&gt; [1, 2, 3, {numbers,[4,5,6]}, 5.34, atom].
-[1,2,3,{numbers,[4,5,6]},5.34,atom]
-
-2&gt; [97, 98, 99].
-"abc"
-
-[New] ++ [OldList]
-</code></pre>
-
-<p>BIFS</p>
-
-<pre><code>hd([1,2,3,4]).
-tl([1,2,3,4]).
-length(List).
-</code></pre>
-
-<p>pattern matching:</p>
-
-<pre><code>[Head|Tail].
-</code></pre>
-
-
     
     
     <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
@@ -723,24 +524,6 @@ length(List).
     
     
     <h2 id="tuples">Tuples</h2>
-
-<p>A tuple is a way to organize data. It’s a way to group togeter many terms
-when you known how many there are.</p>
-
-<pre><code>{Element1, Element2, ..., ElementN}
-</code></pre>
-
-<p>通常使用<code>tagged tuple</code>, 例如:</p>
-
-<pre><code>Temperature = {celsius, 23.213}.
-Point = {point, {1, 2}}.
-</code></pre>
-
-<p>取值</p>
-
-<pre><code>{celsius, T} = Temperature.
-{point, {X, _}} = Point.
-</code></pre>
 
     
     
